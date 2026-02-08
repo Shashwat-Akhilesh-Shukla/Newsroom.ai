@@ -1,0 +1,41 @@
+# Core dependencies for AI Newsroom
+# LangGraph and LangChain for multi-agent orchestration
+langgraph>=0.0.20
+langchain>=0.1.0
+langchain-openai>=0.0.5
+
+# LLM providers
+openai>=1.0.0
+anthropic>=0.8.0
+
+# API clients for external services
+tweepy>=4.14.0  # Twitter/X API
+requests>=2.31.0  # General HTTP requests
+arxiv>=2.0.0  # ArXiv API
+pytrends>=4.9.0  # Google Trends
+
+# Data processing
+beautifulsoup4>=4.12.0  # HTML parsing
+lxml>=4.9.0  # XML/HTML processing
+python-dotenv>=1.0.0  # Environment variable management
+pydantic>=2.0.0  # Data validation
+
+# Database and storage
+sqlalchemy>=2.0.0  # Database ORM
+alembic>=1.12.0  # Database migrations
+redis>=5.0.0  # Caching
+
+# Utilities
+python-dateutil>=2.8.0  # Date parsing
+markdown>=3.5.0  # Markdown processing
+pyyaml>=6.0.0  # YAML parsing
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+
+# Development
+black>=23.0.0  # Code formatting
+flake8>=6.0.0  # Linting
+mypy>=1.5.0  # Type checking
