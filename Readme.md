@@ -51,8 +51,8 @@ This isn't a linear chain of LLM calls. It's a collaborative system where agents
 
 ### The Execution Graph (Not a DAG!)
 
-<img width="918" height="776" alt="image" src="https://github.com/user-attachments/assets/2200ba4a-34cc-4323-a102-b9df0dcd5bfe" />
-<img width="918" height="694" alt="image" src="https://github.com/user-attachments/assets/bc468372-1860-4442-8247-1afd23c8a2dd" />
+<img width="1595" height="756" alt="image" src="https://github.com/user-attachments/assets/73e0cd2e-ae32-4fe9-9b90-9f8138924c4e" />
+
 
 
 **Key Insight:** The graph has **cycles**, not a linear flow. This is what makes it a true multi-agent system.
