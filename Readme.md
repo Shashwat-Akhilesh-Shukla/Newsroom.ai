@@ -51,55 +51,9 @@ This isn't a linear chain of LLM calls. It's a collaborative system where agents
 
 ### The Execution Graph (Not a DAG!)
 
-```
-┌─────────┐
-│  Scout  │──┐ confidence < threshold
-└─────────┘  │ (loop & rescan)
-     │       │
-     └───────┘
-     │ confidence >= threshold
-     ▼
-┌────────────┐
-│ Researcher │◄─────────────────┐
-└────────────┘                  │
-     │                          │
-     ▼                          │
-┌──────────┐                    │
-│ Skeptic  │                    │
-└──────────┘                    │
-     │                          │
-     ├─ APPROVE ────────────────┼──────┐
-     │                          │      │
-     ├─ REJECT ─────────────────┘      │
-     │   (back to Scout)                │
-     │                                  │
-     └─ NEED_MORE_EVIDENCE              │
-         (back to Researcher)           │
-                                        ▼
-                                   ┌────────┐
-                                   │ Writer │◄──┐
-                                   └────────┘   │
-                                        │       │
-                                        ▼       │
-                                   ┌────────┐   │
-                                   │ Editor │   │
-                                   └────────┘   │
-                                        │       │
-                                        ├─ ACCEPT ────────┐
-                                        │                 │
-                                        ├─ REWRITE ───────┘
-                                        │
-                                        └─ FACT_CHECK ────┐
-                                            (to Researcher)│
-                                                           ▼
-                                                      ┌───────────┐
-                                                      │ Publisher │
-                                                      └───────────┘
-                                                           │
-                                                           ├─ checks pass → PUBLISH ✓
-                                                           │
-                                                           └─ checks fail → back to Editor
-```
+<img width="918" height="776" alt="image" src="https://github.com/user-attachments/assets/2200ba4a-34cc-4323-a102-b9df0dcd5bfe" />
+<img width="918" height="694" alt="image" src="https://github.com/user-attachments/assets/bc468372-1860-4442-8247-1afd23c8a2dd" />
+
 
 **Key Insight:** The graph has **cycles**, not a linear flow. This is what makes it a true multi-agent system.
 
