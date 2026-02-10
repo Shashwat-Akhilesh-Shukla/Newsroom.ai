@@ -1,164 +1,156 @@
 """
 Configuration management for AI Newsroom.
 
-This module handles loading and validating configuration from environment
-variables and config files.
+Loads configuration from environment variables and provides
+validated access to settings.
 """
 
 import os
-from typing import Dict, Any, Optional
-from pathlib import Path
-from dotenv import load_dotenv
+from typing import Optional, Dict, Any
+from dataclasses import dataclass
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class LLMConfig:
+    """LLM configuration settings."""
+    provider: str = "openai"
+    model: str = "gpt-4"
+    temperature: float = 0.7
+    max_tokens: int = 2000
+    api_key: Optional[str] = None
+
+
+@dataclass
+class AgentConfig:
+    """Agent-specific configuration settings."""
+    scout_confidence_threshold: float = 0.7
+    max_scout_iterations: int = 3
+    max_research_sources: int = 10
+    max_revision_loops: int = 3
+
+
+@dataclass
+class APIConfig:
+    """External API configuration."""
+    twitter_api_key: Optional[str] = None
+    twitter_api_secret: Optional[str] = None
+    enable_twitter: bool = False
+
+
+@dataclass
+class CacheConfig:
+    """Caching configuration."""
+    enable_cache: bool = True
+    cache_ttl_hours: int = 24
 
 
 class Config:
-    """Configuration manager for AI Newsroom."""
+    """Main configuration class."""
     
-    def __init__(self, env_file: Optional[str] = None):
-        """
-        Initialize configuration.
+    def __init__(self):
+        """Initialize configuration from environment variables."""
+        self.llm = self._load_llm_config()
+        self.agents = self._load_agent_config()
+        self.apis = self._load_api_config()
+        self.cache = self._load_cache_config()
         
-        Args:
-            env_file: Path to .env file (optional)
-        """
-        # Load environment variables
-        if env_file:
-            load_dotenv(env_file)
-        else:
-            load_dotenv()
-        
-        self._config = self._load_config()
-        self._validate_required_keys()
+        self._validate_config()
     
-    def _load_config(self) -> Dict[str, Any]:
-        """Load configuration from environment variables."""
+    def _load_llm_config(self) -> LLMConfig:
+        """Load LLM configuration from environment."""
+        return LLMConfig(
+            provider=os.getenv("LLM_PROVIDER", "openai"),
+            model=os.getenv("LLM_MODEL", "gpt-4"),
+            temperature=float(os.getenv("LLM_TEMPERATURE", "0.7")),
+            max_tokens=int(os.getenv("LLM_MAX_TOKENS", "2000")),
+            api_key=os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+        )
+    
+    def _load_agent_config(self) -> AgentConfig:
+        """Load agent configuration from environment."""
+        return AgentConfig(
+            scout_confidence_threshold=float(os.getenv("SCOUT_CONFIDENCE_THRESHOLD", "0.7")),
+            max_scout_iterations=int(os.getenv("MAX_SCOUT_ITERATIONS", "3")),
+            max_research_sources=int(os.getenv("MAX_RESEARCH_SOURCES", "10")),
+            max_revision_loops=int(os.getenv("MAX_REVISION_LOOPS", "3"))
+        )
+    
+    def _load_api_config(self) -> APIConfig:
+        """Load API configuration from environment."""
+        twitter_key = os.getenv("TWITTER_API_KEY")
+        twitter_secret = os.getenv("TWITTER_API_SECRET")
+        
+        return APIConfig(
+            twitter_api_key=twitter_key,
+            twitter_api_secret=twitter_secret,
+            enable_twitter=bool(twitter_key and twitter_secret)
+        )
+    
+    def _load_cache_config(self) -> CacheConfig:
+        """Load cache configuration from environment."""
+        return CacheConfig(
+            enable_cache=os.getenv("ENABLE_CACHE", "true").lower() == "true",
+            cache_ttl_hours=int(os.getenv("CACHE_TTL_HOURS", "24"))
+        )
+    
+    def _validate_config(self):
+        """Validate required configuration."""
+        if not self.llm.api_key:
+            logger.warning("No LLM API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY.")
+        
+        if self.agents.scout_confidence_threshold < 0 or self.agents.scout_confidence_threshold > 1:
+            raise ValueError("SCOUT_CONFIDENCE_THRESHOLD must be between 0 and 1")
+        
+        logger.info(f"Configuration loaded: LLM={self.llm.provider}/{self.llm.model}, "
+                   f"Twitter={'enabled' if self.apis.enable_twitter else 'disabled'}")
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert configuration to dictionary."""
         return {
-            # LLM API Keys
-            "openai_api_key": os.getenv("OPENAI_API_KEY", ""),
-            "anthropic_api_key": os.getenv("ANTHROPIC_API_KEY", ""),
-            
-            # External Service API Keys
-            "twitter_api_key": os.getenv("TWITTER_API_KEY", ""),
-            "twitter_api_secret": os.getenv("TWITTER_API_SECRET", ""),
-            "twitter_access_token": os.getenv("TWITTER_ACCESS_TOKEN", ""),
-            "twitter_access_secret": os.getenv("TWITTER_ACCESS_SECRET", ""),
-            "github_token": os.getenv("GITHUB_TOKEN", ""),
-            
-            # Database Configuration
-            "database_url": os.getenv("DATABASE_URL", "sqlite:///./newsroom.db"),
-            
-            # Redis Configuration
-            "redis_url": os.getenv("REDIS_URL", "redis://localhost:6379/0"),
-            
-            # Agent Configuration
-            "scout_confidence_threshold": float(os.getenv("SCOUT_CONFIDENCE_THRESHOLD", "0.7")),
-            "max_research_sources": int(os.getenv("MAX_RESEARCH_SOURCES", "10")),
-            "max_revision_loops": int(os.getenv("MAX_REVISION_LOOPS", "3")),
-            "skeptic_quality_threshold": float(os.getenv("SKEPTIC_QUALITY_THRESHOLD", "0.8")),
-            
-            # LLM Configuration
-            "default_model": os.getenv("DEFAULT_MODEL", "gpt-4"),
-            "scout_model": os.getenv("SCOUT_MODEL", "gpt-3.5-turbo"),
-            "researcher_model": os.getenv("RESEARCHER_MODEL", "gpt-4"),
-            "skeptic_model": os.getenv("SKEPTIC_MODEL", "gpt-4"),
-            "writer_model": os.getenv("WRITER_MODEL", "gpt-4"),
-            "editor_model": os.getenv("EDITOR_MODEL", "gpt-4"),
-            "publisher_model": os.getenv("PUBLISHER_MODEL", "gpt-3.5-turbo"),
-            
-            # Publishing Configuration
-            "medium_api_key": os.getenv("MEDIUM_API_KEY", ""),
-            "medium_user_id": os.getenv("MEDIUM_USER_ID", ""),
-            
-            # Logging
-            "log_level": os.getenv("LOG_LEVEL", "INFO"),
-            "log_file": os.getenv("LOG_FILE", "logs/newsroom.log"),
-            
-            # Development
-            "debug": os.getenv("DEBUG", "False").lower() == "true",
+            "llm": {
+                "provider": self.llm.provider,
+                "model": self.llm.model,
+                "temperature": self.llm.temperature,
+                "max_tokens": self.llm.max_tokens
+            },
+            "agents": {
+                "scout_confidence_threshold": self.agents.scout_confidence_threshold,
+                "max_scout_iterations": self.agents.max_scout_iterations,
+                "max_research_sources": self.agents.max_research_sources,
+                "max_revision_loops": self.agents.max_revision_loops
+            },
+            "apis": {
+                "enable_twitter": self.apis.enable_twitter
+            },
+            "cache": {
+                "enable_cache": self.cache.enable_cache,
+                "cache_ttl_hours": self.cache.cache_ttl_hours
+            }
         }
-    
-    def _validate_required_keys(self):
-        """Validate that required API keys are present."""
-        required_keys = ["openai_api_key"]
-        
-        missing_keys = []
-        for key in required_keys:
-            if not self._config.get(key):
-                missing_keys.append(key)
-        
-        if missing_keys:
-            raise ValueError(
-                f"Missing required configuration keys: {', '.join(missing_keys)}. "
-                "Please set them in your .env file."
-            )
-    
-    def get(self, key: str, default: Any = None) -> Any:
-        """
-        Get a configuration value.
-        
-        Args:
-            key: Configuration key
-            default: Default value if key not found
-            
-        Returns:
-            Configuration value or default
-        """
-        return self._config.get(key, default)
-    
-    def get_agent_config(self, agent_name: str) -> Dict[str, Any]:
-        """
-        Get configuration specific to an agent.
-        
-        Args:
-            agent_name: Name of the agent
-            
-        Returns:
-            Dictionary of agent-specific configuration
-        """
-        return {
-            "model": self._config.get(f"{agent_name}_model", self._config["default_model"]),
-            "api_key": self._config["openai_api_key"],
-            "debug": self._config["debug"],
-        }
-    
-    def get_all(self) -> Dict[str, Any]:
-        """Get all configuration values."""
-        return self._config.copy()
-    
-    @property
-    def is_debug(self) -> bool:
-        """Check if debug mode is enabled."""
-        return self._config["debug"]
 
 
 # Global configuration instance
-_config_instance: Optional[Config] = None
+_config: Optional[Config] = None
 
 
-def get_config(env_file: Optional[str] = None) -> Config:
+def get_config() -> Config:
     """
     Get the global configuration instance.
     
-    Args:
-        env_file: Path to .env file (optional, only used on first call)
-        
     Returns:
         Config instance
     """
-    global _config_instance
-    
-    if _config_instance is None:
-        _config_instance = Config(env_file)
-    
-    return _config_instance
+    global _config
+    if _config is None:
+        _config = Config()
+    return _config
 
 
-def reload_config(env_file: Optional[str] = None):
-    """
-    Reload configuration from environment.
-    
-    Args:
-        env_file: Path to .env file (optional)
-    """
-    global _config_instance
-    _config_instance = Config(env_file)
+def reload_config():
+    """Reload configuration from environment."""
+    global _config
+    _config = Config()
+    return _config

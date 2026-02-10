@@ -1,262 +1,382 @@
 """
 LLM utilities for AI Newsroom.
 
-This module provides utilities for interacting with LLMs:
-- LLM initialization and management
-- Prompt template handling
-- Token counting and cost tracking
-- Retry logic with exponential backoff
+Provides utilities for interacting with LLMs, including:
+- Client initialization
+- Prompt template loading
+- Token counting
+- Response parsing
 """
 
-import time
+import os
+import json
 import logging
-from typing import Dict, Any, Optional, List
-from functools import wraps
-
-from langchain_openai import ChatOpenAI
-from langchain.schema import HumanMessage, SystemMessage
-from langchain.callbacks import get_openai_callback
+import yaml
+from typing import Optional, Dict, Any, List
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
 
-class LLMManager:
-    """Manager for LLM interactions."""
-    
-    def __init__(self, api_key: str, model: str = "gpt-4", temperature: float = 0.7):
-        """
-        Initialize LLM manager.
-        
-        Args:
-            api_key: OpenAI API key
-            model: Model name
-            temperature: Temperature for generation
-        """
-        self.api_key = api_key
-        self.model = model
-        self.temperature = temperature
-        self.llm = self._initialize_llm()
-        self.total_tokens = 0
-        self.total_cost = 0.0
-        
-    def _initialize_llm(self) -> ChatOpenAI:
-        """Initialize the LLM client."""
-        return ChatOpenAI(
-            api_key=self.api_key,
-            model=self.model,
-            temperature=self.temperature,
-        )
-    
-    def invoke(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        max_retries: int = 3,
-        retry_delay: float = 1.0
-    ) -> str:
-        """
-        Invoke the LLM with retry logic.
-        
-        Args:
-            system_prompt: System message
-            user_prompt: User message
-            max_retries: Maximum number of retries
-            retry_delay: Initial delay between retries (exponential backoff)
-            
-        Returns:
-            LLM response text
-            
-        Raises:
-            Exception: If all retries fail
-        """
-        messages = [
-            SystemMessage(content=system_prompt),
-            HumanMessage(content=user_prompt)
-        ]
-        
-        for attempt in range(max_retries):
-            try:
-                with get_openai_callback() as cb:
-                    response = self.llm.invoke(messages)
-                    
-                    # Track usage
-                    self.total_tokens += cb.total_tokens
-                    self.total_cost += cb.total_cost
-                    
-                    logger.info(
-                        f"LLM call successful | Tokens: {cb.total_tokens} | "
-                        f"Cost: ${cb.total_cost:.4f}"
-                    )
-                    
-                    return response.content
-                    
-            except Exception as e:
-                logger.warning(f"LLM call failed (attempt {attempt + 1}/{max_retries}): {str(e)}")
-                
-                if attempt < max_retries - 1:
-                    # Exponential backoff
-                    delay = retry_delay * (2 ** attempt)
-                    logger.info(f"Retrying in {delay}s...")
-                    time.sleep(delay)
-                else:
-                    logger.error("All LLM retry attempts failed")
-                    raise
-    
-    def get_usage_stats(self) -> Dict[str, Any]:
-        """
-        Get usage statistics.
-        
-        Returns:
-            Dictionary with token count and cost
-        """
-        return {
-            "total_tokens": self.total_tokens,
-            "total_cost": self.total_cost,
-            "model": self.model
-        }
+# ============================================================================
+# LLM Client Management
+# ============================================================================
 
-
-def retry_on_failure(max_retries: int = 3, delay: float = 1.0):
+def get_llm_client(provider: str = "openai", model: str = "gpt-4", api_key: Optional[str] = None):
     """
-    Decorator for retrying functions with exponential backoff.
+    Initialize and return an LLM client.
     
     Args:
-        max_retries: Maximum number of retries
-        delay: Initial delay between retries
+        provider: LLM provider ('openai', 'anthropic')
+        model: Model name
+        api_key: API key (if not provided, will use environment variable)
         
     Returns:
-        Decorated function
+        LLM client instance
     """
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            for attempt in range(max_retries):
-                try:
-                    return func(*args, **kwargs)
-                except Exception as e:
-                    if attempt < max_retries - 1:
-                        wait_time = delay * (2 ** attempt)
-                        logger.warning(
-                            f"{func.__name__} failed (attempt {attempt + 1}/{max_retries}): {str(e)}. "
-                            f"Retrying in {wait_time}s..."
-                        )
-                        time.sleep(wait_time)
-                    else:
-                        logger.error(f"{func.__name__} failed after {max_retries} attempts")
-                        raise
-        return wrapper
-    return decorator
-
-
-class PromptTemplate:
-    """Simple prompt template manager."""
-    
-    def __init__(self, template: str):
-        """
-        Initialize prompt template.
-        
-        Args:
-            template: Template string with {placeholders}
-        """
-        self.template = template
-    
-    def format(self, **kwargs) -> str:
-        """
-        Format the template with provided values.
-        
-        Args:
-            **kwargs: Values to fill in placeholders
+    if provider == "openai":
+        try:
+            from langchain_openai import ChatOpenAI
             
-        Returns:
-            Formatted prompt
-        """
-        return self.template.format(**kwargs)
+            api_key = api_key or os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                raise ValueError("OpenAI API key not found. Set OPENAI_API_KEY environment variable.")
+            
+            return ChatOpenAI(
+                model=model,
+                api_key=api_key,
+                temperature=0.7
+            )
+        except ImportError:
+            raise ImportError("langchain-openai not installed. Run: pip install langchain-openai")
+    
+    elif provider == "anthropic":
+        try:
+            from langchain_anthropic import ChatAnthropic
+            
+            api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+            if not api_key:
+                raise ValueError("Anthropic API key not found. Set ANTHROPIC_API_KEY environment variable.")
+            
+            return ChatAnthropic(
+                model=model,
+                api_key=api_key,
+                temperature=0.7
+            )
+        except ImportError:
+            raise ImportError("langchain-anthropic not installed. Run: pip install langchain-anthropic")
+    
+    else:
+        raise ValueError(f"Unsupported LLM provider: {provider}")
 
 
-# Common prompt templates
-SCOUT_SYSTEM_PROMPT = """You are a Trend Scout agent for an AI newsroom.
+def generate_completion(
+    prompt: str,
+    system_prompt: Optional[str] = None,
+    temperature: float = 0.7,
+    max_tokens: int = 2000,
+    provider: str = "openai",
+    model: str = "gpt-4"
+) -> str:
+    """
+    Generate a completion from the LLM.
+    
+    Args:
+        prompt: User prompt
+        system_prompt: Optional system prompt
+        temperature: Sampling temperature
+        max_tokens: Maximum tokens to generate
+        provider: LLM provider
+        model: Model name
+        
+    Returns:
+        Generated text
+    """
+    try:
+        from langchain_core.messages import HumanMessage, SystemMessage
+        
+        llm = get_llm_client(provider=provider, model=model)
+        llm.temperature = temperature
+        llm.max_tokens = max_tokens
+        
+        messages = []
+        if system_prompt:
+            messages.append(SystemMessage(content=system_prompt))
+        messages.append(HumanMessage(content=prompt))
+        
+        response = llm.invoke(messages)
+        return response.content
+        
+    except Exception as e:
+        logger.error(f"Failed to generate completion: {e}")
+        raise
 
-Your job is to identify trending topics in AI, technology, and research that would make compelling articles.
 
-Evaluate topics based on:
-1. Novelty: Is this genuinely new or just hype?
-2. Relevance: Does this matter to a technical audience?
-3. Engagement: Is there active discussion around this?
+def generate_structured_output(
+    prompt: str,
+    system_prompt: Optional[str] = None,
+    temperature: float = 0.7,
+    provider: str = "openai",
+    model: str = "gpt-4"
+) -> Dict[str, Any]:
+    """
+    Generate structured JSON output from the LLM.
+    
+    Args:
+        prompt: User prompt (should request JSON output)
+        system_prompt: Optional system prompt
+        temperature: Sampling temperature
+        provider: LLM provider
+        model: Model name
+        
+    Returns:
+        Parsed JSON response
+    """
+    response = generate_completion(
+        prompt=prompt,
+        system_prompt=system_prompt,
+        temperature=temperature,
+        provider=provider,
+        model=model
+    )
+    
+    return extract_json_from_response(response)
 
-Provide a confidence score (0-1) for each topic."""
 
-RESEARCHER_SYSTEM_PROMPT = """You are a Research agent for an AI newsroom.
+def extract_json_from_response(response: str) -> Dict[str, Any]:
+    """
+    Extract JSON from LLM response.
+    
+    Handles cases where JSON is wrapped in markdown code blocks.
+    
+    Args:
+        response: LLM response text
+        
+    Returns:
+        Parsed JSON object
+    """
+    # Remove markdown code blocks if present
+    text = response.strip()
+    
+    if text.startswith("```json"):
+        text = text[7:]
+    elif text.startswith("```"):
+        text = text[3:]
+    
+    if text.endswith("```"):
+        text = text[:-3]
+    
+    text = text.strip()
+    
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        logger.error(f"Failed to parse JSON from response: {e}")
+        logger.debug(f"Response text: {text}")
+        raise
 
-Your job is to conduct deep research on approved topics and gather high-quality information with citations.
 
-For each topic:
-1. Find authoritative sources (papers, documentation, expert blogs)
-2. Extract key claims and findings
-3. Provide proper citations with URLs
-4. Assess source credibility
+# ============================================================================
+# Prompt Template Management
+# ============================================================================
 
-Be thorough and objective. Do NOT make relevance judgments - that's the Skeptic's job."""
+def load_prompt_template(agent_name: str, template_name: str) -> str:
+    """
+    Load a prompt template from the config file.
+    
+    Args:
+        agent_name: Name of the agent (e.g., 'scout', 'researcher')
+        template_name: Name of the template (e.g., 'topic_analysis')
+        
+    Returns:
+        Prompt template string
+    """
+    config_path = Path(__file__).parent.parent.parent / "config" / "agent_prompts.yaml"
+    
+    if not config_path.exists():
+        logger.warning(f"Prompt config file not found: {config_path}")
+        return ""
+    
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            prompts = yaml.safe_load(f)
+        
+        if agent_name not in prompts:
+            logger.warning(f"No prompts found for agent: {agent_name}")
+            return ""
+        
+        if template_name not in prompts[agent_name]:
+            logger.warning(f"Template '{template_name}' not found for agent '{agent_name}'")
+            return ""
+        
+        return prompts[agent_name][template_name]
+        
+    except Exception as e:
+        logger.error(f"Failed to load prompt template: {e}")
+        return ""
 
-SKEPTIC_SYSTEM_PROMPT = """You are a Skeptic agent for an AI newsroom.
 
-Your job is to challenge research and filter out low-quality or irrelevant topics.
+def format_prompt(template: str, **kwargs) -> str:
+    """
+    Format a prompt template with variables.
+    
+    Args:
+        template: Prompt template with {variable} placeholders
+        **kwargs: Variables to substitute
+        
+    Returns:
+        Formatted prompt
+    """
+    try:
+        return template.format(**kwargs)
+    except KeyError as e:
+        logger.error(f"Missing variable in prompt template: {e}")
+        raise
 
-Evaluate research based on:
-1. Evidence quality: Are claims well-supported?
-2. Source credibility: Are sources authoritative?
-3. Relevance: Does this warrant an article?
-4. Novelty: Is this genuinely new information?
 
-You can:
-- APPROVE: Research is solid, proceed to writing
-- REJECT: Topic is not worth pursuing
-- NEED_MORE_EVIDENCE: Research is incomplete, needs more investigation
+# ============================================================================
+# Token Counting
+# ============================================================================
 
-Be critical but fair."""
+def count_tokens(text: str, model: str = "gpt-4") -> int:
+    """
+    Count tokens in text for a specific model.
+    
+    Args:
+        text: Text to count tokens for
+        model: Model name
+        
+    Returns:
+        Approximate token count
+    """
+    try:
+        import tiktoken
+        
+        # Get encoding for model
+        if "gpt-4" in model:
+            encoding = tiktoken.encoding_for_model("gpt-4")
+        elif "gpt-3.5" in model:
+            encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+        else:
+            # Default to cl100k_base encoding
+            encoding = tiktoken.get_encoding("cl100k_base")
+        
+        return len(encoding.encode(text))
+        
+    except ImportError:
+        # Fallback: rough estimate (1 token ≈ 4 characters)
+        logger.warning("tiktoken not installed. Using rough token estimate.")
+        return len(text) // 4
+    except Exception as e:
+        logger.error(f"Failed to count tokens: {e}")
+        return len(text) // 4
 
-WRITER_SYSTEM_PROMPT = """You are a Writer agent for an AI newsroom.
 
-Your job is to create engaging, accurate articles based on approved research.
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gpt-4") -> float:
+    """
+    Estimate cost for LLM API call.
+    
+    Args:
+        input_tokens: Number of input tokens
+        output_tokens: Number of output tokens
+        model: Model name
+        
+    Returns:
+        Estimated cost in USD
+    """
+    # Pricing as of 2024 (approximate)
+    pricing = {
+        "gpt-4": {"input": 0.03 / 1000, "output": 0.06 / 1000},
+        "gpt-4-turbo": {"input": 0.01 / 1000, "output": 0.03 / 1000},
+        "gpt-3.5-turbo": {"input": 0.0005 / 1000, "output": 0.0015 / 1000},
+        "claude-3-opus": {"input": 0.015 / 1000, "output": 0.075 / 1000},
+        "claude-3-sonnet": {"input": 0.003 / 1000, "output": 0.015 / 1000},
+    }
+    
+    # Find matching pricing
+    model_pricing = None
+    for key in pricing:
+        if key in model.lower():
+            model_pricing = pricing[key]
+            break
+    
+    if not model_pricing:
+        logger.warning(f"Unknown model pricing: {model}")
+        return 0.0
+    
+    input_cost = input_tokens * model_pricing["input"]
+    output_cost = output_tokens * model_pricing["output"]
+    
+    return input_cost + output_cost
 
-Guidelines:
-1. Write in a clear, professional tone
-2. Use the inverted pyramid structure
-3. Include all key findings from research
-4. Cite sources appropriately
-5. Make technical content accessible
 
-Create a complete draft ready for editorial review."""
+# ============================================================================
+# Helper Functions
+# ============================================================================
 
-EDITOR_SYSTEM_PROMPT = """You are an Editor agent for an AI newsroom.
+def create_topic_analysis_prompt(topic_data: Dict[str, Any]) -> str:
+    """
+    Create a prompt for analyzing a topic.
+    
+    Args:
+        topic_data: Topic data from various sources
+        
+    Returns:
+        Formatted prompt
+    """
+    template = load_prompt_template("scout", "topic_analysis")
+    
+    if not template:
+        # Fallback template
+        template = """Analyze the following topic and determine its relevance, novelty, and potential for a technical article.
 
-Your job is to review drafts with a critical eye and ensure quality.
+Topic Data:
+{topic_data}
 
-Check for:
-1. Accuracy: Are all claims supported by research?
-2. Clarity: Is the writing clear and well-structured?
-3. Logic: Does the argument flow logically?
-4. Style: Does it match our editorial standards?
-5. Completeness: Are all key points covered?
+Provide your analysis in JSON format with the following fields:
+- relevance: float (0-1)
+- novelty: float (0-1)
+- technical_depth: float (0-1)
+- audience_interest: float (0-1)
+- reasoning: string
 
-You can:
-- ACCEPT: Article is ready for publishing
-- REWRITE: Article needs revision (provide specific feedback)
-- FACT_CHECK: Specific claims need verification
+Respond with ONLY the JSON object, no additional text."""
+    
+    return format_prompt(template, topic_data=json.dumps(topic_data, indent=2))
 
-Be thorough and demanding."""
 
-PUBLISHER_SYSTEM_PROMPT = """You are a Publisher agent for an AI newsroom.
+def create_research_synthesis_prompt(topic: str, sources: List[Dict[str, Any]]) -> str:
+    """
+    Create a prompt for synthesizing research.
+    
+    Args:
+        topic: Research topic
+        sources: List of source materials
+        
+    Returns:
+        Formatted prompt
+    """
+    template = load_prompt_template("researcher", "research_synthesis")
+    
+    if not template:
+        # Fallback template
+        template = """Synthesize research findings for the following topic.
 
-Your job is to perform final validation and prepare articles for publication.
+Topic: {topic}
 
-Check:
-1. SEO: Title, meta description, keywords
-2. Formatting: Proper structure and readability
-3. Duplicates: Not already published elsewhere
-4. Platform requirements: Meets publishing platform standards
+Sources:
+{sources}
 
-You can:
-- PUBLISH: Article is ready to go live
-- REJECT: Article has issues that need fixing
+Extract key claims, supporting evidence, and citations. Structure your response as JSON with:
+- main_claims: list of strings
+- evidence: list of objects with {claim, source, credibility}
+- open_questions: list of strings
+- summary: string
 
-This is the final gate - be meticulous."""
+Respond with ONLY the JSON object."""
+    
+    return format_prompt(
+        template,
+        topic=topic,
+        sources=json.dumps(sources, indent=2)
+    )

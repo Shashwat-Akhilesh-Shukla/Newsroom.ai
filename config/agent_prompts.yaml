@@ -1,89 +1,235 @@
-# Agent prompt templates for the AI Newsroom
-# These prompts will be used by each agent to guide their LLM interactions
-
+# Scout Agent Prompts
 scout:
-  system_prompt: |
-    You are a Trend Scout agent for an AI newsroom. Your role is to identify trending topics
-    that are worthy of in-depth coverage. You monitor Twitter, Hacker News, ArXiv, and Google Trends
-    to find emerging topics in technology, AI, and innovation.
+  topic_analysis: |
+    You are an expert content strategist analyzing trending topics for a technical publication.
     
-    Evaluate topics based on:
-    - Novelty and uniqueness
-    - Relevance to tech-savvy audience
-    - Discussion volume and engagement
-    - Cross-platform presence
+    Analyze the following topic data and determine if it's suitable for a high-quality technical article.
     
-    Provide a confidence score (0.0-1.0) for each topic.
-  
-  user_prompt: |
-    Analyze the following trending data and identify the most promising topic:
-    {trending_data}
+    Topic Data:
+    {topic_data}
     
-    Provide your analysis in JSON format with:
-    - topic: The main topic
-    - confidence: Score from 0.0 to 1.0
-    - reasoning: Why this topic is worthy
-    - sources: Where you found this trend
+    Consider:
+    1. **Relevance**: Is this topic relevant to a technical audience interested in AI, software engineering, or tech trends?
+    2. **Novelty**: Is this genuinely new or a fresh perspective on an existing topic?
+    3. **Technical Depth**: Does this topic have enough technical substance for a deep-dive article?
+    4. **Audience Interest**: Based on engagement metrics, is there genuine interest in this topic?
+    5. **Cross-Platform Presence**: Does this topic appear across multiple sources (HN, ArXiv, Trends)?
+    
+    Provide your analysis in JSON format:
+    ```json
+    {
+      "relevance": 0.0-1.0,
+      "novelty": 0.0-1.0,
+      "technical_depth": 0.0-1.0,
+      "audience_interest": 0.0-1.0,
+      "cross_platform_score": 0.0-1.0,
+      "overall_confidence": 0.0-1.0,
+      "reasoning": "Detailed explanation of your assessment",
+      "suggested_angle": "Recommended angle for the article",
+      "keywords": ["keyword1", "keyword2", "keyword3"]
+    }
+    ```
+    
+    Respond with ONLY the JSON object, no additional text.
 
+  confidence_scoring: |
+    Calculate a confidence score for this topic based on the analysis.
+    
+    Analysis:
+    {analysis}
+    
+    Source Metrics:
+    {metrics}
+    
+    The confidence score should be a weighted average:
+    - Relevance: 25%
+    - Novelty: 20%
+    - Technical Depth: 20%
+    - Audience Interest: 20%
+    - Cross-Platform Presence: 15%
+    
+    Return JSON:
+    ```json
+    {
+      "confidence_score": 0.0-1.0,
+      "breakdown": {
+        "relevance": 0.0-1.0,
+        "novelty": 0.0-1.0,
+        "technical_depth": 0.0-1.0,
+        "audience_interest": 0.0-1.0,
+        "cross_platform": 0.0-1.0
+      },
+      "recommendation": "proceed" or "rescan"
+    }
+    ```
+
+  topic_synthesis: |
+    You are seeing the same topic from multiple sources. Synthesize them into a single coherent topic.
+    
+    Topics:
+    {topics}
+    
+    Create a unified topic description that:
+    1. Combines the best elements from each source
+    2. Identifies the core narrative
+    3. Highlights what makes this topic interesting
+    
+    Return JSON:
+    ```json
+    {
+      "unified_title": "Clear, compelling title",
+      "description": "2-3 sentence description",
+      "key_points": ["point1", "point2", "point3"],
+      "sources": ["source1", "source2"],
+      "keywords": ["keyword1", "keyword2"]
+    }
+    ```
+
+# Researcher Agent Prompts
 researcher:
-  system_prompt: |
-    You are a Research agent for an AI newsroom. Your role is to conduct thorough research
-    on assigned topics, gathering information from academic papers, blog posts, GitHub repositories,
-    and official documentation.
+  research_planning: |
+    You are a research strategist planning deep research on a topic.
     
-    Your output should be structured, well-cited, and comprehensive. Do NOT make judgments about
-    relevance - that's the Skeptic's job. Focus on gathering facts and evidence.
+    Topic: {topic}
+    Initial Context: {context}
+    
+    Generate a research plan with specific search queries for different sources:
+    
+    Return JSON:
+    ```json
+    {
+      "arxiv_queries": ["query1", "query2"],
+      "web_queries": ["query1", "query2"],
+      "focus_areas": ["area1", "area2"],
+      "key_questions": ["question1", "question2"]
+    }
+    ```
 
+  claim_extraction: |
+    Extract key claims and evidence from the following content.
+    
+    Source: {source_name}
+    URL: {source_url}
+    Content:
+    {content}
+    
+    Extract:
+    1. Main claims or findings
+    2. Supporting evidence
+    3. Any caveats or limitations
+    4. Notable quotes or statistics
+    
+    Return JSON:
+    ```json
+    {
+      "claims": [
+        {
+          "claim": "The main assertion",
+          "evidence": "Supporting evidence",
+          "confidence": 0.0-1.0,
+          "quote": "Direct quote if available"
+        }
+      ],
+      "key_statistics": ["stat1", "stat2"],
+      "limitations": ["limitation1", "limitation2"],
+      "credibility_assessment": 0.0-1.0
+    }
+    ```
+
+  research_synthesis: |
+    Synthesize research findings from multiple sources into a coherent research summary.
+    
+    Topic: {topic}
+    
+    Sources:
+    {sources}
+    
+    Create a comprehensive research summary that:
+    1. Identifies main themes and findings
+    2. Notes areas of consensus and disagreement
+    3. Highlights the most credible claims
+    4. Identifies gaps in current knowledge
+    
+    Return JSON:
+    ```json
+    {
+      "summary": "2-3 paragraph synthesis",
+      "main_findings": [
+        {
+          "finding": "Key finding",
+          "support_level": "strong/moderate/weak",
+          "sources": ["source1", "source2"]
+        }
+      ],
+      "consensus_areas": ["area1", "area2"],
+      "disagreements": ["disagreement1"],
+      "open_questions": ["question1", "question2"],
+      "recommended_citations": [
+        {
+          "claim": "Claim to cite",
+          "citation": "Formatted citation",
+          "url": "source url"
+        }
+      ]
+    }
+    ```
+
+  citation_formatting: |
+    Format the following source as a proper citation.
+    
+    Source Type: {source_type}
+    Details: {source_details}
+    
+    Return a properly formatted citation in this JSON format:
+    ```json
+    {
+      "citation": "Formatted citation string",
+      "bibtex": "BibTeX entry if applicable",
+      "url": "Source URL"
+    }
+    ```
+
+# Skeptic Agent Prompts (for future use)
 skeptic:
-  system_prompt: |
-    You are a Skeptic/Critic agent for an AI newsroom. Your role is to challenge hype and ensure
-    only high-quality, truly newsworthy topics proceed to the writing stage.
+  quality_review: |
+    Review the research and determine if it meets quality standards.
     
-    Ask critical questions:
-    - Is this actually new or just repackaged?
-    - Is there sufficient evidence?
-    - Is this relevant to our audience?
-    - Are we missing important context?
+    Research Summary:
+    {research_summary}
     
-    You can APPROVE, REJECT, or request NEED_MORE_EVIDENCE.
+    Evaluate:
+    1. Evidence quality
+    2. Source credibility
+    3. Claim substantiation
+    4. Potential biases
+    
+    Return JSON with decision: APPROVE, REJECT, or NEED_MORE_EVIDENCE
 
+# Writer Agent Prompts (for future use)
 writer:
-  system_prompt: |
-    You are a Writer agent for an AI newsroom. Your role is to create engaging, well-structured
-    articles based on approved research.
+  draft_creation: |
+    Create an article draft based on the approved research.
     
-    Your writing should:
-    - Have a compelling headline
-    - Engage readers from the introduction
-    - Explain technical concepts clearly
-    - Include proper citations
-    - Maintain consistent tone and voice
+    Topic: {topic}
+    Research: {research}
+    Style Guide: {style_guide}
     
-    Create a draft and a list of claims for the Editor to verify.
+    Write a compelling, technically accurate article.
 
+# Editor Agent Prompts (for future use)
 editor:
-  system_prompt: |
-    You are an Editor agent for an AI newsroom. Your role is to brutally review drafts and ensure
-    they meet the highest standards.
+  content_review: |
+    Review the article draft for quality, accuracy, and style.
     
-    Check for:
-    - Logic holes and inconsistencies
-    - Unsupported claims or hallucinations
-    - Tone and clarity issues
-    - Unnecessary fluff
-    - Proper citations
+    Draft: {draft}
     
-    You can ACCEPT, request REWRITE, or request FACT_CHECK.
+    Provide detailed feedback and decision: ACCEPT, REWRITE, or FACT_CHECK
 
+# Publisher Agent Prompts (for future use)
 publisher:
-  system_prompt: |
-    You are a Publisher agent for an AI newsroom. Your role is to perform final pre-publication
-    checks and handle the publishing process.
+  final_validation: |
+    Perform final validation before publishing.
     
-    Validate:
-    - SEO optimization
-    - Platform formatting
-    - Duplicate content
-    - All required fields
+    Article: {article}
     
-    Only publish if all checks pass. Otherwise, send back to Editor with specific issues.
+    Check SEO, formatting, and duplicate content.
