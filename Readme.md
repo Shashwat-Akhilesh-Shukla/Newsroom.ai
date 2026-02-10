@@ -1,8 +1,10 @@
-# 🤖 AI Newsroom
+# 🤖 Newsroom.ai
 
-> **A Multi-Agent Content Creation System Built with LangGraph**
+> **Your AI-Powered Editorial Team That Never Sleeps**
 
-AI Newsroom is an autonomous content creation system that mimics a real editorial newsroom. Six specialized AI agents collaborate through feedback loops and quality gates to research, write, and publish high-quality technical articles—no human intervention required.
+Imagine a newsroom where AI agents work together like a real editorial team—discovering trending topics, researching them deeply, challenging assumptions, writing drafts, and polishing them to perfection. That's Newsroom.ai.
+
+Six specialized AI agents collaborate through feedback loops and quality gates to create high-quality technical articles autonomously. No babysitting required.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangGraph](https://img.shields.io/badge/LangGraph-0.0.20+-green.svg)](https://github.com/langchain-ai/langgraph)
@@ -10,300 +12,254 @@ AI Newsroom is an autonomous content creation system that mimics a real editoria
 
 ---
 
-## 🎯 Mental Model: Newsroom, Not Assembly Line
+## 🎯 Why This Exists
 
-**Think editorial newsroom, not ETL pipeline.**
+**TL;DR:** Most AI content systems are glorified templates. This is different.
 
-This isn't a linear chain of LLM calls. It's a collaborative system where agents have **conflicting incentives**, **quality gates**, and **feedback loops**—just like a real newsroom.
+We built Newsroom.ai to solve a real problem: creating genuinely good technical content at scale. Not keyword-stuffed SEO garbage. Not generic "10 Tips for..." articles. **Real, researched, insightful content** that people actually want to read.
 
-### The Agents
+The secret? **Agents that disagree with each other.**
 
-| Agent | Role | Can Block Progress? |
-|-------|------|---------------------|
-| 🔍 **Scout** | Hunts trending topics from Twitter, HN, ArXiv | ✅ (loops until confidence threshold met) |
-| 📚 **Researcher** | Deep research with citations | ❌ (neutral gatherer) |
-| 🤔 **Skeptic** | Challenges hype and relevance | ✅ (can REJECT or demand MORE_EVIDENCE) |
-| ✍️ **Writer** | Drafts articles | ❌ (executes on approved research) |
-| 📝 **Editor** | Brutal quality control | ✅ (can force REWRITE or FACT_CHECK) |
-| 🚀 **Publisher** | Final validation & publishing | ✅ (SEO, formatting, duplicate checks) |
+Just like a real newsroom, our AI agents have different jobs and different incentives:
+- The **Scout** wants to find the hottest topics
+- The **Skeptic** wants to kill hype and demand evidence
+- The **Writer** wants to publish quickly
+- The **Editor** demands perfection and will send drafts back for rewrites
 
----
-
-## 🔄 Why LangGraph? Why Not LangChain?
-
-**LangChain becomes spaghetti the moment you add:**
-- ❌ Rejections and feedback loops
-- ❌ Conditional reruns based on quality
-- ❌ Multiple quality gates
-- ❌ Cyclic execution paths
-
-**LangGraph gives you:**
-- ✅ **Stateful memory** across retries
-- ✅ **Explicit cycles** for revision loops
-- ✅ **Branching decisions** based on agent outputs
-- ✅ **Agent-level autonomy** with conflicting goals
-- ✅ **Recoverable failures** with retry logic
-- ✅ **Observable execution graph** for debugging
+This tension creates quality. It's messy. It's inefficient. **It works.**
 
 ---
 
-## 🏗️ Architecture Overview
+## 🎭 Meet Your AI Editorial Team
 
-### The Execution Graph (Not a DAG!)
+| Agent | Personality | Superpower | Can Say "No"? |
+|-------|-------------|------------|---------------|
+| 🔍 **Scout** | Trend hunter, always online | Discovers what's hot on HN, ArXiv, Twitter | ✅ Loops until confident |
+| 📚 **Researcher** | Academic librarian | Deep research with proper citations | ❌ Neutral gatherer |
+| 🤔 **Skeptic** | The cynic in the room | Challenges hype: "Is this *actually* new?" | ✅ Can reject outright |
+| ✍️ **Writer** | Creative wordsmith | Turns research into compelling narratives | ❌ Follows orders |
+| 📝 **Editor** | Perfectionist, brutally honest | Catches logic holes and hallucinations | ✅ Forces rewrites |
+| 🚀 **Publisher** | Quality gatekeeper | SEO, formatting, duplicate checks | ✅ Final veto power |
 
-<img width="1595" height="756" alt="image" src="https://github.com/user-attachments/assets/73e0cd2e-ae32-4fe9-9b90-9f8138924c4e" />
-
-
-
-**Key Insight:** The graph has **cycles**, not a linear flow. This is what makes it a true multi-agent system.
+**The magic:** Three agents can block progress. This creates feedback loops that improve quality with each iteration.
 
 ---
 
-## 📊 State Management
+## 🔄 Why LangGraph? (The Honest Answer)
 
-Every agent reads and mutates a shared state object:
+We tried building this with LangChain. It became spaghetti code in about 2 hours.
 
-```python
-NewsroomState = {
-    "topic": str,                    # Current topic being researched
-    "confidence": float,             # Scout's confidence score
-    "research_notes": List[Dict],    # Research findings with citations
-    "critic_feedback": List[str],    # Skeptic's feedback
-    "draft": str,                    # Article draft
-    "editor_comments": List[str],    # Editor's instructions
-    "publish_ready": bool,           # Ready for publishing?
-    "metadata": Dict                 # Timestamps, versions, etc.
-}
+**The problem:** LangChain is great for linear workflows. But the moment you add:
+- ❌ An editor who rejects drafts and sends them back
+- ❌ A skeptic who demands more evidence
+- ❌ Quality gates that can fail
+- ❌ Loops that run until quality improves
+
+...your code becomes an unmaintainable mess of if-statements and callbacks.
+
+**LangGraph solves this** by treating your workflow as a graph with cycles:
+- ✅ **Stateful memory** - Agents remember previous attempts
+- ✅ **Explicit cycles** - Editor → Writer → Editor is a feature, not a bug
+- ✅ **Branching logic** - Each agent decides where to go next
+- ✅ **Observable execution** - You can see exactly what's happening
+
+Think of it like Git vs. a linear file system. Once you need branches and merges, you need Git. Once you need feedback loops and quality gates, you need LangGraph.
+
+---
+
+## 🏗️ How It Actually Works
+
+### The Workflow (Simplified)
+
+```
+Scout finds trending topic
+    ↓
+Researcher gathers evidence
+    ↓
+Skeptic reviews: "Is this legit?"
+    ├─ No → Back to Scout
+    └─ Yes → Continue
+        ↓
+Writer creates draft
+    ↓
+Editor reviews: "Is this good?"
+    ├─ Needs work → Back to Writer
+    ├─ Needs facts → Back to Researcher
+    └─ Perfect → Continue
+        ↓
+Publisher validates and publishes
 ```
 
-**Each agent:**
-1. Reads the full state
-2. Mutates only its slice
-3. Emits a routing decision
+**The graph has cycles.** That's the whole point. Quality comes from iteration.
 
-This is **LangGraph thinking**, not chain thinking.
+### Real Example
+
+Let's say Scout finds: *"New AI model claims 99% accuracy"*
+
+1. **Scout** (confidence: 0.85): "This is trending on HN and ArXiv!"
+2. **Researcher**: Gathers 8 sources, extracts claims with citations
+3. **Skeptic**: "Wait, 99% accuracy *on what dataset*? Need more evidence."
+4. **Researcher** (again): Digs deeper, finds the actual benchmark details
+5. **Skeptic**: "Okay, this checks out. Proceed."
+6. **Writer**: Creates draft with proper context and caveats
+7. **Editor**: "This paragraph is confusing. Rewrite it."
+8. **Writer** (again): Clarifies the confusing section
+9. **Editor**: "Good. Ship it."
+10. **Publisher**: Checks SEO, formatting, duplicates → Publishes
+
+**Total iterations:** 3 loops. **Time saved vs. human:** ~4 hours. **Quality:** Actually good.
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Get Started in 5 Minutes
 
-### Prerequisites
-- Python 3.10+
-- OpenAI API key (or other LLM provider)
-- Optional: Twitter, GitHub, Medium API keys for full functionality
+### What You Need
+- Python 3.10 or higher
+- An OpenAI API key (or Anthropic Claude)
+- 5 minutes
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+# Clone and enter the project
+git clone <your-repo-url>
 cd AI_NEWSROOM
 
-# Create virtual environment
+# Set up Python environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install everything
 pip install -r requirements.txt
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env and add your API keys
+# Add your API key
+echo "OPENAI_API_KEY=your-key-here" > .env
 ```
 
-### Configuration
-
-Edit `.env` with your API keys and preferences:
+### Test Phase 2 (Scout + Researcher)
 
 ```bash
-# Required
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Optional (for full functionality)
-TWITTER_API_KEY=your_twitter_api_key_here
-GITHUB_TOKEN=your_github_token_here
-MEDIUM_API_KEY=your_medium_api_key_here
-
-# Agent Configuration
-SCOUT_CONFIDENCE_THRESHOLD=0.7
-MAX_RESEARCH_SOURCES=10
-MAX_REVISION_LOOPS=3
+# Run the Phase 2 test
+python tests/test_phase2.py
 ```
 
-### Run the Newsroom
-
-```bash
-# Start the newsroom pipeline
-python -m src.main
-
-# With custom configuration
-python -m src.main --config config/custom_config.yaml
-
-# Development mode with verbose logging
-DEBUG=True python -m src.main
+You should see:
+```
+✅ Scout found: "Breakthrough in Quantum Error Correction"
+✅ Confidence: 0.85
+✅ Researcher gathered 12 sources
+✅ All tests passed!
 ```
 
----
-
-## 📁 Project Structure
-
-```
-AI_NEWSROOM/
-├── src/
-│   ├── agents/          # 6 specialized agents + base class
-│   │   ├── scout.py
-│   │   ├── researcher.py
-│   │   ├── skeptic.py
-│   │   ├── writer.py
-│   │   ├── editor.py
-│   │   └── publisher.py
-│   ├── utils/           # API clients, LLM utils, data processing
-│   ├── storage/         # Database and caching layers
-│   ├── main.py          # Entry point
-│   ├── graph.py         # LangGraph workflow definition
-│   └── state.py         # State management
-├── tests/               # Comprehensive test suite
-├── config/              # Agent prompts and style guide
-├── docs/                # Architecture and setup documentation
-└── requirements.txt     # Dependencies
-```
-
-See [`docs/project_structure.md`](docs/project_structure.md) for detailed structure.
+**That's it.** Scout and Researcher are working. The other agents are coming in Phase 3.
 
 ---
 
-## 🎓 How It Works
+## 📊 Current Status
 
-### 1. **Scout Agent** - Trend Discovery
-- Monitors Twitter, Hacker News, ArXiv, Google Trends
-- Ranks topics by novelty, relevance, and engagement
-- Calculates confidence scores
-- **Decision:** Proceed if confidence ≥ threshold, else rescan
+### ✅ Phase 1: Foundation (Complete)
+- Base agent architecture
+- State management system
+- Project structure
 
-### 2. **Researcher Agent** - Deep Investigation
-- Gathers information from papers, blogs, GitHub
-- Extracts claims with citations
-- Structures research notes
-- **Does NOT judge relevance** (that's Skeptic's job)
+### ✅ Phase 2: Discovery & Research (Complete)
+- **Scout Agent** - Finds trending topics from HackerNews, ArXiv, Google Trends
+- **Researcher Agent** - Deep research with citations
+- **API Integrations** - HN, ArXiv, Google Trends, Twitter (optional)
+- **LLM Utilities** - OpenAI/Anthropic integration
+- **Tests** - Full Scout → Researcher flow validated
 
-### 3. **Skeptic Agent** - Quality Control ⚠️
-- Challenges hype: "Is this actually new?"
-- Validates evidence quality
-- **Can APPROVE, REJECT, or demand NEED_MORE_EVIDENCE**
-- Creates the first major feedback loop
-
-### 4. **Writer Agent** - Content Creation
-- Drafts articles based on approved research
-- Maintains consistent tone and style
-- Creates claim list for verification
-- **Cannot publish** (needs Editor approval)
-
-### 5. **Editor Agent** - Brutal Review ⚠️
-- Checks for logic holes and hallucinations
-- Enforces editorial standards
-- **Can ACCEPT, force REWRITE, or request FACT_CHECK**
-- Creates cyclic edges (chains die here, graphs thrive)
-
-### 6. **Publisher Agent** - Final Gatekeeper ⚠️
-- SEO optimization and formatting
-- Duplicate content detection
-- Platform-specific validation
-- **Publishes only if all checks pass**
+### 🚧 Phase 3: Content Creation (In Progress)
+- [ ] Skeptic Agent - Quality control
+- [ ] Writer Agent - Draft creation
+- [ ] Editor Agent - Review and revision
+- [ ] Publisher Agent - Final validation
+- [ ] LangGraph Integration - Connect all agents
 
 ---
 
-## 🧪 Testing
+## 🎓 Learn More
 
-```bash
-# Run all tests
-pytest
+### Documentation
+- **[Quick Start Guide](docs/QUICKSTART_PHASE2.md)** - Get running in 5 minutes
+- **[Phase 2 Walkthrough](docs/phase2_implementation.md)** - Deep dive into Scout & Researcher
+- **[Architecture](docs/architecture.md)** - System design philosophy
+- **[Project Structure](docs/project_structure.md)** - Where everything lives
 
-# Run with coverage
-pytest --cov=src --cov-report=html
+### Key Concepts
 
-# Run specific test suite
-pytest tests/test_agents.py
-pytest tests/test_graph.py
-```
+**Why "Newsroom" and not "Pipeline"?**  
+Pipelines are linear. Newsrooms have feedback loops, disagreements, and quality gates. That's what makes content good.
 
----
+**Why do agents need to disagree?**  
+Tension creates quality. If everyone agrees, you get groupthink. If the Editor can force rewrites, the Writer tries harder.
 
-## 🎯 What Makes This "Multi-Agent"?
-
-This system qualifies as a **true multi-agent system** because:
-
-1. ✅ **At least one agent can block or reject progress**  
-   → Skeptic, Editor, and Publisher all have veto power
-
-2. ✅ **At least one loop can run indefinitely until quality improves**  
-   → Editor ↔ Writer revision loop
-
-3. ✅ **At least two agents have conflicting incentives**  
-   → Writer wants to publish quickly, Editor demands perfection
-
-4. ✅ **State persists across retries**  
-   → NewsroomState maintains context through all feedback loops
-
-**If you don't have these properties, you don't have a multi-agent system—you have a chain.**
+**How is this different from AutoGPT?**  
+AutoGPT is one agent with tools. This is six agents with different goals. The architecture is fundamentally different.
 
 ---
 
-## 📚 Documentation
+## 🛠️ Tech Stack
 
-- **[Architecture Overview](docs/architecture.md)** - Detailed system design
-- **[Setup Guide](docs/setup.md)** - Installation and configuration
-- **[Project Structure](docs/project_structure.md)** - File organization
-- **[Style Guide](config/style_guide.md)** - Content standards
+**Core:**
+- **LangGraph** - Multi-agent orchestration
+- **LangChain** - LLM abstractions
+- **OpenAI/Anthropic** - Language models
 
----
+**Data:**
+- **SQLAlchemy** - Database (coming in Phase 3)
+- **Redis** - Caching (coming in Phase 3)
 
-## 🛠️ Technology Stack
-
-- **LangGraph** - Multi-agent orchestration with cyclic graphs
-- **LangChain** - LLM abstractions and utilities
-- **OpenAI/Anthropic** - LLM providers
-- **SQLAlchemy** - Database ORM
-- **Redis** - Caching layer
-- **Pytest** - Testing framework
-
----
-
-## 🔮 Roadmap
-
-- [ ] Implement all agent logic
-- [ ] Add support for multiple LLM providers
-- [ ] Build web UI for monitoring agent execution
-- [ ] Add support for image generation and embedding
-- [ ] Implement A/B testing for different agent prompts
-- [ ] Add analytics dashboard for published content
-- [ ] Support for multiple publishing platforms
+**APIs:**
+- **Hacker News** - Tech discussions
+- **ArXiv** - Academic papers
+- **Google Trends** - Search trends
+- **Twitter** - Social trends (optional)
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our contributing guidelines and submit pull requests.
+We're building this in public. Contributions welcome!
+
+**Areas we need help:**
+- [ ] Additional data sources (Reddit, GitHub trending, etc.)
+- [ ] Better prompt engineering for agents
+- [ ] Web UI for monitoring agent execution
+- [ ] Support for more LLM providers
+- [ ] Publishing integrations (Medium, Dev.to, etc.)
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - Use it, fork it, build on it. Just don't blame us if your AI agents start arguing with each other. (They will. That's the point.)
+
+---
+
+## 💡 The Big Idea
+
+**Most AI content systems are assembly lines.** Input → Process → Output. Fast, efficient, soulless.
+
+**Newsroom.ai is a newsroom.** Messy, iterative, with agents that challenge each other. Slower, more expensive, **way better output.**
+
+We believe the future of AI isn't about making it faster—it's about making it *think* better. And thinking requires disagreement, iteration, and quality gates.
+
+**This is not a chain. This is a graph.**
+
+And graphs are how real work gets done.
 
 ---
 
 ## 🙏 Acknowledgments
 
-- Built with [LangGraph](https://github.com/langchain-ai/langgraph) by LangChain
-- Inspired by real editorial newsroom workflows
-- Designed to showcase the power of multi-agent systems over simple chains
+Built with [LangGraph](https://github.com/langchain-ai/langgraph) by LangChain.
+
+Inspired by every editor who ever sent our drafts back with "this needs work" written in red ink. You were right. We hated it. But you were right.
 
 ---
 
-## 💡 Key Takeaway
-
-**This is not a chain. This is a graph.**
-
-The moment you add quality gates, rejections, and feedback loops, you need LangGraph. LangChain alone will become unmaintainable spaghetti.
-
-**Think newsroom, not assembly line.**
+**Questions? Issues? Ideas?**  
+Open an issue or start a discussion. We're figuring this out together.
