@@ -189,47 +189,162 @@ researcher:
     }
     ```
 
-# Skeptic Agent Prompts (for future use)
+# Skeptic Agent Prompts
 skeptic:
   quality_review: |
-    Review the research and determine if it meets quality standards.
+    You are a skeptical research reviewer evaluating the quality of research.
     
     Research Summary:
     {research_summary}
     
     Evaluate:
-    1. Evidence quality
-    2. Source credibility
-    3. Claim substantiation
-    4. Potential biases
+    1. **Evidence Quality**: Are claims well-supported by credible sources?
+    2. **Source Credibility**: Are the sources reliable and authoritative?
+    3. **Novelty**: Is this genuinely new or just repackaged hype?
+    4. **Completeness**: Is the research thorough enough for a quality article?
+    5. **Potential Biases**: Are there obvious biases or conflicts of interest?
     
-    Return JSON with decision: APPROVE, REJECT, or NEED_MORE_EVIDENCE
+    Be critical but fair. Challenge assumptions and demand evidence.
+    
+    Return JSON:
+    ```json
+    {
+      "evidence_quality": 0.0-1.0,
+      "source_credibility": 0.0-1.0,
+      "novelty_score": 0.0-1.0,
+      "completeness": 0.0-1.0,
+      "overall_quality": 0.0-1.0,
+      "concerns": ["concern1", "concern2"],
+      "strengths": ["strength1", "strength2"],
+      "recommendation": "approve/reject/need_more_evidence",
+      "reasoning": "Detailed explanation of your decision"
+    }
+    ```
 
-# Writer Agent Prompts (for future use)
+# Writer Agent Prompts
 writer:
   draft_creation: |
-    Create an article draft based on the approved research.
+    You are a skilled technical writer creating an article.
     
     Topic: {topic}
-    Research: {research}
-    Style Guide: {style_guide}
     
-    Write a compelling, technically accurate article.
+    Research Summary:
+    {research_summary}
+    
+    Style Guide:
+    {style_guide}
+    
+    Write a comprehensive, well-structured article that:
+    1. Has an engaging introduction that hooks the reader
+    2. Presents findings clearly with proper citations
+    3. Maintains a {style} tone (technical but accessible)
+    4. Uses clear headings and logical structure
+    5. Includes a thoughtful conclusion
+    6. Is approximately {max_words} words
+    
+    Important:
+    - Cite sources inline using [Source Name](URL) format
+    - Use concrete examples and specific details
+    - Avoid hype and unsubstantiated claims
+    - Make technical concepts accessible
+    
+    Write the complete article now.
 
-# Editor Agent Prompts (for future use)
+  revision_handling: |
+    You are revising an article based on editor feedback.
+    
+    Current Draft:
+    {current_draft}
+    
+    Editor Feedback:
+    {editor_feedback}
+    
+    Revise the article to address ALL the feedback while:
+    1. Maintaining the core message and research findings
+    2. Keeping proper citations intact
+    3. Improving clarity and flow
+    4. Fixing any logic holes or inconsistencies
+    
+    Provide the complete revised article.
+
+# Editor Agent Prompts
 editor:
   content_review: |
-    Review the article draft for quality, accuracy, and style.
+    You are a perfectionist editor reviewing an article draft.
     
-    Draft: {draft}
+    Topic: {topic}
     
-    Provide detailed feedback and decision: ACCEPT, REWRITE, or FACT_CHECK
+    Draft:
+    {draft}
+    
+    Review the draft critically for:
+    1. **Clarity**: Is the writing clear and easy to follow?
+    2. **Logic**: Are arguments well-structured and logical?
+    3. **Evidence**: Are claims properly supported with citations?
+    4. **Engagement**: Is it interesting and well-paced?
+    5. **Technical Accuracy**: Are technical details correct?
+    6. **Style**: Does it follow editorial standards?
+    
+    Be brutal but constructive. Catch every flaw.
+    
+    Return JSON:
+    ```json
+    {
+      "clarity_score": 0.0-1.0,
+      "logic_score": 0.0-1.0,
+      "evidence_score": 0.0-1.0,
+      "engagement_score": 0.0-1.0,
+      "technical_accuracy": 0.0-1.0,
+      "overall_quality": 0.0-1.0,
+      "strengths": ["strength1", "strength2"],
+      "weaknesses": ["weakness1", "weakness2"],
+      "specific_issues": ["issue1", "issue2"],
+      "recommendation": "accept/rewrite/fact_check",
+      "revision_instructions": "Specific, actionable feedback for revision"
+    }
+    ```
 
-# Publisher Agent Prompts (for future use)
+# Publisher Agent Prompts
 publisher:
+  seo_optimization: |
+    You are an SEO expert optimizing an article for search engines.
+    
+    Topic: {topic}
+    
+    Article (first 500 words):
+    {article_preview}
+    
+    Generate SEO metadata that will:
+    1. Attract clicks from search results
+    2. Accurately represent the content
+    3. Include relevant keywords naturally
+    4. Work well on social media
+    
+    Return JSON:
+    ```json
+    {
+      "title_tag": "60-70 character optimized title",
+      "meta_description": "150-160 character compelling description",
+      "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+      "slug": "url-friendly-slug",
+      "og_title": "Social media optimized title",
+      "og_description": "Social media description (under 200 chars)"
+    }
+    ```
+
   final_validation: |
     Perform final validation before publishing.
     
     Article: {article}
     
-    Check SEO, formatting, and duplicate content.
+    Metadata: {metadata}
+    
+    Check:
+    1. SEO optimization is complete
+    2. Formatting is correct
+    3. All links are valid
+    4. No duplicate content
+    5. Readability is good
+    
+    Return JSON with validation results and any issues found.
+

@@ -1,235 +1,263 @@
 """
-LangGraph workflow definition for the AI Newsroom.
+LangGraph workflow definition for AI Newsroom.
 
-This module defines the complete multi-agent workflow using LangGraph,
-including all nodes, edges, and routing logic.
+This module defines the complete multi-agent workflow with all routing logic.
 """
 
-from typing import Literal
+import logging
+from typing import Dict, Any, Literal
 from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver
 
-from .state import NewsroomState, AgentDecision
-from .utils.logging_config import get_logger
+from .state import NewsroomState, create_initial_state
+from .agents.scout import ScoutAgent
+from .agents.researcher import ResearcherAgent
+from .agents.skeptic import SkepticAgent
+from .agents.writer import WriterAgent
+from .agents.editor import EditorAgent
+from .agents.publisher import PublisherAgent
 
-logger = get_logger(__name__)
+logger = logging.getLogger(__name__)
 
 
-def create_newsroom_graph():
+# Initialize all agents
+scout_agent = ScoutAgent()
+researcher_agent = ResearcherAgent()
+skeptic_agent = SkepticAgent()
+writer_agent = WriterAgent()
+editor_agent = EditorAgent()
+publisher_agent = PublisherAgent()
+
+
+def create_newsroom_workflow() -> StateGraph:
     """
-    Create the LangGraph workflow for the AI Newsroom.
-    
-    This graph has CYCLES - it's not a DAG!
-    Agents can loop back based on quality gates and feedback.
+    Create the complete newsroom workflow graph.
     
     Returns:
-        Compiled StateGraph
+        Compiled LangGraph workflow
     """
-    # Create graph with state
+    # Create the graph
     workflow = StateGraph(NewsroomState)
     
-    # Add nodes (agents will be added in later phases)
-    # For now, we'll add placeholder nodes
-    workflow.add_node("scout", scout_node)
-    workflow.add_node("researcher", researcher_node)
-    workflow.add_node("skeptic", skeptic_node)
-    workflow.add_node("writer", writer_node)
-    workflow.add_node("editor", editor_node)
-    workflow.add_node("publisher", publisher_node)
+    # Add all agents as nodes
+    workflow.add_node("scout", scout_agent.execute)
+    workflow.add_node("researcher", researcher_agent.execute)
+    workflow.add_node("skeptic", skeptic_agent.execute)
+    workflow.add_node("writer", writer_agent.execute)
+    workflow.add_node("editor", editor_agent.execute)
+    workflow.add_node("publisher", publisher_agent.execute)
+    
+    # Add conditional edges with routing functions
+    workflow.add_conditional_edges(
+        "scout",
+        route_scout,
+        {
+            "researcher": "researcher",
+            "scout": "scout",  # Loop back for rescan
+            "END": END
+        }
+    )
+    
+    workflow.add_conditional_edges(
+        "researcher",
+        route_researcher,
+        {
+            "skeptic": "skeptic"
+        }
+    )
+    
+    workflow.add_conditional_edges(
+        "skeptic",
+        route_skeptic,
+        {
+            "writer": "writer",
+            "researcher": "researcher",  # Need more evidence
+            "scout": "scout"  # Rejected, find new topic
+        }
+    )
+    
+    workflow.add_conditional_edges(
+        "writer",
+        route_writer,
+        {
+            "editor": "editor"
+        }
+    )
+    
+    workflow.add_conditional_edges(
+        "editor",
+        route_editor,
+        {
+            "publisher": "publisher",
+            "writer": "writer",  # Rewrite loop
+            "researcher": "researcher"  # Fact-check
+        }
+    )
+    
+    workflow.add_conditional_edges(
+        "publisher",
+        route_publisher,
+        {
+            "END": END,
+            "editor": "editor"  # Failed validation
+        }
+    )
     
     # Set entry point
     workflow.set_entry_point("scout")
     
-    # Add conditional edges (routing logic)
+    # Compile the graph
+    app = workflow.compile()
     
-    # Scout routing
-    workflow.add_conditional_edges(
-        "scout",
-        route_from_scout,
-        {
-            "researcher": "researcher",  # High confidence
-            "scout": "scout",  # Low confidence, rescan
-        }
-    )
+    logger.info("Newsroom workflow created successfully")
     
-    # Researcher always goes to Skeptic
-    workflow.add_edge("researcher", "skeptic")
-    
-    # Skeptic routing (creates first major feedback loop)
-    workflow.add_conditional_edges(
-        "skeptic",
-        route_from_skeptic,
-        {
-            "writer": "writer",  # APPROVE
-            "scout": "scout",  # REJECT
-            "researcher": "researcher",  # NEED_MORE_EVIDENCE
-        }
-    )
-    
-    # Writer always goes to Editor
-    workflow.add_edge("writer", "editor")
-    
-    # Editor routing (creates revision loop)
-    workflow.add_conditional_edges(
-        "editor",
-        route_from_editor,
-        {
-            "publisher": "publisher",  # ACCEPT
-            "writer": "writer",  # REWRITE
-            "researcher": "researcher",  # FACT_CHECK
-        }
-    )
-    
-    # Publisher routing (final gate)
-    workflow.add_conditional_edges(
-        "publisher",
-        route_from_publisher,
-        {
-            END: END,  # PUBLISH
-            "editor": "editor",  # REJECT
-        }
-    )
-    
-    # Compile with checkpointing for state persistence
-    memory = MemorySaver()
-    return workflow.compile(checkpointer=memory)
-
-
-# Placeholder node functions (will be replaced with actual agents in later phases)
-
-def scout_node(state: NewsroomState) -> NewsroomState:
-    """Scout agent node (placeholder)."""
-    logger.info("Scout node executing (placeholder)")
-    state["current_agent"] = "scout"
-    # Placeholder: Set a default confidence
-    if state["confidence"] == 0.0:
-        state["confidence"] = 0.8  # Placeholder value
-    return state
-
-
-def researcher_node(state: NewsroomState) -> NewsroomState:
-    """Researcher agent node (placeholder)."""
-    logger.info("Researcher node executing (placeholder)")
-    state["current_agent"] = "researcher"
-    return state
-
-
-def skeptic_node(state: NewsroomState) -> NewsroomState:
-    """Skeptic agent node (placeholder)."""
-    logger.info("Skeptic node executing (placeholder)")
-    state["current_agent"] = "skeptic"
-    # Placeholder: Default to APPROVE
-    state["skeptic_decision"] = AgentDecision.APPROVE.value
-    return state
-
-
-def writer_node(state: NewsroomState) -> NewsroomState:
-    """Writer agent node (placeholder)."""
-    logger.info("Writer node executing (placeholder)")
-    state["current_agent"] = "writer"
-    return state
-
-
-def editor_node(state: NewsroomState) -> NewsroomState:
-    """Editor agent node (placeholder)."""
-    logger.info("Editor node executing (placeholder)")
-    state["current_agent"] = "editor"
-    # Placeholder: Default to ACCEPT
-    state["editor_decision"] = AgentDecision.ACCEPT.value
-    return state
-
-
-def publisher_node(state: NewsroomState) -> NewsroomState:
-    """Publisher agent node (placeholder)."""
-    logger.info("Publisher node executing (placeholder)")
-    state["current_agent"] = "publisher"
-    state["publish_ready"] = True
-    return state
+    return app
 
 
 # Routing functions
 
-def route_from_scout(state: NewsroomState) -> Literal["researcher", "scout"]:
+def route_scout(state: NewsroomState) -> Literal["researcher", "scout", "END"]:
     """
-    Route from Scout based on confidence.
+    Route from Scout agent.
     
     Args:
-        state: Current state
+        state: Current newsroom state
         
     Returns:
         Next node name
     """
-    from .utils.config import get_config
-    config = get_config()
-    threshold = config.get("scout_confidence_threshold", 0.7)
-    
-    if state["confidence"] >= threshold:
-        logger.info(f"Scout confidence {state['confidence']:.2f} >= {threshold}, routing to researcher")
-        return "researcher"
-    else:
-        logger.info(f"Scout confidence {state['confidence']:.2f} < {threshold}, rescanning")
-        return "scout"
+    return scout_agent.get_routing_decision(state)
 
 
-def route_from_skeptic(state: NewsroomState) -> Literal["writer", "scout", "researcher"]:
+def route_researcher(state: NewsroomState) -> Literal["skeptic"]:
     """
-    Route from Skeptic based on decision.
+    Route from Researcher agent.
     
     Args:
-        state: Current state
+        state: Current newsroom state
+        
+    Returns:
+        Next node name (always skeptic)
+    """
+    return researcher_agent.get_routing_decision(state)
+
+
+def route_skeptic(state: NewsroomState) -> Literal["writer", "researcher", "scout"]:
+    """
+    Route from Skeptic agent.
+    
+    Args:
+        state: Current newsroom state
         
     Returns:
         Next node name
     """
-    decision = state.get("skeptic_decision", AgentDecision.APPROVE.value)
-    
-    if decision == AgentDecision.APPROVE.value:
-        logger.info("Skeptic APPROVED, routing to writer")
-        return "writer"
-    elif decision == AgentDecision.REJECT.value:
-        logger.info("Skeptic REJECTED, routing back to scout")
-        return "scout"
-    else:  # NEED_MORE_EVIDENCE
-        logger.info("Skeptic needs MORE EVIDENCE, routing to researcher")
-        return "researcher"
+    return skeptic_agent.get_routing_decision(state)
 
 
-def route_from_editor(state: NewsroomState) -> Literal["publisher", "writer", "researcher"]:
+def route_writer(state: NewsroomState) -> Literal["editor"]:
     """
-    Route from Editor based on decision.
+    Route from Writer agent.
     
     Args:
-        state: Current state
+        state: Current newsroom state
+        
+    Returns:
+        Next node name (always editor)
+    """
+    return writer_agent.get_routing_decision(state)
+
+
+def route_editor(state: NewsroomState) -> Literal["publisher", "writer", "researcher"]:
+    """
+    Route from Editor agent.
+    
+    Args:
+        state: Current newsroom state
         
     Returns:
         Next node name
     """
-    decision = state.get("editor_decision", AgentDecision.ACCEPT.value)
-    
-    if decision == AgentDecision.ACCEPT.value:
-        logger.info("Editor ACCEPTED, routing to publisher")
-        return "publisher"
-    elif decision == AgentDecision.REWRITE.value:
-        logger.info("Editor requested REWRITE, routing back to writer")
-        return "writer"
-    else:  # FACT_CHECK
-        logger.info("Editor requested FACT_CHECK, routing to researcher")
-        return "researcher"
+    return editor_agent.get_routing_decision(state)
 
 
-def route_from_publisher(state: NewsroomState) -> Literal["__end__", "editor"]:
+def route_publisher(state: NewsroomState) -> Literal["END", "editor"]:
     """
-    Route from Publisher based on decision.
+    Route from Publisher agent.
     
     Args:
-        state: Current state
+        state: Current newsroom state
         
     Returns:
         Next node name or END
     """
-    if state.get("publish_ready", False):
-        logger.info("Publisher APPROVED, ending workflow")
-        return END
-    else:
-        logger.info("Publisher REJECTED, routing back to editor")
-        return "editor"
+    return publisher_agent.get_routing_decision(state)
+
+
+def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
+    """
+    Run the complete newsroom workflow.
+    
+    Args:
+        initial_state: Optional initial state (uses default if None)
+        
+    Returns:
+        Final state after workflow completion
+    """
+    logger.info("Starting newsroom workflow...")
+    
+    # Create workflow
+    app = create_newsroom_workflow()
+    
+    # Use provided state or create initial state
+    if initial_state is None:
+        initial_state = create_initial_state()
+    
+    # Run the workflow
+    try:
+        final_state = app.invoke(initial_state)
+        
+        logger.info("Newsroom workflow completed successfully")
+        
+        # Log summary
+        if final_state.get("publish_ready"):
+            logger.info(f"✅ Article published: '{final_state.get('topic')}'")
+            logger.info(f"   Word count: {len(final_state.get('draft', '').split())}")
+            logger.info(f"   Revisions: {final_state.get('draft_version', 0)}")
+        else:
+            logger.info(f"❌ Workflow ended without publishing")
+            logger.info(f"   Last stage: {final_state.get('workflow_stage', 'unknown')}")
+        
+        return final_state
+        
+    except Exception as e:
+        logger.error(f"Workflow execution failed: {e}", exc_info=True)
+        raise
+
+
+def stream_newsroom(initial_state: NewsroomState = None):
+    """
+    Stream the newsroom workflow execution.
+    
+    Args:
+        initial_state: Optional initial state
+        
+    Yields:
+        State updates as the workflow progresses
+    """
+    logger.info("Starting newsroom workflow (streaming mode)...")
+    
+    # Create workflow
+    app = create_newsroom_workflow()
+    
+    # Use provided state or create initial state
+    if initial_state is None:
+        initial_state = create_initial_state()
+    
+    # Stream the workflow
+    try:
+        for state in app.stream(initial_state):
+            yield state
+            
+    except Exception as e:
+        logger.error(f"Workflow streaming failed: {e}", exc_info=True)
+        raise
