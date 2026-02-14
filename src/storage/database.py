@@ -11,8 +11,14 @@ from pathlib import Path
 from contextlib import contextmanager
 
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text, ForeignKey, JSON
-from sqlalchemy.orm import sessionmaker, relationship, Session, declarative_base
+from sqlalchemy.orm import sessionmaker, relationship, Session
 from sqlalchemy.pool import StaticPool
+
+# Support both SQLAlchemy 1.x and 2.x
+try:
+    from sqlalchemy.orm import declarative_base
+except ImportError:
+    from sqlalchemy.ext.declarative import declarative_base
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +35,7 @@ class Topic(Base):
     title = Column(String(500), nullable=False)
     confidence = Column(Float, nullable=False)
     status = Column(String(50), default='discovered')  # discovered, researching, approved, rejected, published
-    metadata = Column(JSON, default=dict)
+    meta_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -51,7 +57,7 @@ class Research(Base):
     source = Column(String(200), nullable=False)  # HackerNews, ArXiv, etc.
     content = Column(Text, nullable=False)
     citations = Column(JSON, default=list)  # List of citation dicts
-    metadata = Column(JSON, default=dict)
+    meta_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
@@ -71,7 +77,7 @@ class Draft(Base):
     content = Column(Text, nullable=False)
     status = Column(String(50), default='draft')  # draft, under_review, approved, rejected
     word_count = Column(Integer, default=0)
-    metadata = Column(JSON, default=dict)
+    meta_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
@@ -90,7 +96,7 @@ class Feedback(Base):
     target_agent = Column(String(50), nullable=False)  # scout, researcher, writer
     content = Column(Text, nullable=False)
     decision = Column(String(50))  # APPROVE, REJECT, NEED_MORE_EVIDENCE, REWRITE, etc.
-    metadata = Column(JSON, default=dict)
+    meta_data = Column(JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
     
     def __repr__(self):
@@ -106,7 +112,7 @@ class Publication(Base):
     draft_id = Column(Integer, ForeignKey('drafts.draft_id'), nullable=True)
     platform = Column(String(100), default='local')  # local, medium, dev.to, etc.
     url = Column(String(500), nullable=True)
-    metadata = Column(JSON, default=dict)  # SEO data, keywords, etc.
+    meta_data = Column(JSON, default=dict)  # SEO data, keywords, etc.
     published_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
@@ -187,13 +193,13 @@ class DatabaseManager:
     
     # CRUD Operations for Topic
     
-    def create_topic(self, title: str, confidence: float, metadata: Optional[Dict] = None) -> Topic:
+    def create_topic(self, title: str, confidence: float, meta_data: Optional[Dict] = None) -> Topic:
         """Create a new topic."""
         with self.get_session() as session:
             topic = Topic(
                 title=title,
                 confidence=confidence,
-                metadata=metadata or {}
+                meta_data=meta_data or {}
             )
             session.add(topic)
             session.flush()
@@ -225,7 +231,7 @@ class DatabaseManager:
     # CRUD Operations for Research
     
     def create_research(self, topic_id: int, source: str, content: str, 
-                       citations: Optional[List[Dict]] = None, metadata: Optional[Dict] = None) -> Research:
+                       citations: Optional[List[Dict]] = None, meta_data: Optional[Dict] = None) -> Research:
         """Create research note."""
         with self.get_session() as session:
             research = Research(
@@ -233,7 +239,7 @@ class DatabaseManager:
                 source=source,
                 content=content,
                 citations=citations or [],
-                metadata=metadata or {}
+                meta_data=meta_data or {}
             )
             session.add(research)
             session.flush()
@@ -249,7 +255,7 @@ class DatabaseManager:
     # CRUD Operations for Draft
     
     def create_draft(self, topic_id: int, content: str, version: int = 1,
-                    metadata: Optional[Dict] = None) -> Draft:
+                    meta_data: Optional[Dict] = None) -> Draft:
         """Create a new draft."""
         word_count = len(content.split())
         with self.get_session() as session:
@@ -258,7 +264,7 @@ class DatabaseManager:
                 version=version,
                 content=content,
                 word_count=word_count,
-                metadata=metadata or {}
+                meta_data=meta_data or {}
             )
             session.add(draft)
             session.flush()
@@ -285,7 +291,7 @@ class DatabaseManager:
     # CRUD Operations for Feedback
     
     def create_feedback(self, agent: str, target_agent: str, content: str,
-                       decision: Optional[str] = None, metadata: Optional[Dict] = None) -> Feedback:
+                       decision: Optional[str] = None, meta_data: Optional[Dict] = None) -> Feedback:
         """Create feedback entry."""
         with self.get_session() as session:
             feedback = Feedback(
@@ -293,7 +299,7 @@ class DatabaseManager:
                 target_agent=target_agent,
                 content=content,
                 decision=decision,
-                metadata=metadata or {}
+                meta_data=meta_data or {}
             )
             session.add(feedback)
             session.flush()
@@ -310,7 +316,7 @@ class DatabaseManager:
     
     def create_publication(self, topic_id: int, draft_id: Optional[int] = None,
                           platform: str = 'local', url: Optional[str] = None,
-                          metadata: Optional[Dict] = None) -> Publication:
+                          meta_data: Optional[Dict] = None) -> Publication:
         """Create publication record."""
         with self.get_session() as session:
             publication = Publication(
@@ -318,7 +324,7 @@ class DatabaseManager:
                 draft_id=draft_id,
                 platform=platform,
                 url=url,
-                metadata=metadata or {}
+                meta_data=meta_data or {}
             )
             session.add(publication)
             session.flush()

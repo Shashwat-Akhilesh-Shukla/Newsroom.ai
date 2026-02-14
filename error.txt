@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\debug_import.py", line 7, in <module>
+    from database import DatabaseManager
+  File "c:\Users/passi/OneDrive/Desktop/Projects/FlagShip projects/AI_NEWSROOM/src/storage\database.py", line 30, in <module>
+    class Topic(Base):
+  File "C:\Python312\Lib\site-packages\sqlalchemy\orm\decl_api.py", line 199, in __init__
+    _as_declarative(reg, cls, dict_)
+  File "C:\Python312\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 245, in _as_declarative
+    return _MapperConfig.setup_mapping(registry, cls, dict_, None, {})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 326, in setup_mapping
+    return _ClassScanMapperConfig(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python312\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 573, in __init__
+    self._extract_mappable_attributes()
+  File "C:\Python312\Lib\site-packages\sqlalchemy\orm\decl_base.py", line 1530, in _extract_mappable_attributes
+    raise exc.InvalidRequestError(
+sqlalchemy.exc.InvalidRequestError: Attribute name 'metadata' is reserved when using the Declarative API.

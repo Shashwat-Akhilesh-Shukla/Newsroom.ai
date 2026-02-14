@@ -64,7 +64,7 @@ class TestDatabase:
         topic = self.db.create_topic(
             title="AI Breakthrough in Quantum Computing",
             confidence=0.85,
-            metadata={"source": "HackerNews", "score": 150}
+            meta_data={"source": "HackerNews", "score": 150}
         )
         
         assert topic.topic_id is not None
@@ -111,7 +111,7 @@ class TestDatabase:
                 {"title": "Paper 1", "url": "https://arxiv.org/1234"},
                 {"title": "Paper 2", "url": "https://arxiv.org/5678"}
             ],
-            metadata={"credibility": 0.9}
+            meta_data={"credibility": 0.9}
         )
         
         assert research.research_id is not None
@@ -153,7 +153,7 @@ Researchers have developed a new error correction code..."""
             topic_id=topic_id,
             content=draft_content,
             version=1,
-            metadata={"author": "WriterAgent"}
+            meta_data={"author": "WriterAgent"}
         )
         
         assert draft.draft_id is not None
@@ -185,7 +185,7 @@ Researchers have developed a new error correction code..."""
             target_agent="researcher",
             content="Need more evidence for the 50% overhead reduction claim.",
             decision="NEED_MORE_EVIDENCE",
-            metadata={"severity": "high"}
+            meta_data={"severity": "high"}
         )
         
         assert feedback.feedback_id is not None
@@ -204,7 +204,7 @@ Researchers have developed a new error correction code..."""
             draft_id=draft_id,
             platform="local",
             url=f"file:///output/article_{topic_id}.md",
-            metadata={"keywords": ["quantum", "computing", "AI"]}
+            meta_data={"keywords": ["quantum", "computing", "AI"]}
         )
         
         assert publication.pub_id is not None
