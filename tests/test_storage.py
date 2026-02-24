@@ -9,8 +9,6 @@ import sys
 import time
 import logging
 from pathlib import Path
-import tempfile
-import shutil
 
 # Add storage directory to path to import modules directly
 # This avoids importing src/__init__.py which requires langgraph
@@ -46,16 +44,29 @@ logger = logging.getLogger(__name__)
 
 class TestDatabase:
     """Test database operations."""
-    
+
+    # Default to same URL as .env.example; override with DATABASE_URL env var
+    _DEFAULT_TEST_DB_URL = "postgresql://postgres:postgres@localhost:5432/newsroom"
+
     def __init__(self):
-        # Use temporary database for testing
-        self.temp_dir = tempfile.mkdtemp()
-        self.db_path = Path(self.temp_dir) / "test_newsroom.db"
-        self.db = DatabaseManager(db_url=f"sqlite:///{self.db_path}", echo=False)
-    
+        db_url = os.environ.get("DATABASE_URL", self._DEFAULT_TEST_DB_URL)
+        try:
+            self.db = DatabaseManager(db_url=db_url, echo=False)
+        except Exception as exc:
+            raise RuntimeError(
+                f"Could not connect to PostgreSQL at {db_url!r}. "
+                "Make sure PostgreSQL is running and DATABASE_URL is set correctly. "
+                f"Original error: {exc}"
+            ) from exc
+
     def cleanup(self):
-        """Clean up test database."""
-        shutil.rmtree(self.temp_dir, ignore_errors=True)
+        """Drop all test tables after the test run."""
+        try:
+            from database import Base
+            Base.metadata.drop_all(bind=self.db.engine)
+        except Exception:
+            pass
+
     
     def test_create_topic(self):
         """Test creating a topic."""

@@ -2,17 +2,17 @@
 Database layer for persistent storage.
 
 Implements SQLAlchemy models and database operations for the AI Newsroom.
+Uses PostgreSQL as the database backend (via psycopg2).
 """
 
 import logging
+import os
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict, Any
-from pathlib import Path
 from contextlib import contextmanager
 
 from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text, ForeignKey, JSON
 from sqlalchemy.orm import sessionmaker, relationship, Session
-from sqlalchemy.pool import StaticPool
 
 # Support both SQLAlchemy 1.x and 2.x
 try:
@@ -23,6 +23,9 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 Base = declarative_base()
+
+# Default PostgreSQL URL (override via DATABASE_URL env var)
+_DEFAULT_DB_URL = "postgresql://postgres:postgres@localhost:5432/newsroom"
 
 
 # Models
@@ -127,43 +130,49 @@ class Publication(Base):
 class DatabaseManager:
     """
     Manages database connections and operations.
-    
-    Supports SQLite (default) with optional PostgreSQL support.
+
+    Uses PostgreSQL as the backend. The connection URL is resolved in this order:
+      1. ``db_url`` argument passed to the constructor
+      2. ``DATABASE_URL`` environment variable
+      3. Hard-coded default: ``postgresql://postgres:postgres@localhost:5432/newsroom``
     """
-    
+
     def __init__(self, db_url: Optional[str] = None, echo: bool = False):
         """
         Initialize database manager.
-        
+
         Args:
-            db_url: Database URL (defaults to SQLite: newsroom.db)
-            echo: Whether to echo SQL statements (for debugging)
+            db_url: PostgreSQL connection URL.  When omitted, falls back to the
+                    ``DATABASE_URL`` environment variable, then to the built-in
+                    default (localhost / newsroom).
+            echo: Whether to echo SQL statements (for debugging).
         """
         if db_url is None:
-            # Default to SQLite in project root
-            db_path = Path("newsroom.db")
-            db_url = f"sqlite:///{db_path}"
-            logger.info(f"Using SQLite database: {db_path}")
-        
-        # Create engine
-        if db_url.startswith("sqlite"):
-            # SQLite-specific settings
-            self.engine = create_engine(
-                db_url,
-                echo=echo,
-                connect_args={"check_same_thread": False},
-                poolclass=StaticPool
+            db_url = os.getenv("DATABASE_URL", _DEFAULT_DB_URL)
+
+        if not db_url.startswith("postgresql"):
+            raise ValueError(
+                f"Only PostgreSQL is supported. Got URL scheme: {db_url.split('://')[0]!r}. "
+                "Set DATABASE_URL to a postgresql:// connection string."
             )
-        else:
-            # PostgreSQL or other databases
-            self.engine = create_engine(db_url, echo=echo, pool_pre_ping=True)
-        
+
+        logger.info(f"Connecting to PostgreSQL: {db_url.split('@')[-1]}")
+
+        # Create engine with connection health-checks
+        self.engine = create_engine(
+            db_url,
+            echo=echo,
+            pool_pre_ping=True,
+            pool_size=5,
+            max_overflow=10,
+        )
+
         # Create session factory
         self.SessionLocal = sessionmaker(bind=self.engine, autocommit=False, autoflush=False)
-        
+
         # Create tables
         self._create_tables()
-        
+
         logger.info("Database initialized successfully")
     
     def _create_tables(self):
