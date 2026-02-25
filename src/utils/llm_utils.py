@@ -2,7 +2,7 @@
 LLM utilities for AI Newsroom.
 
 Provides utilities for interacting with LLMs, including:
-- Client initialization
+- Client initialization (Perplexity API)
 - Prompt template loading
 - Token counting
 - Response parsing
@@ -17,57 +17,56 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+# Perplexity API base URL (OpenAI-compatible)
+PERPLEXITY_BASE_URL = "https://api.perplexity.ai"
+
 
 # ============================================================================
 # LLM Client Management
 # ============================================================================
 
-def get_llm_client(provider: str = "openai", model: str = "gpt-4", api_key: Optional[str] = None):
+def get_llm_client(provider: str = "perplexity", model: str = "sonar", api_key: Optional[str] = None):
     """
     Initialize and return an LLM client.
-    
+
+    Currently supports:
+        - 'perplexity': Perplexity AI via OpenAI-compatible endpoint.
+          Requires PERPLEXITY_API_KEY environment variable.
+          Default model: sonar
+
     Args:
-        provider: LLM provider ('openai', 'anthropic')
-        model: Model name
+        provider: LLM provider ('perplexity')
+        model: Model name (default: 'sonar')
         api_key: API key (if not provided, will use environment variable)
-        
+
     Returns:
         LLM client instance
     """
-    if provider == "openai":
+    if provider == "perplexity":
         try:
             from langchain_openai import ChatOpenAI
-            
-            api_key = api_key or os.getenv("OPENAI_API_KEY")
+
+            api_key = api_key or os.getenv("PERPLEXITY_API_KEY")
             if not api_key:
-                raise ValueError("OpenAI API key not found. Set OPENAI_API_KEY environment variable.")
-            
+                raise ValueError(
+                    "Perplexity API key not found. Set PERPLEXITY_API_KEY environment variable."
+                )
+
             return ChatOpenAI(
                 model=model,
                 api_key=api_key,
-                temperature=0.7
+                base_url=PERPLEXITY_BASE_URL,
+                temperature=0.7,
             )
         except ImportError:
-            raise ImportError("langchain-openai not installed. Run: pip install langchain-openai")
-    
-    elif provider == "anthropic":
-        try:
-            from langchain_anthropic import ChatAnthropic
-            
-            api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
-            if not api_key:
-                raise ValueError("Anthropic API key not found. Set ANTHROPIC_API_KEY environment variable.")
-            
-            return ChatAnthropic(
-                model=model,
-                api_key=api_key,
-                temperature=0.7
+            raise ImportError(
+                "langchain-openai not installed. Run: pip install langchain-openai"
             )
-        except ImportError:
-            raise ImportError("langchain-anthropic not installed. Run: pip install langchain-anthropic")
-    
+
     else:
-        raise ValueError(f"Unsupported LLM provider: {provider}")
+        raise ValueError(
+            f"Unsupported LLM provider: {provider}. Only 'perplexity' is currently supported."
+        )
 
 
 def generate_completion(
@@ -75,8 +74,8 @@ def generate_completion(
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
     max_tokens: int = 2000,
-    provider: str = "openai",
-    model: str = "gpt-4"
+    provider: str = "perplexity",
+    model: str = "sonar",
 ) -> str:
     """
     Generate a completion from the LLM.
@@ -116,8 +115,8 @@ def generate_structured_output(
     prompt: str,
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
-    provider: str = "openai",
-    model: str = "gpt-4"
+    provider: str = "perplexity",
+    model: str = "sonar",
 ) -> Dict[str, Any]:
     """
     Generate structured JSON output from the LLM.
@@ -238,31 +237,27 @@ def format_prompt(template: str, **kwargs) -> str:
 # Token Counting
 # ============================================================================
 
-def count_tokens(text: str, model: str = "gpt-4") -> int:
+def count_tokens(text: str, model: str = "sonar") -> int:
     """
     Count tokens in text for a specific model.
-    
+
+    Uses cl100k_base encoding (same as GPT-4), which is a reasonable
+    approximation for Perplexity sonar models.
+
     Args:
         text: Text to count tokens for
         model: Model name
-        
+
     Returns:
         Approximate token count
     """
     try:
         import tiktoken
-        
-        # Get encoding for model
-        if "gpt-4" in model:
-            encoding = tiktoken.encoding_for_model("gpt-4")
-        elif "gpt-3.5" in model:
-            encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
-        else:
-            # Default to cl100k_base encoding
-            encoding = tiktoken.get_encoding("cl100k_base")
-        
+
+        # cl100k_base is compatible with sonar / llama-based models
+        encoding = tiktoken.get_encoding("cl100k_base")
         return len(encoding.encode(text))
-        
+
     except ImportError:
         # Fallback: rough estimate (1 token ≈ 4 characters)
         logger.warning("tiktoken not installed. Using rough token estimate.")
@@ -272,41 +267,44 @@ def count_tokens(text: str, model: str = "gpt-4") -> int:
         return len(text) // 4
 
 
-def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gpt-4") -> float:
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "sonar") -> float:
     """
     Estimate cost for LLM API call.
-    
+
+    Perplexity sonar pricing (approximate, per 1M tokens):
+      - sonar:          $1.00 input / $1.00 output
+      - sonar-pro:      $3.00 input / $15.00 output
+      - sonar-reasoning: $1.00 input / $5.00 output
+
     Args:
         input_tokens: Number of input tokens
         output_tokens: Number of output tokens
         model: Model name
-        
+
     Returns:
         Estimated cost in USD
     """
-    # Pricing as of 2024 (approximate)
+    # Perplexity pricing (per token)
     pricing = {
-        "gpt-4": {"input": 0.03 / 1000, "output": 0.06 / 1000},
-        "gpt-4-turbo": {"input": 0.01 / 1000, "output": 0.03 / 1000},
-        "gpt-3.5-turbo": {"input": 0.0005 / 1000, "output": 0.0015 / 1000},
-        "claude-3-opus": {"input": 0.015 / 1000, "output": 0.075 / 1000},
-        "claude-3-sonnet": {"input": 0.003 / 1000, "output": 0.015 / 1000},
+        "sonar-pro": {"input": 3.00 / 1_000_000, "output": 15.00 / 1_000_000},
+        "sonar-reasoning": {"input": 1.00 / 1_000_000, "output": 5.00 / 1_000_000},
+        "sonar": {"input": 1.00 / 1_000_000, "output": 1.00 / 1_000_000},
     }
-    
-    # Find matching pricing
+
+    # Find matching pricing (longest match wins)
     model_pricing = None
     for key in pricing:
         if key in model.lower():
             model_pricing = pricing[key]
             break
-    
+
     if not model_pricing:
-        logger.warning(f"Unknown model pricing: {model}")
-        return 0.0
-    
+        logger.warning(f"Unknown model pricing: {model}. Defaulting to sonar pricing.")
+        model_pricing = pricing["sonar"]
+
     input_cost = input_tokens * model_pricing["input"]
     output_cost = output_tokens * model_pricing["output"]
-    
+
     return input_cost + output_cost
 
 

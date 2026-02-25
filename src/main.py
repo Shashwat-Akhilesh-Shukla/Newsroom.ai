@@ -47,7 +47,7 @@ def main():
     config = get_config()
     if not config.llm.api_key:
         logger.error("❌ No LLM API key found!")
-        logger.error("Set OPENAI_API_KEY or ANTHROPIC_API_KEY in your environment")
+        logger.error("Set PERPLEXITY_API_KEY in your environment")
         sys.exit(1)
     
     logger.info("=" * 70)

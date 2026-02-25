@@ -16,8 +16,8 @@ logger = logging.getLogger(__name__)
 @dataclass
 class LLMConfig:
     """LLM configuration settings."""
-    provider: str = "openai"
-    model: str = "gpt-4"
+    provider: str = "perplexity"
+    model: str = "sonar"
     temperature: float = 0.7
     max_tokens: int = 2000
     api_key: Optional[str] = None
@@ -62,11 +62,11 @@ class Config:
     def _load_llm_config(self) -> LLMConfig:
         """Load LLM configuration from environment."""
         return LLMConfig(
-            provider=os.getenv("LLM_PROVIDER", "openai"),
-            model=os.getenv("LLM_MODEL", "gpt-4"),
+            provider=os.getenv("LLM_PROVIDER", "perplexity"),
+            model=os.getenv("LLM_MODEL", "sonar"),
             temperature=float(os.getenv("LLM_TEMPERATURE", "0.7")),
             max_tokens=int(os.getenv("LLM_MAX_TOKENS", "2000")),
-            api_key=os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+            api_key=os.getenv("PERPLEXITY_API_KEY"),
         )
     
     def _load_agent_config(self) -> AgentConfig:
@@ -99,11 +99,11 @@ class Config:
     def _validate_config(self):
         """Validate required configuration."""
         if not self.llm.api_key:
-            logger.warning("No LLM API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY.")
-        
+            logger.warning("No LLM API key found. Set PERPLEXITY_API_KEY environment variable.")
+
         if self.agents.scout_confidence_threshold < 0 or self.agents.scout_confidence_threshold > 1:
             raise ValueError("SCOUT_CONFIDENCE_THRESHOLD must be between 0 and 1")
-        
+
         logger.info(f"Configuration loaded: LLM={self.llm.provider}/{self.llm.model}, "
                    f"Twitter={'enabled' if self.apis.enable_twitter else 'disabled'}")
     

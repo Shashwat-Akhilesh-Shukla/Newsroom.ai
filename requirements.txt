@@ -2,11 +2,11 @@
 # LangGraph and LangChain for multi-agent orchestration
 langgraph>=0.0.20
 langchain>=0.1.0
-langchain-openai>=0.0.5
+langchain-openai>=0.0.5  # Used for Perplexity API (OpenAI-compatible endpoint)
 
 # LLM providers
-openai>=1.0.0
-anthropic>=0.8.0
+# Perplexity API is accessed via langchain-openai with a custom base_url.
+# No additional provider SDK packages (openai, anthropic) are required.
 
 # API clients for external services
 tweepy>=4.14.0  # Twitter/X API
@@ -30,7 +30,7 @@ redis>=5.0.0  # Caching
 python-dateutil>=2.8.0  # Date parsing
 markdown>=3.5.0  # Markdown processing
 pyyaml>=6.0.0  # YAML parsing
-tiktoken>=0.5.0  # Token counting for LLMs
+tiktoken>=0.5.0  # Token counting for LLMs (cl100k_base for sonar models)
 
 # Testing
 pytest>=7.4.0

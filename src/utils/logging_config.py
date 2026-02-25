@@ -68,7 +68,7 @@ def setup_logging(
     # Reduce noise from third-party libraries
     logging.getLogger("urllib3").setLevel(logging.WARNING)
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("openai").setLevel(logging.WARNING)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     
     logger = logging.getLogger(__name__)
     logger.info(f"Logging initialized | Level: {log_level} | Debug: {debug}")
