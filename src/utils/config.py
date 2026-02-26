@@ -35,9 +35,8 @@ class AgentConfig:
 @dataclass
 class APIConfig:
     """External API configuration."""
-    twitter_api_key: Optional[str] = None
-    twitter_api_secret: Optional[str] = None
-    enable_twitter: bool = False
+    # No paid API keys needed — Reddit and DuckDuckGo are used instead.
+    pass
 
 
 @dataclass
@@ -80,14 +79,7 @@ class Config:
     
     def _load_api_config(self) -> APIConfig:
         """Load API configuration from environment."""
-        twitter_key = os.getenv("TWITTER_API_KEY")
-        twitter_secret = os.getenv("TWITTER_API_SECRET")
-        
-        return APIConfig(
-            twitter_api_key=twitter_key,
-            twitter_api_secret=twitter_secret,
-            enable_twitter=bool(twitter_key and twitter_secret)
-        )
+        return APIConfig()
     
     def _load_cache_config(self) -> CacheConfig:
         """Load cache configuration from environment."""
@@ -104,8 +96,7 @@ class Config:
         if self.agents.scout_confidence_threshold < 0 or self.agents.scout_confidence_threshold > 1:
             raise ValueError("SCOUT_CONFIDENCE_THRESHOLD must be between 0 and 1")
 
-        logger.info(f"Configuration loaded: LLM={self.llm.provider}/{self.llm.model}, "
-                   f"Twitter={'enabled' if self.apis.enable_twitter else 'disabled'}")
+        logger.info(f"Configuration loaded: LLM={self.llm.provider}/{self.llm.model}")
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""
@@ -122,9 +113,7 @@ class Config:
                 "max_research_sources": self.agents.max_research_sources,
                 "max_revision_loops": self.agents.max_revision_loops
             },
-            "apis": {
-                "enable_twitter": self.apis.enable_twitter
-            },
+            "apis": {},
             "cache": {
                 "enable_cache": self.cache.enable_cache,
                 "cache_ttl_hours": self.cache.cache_ttl_hours

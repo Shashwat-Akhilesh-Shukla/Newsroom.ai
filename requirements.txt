@@ -9,8 +9,8 @@ langchain-openai>=0.0.5  # Used for Perplexity API (OpenAI-compatible endpoint)
 # No additional provider SDK packages (openai, anthropic) are required.
 
 # API clients for external services
-tweepy>=4.14.0  # Twitter/X API
-requests>=2.31.0  # General HTTP requests
+# Reddit (public JSON API) and DuckDuckGo News are used instead of Twitter — no extra packages needed.
+requests>=2.31.0  # General HTTP requests (also used for Reddit & DuckDuckGo)
 arxiv>=2.0.0  # ArXiv API
 pytrends>=4.9.0  # Google Trends
 

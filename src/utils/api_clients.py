@@ -5,7 +5,8 @@ This module provides clients for fetching data from various external sources:
 - Hacker News: Top stories and discussions
 - ArXiv: Academic papers
 - Google Trends: Search trends
-- Twitter/X: Trending topics (optional)
+- Reddit: Hot/trending posts from tech subreddits (free, no auth required)
+- DuckDuckGo News: Trending news articles via DuckDuckGo search (free, no API key)
 
 Each client includes rate limiting, retry logic, and error handling.
 """
@@ -377,66 +378,211 @@ class GoogleTrendsClient:
 
 
 # ============================================================================
-# Twitter Client (Optional)
+# Reddit Client (Free — no API key required for public JSON endpoints)
 # ============================================================================
 
-class TwitterClient:
+class RedditClient:
     """
-    Client for Twitter/X API.
-    
-    Note: This requires Twitter API v2 access which is paid.
-    Will gracefully degrade if credentials are not provided.
+    Client for Reddit's public JSON API.
+
+    Uses Reddit's unauthenticated JSON endpoints (no API key needed).
+    Fetches hot posts from a curated list of tech/science subreddits.
     """
-    
-    def __init__(self, api_key: Optional[str] = None, api_secret: Optional[str] = None):
+
+    SUBREDDITS = [
+        "technology", "programming", "artificial", "MachineLearning",
+        "science", "worldnews", "Futurology", "cybersecurity"
+    ]
+    BASE_URL = "https://www.reddit.com"
+
+    def __init__(self):
+        """Initialize Reddit client."""
+        self.rate_limiter = RateLimiter(calls_per_second=0.5)  # be polite to Reddit
+        self.session = requests.Session()
+        # Reddit requires a non-default User-Agent to avoid 429s
+        self.session.headers.update({
+            'User-Agent': 'AI-Newsroom/1.0 (trend aggregator; contact: newsroom@example.com)'
+        })
+
+    @retry_with_backoff(max_retries=3)
+    def _make_request(self, url: str, params: Optional[Dict[str, Any]] = None) -> Any:
+        """Make a request to the Reddit JSON API with rate limiting."""
+        self.rate_limiter.wait()
+        response = self.session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+
+    def get_hot_posts(self, subreddit: str, limit: int = 10) -> List[Dict[str, Any]]:
         """
-        Initialize Twitter client.
-        
+        Get hot posts from a subreddit.
+
         Args:
-            api_key: Twitter API key
-            api_secret: Twitter API secret
-        """
-        self.api_key = api_key
-        self.api_secret = api_secret
-        self.available = bool(api_key and api_secret)
-        
-        if not self.available:
-            logger.info("Twitter API credentials not provided. Twitter functionality disabled.")
-    
-    def get_trending_topics(self, location: str = 'worldwide') -> List[Dict[str, Any]]:
-        """
-        Get trending topics from Twitter.
-        
-        Args:
-            location: Location for trends
-            
+            subreddit: Subreddit name (without r/)
+            limit: Maximum number of posts to return
+
         Returns:
-            List of trending topics
+            List of post metadata dicts
         """
-        if not self.available:
+        try:
+            url = f"{self.BASE_URL}/r/{subreddit}/hot.json"
+            data = self._make_request(url, params={'limit': limit, 'raw_json': 1})
+            posts = []
+            for child in data.get('data', {}).get('children', []):
+                post = child.get('data', {})
+                # Skip pinned/stickied mod posts
+                if post.get('stickied'):
+                    continue
+                posts.append({
+                    'title': post.get('title', ''),
+                    'url': post.get('url', ''),
+                    'score': post.get('score', 0),
+                    'comments': post.get('num_comments', 0),
+                    'author': post.get('author', ''),
+                    'subreddit': subreddit,
+                    'permalink': f"https://www.reddit.com{post.get('permalink', '')}",
+                    'source': 'reddit',
+                })
+            return posts
+        except Exception as e:
+            logger.error(f"Failed to fetch hot posts from r/{subreddit}: {e}")
             return []
-        
-        # TODO: Implement Twitter API v2 integration when credentials are available
-        logger.warning("Twitter API integration not yet implemented")
-        return []
-    
-    def search_tweets(self, query: str, limit: int = 100) -> List[Dict[str, Any]]:
+
+    def get_trending_topics(self, posts_per_subreddit: int = 10) -> List[Dict[str, Any]]:
         """
-        Search for recent tweets.
-        
+        Aggregate hot posts from all tracked subreddits.
+
         Args:
-            query: Search query
-            limit: Maximum number of tweets
-            
+            posts_per_subreddit: How many hot posts to pull per subreddit
+
         Returns:
-            List of tweets
+            Combined list of trending posts sorted by score
         """
-        if not self.available:
+        all_posts: List[Dict[str, Any]] = []
+        for subreddit in self.SUBREDDITS:
+            posts = self.get_hot_posts(subreddit, limit=posts_per_subreddit)
+            all_posts.extend(posts)
+
+        # Deduplicate by URL, keep highest-score entry
+        seen_urls: Dict[str, Dict[str, Any]] = {}
+        for post in all_posts:
+            url = post.get('url', '')
+            if not url:
+                continue
+            if url not in seen_urls or post['score'] > seen_urls[url]['score']:
+                seen_urls[url] = post
+
+        deduped = sorted(seen_urls.values(), key=lambda x: x['score'], reverse=True)
+        logger.info(f"Fetched {len(deduped)} unique trending posts from Reddit")
+        return deduped
+
+
+# ============================================================================
+# DuckDuckGo News Client (Free — no API key required)
+# ============================================================================
+
+class DuckDuckGoNewsClient:
+    """
+    Fetches trending news headlines via DuckDuckGo's news search endpoint.
+
+    Uses the unofficial DuckDuckGo news JSON endpoint — no API key required.
+    Searches for broad tech/AI/science news to surface trending topics.
+    """
+
+    DDG_NEWS_URL = "https://duckduckgo.com/"
+    DDG_API_URL = "https://api.duckduckgo.com/"
+
+    SEARCH_QUERIES = [
+        "technology news",
+        "artificial intelligence",
+        "science discovery",
+        "cybersecurity breach",
+        "software engineering",
+    ]
+
+    def __init__(self):
+        """Initialize DuckDuckGo News client."""
+        self.rate_limiter = RateLimiter(calls_per_second=0.3)  # gentle rate limiting
+        self.session = requests.Session()
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (compatible; AI-Newsroom/1.0)'
+        })
+
+    @retry_with_backoff(max_retries=3)
+    def _search_news(self, query: str) -> List[Dict[str, Any]]:
+        """
+        Search news for a given query using DuckDuckGo's JSON API.
+
+        Args:
+            query: Search term
+
+        Returns:
+            List of news result dicts
+        """
+        self.rate_limiter.wait()
+        params = {
+            'q': query,
+            'format': 'json',
+            'no_html': '1',
+            'skip_disambig': '1',
+        }
+        try:
+            resp = self.session.get(self.DDG_API_URL, params=params, timeout=10)
+            resp.raise_for_status()
+            data = resp.json()
+        except Exception as e:
+            logger.warning(f"DuckDuckGo JSON API failed for '{query}': {e}")
             return []
-        
-        # TODO: Implement Twitter API v2 search
-        logger.warning("Twitter API integration not yet implemented")
-        return []
+
+        results = []
+        # RelatedTopics carry news-like snippets
+        for item in data.get('RelatedTopics', []):
+            # Flat items have 'Text' and 'FirstURL'
+            text = item.get('Text', '')
+            url = item.get('FirstURL', '')
+            if text and url:
+                results.append({
+                    'title': text[:200],
+                    'url': url,
+                    'query': query,
+                    'source': 'duckduckgo_news',
+                    'score': 0,
+                })
+            # subs inside 'Topics'
+            for sub in item.get('Topics', []):
+                sub_text = sub.get('Text', '')
+                sub_url = sub.get('FirstURL', '')
+                if sub_text and sub_url:
+                    results.append({
+                        'title': sub_text[:200],
+                        'url': sub_url,
+                        'query': query,
+                        'source': 'duckduckgo_news',
+                        'score': 0,
+                    })
+        return results
+
+    def get_trending_topics(self) -> List[Dict[str, Any]]:
+        """
+        Get trending topics by running multiple topic searches on DuckDuckGo.
+
+        Returns:
+            Combined, deduplicated list of news results
+        """
+        all_results: List[Dict[str, Any]] = []
+        for query in self.SEARCH_QUERIES:
+            results = self._search_news(query)
+            all_results.extend(results)
+
+        # Deduplicate by URL
+        seen: Dict[str, Dict[str, Any]] = {}
+        for item in all_results:
+            url = item.get('url', '')
+            if url and url not in seen:
+                seen[url] = item
+
+        deduped = list(seen.values())
+        logger.info(f"Fetched {len(deduped)} unique results from DuckDuckGo News")
+        return deduped
 
 
 # ============================================================================
@@ -445,41 +591,43 @@ class TwitterClient:
 
 class TrendAggregator:
     """Aggregates trends from multiple sources."""
-    
-    def __init__(self, twitter_api_key: Optional[str] = None, twitter_api_secret: Optional[str] = None):
+
+    def __init__(self):
         """
         Initialize trend aggregator with all clients.
-        
-        Args:
-            twitter_api_key: Optional Twitter API key
-            twitter_api_secret: Optional Twitter API secret
+        All sources are free and require no API keys.
         """
         self.hn_client = HackerNewsClient()
         self.arxiv_client = ArXivClient()
         self.trends_client = GoogleTrendsClient()
-        self.twitter_client = TwitterClient(twitter_api_key, twitter_api_secret)
-    
+        self.reddit_client = RedditClient()
+        self.ddg_client = DuckDuckGoNewsClient()
+
     def get_all_trends(self, hn_limit: int = 30, arxiv_limit: int = 10) -> Dict[str, List[Dict[str, Any]]]:
         """
         Fetch trends from all available sources.
-        
+
         Args:
             hn_limit: Number of HN stories to fetch
             arxiv_limit: Number of ArXiv papers to fetch
-            
+
         Returns:
             Dictionary with trends from each source
         """
         logger.info("Fetching trends from all sources...")
-        
+
         trends = {
             'hackernews': self.hn_client.get_trending_topics(limit=hn_limit),
             'arxiv': self.arxiv_client.get_recent_papers(max_results=arxiv_limit),
             'google_trends': self.trends_client.get_trending_searches(),
-            'twitter': self.twitter_client.get_trending_topics()
+            'reddit': self.reddit_client.get_trending_topics(),
+            'duckduckgo_news': self.ddg_client.get_trending_topics(),
         }
-        
+
         total_trends = sum(len(v) for v in trends.values())
-        logger.info(f"Fetched {total_trends} total trends from {len([k for k, v in trends.items() if v])} sources")
-        
+        logger.info(
+            f"Fetched {total_trends} total trends from "
+            f"{len([k for k, v in trends.items() if v])} sources"
+        )
+
         return trends

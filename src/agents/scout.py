@@ -45,17 +45,12 @@ class ScoutAgent(BaseAgent):
                 'max_iterations': app_config.agents.max_scout_iterations,
                 'llm_provider': app_config.llm.provider,
                 'llm_model': app_config.llm.model,
-                'twitter_enabled': app_config.apis.enable_twitter
             }
-        
+
         super().__init__(name="scout", config=config)
-        
-        # Initialize trend aggregator
-        app_config = get_config()
-        self.aggregator = TrendAggregator(
-            twitter_api_key=app_config.apis.twitter_api_key,
-            twitter_api_secret=app_config.apis.twitter_api_secret
-        )
+
+        # Initialize trend aggregator (all sources are free, no API keys needed)
+        self.aggregator = TrendAggregator()
         
         self.confidence_threshold = config.get('confidence_threshold', 0.7)
         self.max_iterations = config.get('max_iterations', 3)
