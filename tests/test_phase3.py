@@ -282,7 +282,7 @@ def main():
     config = get_config()
     if not config.llm.api_key:
         logger.error("\n❌ No LLM API key found!")
-        logger.error("Set OPENAI_API_KEY or ANTHROPIC_API_KEY in your environment")
+        logger.error("Set GEMINI_API_KEY in your environment")
         return False
     
     logger.info(f"\n✓ Using LLM: {config.llm.provider}/{config.llm.model}")

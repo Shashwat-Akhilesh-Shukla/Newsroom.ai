@@ -17,6 +17,7 @@ from ..utils.llm_utils import (
     format_prompt
 )
 from ..utils.config import get_config
+from ..utils.reddit_publisher import RedditPublisher, RedditPublishError
 
 logger = logging.getLogger(__name__)
 
@@ -100,6 +101,12 @@ class PublisherAgent(BaseAgent):
             publishing_metadata = self.generate_publishing_metadata(state, seo_metadata)
             state["publishing_metadata"] = publishing_metadata
             state["publish_ready"] = True
+
+            # Step 6: Publish to Reddit via PRAW
+            reddit_url = self._publish_to_reddit(state, publishing_metadata)
+            if reddit_url:
+                state["publishing_metadata"]["reddit_url"] = reddit_url
+                self.logger.info(f"Published to Reddit: {reddit_url}")
         else:
             state["publish_ready"] = False
         
@@ -121,28 +128,65 @@ class PublisherAgent(BaseAgent):
     def get_routing_decision(self, state: NewsroomState) -> str:
         """
         Determine routing based on Publisher's decision.
-        
+
         Args:
             state: Current newsroom state
-            
+
         Returns:
             Next agent name or END
         """
         decision = state.get("publisher_decision", AgentDecision.REJECT)
-        
+
         if decision == AgentDecision.PUBLISH:
             self.log_decision(
                 AgentDecision.PUBLISH,
                 "All checks passed, article ready for publishing"
             )
             return "END"
-        
+
         else:  # REJECT
             self.log_decision(
                 AgentDecision.REJECT,
                 "Publishing checks failed, sending back to Editor"
             )
             return "editor"
+
+    def _publish_to_reddit(
+        self,
+        state: NewsroomState,
+        publishing_metadata: Dict[str, Any],
+    ) -> Optional[str]:
+        """
+        Attempt to post the article to Reddit via PRAW.
+
+        Returns the post URL on success, or None if credentials are
+        missing or posting fails (workflow continues either way).
+        """
+        import os
+        required = ("REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET",
+                    "REDDIT_USERNAME", "REDDIT_PASSWORD")
+        if any(not os.getenv(v) for v in required):
+            self.logger.warning(
+                f"Missing Reddit credentials ({', '.join(required)}) — "
+                "skipping Reddit publish."
+            )
+            return None
+
+        try:
+            publisher = RedditPublisher()
+            url = publisher.publish(
+                title=publishing_metadata.get("title", state.get("topic", "Untitled")),
+                content_markdown=state.get("draft", ""),
+            )
+            return url
+        except RedditPublishError as e:
+            self.logger.error(f"Reddit publishing failed: {e}")
+            return None
+        except Exception as e:
+            self.logger.error(
+                f"Unexpected error during Reddit publish: {e}", exc_info=True
+            )
+            return None
     
     def generate_seo_metadata(self, state: NewsroomState) -> Dict[str, Any]:
         """

@@ -8,6 +8,9 @@ langchain-google-genai>=1.0.0  # Used for Gemini API
 # Gemini API is accessed via langchain-google-genai.
 # No additional provider SDK packages (openai, anthropic) are required.
 
+# Reddit publishing
+praw>=7.7.0
+
 # API clients for external services
 # Reddit (public JSON API) and DuckDuckGo News are used instead of Twitter — no extra packages needed.
 requests>=2.31.0  # General HTTP requests (also used for Reddit & DuckDuckGo)
