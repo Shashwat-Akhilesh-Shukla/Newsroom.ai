@@ -2,10 +2,10 @@
 # LangGraph and LangChain for multi-agent orchestration
 langgraph>=0.0.20
 langchain>=0.1.0
-langchain-openai>=0.0.5  # Used for Perplexity API (OpenAI-compatible endpoint)
+langchain-google-genai>=1.0.0  # Used for Gemini API
 
 # LLM providers
-# Perplexity API is accessed via langchain-openai with a custom base_url.
+# Gemini API is accessed via langchain-google-genai.
 # No additional provider SDK packages (openai, anthropic) are required.
 
 # API clients for external services

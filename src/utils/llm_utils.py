@@ -2,7 +2,7 @@
 LLM utilities for AI Newsroom.
 
 Provides utilities for interacting with LLMs, including:
-- Client initialization (Perplexity API)
+- Client initialization (Gemini API)
 - Prompt template loading
 - Token counting
 - Response parsing
@@ -17,55 +17,51 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# Perplexity API base URL (OpenAI-compatible)
-PERPLEXITY_BASE_URL = "https://api.perplexity.ai"
-
 
 # ============================================================================
 # LLM Client Management
 # ============================================================================
 
-def get_llm_client(provider: str = "perplexity", model: str = "sonar", api_key: Optional[str] = None):
+def get_llm_client(provider: str = "gemini", model: str = "gemini-2.0-flash", api_key: Optional[str] = None):
     """
     Initialize and return an LLM client.
 
     Currently supports:
-        - 'perplexity': Perplexity AI via OpenAI-compatible endpoint.
-          Requires PERPLEXITY_API_KEY environment variable.
-          Default model: sonar
+        - 'gemini': Google Gemini via langchain-google-genai.
+          Requires GEMINI_API_KEY environment variable.
+          Default model: gemini-2.0-flash
 
     Args:
-        provider: LLM provider ('perplexity')
-        model: Model name (default: 'sonar')
+        provider: LLM provider ('gemini')
+        model: Model name (default: 'gemini-2.0-flash')
         api_key: API key (if not provided, will use environment variable)
 
     Returns:
         LLM client instance
     """
-    if provider == "perplexity":
+    if provider == "gemini":
         try:
-            from langchain_openai import ChatOpenAI
+            from langchain_google_genai import ChatGoogleGenerativeAI
 
-            api_key = api_key or os.getenv("PERPLEXITY_API_KEY")
+            api_key = api_key or os.getenv("GEMINI_API_KEY")
             if not api_key:
                 raise ValueError(
-                    "Perplexity API key not found. Set PERPLEXITY_API_KEY environment variable."
+                    "Gemini API key not found. Set GEMINI_API_KEY environment variable."
                 )
 
-            return ChatOpenAI(
+            return ChatGoogleGenerativeAI(
                 model=model,
-                api_key=api_key,
-                base_url=PERPLEXITY_BASE_URL,
+                google_api_key=api_key,
                 temperature=0.7,
             )
         except ImportError:
             raise ImportError(
-                "langchain-openai not installed. Run: pip install langchain-openai"
+                "langchain-google-genai not installed. Run: pip install langchain-google-genai"
             )
 
     else:
         raise ValueError(
-            f"Unsupported LLM provider: {provider}. Only 'perplexity' is currently supported."
+            f"Unsupported LLM provider: {provider}. Only 'gemini' is currently supported."
         )
 
 
@@ -74,8 +70,8 @@ def generate_completion(
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
     max_tokens: int = 2000,
-    provider: str = "perplexity",
-    model: str = "sonar",
+    provider: str = "gemini",
+    model: str = "gemini-2.0-flash",
 ) -> str:
     """
     Generate a completion from the LLM.
@@ -115,8 +111,8 @@ def generate_structured_output(
     prompt: str,
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
-    provider: str = "perplexity",
-    model: str = "sonar",
+    provider: str = "gemini",
+    model: str = "gemini-2.0-flash",
 ) -> Dict[str, Any]:
     """
     Generate structured JSON output from the LLM.
@@ -237,12 +233,11 @@ def format_prompt(template: str, **kwargs) -> str:
 # Token Counting
 # ============================================================================
 
-def count_tokens(text: str, model: str = "sonar") -> int:
+def count_tokens(text: str, model: str = "gemini-2.0-flash") -> int:
     """
     Count tokens in text for a specific model.
 
-    Uses cl100k_base encoding (same as GPT-4), which is a reasonable
-    approximation for Perplexity sonar models.
+    Uses cl100k_base encoding as a reasonable approximation for Gemini models.
 
     Args:
         text: Text to count tokens for
@@ -254,7 +249,6 @@ def count_tokens(text: str, model: str = "sonar") -> int:
     try:
         import tiktoken
 
-        # cl100k_base is compatible with sonar / llama-based models
         encoding = tiktoken.get_encoding("cl100k_base")
         return len(encoding.encode(text))
 
@@ -267,14 +261,15 @@ def count_tokens(text: str, model: str = "sonar") -> int:
         return len(text) // 4
 
 
-def estimate_cost(input_tokens: int, output_tokens: int, model: str = "sonar") -> float:
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gemini-2.0-flash") -> float:
     """
     Estimate cost for LLM API call.
 
-    Perplexity sonar pricing (approximate, per 1M tokens):
-      - sonar:          $1.00 input / $1.00 output
-      - sonar-pro:      $3.00 input / $15.00 output
-      - sonar-reasoning: $1.00 input / $5.00 output
+    Gemini pricing (approximate, per 1M tokens):
+      - gemini-2.0-flash:       $0.075 input / $0.30 output
+      - gemini-2.0-flash-lite:  $0.075 input / $0.30 output
+      - gemini-1.5-pro:         $1.25 input  / $5.00 output
+      - gemini-1.5-flash:       $0.075 input / $0.30 output
 
     Args:
         input_tokens: Number of input tokens
@@ -284,11 +279,11 @@ def estimate_cost(input_tokens: int, output_tokens: int, model: str = "sonar") -
     Returns:
         Estimated cost in USD
     """
-    # Perplexity pricing (per token)
+    # Gemini pricing (per token)
     pricing = {
-        "sonar-pro": {"input": 3.00 / 1_000_000, "output": 15.00 / 1_000_000},
-        "sonar-reasoning": {"input": 1.00 / 1_000_000, "output": 5.00 / 1_000_000},
-        "sonar": {"input": 1.00 / 1_000_000, "output": 1.00 / 1_000_000},
+        "gemini-1.5-pro": {"input": 1.25 / 1_000_000, "output": 5.00 / 1_000_000},
+        "gemini-1.5-flash": {"input": 0.075 / 1_000_000, "output": 0.30 / 1_000_000},
+        "gemini-2.0-flash": {"input": 0.075 / 1_000_000, "output": 0.30 / 1_000_000},
     }
 
     # Find matching pricing (longest match wins)
@@ -299,8 +294,8 @@ def estimate_cost(input_tokens: int, output_tokens: int, model: str = "sonar") -
             break
 
     if not model_pricing:
-        logger.warning(f"Unknown model pricing: {model}. Defaulting to sonar pricing.")
-        model_pricing = pricing["sonar"]
+        logger.warning(f"Unknown model pricing: {model}. Defaulting to gemini-2.0-flash pricing.")
+        model_pricing = pricing["gemini-2.0-flash"]
 
     input_cost = input_tokens * model_pricing["input"]
     output_cost = output_tokens * model_pricing["output"]
