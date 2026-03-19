@@ -2,17 +2,18 @@
 Database layer for persistent storage.
 
 Implements SQLAlchemy models and database operations for the AI Newsroom.
-Uses PostgreSQL as the database backend (via psycopg2).
+Uses PostgreSQL as the database backend (via asyncpg).
 """
 
 import logging
 import os
 from datetime import datetime, timedelta
 from typing import List, Optional, Dict, Any
-from contextlib import contextmanager
+from contextlib import asynccontextmanager
 
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Text, ForeignKey, JSON
-from sqlalchemy.orm import sessionmaker, relationship, Session
+from sqlalchemy import Column, Integer, String, Float, DateTime, Text, ForeignKey, JSON, select, delete
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
 # Support both SQLAlchemy 1.x and 2.x
 try:
@@ -25,7 +26,7 @@ logger = logging.getLogger(__name__)
 Base = declarative_base()
 
 # Default PostgreSQL URL (override via DATABASE_URL env var)
-_DEFAULT_DB_URL = "postgresql://postgres:postgres@localhost:5432/newsroom"
+_DEFAULT_DB_URL = "postgresql+asyncpg://postgres:postgres@localhost:5432/newsroom"
 
 
 # Models
@@ -129,37 +130,27 @@ class Publication(Base):
 
 class DatabaseManager:
     """
-    Manages database connections and operations.
+    Manages async database connections and operations.
 
-    Uses PostgreSQL as the backend. The connection URL is resolved in this order:
+    Uses PostgreSQL as the backend via asyncpg. The connection URL is resolved in this order:
       1. ``db_url`` argument passed to the constructor
       2. ``DATABASE_URL`` environment variable
-      3. Hard-coded default: ``postgresql://postgres:postgres@localhost:5432/newsroom``
+      3. Hard-coded default: ``postgresql+asyncpg://postgres:postgres@localhost:5432/newsroom``
     """
 
     def __init__(self, db_url: Optional[str] = None, echo: bool = False):
-        """
-        Initialize database manager.
-
-        Args:
-            db_url: PostgreSQL connection URL.  When omitted, falls back to the
-                    ``DATABASE_URL`` environment variable, then to the built-in
-                    default (localhost / newsroom).
-            echo: Whether to echo SQL statements (for debugging).
-        """
         if db_url is None:
             db_url = os.getenv("DATABASE_URL", _DEFAULT_DB_URL)
 
-        if not db_url.startswith("postgresql"):
+        if not db_url.startswith("postgresql+asyncpg"):
             raise ValueError(
-                f"Only PostgreSQL is supported. Got URL scheme: {db_url.split('://')[0]!r}. "
-                "Set DATABASE_URL to a postgresql:// connection string."
+                f"Only asyncpg is supported. Got URL scheme: {db_url.split('://')[0]!r}. "
+                "Set DATABASE_URL to a postgresql+asyncpg:// connection string."
             )
 
-        logger.info(f"Connecting to PostgreSQL: {db_url.split('@')[-1]}")
+        logger.info(f"Connecting to PostgreSQL (async): {db_url.split('@')[-1]}")
 
-        # Create engine with connection health-checks
-        self.engine = create_engine(
+        self.engine = create_async_engine(
             db_url,
             echo=echo,
             pool_pre_ping=True,
@@ -167,64 +158,46 @@ class DatabaseManager:
             max_overflow=10,
         )
 
-        # Create session factory
-        self.SessionLocal = sessionmaker(bind=self.engine, autocommit=False, autoflush=False)
-
-        # Create tables
-        self._create_tables()
-
-        logger.info("Database initialized successfully")
-    
-    def _create_tables(self):
-        """Create all tables if they don't exist."""
-        Base.metadata.create_all(bind=self.engine)
+        self.SessionLocal = async_sessionmaker(bind=self.engine, expire_on_commit=False, class_=AsyncSession)
+        
+    async def initialize_db(self):
+        """Create all tables if they don't exist asynchronously."""
+        async with self.engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
         logger.debug("Database tables created/verified")
     
-    @contextmanager
-    def get_session(self) -> Session:
-        """
-        Get a database session (context manager).
-        
-        Usage:
-            with db.get_session() as session:
-                topic = session.query(Topic).first()
-        """
-        session = self.SessionLocal()
-        try:
-            yield session
-            session.commit()
-        except Exception as e:
-            session.rollback()
-            logger.error(f"Database session error: {e}")
-            raise
-        finally:
-            session.close()
-    
+    @asynccontextmanager
+    async def get_session(self) -> AsyncSession:
+        """Get a database session (async context manager)."""
+        async with self.SessionLocal() as session:
+            try:
+                yield session
+                await session.commit()
+            except Exception as e:
+                await session.rollback()
+                logger.error(f"Database session error: {e}")
+                raise
+
     # CRUD Operations for Topic
     
-    def create_topic(self, title: str, confidence: float, meta_data: Optional[Dict] = None) -> Topic:
-        """Create a new topic."""
-        with self.get_session() as session:
-            topic = Topic(
-                title=title,
-                confidence=confidence,
-                meta_data=meta_data or {}
-            )
+    async def create_topic(self, title: str, confidence: float, meta_data: Optional[Dict] = None) -> Topic:
+        async with self.get_session() as session:
+            topic = Topic(title=title, confidence=confidence, meta_data=meta_data or {})
             session.add(topic)
-            session.flush()
-            session.refresh(topic)
+            await session.flush()
+            await session.refresh(topic)
             logger.info(f"Created topic: {topic}")
             return topic
     
-    def get_topic(self, topic_id: int) -> Optional[Topic]:
-        """Get topic by ID."""
-        with self.get_session() as session:
-            return session.query(Topic).filter(Topic.topic_id == topic_id).first()
+    async def get_topic(self, topic_id: int) -> Optional[Topic]:
+        async with self.get_session() as session:
+            result = await session.execute(select(Topic).filter(Topic.topic_id == topic_id))
+            return result.scalars().first()
     
-    def update_topic_status(self, topic_id: int, status: str) -> bool:
-        """Update topic status."""
-        with self.get_session() as session:
-            topic = session.query(Topic).filter(Topic.topic_id == topic_id).first()
+    async def update_topic_status(self, topic_id: int, status: str) -> bool:
+        async with self.get_session() as session:
+            result = await session.execute(select(Topic).filter(Topic.topic_id == topic_id))
+            topic = result.scalars().first()
             if topic:
                 topic.status = status
                 topic.updated_at = datetime.utcnow()
@@ -232,155 +205,134 @@ class DatabaseManager:
                 return True
             return False
     
-    def get_topics_by_status(self, status: str) -> List[Topic]:
-        """Get all topics with a specific status."""
-        with self.get_session() as session:
-            return session.query(Topic).filter(Topic.status == status).all()
+    async def get_topics_by_status(self, status: str) -> List[Topic]:
+        async with self.get_session() as session:
+            result = await session.execute(select(Topic).filter(Topic.status == status))
+            return list(result.scalars().all())
     
     # CRUD Operations for Research
     
-    def create_research(self, topic_id: int, source: str, content: str, 
+    async def create_research(self, topic_id: int, source: str, content: str, 
                        citations: Optional[List[Dict]] = None, meta_data: Optional[Dict] = None) -> Research:
-        """Create research note."""
-        with self.get_session() as session:
+        async with self.get_session() as session:
             research = Research(
-                topic_id=topic_id,
-                source=source,
-                content=content,
-                citations=citations or [],
-                meta_data=meta_data or {}
+                topic_id=topic_id, source=source, content=content,
+                citations=citations or [], meta_data=meta_data or {}
             )
             session.add(research)
-            session.flush()
-            session.refresh(research)
+            await session.flush()
+            await session.refresh(research)
             logger.info(f"Created research note: {research}")
             return research
     
-    def get_research_by_topic(self, topic_id: int) -> List[Research]:
-        """Get all research notes for a topic."""
-        with self.get_session() as session:
-            return session.query(Research).filter(Research.topic_id == topic_id).all()
+    async def get_research_by_topic(self, topic_id: int) -> List[Research]:
+        async with self.get_session() as session:
+            result = await session.execute(select(Research).filter(Research.topic_id == topic_id))
+            return list(result.scalars().all())
     
     # CRUD Operations for Draft
     
-    def create_draft(self, topic_id: int, content: str, version: int = 1,
+    async def create_draft(self, topic_id: int, content: str, version: int = 1,
                     meta_data: Optional[Dict] = None) -> Draft:
-        """Create a new draft."""
         word_count = len(content.split())
-        with self.get_session() as session:
+        async with self.get_session() as session:
             draft = Draft(
-                topic_id=topic_id,
-                version=version,
-                content=content,
-                word_count=word_count,
-                meta_data=meta_data or {}
+                topic_id=topic_id, version=version, content=content,
+                word_count=word_count, meta_data=meta_data or {}
             )
             session.add(draft)
-            session.flush()
-            session.refresh(draft)
+            await session.flush()
+            await session.refresh(draft)
             logger.info(f"Created draft: {draft}")
             return draft
     
-    def get_latest_draft(self, topic_id: int) -> Optional[Draft]:
-        """Get the latest draft version for a topic."""
-        with self.get_session() as session:
-            return session.query(Draft)\
-                .filter(Draft.topic_id == topic_id)\
-                .order_by(Draft.version.desc())\
-                .first()
+    async def get_latest_draft(self, topic_id: int) -> Optional[Draft]:
+        async with self.get_session() as session:
+            result = await session.execute(
+                select(Draft).filter(Draft.topic_id == topic_id).order_by(Draft.version.desc())
+            )
+            return result.scalars().first()
     
-    def get_drafts_by_topic(self, topic_id: int) -> List[Draft]:
-        """Get all drafts for a topic."""
-        with self.get_session() as session:
-            return session.query(Draft)\
-                .filter(Draft.topic_id == topic_id)\
-                .order_by(Draft.version)\
-                .all()
+    async def get_drafts_by_topic(self, topic_id: int) -> List[Draft]:
+        async with self.get_session() as session:
+            result = await session.execute(
+                select(Draft).filter(Draft.topic_id == topic_id).order_by(Draft.version)
+            )
+            return list(result.scalars().all())
     
     # CRUD Operations for Feedback
     
-    def create_feedback(self, agent: str, target_agent: str, content: str,
+    async def create_feedback(self, agent: str, target_agent: str, content: str,
                        decision: Optional[str] = None, meta_data: Optional[Dict] = None) -> Feedback:
-        """Create feedback entry."""
-        with self.get_session() as session:
+        async with self.get_session() as session:
             feedback = Feedback(
-                agent=agent,
-                target_agent=target_agent,
-                content=content,
-                decision=decision,
-                meta_data=meta_data or {}
+                agent=agent, target_agent=target_agent, content=content,
+                decision=decision, meta_data=meta_data or {}
             )
             session.add(feedback)
-            session.flush()
-            session.refresh(feedback)
+            await session.flush()
+            await session.refresh(feedback)
             logger.info(f"Created feedback: {feedback}")
             return feedback
     
-    def get_feedback_by_agent(self, agent: str) -> List[Feedback]:
-        """Get all feedback from a specific agent."""
-        with self.get_session() as session:
-            return session.query(Feedback).filter(Feedback.agent == agent).all()
+    async def get_feedback_by_agent(self, agent: str) -> List[Feedback]:
+        async with self.get_session() as session:
+            result = await session.execute(select(Feedback).filter(Feedback.agent == agent))
+            return list(result.scalars().all())
     
     # CRUD Operations for Publication
     
-    def create_publication(self, topic_id: int, draft_id: Optional[int] = None,
+    async def create_publication(self, topic_id: int, draft_id: Optional[int] = None,
                           platform: str = 'local', url: Optional[str] = None,
                           meta_data: Optional[Dict] = None) -> Publication:
-        """Create publication record."""
-        with self.get_session() as session:
+        async with self.get_session() as session:
             publication = Publication(
-                topic_id=topic_id,
-                draft_id=draft_id,
-                platform=platform,
-                url=url,
-                meta_data=meta_data or {}
+                topic_id=topic_id, draft_id=draft_id, platform=platform,
+                url=url, meta_data=meta_data or {}
             )
             session.add(publication)
-            session.flush()
-            session.refresh(publication)
+            await session.flush()
+            await session.refresh(publication)
             logger.info(f"Created publication: {publication}")
             return publication
     
-    def get_publications(self, platform: Optional[str] = None) -> List[Publication]:
-        """Get all publications, optionally filtered by platform."""
-        with self.get_session() as session:
-            query = session.query(Publication)
+    async def get_publications(self, platform: Optional[str] = None) -> List[Publication]:
+        async with self.get_session() as session:
+            query = select(Publication)
             if platform:
                 query = query.filter(Publication.platform == platform)
-            return query.all()
+            result = await session.execute(query)
+            return list(result.scalars().all())
     
     # Utility Methods
     
-    def get_workflow_history(self, topic_id: int) -> Dict[str, Any]:
-        """
-        Get complete workflow history for a topic.
-        
-        Returns:
-            Dictionary with topic, research, drafts, feedback, and publications
-        """
-        with self.get_session() as session:
-            topic = session.query(Topic).filter(Topic.topic_id == topic_id).first()
+    async def get_workflow_history(self, topic_id: int) -> Dict[str, Any]:
+        async with self.get_session() as session:
+            topic_result = await session.execute(select(Topic).filter(Topic.topic_id == topic_id))
+            topic = topic_result.scalars().first()
             if not topic:
                 return {}
             
+            research_result = await session.execute(select(Research).filter(Research.topic_id == topic_id))
+            drafts_result = await session.execute(select(Draft).filter(Draft.topic_id == topic_id).order_by(Draft.version))
+            feedback_result = await session.execute(select(Feedback))
+            pubs_result = await session.execute(select(Publication).filter(Publication.topic_id == topic_id))
+            
             return {
                 'topic': topic,
-                'research': session.query(Research).filter(Research.topic_id == topic_id).all(),
-                'drafts': session.query(Draft).filter(Draft.topic_id == topic_id).order_by(Draft.version).all(),
-                'feedback': session.query(Feedback).all(),  # All feedback for context
-                'publications': session.query(Publication).filter(Publication.topic_id == topic_id).all()
+                'research': list(research_result.scalars().all()),
+                'drafts': list(drafts_result.scalars().all()),
+                'feedback': list(feedback_result.scalars().all()),
+                'publications': list(pubs_result.scalars().all())
             }
     
-    def cleanup_old_data(self, days: int = 30):
-        """Delete data older than specified days."""
+    async def cleanup_old_data(self, days: int = 30):
         cutoff_date = datetime.utcnow() - timedelta(days=days)
-        with self.get_session() as session:
-            # Delete old topics and cascade will handle related records
-            deleted = session.query(Topic)\
-                .filter(Topic.created_at < cutoff_date)\
-                .filter(Topic.status != 'published')\
-                .delete()
-            logger.info(f"Cleaned up {deleted} old topics")
+        async with self.get_session() as session:
+            result = await session.execute(
+                delete(Topic).where((Topic.created_at < cutoff_date) & (Topic.status != 'published'))
+            )
+            logger.info(f"Cleaned up old topics")
 
 
 # Global database instance (lazy initialization)

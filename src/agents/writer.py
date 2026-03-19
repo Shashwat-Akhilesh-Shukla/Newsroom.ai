@@ -74,7 +74,7 @@ class WriterAgent(BaseAgent):
         
         return True
     
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main Writer processing logic.
         
@@ -95,10 +95,10 @@ class WriterAgent(BaseAgent):
         
         if is_revision:
             self.logger.info(f"Handling revision request with {len(editor_feedback)} comments")
-            draft = self.revise_draft(state, editor_feedback)
+            draft = await self.revise_draft(state, editor_feedback)
         else:
             self.logger.info("Creating initial draft")
-            draft = self.create_draft(state)
+            draft = await self.create_draft(state)
         
         if not draft:
             self.logger.error("Failed to create draft")
@@ -140,7 +140,7 @@ class WriterAgent(BaseAgent):
         )
         return "editor"
     
-    def create_draft(self, state: NewsroomState) -> Optional[str]:
+    async def create_draft(self, state: NewsroomState) -> Optional[str]:
         """
         Create initial article draft.
         
@@ -202,7 +202,7 @@ Write the complete article now."""
             
             # Generate draft
             config = get_config()
-            draft = generate_completion(
+            draft = await generate_completion(
                 prompt=prompt,
                 system_prompt="You are an expert technical writer who creates clear, engaging, well-researched articles.",
                 temperature=0.7,
@@ -217,7 +217,7 @@ Write the complete article now."""
             self.logger.error(f"Failed to create draft: {e}", exc_info=True)
             return None
     
-    def revise_draft(self, state: NewsroomState, editor_feedback: List[str]) -> Optional[str]:
+    async def revise_draft(self, state: NewsroomState, editor_feedback: List[str]) -> Optional[str]:
         """
         Revise existing draft based on editor feedback.
         
@@ -250,7 +250,7 @@ Provide the complete revised article."""
             
             # Generate revision
             config = get_config()
-            revised_draft = generate_completion(
+            revised_draft = await generate_completion(
                 prompt=prompt,
                 system_prompt="You are an expert technical writer who carefully addresses editorial feedback.",
                 temperature=0.7,

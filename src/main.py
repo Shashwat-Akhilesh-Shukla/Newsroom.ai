@@ -7,8 +7,13 @@ Run the complete multi-agent newsroom workflow.
 import logging
 import sys
 import argparse
+import asyncio
 from pathlib import Path
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables explicitly
+load_dotenv()
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -30,7 +35,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def main():
+async def main():
     """Main execution function."""
     parser = argparse.ArgumentParser(description='AI Newsroom - Multi-Agent Content Creation')
     parser.add_argument('--stream', action='store_true', help='Stream workflow execution')
@@ -68,7 +73,7 @@ def main():
             logger.info("\n🚀 Starting workflow (streaming mode)...\n")
             
             final_state = None
-            for state_update in stream_newsroom(initial_state):
+            async for state_update in stream_newsroom(initial_state):
                 # Log state updates
                 for node_name, node_state in state_update.items():
                     logger.info(f"📍 {node_name.upper()}: {node_state.get('workflow_stage', 'processing')}")
@@ -77,7 +82,7 @@ def main():
         else:
             # Standard mode - run to completion
             logger.info("\n🚀 Starting workflow...\n")
-            final_state = run_newsroom(initial_state)
+            final_state = await run_newsroom(initial_state)
         
         # Display results
         logger.info("\n" + "=" * 70)
@@ -189,4 +194,4 @@ def save_article(state: dict, output_path: str):
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

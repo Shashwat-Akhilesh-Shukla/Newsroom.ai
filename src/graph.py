@@ -193,7 +193,7 @@ def route_publisher(state: NewsroomState) -> Literal["END", "editor"]:
     return publisher_agent.get_routing_decision(state)
 
 
-def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
+async def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
     """
     Run the complete newsroom workflow.
     
@@ -214,7 +214,7 @@ def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
     
     # Run the workflow
     try:
-        final_state = app.invoke(initial_state)
+        final_state = await app.ainvoke(initial_state)
         
         logger.info("Newsroom workflow completed successfully")
         
@@ -234,7 +234,7 @@ def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
         raise
 
 
-def stream_newsroom(initial_state: NewsroomState = None):
+async def stream_newsroom(initial_state: NewsroomState = None):
     """
     Stream the newsroom workflow execution.
     
@@ -255,7 +255,7 @@ def stream_newsroom(initial_state: NewsroomState = None):
     
     # Stream the workflow
     try:
-        for state in app.stream(initial_state):
+        async for state in app.astream(initial_state):
             yield state
             
     except Exception as e:

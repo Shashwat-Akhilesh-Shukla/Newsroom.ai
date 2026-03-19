@@ -74,7 +74,7 @@ class SkepticAgent(BaseAgent):
         
         return True
     
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main Skeptic processing logic.
         
@@ -88,7 +88,7 @@ class SkepticAgent(BaseAgent):
         self.logger.info(f"Skeptic agent reviewing research on: '{topic}'")
         
         # Step 1: Evaluate research quality
-        quality_assessment = self.evaluate_research_quality(state)
+        quality_assessment = await self.evaluate_research_quality(state)
         
         if not quality_assessment:
             self.logger.error("Failed to assess research quality")
@@ -157,7 +157,7 @@ class SkepticAgent(BaseAgent):
             )
             return "scout"
     
-    def evaluate_research_quality(self, state: NewsroomState) -> Optional[Dict[str, Any]]:
+    async def evaluate_research_quality(self, state: NewsroomState) -> Optional[Dict[str, Any]]:
         """
         Evaluate the quality of research using LLM.
         
@@ -216,7 +216,7 @@ Return JSON:
             
             # Get LLM assessment
             config = get_config()
-            assessment = generate_structured_output(
+            assessment = await generate_structured_output(
                 prompt=prompt,
                 system_prompt="You are a critical research evaluator who challenges assumptions and demands evidence.",
                 temperature=0.3,

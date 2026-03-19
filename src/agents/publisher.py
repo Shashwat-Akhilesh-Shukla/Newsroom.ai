@@ -69,7 +69,7 @@ class PublisherAgent(BaseAgent):
         
         return True
     
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main Publisher processing logic.
         
@@ -85,7 +85,7 @@ class PublisherAgent(BaseAgent):
         self.logger.info(f"Publisher agent validating: '{topic}'")
         
         # Step 1: Generate SEO metadata
-        seo_metadata = self.generate_seo_metadata(state)
+        seo_metadata = await self.generate_seo_metadata(state)
         
         # Step 2: Check for duplicate content
         duplicate_check = self.check_duplicate_content(draft)
@@ -188,7 +188,7 @@ class PublisherAgent(BaseAgent):
             )
             return None
     
-    def generate_seo_metadata(self, state: NewsroomState) -> Dict[str, Any]:
+    async def generate_seo_metadata(self, state: NewsroomState) -> Dict[str, Any]:
         """
         Generate SEO metadata for the article.
         
@@ -240,7 +240,7 @@ Return JSON:
             
             # Generate SEO metadata
             config = get_config()
-            seo_metadata = generate_structured_output(
+            seo_metadata = await generate_structured_output(
                 prompt=prompt,
                 system_prompt="You are an SEO expert who creates compelling, search-optimized metadata.",
                 temperature=0.5,

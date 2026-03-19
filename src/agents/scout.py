@@ -68,7 +68,7 @@ class ScoutAgent(BaseAgent):
         # Scout can start with minimal state
         return True
     
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main Scout processing logic.
         
@@ -91,7 +91,7 @@ class ScoutAgent(BaseAgent):
             return state
         
         # Step 1: Fetch trending topics from all sources
-        all_trends = self.fetch_trending_topics()
+        all_trends = await self.fetch_trending_topics()
         
         if not any(all_trends.values()):
             self.logger.error("No trends fetched from any source")
@@ -109,7 +109,7 @@ class ScoutAgent(BaseAgent):
         # Step 3: Analyze top topics
         analyzed_topics = []
         for topic in aggregated_topics[:5]:  # Analyze top 5
-            analysis = self.analyze_topic(topic)
+            analysis = await self.analyze_topic(topic)
             if analysis:
                 analyzed_topics.append({
                     'topic': topic,
@@ -172,7 +172,7 @@ class ScoutAgent(BaseAgent):
         )
         return "scout"  # Loop back to self
     
-    def fetch_trending_topics(self) -> Dict[str, List[Dict[str, Any]]]:
+    async def fetch_trending_topics(self) -> Dict[str, List[Dict[str, Any]]]:
         """
         Fetch trending topics from all available sources.
         
@@ -182,7 +182,7 @@ class ScoutAgent(BaseAgent):
         self.logger.info("Fetching trends from all sources...")
         
         try:
-            trends = self.aggregator.get_all_trends(hn_limit=30, arxiv_limit=10)
+            trends = await self.aggregator.get_all_trends(hn_limit=30, arxiv_limit=10)
             
             # Log what we got
             for source, items in trends.items():
@@ -241,7 +241,7 @@ class ScoutAgent(BaseAgent):
         self.logger.info(f"Aggregated {len(aggregated)} unique topics")
         return aggregated
     
-    def analyze_topic(self, topic: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    async def analyze_topic(self, topic: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """
         Analyze a topic using LLM.
         
@@ -257,7 +257,7 @@ class ScoutAgent(BaseAgent):
             
             # Get LLM analysis
             config = get_config()
-            analysis = generate_structured_output(
+            analysis = await generate_structured_output(
                 prompt=prompt,
                 system_prompt="You are an expert content strategist analyzing topics for technical articles.",
                 temperature=0.3,  # Lower temperature for more consistent analysis

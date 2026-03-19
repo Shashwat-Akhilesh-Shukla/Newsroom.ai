@@ -65,7 +65,7 @@ def get_llm_client(provider: str = "gemini", model: str = "gemini-2.0-flash", ap
         )
 
 
-def generate_completion(
+async def generate_completion(
     prompt: str,
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
@@ -99,7 +99,7 @@ def generate_completion(
             messages.append(SystemMessage(content=system_prompt))
         messages.append(HumanMessage(content=prompt))
         
-        response = llm.invoke(messages)
+        response = await llm.ainvoke(messages)
         return response.content
         
     except Exception as e:
@@ -107,7 +107,7 @@ def generate_completion(
         raise
 
 
-def generate_structured_output(
+async def generate_structured_output(
     prompt: str,
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
@@ -127,7 +127,7 @@ def generate_structured_output(
     Returns:
         Parsed JSON response
     """
-    response = generate_completion(
+    response = await generate_completion(
         prompt=prompt,
         system_prompt=system_prompt,
         temperature=temperature,

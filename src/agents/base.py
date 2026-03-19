@@ -37,7 +37,7 @@ class BaseAgent(ABC):
         self.execution_count = 0
         
     @abstractmethod
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main processing logic for the agent.
         
@@ -86,7 +86,7 @@ class BaseAgent(ABC):
         """
         pass
     
-    def execute(self, state: NewsroomState) -> NewsroomState:
+    async def execute(self, state: NewsroomState) -> NewsroomState:
         """
         Execute the agent with logging and error handling.
         
@@ -117,7 +117,7 @@ class BaseAgent(ABC):
         try:
             # Process the state
             start_time = datetime.utcnow()
-            updated_state = self.process(state)
+            updated_state = await self.process(state)
             end_time = datetime.utcnow()
             
             # Log execution time

@@ -70,7 +70,7 @@ class EditorAgent(BaseAgent):
         
         return True
     
-    def process(self, state: NewsroomState) -> NewsroomState:
+    async def process(self, state: NewsroomState) -> NewsroomState:
         """
         Main Editor processing logic.
         
@@ -89,7 +89,7 @@ class EditorAgent(BaseAgent):
         state = increment_iteration(state, "revision_loops")
         
         # Step 1: Review draft quality
-        review = self.review_draft(state)
+        review = await self.review_draft(state)
         
         if not review:
             self.logger.error("Failed to review draft")
@@ -167,7 +167,7 @@ class EditorAgent(BaseAgent):
             )
             return "writer"
     
-    def review_draft(self, state: NewsroomState) -> Optional[Dict[str, Any]]:
+    async def review_draft(self, state: NewsroomState) -> Optional[Dict[str, Any]]:
         """
         Review draft quality using LLM.
         
@@ -224,7 +224,7 @@ Return JSON:
             
             # Get LLM review
             config = get_config()
-            review = generate_structured_output(
+            review = await generate_structured_output(
                 prompt=prompt,
                 system_prompt="You are a perfectionist editor who demands excellence and catches every flaw.",
                 temperature=0.3,
