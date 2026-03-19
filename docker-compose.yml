@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  newsroom:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai_newsroom
+    environment:
+      # Inject the DB URL to point to the postgres container
+      - DATABASE_URL=postgresql://newsroom:secretpassword@db:5432/newsroom_db
+      - REDIS_URL=redis://redis:6379/0
+    env_file:
+      # Automatically load the user's local .env file (for GEMINI_API_KEY, etc.)
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    # The default entrypoint will run src.main. 
+    # To run streaming mode, you can override command:
+    # command: ["--stream"]
+    
+  db:
+    image: postgres:15-alpine
+    container_name: newsroom_db
+    environment:
+      - POSTGRES_USER=newsroom
+      - POSTGRES_PASSWORD=secretpassword
+      - POSTGRES_DB=newsroom_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U newsroom -d newsroom_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: newsroom_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  # Named volumes for persistent storage
+  postgres_data:
+  redis_data:
