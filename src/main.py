@@ -11,6 +11,7 @@ import asyncio
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
+sys.stdout.reconfigure(encoding='utf-8')
 
 # Load environment variables explicitly
 load_dotenv()
@@ -202,5 +203,10 @@ def save_article(state: dict, output_path: str):
         logger.error(f"Failed to save article: {e}")
 
 
-if __name__ == "__main__":
+def run():
+    """Sync entry point for the console script (pyproject.toml)."""
     asyncio.run(main())
+
+
+if __name__ == "__main__":
+    run()

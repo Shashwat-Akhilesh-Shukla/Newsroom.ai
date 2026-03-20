@@ -250,7 +250,7 @@ def format_prompt(template: str, **kwargs) -> str:
         Formatted prompt
     """
     try:
-        return template.format(**kwargs)
+        return template.replace("{topic_data}", kwargs["topic_data"])
     except KeyError as e:
         logger.error(f"Missing variable in prompt template: {e}")
         raise

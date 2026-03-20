@@ -137,7 +137,7 @@ class HackerNewsClient:
 class ArXivClient:
     """Client for ArXiv API."""
     
-    BASE_URL = "http://export.arxiv.org/api/query"
+    BASE_URL = "https://export.arxiv.org/api/query"
     
     def __init__(self):
         self.rate_limiter = RateLimiter(calls_per_second=0.5)
@@ -299,8 +299,11 @@ class RedditClient:
     def __init__(self):
         self.rate_limiter = RateLimiter(calls_per_second=0.5)
         self.session = httpx.AsyncClient(headers={
-            'User-Agent': 'AI-Newsroom/1.0 (trend aggregator; contact: newsroom@example.com)'
-        })
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+                "Accept": "application/json",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Referer": "https://www.reddit.com/",
+            })
 
     @retry_with_backoff(max_retries=3)
     async def _make_request(self, url: str, params: Optional[Dict[str, Any]] = None) -> Any:
@@ -420,7 +423,13 @@ class DuckDuckGoNewsClient:
 
     async def get_trending_topics(self) -> List[Dict[str, Any]]:
         tasks = [self._search_news(query) for query in self.SEARCH_QUERIES]
-        results = await asyncio.gather(*tasks, return_exceptions=True)
+        semaphore = asyncio.Semaphore(2)
+
+        async def limited_task(task):
+            async with semaphore:
+                return await task
+
+        results = await asyncio.gather(*[limited_task(t) for t in tasks])
         
         all_results = []
         for r in results:

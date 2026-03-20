@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [project.scripts]
-newsroom = "src.main:main"
+newsroom = "src.main:run"
 
 [tool.black]
 line-length = 100
