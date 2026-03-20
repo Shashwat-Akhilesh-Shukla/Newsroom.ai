@@ -2,7 +2,7 @@
 LLM utilities for AI Newsroom.
 
 Provides utilities for interacting with LLMs, including:
-- Client initialization (Gemini API)
+- Client initialization (Gemini API) with LangSmith tracing callbacks
 - Prompt template loading
 - Token counting
 - Response parsing
@@ -22,7 +22,12 @@ logger = logging.getLogger(__name__)
 # LLM Client Management
 # ============================================================================
 
-def get_llm_client(provider: str = "gemini", model: str = "gemini-2.0-flash", api_key: Optional[str] = None):
+def get_llm_client(
+    provider: str = "gemini",
+    model: str = "gemini-2.0-flash",
+    api_key: Optional[str] = None,
+    run_name: Optional[str] = None,
+):
     """
     Initialize and return an LLM client.
 
@@ -31,14 +36,28 @@ def get_llm_client(provider: str = "gemini", model: str = "gemini-2.0-flash", ap
           Requires GEMINI_API_KEY environment variable.
           Default model: gemini-2.0-flash
 
+    LangSmith tracing is attached automatically when LANGCHAIN_TRACING_V2
+    is set and the langsmith package is installed.
+
     Args:
         provider: LLM provider ('gemini')
         model: Model name (default: 'gemini-2.0-flash')
         api_key: API key (if not provided, will use environment variable)
+        run_name: Optional span name shown in LangSmith (e.g. 'scout_analysis')
 
     Returns:
         LLM client instance
     """
+    # Build optional LangSmith callback list
+    callbacks = []
+    try:
+        from langsmith.callbacks import LangSmithCallbackHandler  # type: ignore
+        from src.observability.tracing import is_tracing_enabled
+        if is_tracing_enabled():
+            callbacks.append(LangSmithCallbackHandler())
+    except Exception:
+        pass  # tracing not available — proceed without callbacks
+
     if provider == "gemini":
         try:
             from langchain_google_genai import ChatGoogleGenerativeAI
@@ -53,6 +72,7 @@ def get_llm_client(provider: str = "gemini", model: str = "gemini-2.0-flash", ap
                 model=model,
                 google_api_key=api_key,
                 temperature=0.7,
+                callbacks=callbacks if callbacks else None,
             )
         except ImportError:
             raise ImportError(
@@ -72,10 +92,11 @@ async def generate_completion(
     max_tokens: int = 2000,
     provider: str = "gemini",
     model: str = "gemini-2.0-flash",
+    run_name: Optional[str] = None,
 ) -> str:
     """
     Generate a completion from the LLM.
-    
+
     Args:
         prompt: User prompt
         system_prompt: Optional system prompt
@@ -83,25 +104,31 @@ async def generate_completion(
         max_tokens: Maximum tokens to generate
         provider: LLM provider
         model: Model name
-        
+        run_name: Optional span name in LangSmith (e.g. 'scout_topic_analysis')
+
     Returns:
         Generated text
     """
     try:
         from langchain_core.messages import HumanMessage, SystemMessage
-        
-        llm = get_llm_client(provider=provider, model=model)
+
+        llm = get_llm_client(provider=provider, model=model, run_name=run_name)
         llm.temperature = temperature
         llm.max_tokens = max_tokens
-        
+
         messages = []
         if system_prompt:
             messages.append(SystemMessage(content=system_prompt))
         messages.append(HumanMessage(content=prompt))
-        
-        response = await llm.ainvoke(messages)
+
+        # Pass run_name so LangSmith labels the span with a readable name
+        invoke_kwargs: Dict[str, Any] = {}
+        if run_name:
+            invoke_kwargs["run_name"] = run_name
+
+        response = await llm.ainvoke(messages, **invoke_kwargs)
         return response.content
-        
+
     except Exception as e:
         logger.error(f"Failed to generate completion: {e}")
         raise

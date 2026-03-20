@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from src.graph import run_newsroom, stream_newsroom
 from src.state import create_initial_state
 from src.utils.config import get_config
+from src.observability import setup_tracing
 
 # Configure logging
 logging.basicConfig(
@@ -52,8 +53,16 @@ async def main():
     config = get_config()
     if not config.llm.api_key:
         logger.error("❌ No LLM API key found!")
-        logger.error("Set PERPLEXITY_API_KEY in your environment")
+        logger.error("Set GEMINI_API_KEY in your environment")
         sys.exit(1)
+
+    # Initialise LangSmith tracing (no-op if LANGCHAIN_API_KEY not set)
+    tracing_active = setup_tracing()
+    if not tracing_active:
+        logger.info(
+            "ℹ️  LangSmith tracing disabled. "
+            "Set LANGCHAIN_TRACING_V2=true + LANGCHAIN_API_KEY to enable."
+        )
     
     logger.info("=" * 70)
     logger.info("AI NEWSROOM - Multi-Agent Content Creation System")

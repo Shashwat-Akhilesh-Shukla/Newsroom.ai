@@ -2,9 +2,12 @@
 LangGraph workflow definition for AI Newsroom.
 
 This module defines the complete multi-agent workflow with all routing logic.
+Every execution is wrapped in a LangSmith root span so all agent sub-spans
+nest under a single traceable tree in the LangSmith UI.
 """
 
 import logging
+import uuid
 from typing import Dict, Any, Literal
 from langgraph.graph import StateGraph, END
 
@@ -196,29 +199,48 @@ def route_publisher(state: NewsroomState) -> Literal["END", "editor"]:
 async def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
     """
     Run the complete newsroom workflow.
-    
+
+    This is the root LangSmith span — all agent sub-spans nest under it,
+    forming a complete trace tree visible in the LangSmith UI.
+
     Args:
         initial_state: Optional initial state (uses default if None)
-        
+
     Returns:
         Final state after workflow completion
     """
     logger.info("Starting newsroom workflow...")
-    
+
+    # Assign a run ID for cross-system correlation
+    run_id = str(uuid.uuid4())
+
     # Create workflow
     app = create_newsroom_workflow()
-    
+
     # Use provided state or create initial state
     if initial_state is None:
         initial_state = create_initial_state()
-    
+
+    # Store run_id in state so agents can reference this workflow run
+    initial_state["metadata"]["langsmith_run_id"] = run_id
+    initial_state["metadata"]["workflow_run_id"] = run_id
+
+    # Resolve LangSmith trace URL (no-op if tracing is disabled)
+    try:
+        from .observability.tracing import get_run_url, is_tracing_enabled
+        if is_tracing_enabled():
+            trace_url = get_run_url(run_id)
+            logger.info(f"🔍 LangSmith trace: {trace_url}")
+    except Exception:
+        pass
+
     # Run the workflow
     try:
         final_state = await app.ainvoke(initial_state)
-        
+
         logger.info("Newsroom workflow completed successfully")
-        
-        # Log summary
+
+        # Log outcome
         if final_state.get("publish_ready"):
             logger.info(f"✅ Article published: '{final_state.get('topic')}'")
             logger.info(f"   Word count: {len(final_state.get('draft', '').split())}")
@@ -226,9 +248,37 @@ async def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
         else:
             logger.info(f"❌ Workflow ended without publishing")
             logger.info(f"   Last stage: {final_state.get('workflow_stage', 'unknown')}")
-        
+
+        # Log workflow metrics summary if available
+        try:
+            from .observability.metrics import WorkflowMetrics
+            wm = WorkflowMetrics(
+                run_id=run_id,
+                topic=final_state.get("topic", ""),
+                published=final_state.get("publish_ready", False),
+                revision_loops=final_state.get("revision_count", 0),
+            )
+            # Ingest per-agent metrics stored in state
+            from .observability.metrics import AgentMetrics
+            from .observability.metrics import collect_agent_metrics
+            for agent_name, runs in final_state.get("metadata", {}).get("metrics", {}).items():
+                for run_data in runs:
+                    from datetime import datetime
+                    m = AgentMetrics(
+                        agent_name=run_data.get("agent_name", agent_name),
+                        latency_ms=run_data.get("latency_ms", 0),
+                        token_input=run_data.get("token_input", 0),
+                        token_output=run_data.get("token_output", 0),
+                        estimated_cost_usd=run_data.get("estimated_cost_usd", 0),
+                        llm_call_count=run_data.get("llm_call_count", 0),
+                    )
+                    wm.ingest_agent_metrics(m)
+            wm.log_summary()
+        except Exception:
+            pass
+
         return final_state
-        
+
     except Exception as e:
         logger.error(f"Workflow execution failed: {e}", exc_info=True)
         raise
@@ -237,27 +287,40 @@ async def run_newsroom(initial_state: NewsroomState = None) -> NewsroomState:
 async def stream_newsroom(initial_state: NewsroomState = None):
     """
     Stream the newsroom workflow execution.
-    
+
     Args:
         initial_state: Optional initial state
-        
+
     Yields:
         State updates as the workflow progresses
     """
     logger.info("Starting newsroom workflow (streaming mode)...")
-    
+
+    run_id = str(uuid.uuid4())
+
     # Create workflow
     app = create_newsroom_workflow()
-    
+
     # Use provided state or create initial state
     if initial_state is None:
         initial_state = create_initial_state()
-    
+
+    initial_state["metadata"]["langsmith_run_id"] = run_id
+    initial_state["metadata"]["workflow_run_id"] = run_id
+
+    try:
+        from .observability.tracing import get_run_url, is_tracing_enabled
+        if is_tracing_enabled():
+            trace_url = get_run_url(run_id)
+            logger.info(f"🔍 LangSmith trace: {trace_url}")
+    except Exception:
+        pass
+
     # Stream the workflow
     try:
         async for state in app.astream(initial_state):
             yield state
-            
+
     except Exception as e:
         logger.error(f"Workflow streaming failed: {e}", exc_info=True)
         raise

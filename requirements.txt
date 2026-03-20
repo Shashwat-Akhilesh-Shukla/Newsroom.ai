@@ -4,6 +4,9 @@ langgraph>=0.0.20
 langchain>=0.1.0
 langchain-google-genai>=1.0.0  # Used for Gemini API
 
+# Observability & Tracing
+langsmith>=0.1.0  # LangSmith tracing, evaluation, and production monitoring
+
 # LLM providers
 # Gemini API is accessed via langchain-google-genai.
 # No additional provider SDK packages (openai, anthropic) are required.
