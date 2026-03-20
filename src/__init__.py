@@ -3,12 +3,12 @@
 __version__ = "0.1.0"
 
 from .state import NewsroomState, create_initial_state
-from .graph import create_newsroom_graph
+from .graph import create_newsroom_workflow
 from .main import main
 
 __all__ = [
     "NewsroomState",
     "create_initial_state",
-    "create_newsroom_graph",
+    "create_newsroom_workflow",
     "main",
 ]
