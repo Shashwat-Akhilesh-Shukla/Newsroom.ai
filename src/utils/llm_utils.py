@@ -29,6 +29,7 @@ def get_llm_client(
     run_name: Optional[str] = None,
     temperature: float = 0.7,
     max_output_tokens: Optional[int] = None,
+    response_mime_type: Optional[str] = None,
 ):
     """
     Initialize and return an LLM client.
@@ -77,6 +78,8 @@ def get_llm_client(
             }
             if max_output_tokens is not None:
                 kwargs["max_output_tokens"] = max_output_tokens
+            if response_mime_type is not None:
+                kwargs["model_kwargs"] = {"response_mime_type": response_mime_type}
             if callbacks:
                 kwargs["callbacks"] = callbacks
             return ChatGoogleGenerativeAI(**kwargs)
@@ -99,6 +102,7 @@ async def generate_completion(
     provider: str = "gemini",
     model: str = "gemini-2.5-flash",
     run_name: Optional[str] = None,
+    response_mime_type: Optional[str] = None,
 ) -> str:
     """
     Generate a completion from the LLM.
@@ -124,6 +128,7 @@ async def generate_completion(
             run_name=run_name,
             temperature=temperature,
             max_output_tokens=max_tokens,
+            response_mime_type=response_mime_type,
         )
 
         messages = []
@@ -150,6 +155,7 @@ async def generate_structured_output(
     temperature: float = 0.7,
     provider: str = "gemini",
     model: str = "gemini-2.5-flash",
+    max_tokens: int = 4000,
 ) -> Dict[str, Any]:
     """
     Generate structured JSON output from the LLM.
@@ -168,8 +174,10 @@ async def generate_structured_output(
         prompt=prompt,
         system_prompt=system_prompt,
         temperature=temperature,
+        max_tokens=max_tokens,
         provider=provider,
-        model=model
+        model=model,
+        response_mime_type="application/json"
     )
     
     return extract_json_from_response(response)
