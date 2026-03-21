@@ -24,9 +24,11 @@ logger = logging.getLogger(__name__)
 
 def get_llm_client(
     provider: str = "gemini",
-    model: str = "gemini-2.0-flash",
+    model: str = "gemini-2.5-flash",
     api_key: Optional[str] = None,
     run_name: Optional[str] = None,
+    temperature: float = 0.7,
+    max_output_tokens: Optional[int] = None,
 ):
     """
     Initialize and return an LLM client.
@@ -34,14 +36,14 @@ def get_llm_client(
     Currently supports:
         - 'gemini': Google Gemini via langchain-google-genai.
           Requires GEMINI_API_KEY environment variable.
-          Default model: gemini-2.0-flash
+          Default model: gemini-2.5-flash
 
     LangSmith tracing is attached automatically when LANGCHAIN_TRACING_V2
     is set and the langsmith package is installed.
 
     Args:
         provider: LLM provider ('gemini')
-        model: Model name (default: 'gemini-2.0-flash')
+        model: Model name (default: 'gemini-2.5-flash')
         api_key: API key (if not provided, will use environment variable)
         run_name: Optional span name shown in LangSmith (e.g. 'scout_analysis')
 
@@ -68,12 +70,16 @@ def get_llm_client(
                     "Gemini API key not found. Set GEMINI_API_KEY environment variable."
                 )
 
-            return ChatGoogleGenerativeAI(
-                model=model,
-                google_api_key=api_key,
-                temperature=0.7,
-                callbacks=callbacks if callbacks else None,
-            )
+            kwargs: Dict[str, Any] = {
+                "model": model,
+                "google_api_key": api_key,
+                "temperature": temperature,
+            }
+            if max_output_tokens is not None:
+                kwargs["max_output_tokens"] = max_output_tokens
+            if callbacks:
+                kwargs["callbacks"] = callbacks
+            return ChatGoogleGenerativeAI(**kwargs)
         except ImportError:
             raise ImportError(
                 "langchain-google-genai not installed. Run: pip install langchain-google-genai"
@@ -91,7 +97,7 @@ async def generate_completion(
     temperature: float = 0.7,
     max_tokens: int = 2000,
     provider: str = "gemini",
-    model: str = "gemini-2.0-flash",
+    model: str = "gemini-2.5-flash",
     run_name: Optional[str] = None,
 ) -> str:
     """
@@ -112,9 +118,13 @@ async def generate_completion(
     try:
         from langchain_core.messages import HumanMessage, SystemMessage
 
-        llm = get_llm_client(provider=provider, model=model, run_name=run_name)
-        llm.temperature = temperature
-        llm.max_tokens = max_tokens
+        llm = get_llm_client(
+            provider=provider,
+            model=model,
+            run_name=run_name,
+            temperature=temperature,
+            max_output_tokens=max_tokens,
+        )
 
         messages = []
         if system_prompt:
@@ -139,7 +149,7 @@ async def generate_structured_output(
     system_prompt: Optional[str] = None,
     temperature: float = 0.7,
     provider: str = "gemini",
-    model: str = "gemini-2.0-flash",
+    model: str = "gemini-2.5-flash",
 ) -> Dict[str, Any]:
     """
     Generate structured JSON output from the LLM.
@@ -260,7 +270,7 @@ def format_prompt(template: str, **kwargs) -> str:
 # Token Counting
 # ============================================================================
 
-def count_tokens(text: str, model: str = "gemini-2.0-flash") -> int:
+def count_tokens(text: str, model: str = "gemini-2.5-flash") -> int:
     """
     Count tokens in text for a specific model.
 
@@ -288,11 +298,12 @@ def count_tokens(text: str, model: str = "gemini-2.0-flash") -> int:
         return len(text) // 4
 
 
-def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gemini-2.0-flash") -> float:
+def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gemini-2.5-flash") -> float:
     """
     Estimate cost for LLM API call.
 
     Gemini pricing (approximate, per 1M tokens):
+      - gemini-2.5-flash:       $0.075 input / $0.30 output
       - gemini-2.0-flash:       $0.075 input / $0.30 output
       - gemini-2.0-flash-lite:  $0.075 input / $0.30 output
       - gemini-1.5-pro:         $1.25 input  / $5.00 output
@@ -311,6 +322,7 @@ def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gemini-2.
         "gemini-1.5-pro": {"input": 1.25 / 1_000_000, "output": 5.00 / 1_000_000},
         "gemini-1.5-flash": {"input": 0.075 / 1_000_000, "output": 0.30 / 1_000_000},
         "gemini-2.0-flash": {"input": 0.075 / 1_000_000, "output": 0.30 / 1_000_000},
+        "gemini-2.5-flash": {"input": 0.075 / 1_000_000, "output": 0.30 / 1_000_000},
     }
 
     # Find matching pricing (longest match wins)
@@ -321,8 +333,8 @@ def estimate_cost(input_tokens: int, output_tokens: int, model: str = "gemini-2.
             break
 
     if not model_pricing:
-        logger.warning(f"Unknown model pricing: {model}. Defaulting to gemini-2.0-flash pricing.")
-        model_pricing = pricing["gemini-2.0-flash"]
+        logger.warning(f"Unknown model pricing: {model}. Defaulting to gemini-2.5-flash pricing.")
+        model_pricing = pricing["gemini-2.5-flash"]
 
     input_cost = input_tokens * model_pricing["input"]
     output_cost = output_tokens * model_pricing["output"]

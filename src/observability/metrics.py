@@ -163,7 +163,7 @@ def collect_agent_metrics(
     """
     Build an AgentMetrics instance from raw execution data.
 
-    Cost is estimated automatically using gemini-2.0-flash pricing:
+    Cost is estimated automatically using gemini-2.5-flash pricing:
     $0.075 / 1M input tokens, $0.30 / 1M output tokens.
     """
     latency_ms = (ended_at - started_at).total_seconds() * 1000

@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 class LLMConfig:
     """LLM configuration settings."""
     provider: str = "gemini"
-    model: str = "gemini-2.0-flash"
+    model: str = "gemini-2.5-flash"
     temperature: float = 0.7
     max_tokens: int = 2000
     api_key: Optional[str] = None
@@ -66,7 +66,7 @@ class Config:
         """Load LLM configuration from environment."""
         return LLMConfig(
             provider=os.getenv("LLM_PROVIDER", "gemini"),
-            model=os.getenv("LLM_MODEL", "gemini-2.0-flash"),
+            model=os.getenv("LLM_MODEL", "gemini-2.5-flash"),
             temperature=float(os.getenv("LLM_TEMPERATURE", "0.7")),
             max_tokens=int(os.getenv("LLM_MAX_TOKENS", "2000")),
             api_key=os.getenv("GEMINI_API_KEY"),

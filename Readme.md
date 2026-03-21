@@ -227,7 +227,7 @@ You should see output like:
 **Core:**
 - **LangGraph** — Multi-agent orchestration with stateful cycles
 - **LangChain** — LLM abstractions and message formatting
-- **Google Gemini (`gemini-2.0-flash`)** — Primary language model
+- **Google Gemini (`gemini-2.5-flash`)** — Primary language model
 
 **Data Sources:**
 - **Reddit** — Tech discussions (public JSON API, no key required)
@@ -294,7 +294,7 @@ All configuration is driven by environment variables. Copy `.env.example` to `.e
 |---|---|---|
 | `GEMINI_API_KEY` | *(required)* | Google Gemini API key |
 | `LLM_PROVIDER` | `gemini` | LLM backend |
-| `LLM_MODEL` | `gemini-2.0-flash` | Gemini model name |
+| `LLM_MODEL` | `gemini-2.5-flash` | Gemini model name |
 | `DATABASE_URL` | *(required)* | PostgreSQL connection string |
 | `REDIS_URL` | `redis://localhost:6379/0` | Redis connection string |
 | `SCOUT_CONFIDENCE_THRESHOLD` | `0.7` | Minimum confidence to proceed from Scout |
@@ -322,7 +322,7 @@ Tension creates quality. If everyone agrees, you get groupthink. If the Editor c
 AutoGPT is one agent with tools. This is six agents with different goals. The architecture is fundamentally different.
 
 **Why Gemini?**  
-Google Gemini (`gemini-2.0-flash`) offers a generous free tier and strong instruction-following, making it practical to run this system at zero variable cost during development.
+Google Gemini (`gemini-2.5-flash`) offers a generous free tier and strong instruction-following, making it practical to run this system at zero variable cost during development.
 
 ---
 
