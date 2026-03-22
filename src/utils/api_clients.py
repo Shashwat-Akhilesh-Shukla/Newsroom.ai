@@ -15,7 +15,7 @@ import asyncio
 import logging
 import httpx
 from typing import List, Dict, Optional, Any, Callable
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 import xml.etree.ElementTree as ET
 
@@ -180,7 +180,7 @@ class ArXivClient:
             xml_data = await self._make_request(params)
             papers = self._parse_arxiv_response(xml_data)
             
-            cutoff_date = datetime.now() - timedelta(days=days)
+            cutoff_date = datetime.now(timezone.utc) - timedelta(days=days)
             recent_papers = [
                 p for p in papers 
                 if datetime.fromisoformat(p['published'].replace('Z', '+00:00')) > cutoff_date
