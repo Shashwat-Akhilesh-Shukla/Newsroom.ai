@@ -13,7 +13,7 @@ from datetime import datetime
 from .base import BaseAgent
 from ..state import NewsroomState, AgentDecision, increment_iteration, check_max_iterations
 from ..utils.api_clients import TrendAggregator
-from ..utils.llm_utils import generate_structured_output, create_topic_analysis_prompt
+from ..utils.llm_utils import generate_structured_output, create_topic_selection_batch_prompt
 from ..utils.config import get_config
 
 logger = logging.getLogger(__name__)
@@ -106,23 +106,14 @@ class ScoutAgent(BaseAgent):
             state["confidence"] = 0.0
             return state
         
-        # Step 3: Analyze top topics
-        analyzed_topics = []
-        for topic in aggregated_topics[:5]:  # Analyze top 5
-            analysis = await self.analyze_topic(topic)
-            if analysis:
-                analyzed_topics.append({
-                    'topic': topic,
-                    'analysis': analysis
-                })
+        # Step 3: Select best topic from top aggregated topics
+        top_topics = aggregated_topics[:5]
+        best_topic = await self.analyze_topics_batch(top_topics)
         
-        if not analyzed_topics:
-            self.logger.warning("No topics passed analysis")
+        if not best_topic:
+            self.logger.warning("No topics passed batch analysis")
             state["confidence"] = 0.0
             return state
-        
-        # Step 4: Select best topic
-        best_topic = max(analyzed_topics, key=lambda x: x['analysis'].get('overall_confidence', 0))
         
         # Step 5: Update state
         state["topic"] = best_topic['topic'].get('title', '')
@@ -132,7 +123,7 @@ class ScoutAgent(BaseAgent):
         # Store metadata
         state["metadata"]["scout_analysis"] = best_topic['analysis']
         state["metadata"]["all_trends"] = all_trends
-        state["metadata"]["analyzed_topics"] = analyzed_topics
+        state["metadata"]["analyzed_topics"] = [best_topic]
         
         self.logger.info(f"Selected topic: '{state['topic']}' with confidence {state['confidence']:.2f}")
         
@@ -241,23 +232,23 @@ class ScoutAgent(BaseAgent):
         self.logger.info(f"Aggregated {len(aggregated)} unique topics")
         return aggregated
     
-    async def analyze_topic(self, topic: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    async def analyze_topics_batch(self, topics: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         """
-        Analyze a topic using LLM.
+        Analyze a batch of topics and select the best one using LLM.
         
         Args:
-            topic: Topic data
+            topics: List of Topic data
             
         Returns:
-            Analysis results or None if failed
+            Dictionary containing 'topic' and 'analysis' for the selected best topic, or None
         """
         try:
-            # Create analysis prompt
-            prompt = create_topic_analysis_prompt(topic)
+            # Create batch analysis prompt
+            prompt = create_topic_selection_batch_prompt(topics)
             
             # Get LLM analysis
             config = get_config()
-            analysis = await generate_structured_output(
+            result = await generate_structured_output(
                 prompt=prompt,
                 system_prompt="You are an expert content strategist analyzing topics for technical articles.",
                 temperature=0.3,  # Lower temperature for more consistent analysis
@@ -265,12 +256,23 @@ class ScoutAgent(BaseAgent):
                 model=config.llm.model
             )
             
-            self.logger.debug(f"Analysis for '{topic.get('title', 'unknown')}': {analysis.get('overall_confidence', 0):.2f}")
+            selected_index = result.get('selected_index')
+            analysis = result.get('analysis')
             
-            return analysis
+            if selected_index is not None and analysis and 0 <= selected_index < len(topics):
+                selected_topic = topics[selected_index]
+                self.logger.debug(f"Batch analysis selected index {selected_index} '{selected_topic.get('title', 'unknown')}' "
+                                f"with confidence: {analysis.get('overall_confidence', 0):.2f}")
+                return {
+                    'topic': selected_topic,
+                    'analysis': analysis
+                }
+            else:
+                self.logger.error(f"Invalid batch analysis result: {result}")
+                return None
             
         except Exception as e:
-            self.logger.error(f"Failed to analyze topic: {e}", exc_info=True)
+            self.logger.error(f"Failed to analyze topics batch: {e}", exc_info=True)
             return None
     
     def calculate_confidence(self, analysis: Dict[str, Any]) -> float:

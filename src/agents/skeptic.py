@@ -55,23 +55,14 @@ class SkepticAgent(BaseAgent):
         self.min_sources = config.get('min_sources', 3)
     
     def validate_input(self, state: NewsroomState) -> bool:
-        """
-        Validate that the state has research to review.
-        
-        Args:
-            state: Current newsroom state
-            
-        Returns:
-            True if valid, False otherwise
-        """
         if not state.get("topic"):
             self.logger.error("No topic found in state")
             return False
-        
+
         if not state.get("research_notes"):
-            self.logger.error("No research notes found in state")
-            return False
-        
+            # Don't crash the pipeline — process() will issue a REJECT
+            self.logger.warning("Skeptic received no research notes — will auto-reject")
+
         return True
     
     async def process(self, state: NewsroomState) -> NewsroomState:
@@ -86,7 +77,14 @@ class SkepticAgent(BaseAgent):
         """
         topic = state["topic"]
         self.logger.info(f"Skeptic agent reviewing research on: '{topic}'")
-        
+
+        # No notes — reject immediately, no LLM call needed
+        if not state.get("research_notes"):
+            state["skeptic_decision"] = AgentDecision.REJECT
+            state["critic_feedback"].append("No research notes available — topic rejected")
+            self.logger.warning("Rejecting topic: no research notes after all retries")
+            return state
+
         # Step 1: Evaluate research quality
         quality_assessment = await self.evaluate_research_quality(state)
         

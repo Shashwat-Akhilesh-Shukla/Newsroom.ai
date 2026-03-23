@@ -72,6 +72,7 @@ class NewsroomState(TypedDict):
     
     # Publishing
     publish_ready: bool
+    publisher_decision: Optional[str]
     seo_metadata: Dict[str, str]
     
     # Workflow metadata
@@ -123,6 +124,7 @@ def create_initial_state(topic: Optional[str] = None) -> NewsroomState:
         
         # Publishing
         publish_ready=False,
+        publisher_decision=None,
         seo_metadata={},
         
         # Workflow metadata

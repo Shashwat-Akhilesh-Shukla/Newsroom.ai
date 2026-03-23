@@ -64,7 +64,8 @@ def create_newsroom_workflow() -> StateGraph:
         "researcher",
         route_researcher,
         {
-            "skeptic": "skeptic"
+            "skeptic": "skeptic",
+            "researcher": "researcher"  # Retry when 0 notes produced
         }
     )
     
@@ -100,8 +101,9 @@ def create_newsroom_workflow() -> StateGraph:
         "publisher",
         route_publisher,
         {
-            "END": END,
-            "editor": "editor"  # Failed validation
+            "END_PUBLISHED": END,   # PUBLISHER_PASS — article published
+            "END_KILLED": END,      # EDITORIAL_VETO — article killed
+            "editor": "editor"      # PUBLISHER_FAIL — back to editor
         }
     )
     
@@ -131,15 +133,15 @@ def route_scout(state: NewsroomState) -> Literal["researcher", "scout", "END"]:
     return scout_agent.get_routing_decision(state)
 
 
-def route_researcher(state: NewsroomState) -> Literal["skeptic"]:
+def route_researcher(state: NewsroomState) -> Literal["skeptic", "researcher"]:
     """
     Route from Researcher agent.
-    
+
     Args:
         state: Current newsroom state
-        
+
     Returns:
-        Next node name (always skeptic)
+        'skeptic' normally, 'researcher' to retry when 0 notes produced
     """
     return researcher_agent.get_routing_decision(state)
 
@@ -183,15 +185,13 @@ def route_editor(state: NewsroomState) -> Literal["publisher", "writer", "resear
     return editor_agent.get_routing_decision(state)
 
 
-def route_publisher(state: NewsroomState) -> Literal["END", "editor"]:
+def route_publisher(state: NewsroomState) -> Literal["END_PUBLISHED", "END_KILLED", "editor"]:
     """
     Route from Publisher agent.
-    
-    Args:
-        state: Current newsroom state
-        
+
     Returns:
-        Next node name or END
+        'END_PUBLISHED' on success, 'END_KILLED' on editorial veto,
+        'editor' on soft publishing failure
     """
     return publisher_agent.get_routing_decision(state)
 

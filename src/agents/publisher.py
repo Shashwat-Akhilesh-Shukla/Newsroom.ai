@@ -129,22 +129,34 @@ class PublisherAgent(BaseAgent):
         """
         Determine routing based on Publisher's decision.
 
+        Diagram routes:
+          PUBLISHER_PASS (PUBLISH)         → END_PUBLISHED
+          EDITORIAL_VETO (REJECT_PUBLISH)  → END_KILLED
+          PUBLISHER_FAIL (REJECT)          → editor
+
         Args:
             state: Current newsroom state
 
         Returns:
-            Next agent name or END
+            Next agent name or END variant
         """
-        decision = state.get("publisher_decision", AgentDecision.REJECT)
+        decision = state.get("publisher_decision", AgentDecision.REJECT_PUBLISH)
 
         if decision == AgentDecision.PUBLISH:
             self.log_decision(
                 AgentDecision.PUBLISH,
-                "All checks passed, article ready for publishing"
+                "All checks passed, article published"
             )
-            return "END"
+            return "END_PUBLISHED"
 
-        else:  # REJECT
+        elif decision == AgentDecision.REJECT_PUBLISH:
+            self.log_decision(
+                AgentDecision.REJECT_PUBLISH,
+                "Editorial veto — article killed"
+            )
+            return "END_KILLED"
+
+        else:  # AgentDecision.REJECT — soft fail, send back to editor
             self.log_decision(
                 AgentDecision.REJECT,
                 "Publishing checks failed, sending back to Editor"
@@ -339,20 +351,21 @@ Return JSON:
         Returns:
             Decision: PUBLISH or REJECT
         """
-        # Check for blockers
+        # Check for blockers — hard editorial veto (duplicate = kill the article)
         if duplicate_check.get("is_duplicate"):
-            self.logger.warning("Duplicate content detected")
-            return AgentDecision.REJECT
-        
+            self.logger.warning("Duplicate content detected — editorial veto")
+            return AgentDecision.REJECT_PUBLISH
+
+        # Soft fail — bad formatting, send back to editor for another pass
         if not format_check.get("is_valid"):
-            self.logger.warning(f"Format issues: {format_check.get('issues')}")
+            self.logger.warning(f"Format issues: {format_check.get('issues')} — returning to editor")
             return AgentDecision.REJECT
-        
-        # Check SEO metadata
+
+        # Check SEO metadata — soft fail
         if not seo_metadata.get("title_tag"):
-            self.logger.warning("Missing SEO title")
+            self.logger.warning("Missing SEO title — returning to editor")
             return AgentDecision.REJECT
-        
+
         # All checks passed
         return AgentDecision.PUBLISH
     

@@ -267,11 +267,10 @@ def format_prompt(template: str, **kwargs) -> str:
     Returns:
         Formatted prompt
     """
-    try:
-        return template.format_map(kwargs)
-    except KeyError as e:
-        logger.error(f"Missing variable in prompt template: {e}")
-        raise
+    result = template
+    for key, value in kwargs.items():
+        result = result.replace(f"{{{key}}}", str(value))
+    return result
 
 
 # ============================================================================
@@ -384,6 +383,40 @@ Respond with ONLY the JSON object, no additional text."""
     
     return format_prompt(template, topic_data=json.dumps(topic_data, indent=2))
 
+
+def create_topic_selection_batch_prompt(topics_data: List[Dict[str, Any]]) -> str:
+    """
+    Create a prompt for selecting the best topic from a batch.
+    
+    Args:
+        topics_data: List of topic data from various sources
+        
+    Returns:
+        Formatted prompt
+    """
+    template = load_prompt_template("scout", "topic_selection_batch")
+    
+    if not template:
+        # Fallback template
+        template = """Analyze the following topics and determine the single best one for a technical article.
+
+Topics Data:
+{topics_data}
+
+Provide your analysis in JSON format with the following fields:
+- selected_index: integer (0-based index of chosen topic)
+- analysis: object containing:
+  - relevance: float (0-1)
+  - novelty: float (0-1)
+  - technical_depth: float (0-1)
+  - audience_interest: float (0-1)
+  - overall_confidence: float (0-1)
+  - reasoning: string
+  - keywords: list of strings
+
+Respond with ONLY the JSON object, no additional text."""
+    
+    return format_prompt(template, topics_data=json.dumps(topics_data, indent=2))
 
 def create_research_synthesis_prompt(topic: str, sources: List[Dict[str, Any]]) -> str:
     """

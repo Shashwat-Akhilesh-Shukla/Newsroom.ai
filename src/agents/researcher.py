@@ -142,17 +142,28 @@ class ResearcherAgent(BaseAgent):
     
     def get_routing_decision(self, state: NewsroomState) -> str:
         """
-        Researcher always routes to Skeptic for validation.
-        
+        Route to Skeptic if research produced notes, otherwise retry (up to 2 times).
+
         Args:
             state: Current newsroom state
-            
+
         Returns:
-            Next agent name (always "skeptic")
+            Next agent name: "researcher" to retry, "skeptic" to proceed
         """
+        notes = state.get("research_notes", [])
+        retry_count = state.get("metadata", {}).get("researcher_retry_count", 0)
+
+        if len(notes) == 0 and retry_count < 2:
+            state["metadata"]["researcher_retry_count"] = retry_count + 1
+            self.log_decision(
+                "RETRY_RESEARCH",
+                f"0 notes produced (attempt {retry_count + 1}/2) — retrying researcher"
+            )
+            return "researcher"
+
         self.log_decision(
             "PROCEED_TO_SKEPTIC",
-            f"Research complete with {len(state.get('research_notes', []))} notes"
+            f"Research complete with {len(notes)} notes"
         )
         return "skeptic"
     

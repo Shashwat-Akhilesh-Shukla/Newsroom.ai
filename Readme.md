@@ -71,8 +71,11 @@ Think of it like Git vs. a linear file system. Once you need branches and merges
 ## 🏗️ How It Actually Works
 
 ### The Workflow
+![Workflow diagram](image.png)
+
 
 ```
+
 Scout finds trending topic
     ↓
 Researcher gathers evidence

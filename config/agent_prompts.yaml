@@ -85,6 +85,41 @@ scout:
     }
     ```
 
+  topic_selection_batch: |
+    You are an expert content strategist analyzing trending topics for a technical publication.
+
+    You are given a list of top trending topics. Determine the single best topic to write a high-quality technical article about.
+
+    Topics Data:
+    {topics_data}
+
+    Consider:
+    1. **Relevance**: Is this topic relevant to a technical audience interested in AI, software engineering, or tech trends?
+    2. **Novelty**: Is this genuinely new or a fresh perspective on an existing topic?
+    3. **Technical Depth**: Does this topic have enough technical substance for a deep-dive article?
+    4. **Audience Interest**: Based on engagement metrics, is there genuine interest in this topic?
+    5. **Cross-Platform Presence**: Does this topic appear across multiple sources (HN, ArXiv, Trends)?
+
+    Provide your choice and analysis in JSON format:
+    ```json
+    {
+      "selected_index": 0,
+      "analysis": {
+        "relevance": 0.0-1.0,
+        "novelty": 0.0-1.0,
+        "technical_depth": 0.0-1.0,
+        "audience_interest": 0.0-1.0,
+        "cross_platform_score": 0.0-1.0,
+        "overall_confidence": 0.0-1.0,
+        "reasoning": "Detailed explanation of why this topic is the best choice among the options",
+        "suggested_angle": "Recommended angle for the article",
+        "keywords": ["keyword1", "keyword2", "keyword3"]
+      }
+    }
+    ```
+
+    Respond with ONLY the JSON object, no additional text. The `selected_index` must be an integer corresponding to the index (0-based) of the topic in the provided list.
+
 # Researcher Agent Prompts
 researcher:
   research_planning: |
