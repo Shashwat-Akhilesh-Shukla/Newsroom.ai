@@ -89,34 +89,21 @@ class ResearcherAgent(BaseAgent):
         topic = state["topic"]
         self.logger.info(f"Researcher agent starting research on: '{topic}'")
         
-        # Step 1: Generate research plan
-        research_plan = await self.generate_research_plan(topic, state)
-        
-        if not research_plan:
-            self.logger.error("Failed to generate research plan")
-            return state
-        
-        # Step 2: Gather information from sources
-        sources = await self.gather_sources(topic, research_plan)
+        # Step 1: Gather information from sources
+        sources = await self.gather_sources(topic)
         
         if not sources:
             self.logger.warning("No sources gathered")
             return state
         
-        # Step 3: Extract claims from sources
-        all_claims = []
-        for source in sources:
-            claims = await self.extract_claims(source)
-            all_claims.extend(claims)
-        
-        # Step 4: Synthesize research
-        synthesis = await self.synthesize_research(topic, sources, all_claims)
+        # Step 2: Synthesize research
+        synthesis = await self.synthesize_research(topic, sources)
         
         if not synthesis:
             self.logger.error("Failed to synthesize research")
             return state
         
-        # Step 5: Update state with research findings
+        # Step 3: Update state with research findings
         state["research_summary"] = synthesis.get('summary', '')
         
         # Add research notes
@@ -130,9 +117,7 @@ class ResearcherAgent(BaseAgent):
             )
         
         # Store metadata
-        state["metadata"]["research_plan"] = research_plan
         state["metadata"]["sources_gathered"] = len(sources)
-        state["metadata"]["claims_extracted"] = len(all_claims)
         state["metadata"]["synthesis"] = synthesis
         
         self.logger.info(f"Research complete: {len(state['research_notes'])} notes, "
@@ -167,53 +152,14 @@ class ResearcherAgent(BaseAgent):
         )
         return "skeptic"
     
-    async def generate_research_plan(self, topic: str, state: NewsroomState) -> Optional[Dict[str, Any]]:
-        """
-        Generate a research plan using LLM.
-        
-        Args:
-            topic: Research topic
-            state: Current state (for context)
-            
-        Returns:
-            Research plan or None if failed
-        """
-        try:
-            # Get context from Scout analysis if available
-            context = state.get("metadata", {}).get("scout_analysis", {})
-            
-            # Load prompt template
-            template = load_prompt_template("researcher", "research_planning")
-            prompt = format_prompt(
-                template,
-                topic=topic,
-                context=json.dumps(context, indent=2)
-            )
-            
-            # Generate plan
-            config = get_config()
-            plan = await generate_structured_output(
-                prompt=prompt,
-                system_prompt="You are a research strategist planning comprehensive research.",
-                temperature=0.5,
-                provider=config.llm.provider,
-                model=config.llm.model
-            )
-            
-            self.logger.info(f"Generated research plan with {len(plan.get('arxiv_queries', []))} ArXiv queries")
-            return plan
-            
-        except Exception as e:
-            self.logger.error(f"Failed to generate research plan: {e}", exc_info=True)
-            return None
+
     
-    async def gather_sources(self, topic: str, research_plan: Dict[str, Any]) -> List[Dict[str, Any]]:
+    async def gather_sources(self, topic: str) -> List[Dict[str, Any]]:
         """
-        Gather sources based on research plan.
+        Gather sources directly from topic.
         
         Args:
             topic: Research topic
-            research_plan: Research plan with queries
             
         Returns:
             List of sources
@@ -221,8 +167,7 @@ class ResearcherAgent(BaseAgent):
         sources = []
         
         # Gather from ArXiv
-        arxiv_queries = research_plan.get('arxiv_queries', [topic])
-        for query in arxiv_queries[:3]:  # Limit queries
+        for query in [topic]:  # Limit queries
             papers = await self.arxiv_client.search_papers(query, max_results=5)
             for paper in papers:
                 sources.append({
@@ -254,53 +199,12 @@ class ResearcherAgent(BaseAgent):
         self.logger.info(f"Gathered {len(sources)} sources")
         return sources
     
-    async def extract_claims(self, source: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """
-        Extract claims from a source using LLM.
-        
-        Args:
-            source: Source data
-            
-        Returns:
-            List of extracted claims
-        """
-        try:
-            # Load prompt template
-            template = load_prompt_template("researcher", "claim_extraction")
-            prompt = format_prompt(
-                template,
-                source_name=source.get('source_name', 'Unknown'),
-                source_url=source.get('url', ''),
-                content=source.get('content', '')[:2000]  # Limit content length
-            )
-            
-            # Extract claims
-            config = get_config()
-            result = await generate_structured_output(
-                prompt=prompt,
-                system_prompt="You are a research analyst extracting key claims from sources.",
-                temperature=0.3,
-                provider=config.llm.provider,
-                model=config.llm.model
-            )
-            
-            # Add source information to each claim
-            claims = result.get('claims', [])
-            for claim in claims:
-                claim['source'] = source.get('source_name', 'Unknown')
-                claim['source_url'] = source.get('url', '')
-            
-            return claims
-            
-        except Exception as e:
-            self.logger.error(f"Failed to extract claims from source: {e}", exc_info=True)
-            return []
+
     
     async def synthesize_research(
         self,
         topic: str,
-        sources: List[Dict[str, Any]],
-        claims: List[Dict[str, Any]]
+        sources: List[Dict[str, Any]]
     ) -> Optional[Dict[str, Any]]:
         """
         Synthesize research findings using LLM.
@@ -308,7 +212,6 @@ class ResearcherAgent(BaseAgent):
         Args:
             topic: Research topic
             sources: List of sources
-            claims: List of extracted claims
             
         Returns:
             Synthesis results or None if failed
@@ -320,7 +223,8 @@ class ResearcherAgent(BaseAgent):
                 sources_summary.append({
                     'title': source.get('title', ''),
                     'type': source.get('type', ''),
-                    'url': source.get('url', '')
+                    'url': source.get('url', ''),
+                    'content': source.get('content', '')[:3000]
                 })
             
             # Create synthesis prompt

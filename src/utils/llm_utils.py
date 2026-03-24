@@ -440,11 +440,35 @@ Topic: {topic}
 Sources:
 {sources}
 
-Extract key claims, supporting evidence, and citations. Structure your response as JSON with:
-- main_claims: list of strings
-- evidence: list of objects with {claim, source, credibility}
-- open_questions: list of strings
-- summary: string
+Create a comprehensive research summary that:
+1. Identifies main themes and findings
+2. Notes areas of consensus and disagreement
+3. Highlights the most credible claims
+4. Identifies gaps in current knowledge
+
+Return JSON:
+```json
+{
+  "summary": "2-3 paragraph synthesis",
+  "main_findings": [
+    {
+      "finding": "Key finding",
+      "support_level": "strong/moderate/weak",
+      "sources": ["source1", "source2"]
+    }
+  ],
+  "consensus_areas": ["area1", "area2"],
+  "disagreements": ["disagreement1"],
+  "open_questions": ["question1", "question2"],
+  "recommended_citations": [
+    {
+      "claim": "Claim to cite",
+      "citation": "Formatted citation",
+      "url": "source url"
+    }
+  ]
+}
+```
 
 Respond with ONLY the JSON object."""
     
