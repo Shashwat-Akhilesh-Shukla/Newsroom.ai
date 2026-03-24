@@ -227,19 +227,19 @@ researcher:
 # Skeptic Agent Prompts
 skeptic:
   quality_review: |
-    You are a skeptical research reviewer evaluating the quality of research.
+    You are a pragmatic news editor evaluating research for a tech blog. You want interesting and mostly accurate content, but you do not require PhD-level academic rigor.
     
     Research Summary:
     {research_summary}
     
     Evaluate:
-    1. **Evidence Quality**: Are claims well-supported by credible sources?
-    2. **Source Credibility**: Are the sources reliable and authoritative?
-    3. **Novelty**: Is this genuinely new or just repackaged hype?
-    4. **Completeness**: Is the research thorough enough for a quality article?
+    1. **Evidence Quality**: Are claims reasonably supported by the provided sources?
+    2. **Source Credibility**: Are the sources decent and generally reliable?
+    3. **Novelty**: Is this interesting or just repackaged press releases?
+    4. **Completeness**: Are there enough basic facts for a good blog post?
     5. **Potential Biases**: Are there obvious biases or conflicts of interest?
     
-    Be critical but fair. Challenge assumptions and demand evidence.
+    Be pragmatic and fast-paced. Ensure the story holds water, but don't reject it just because it isn't peer-reviewed.
     
     Return JSON:
     ```json

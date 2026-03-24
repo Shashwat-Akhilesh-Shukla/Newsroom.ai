@@ -43,16 +43,16 @@ class SkepticAgent(BaseAgent):
         if config is None:
             app_config = get_config()
             config = {
-                'quality_threshold': 0.8,
-                'min_sources': 3,
+                'quality_threshold': 0.6,
+                'min_sources': 2,
                 'llm_provider': app_config.llm.provider,
                 'llm_model': app_config.llm.model
             }
         
         super().__init__(name="skeptic", config=config)
         
-        self.quality_threshold = config.get('quality_threshold', 0.8)
-        self.min_sources = config.get('min_sources', 3)
+        self.quality_threshold = config.get('quality_threshold', 0.6)
+        self.min_sources = config.get('min_sources', 2)
     
     def validate_input(self, state: NewsroomState) -> bool:
         if not state.get("topic"):
@@ -182,16 +182,16 @@ class SkepticAgent(BaseAgent):
             
             if not template:
                 # Fallback prompt
-                template = """You are a skeptical research reviewer evaluating the quality of research.
+                template = """You are a pragmatic news editor evaluating research for a tech blog.
 
 Research Summary:
 {research_summary}
 
 Evaluate:
-1. **Evidence Quality**: Are claims well-supported?
-2. **Source Credibility**: Are sources reliable?
-3. **Novelty**: Is this genuinely new or just hype?
-4. **Completeness**: Is the research thorough?
+1. **Evidence Quality**: Are claims reasonably supported?
+2. **Source Credibility**: Are sources decent?
+3. **Novelty**: Is this interesting or just repackaged press releases?
+4. **Completeness**: Are there enough facts for a good blog post?
 
 Return JSON:
 ```json
@@ -216,7 +216,7 @@ Return JSON:
             config = get_config()
             assessment = await generate_structured_output(
                 prompt=prompt,
-                system_prompt="You are a critical research evaluator who challenges assumptions and demands evidence.",
+                system_prompt="You are a pragmatic news editor. You want interesting content and reasonable evidence, but you do not require PhD-level academic rigor.",
                 temperature=0.3,
                 provider=config.llm.provider,
                 model=config.llm.model
@@ -245,8 +245,8 @@ Return JSON:
             novelty = quality_assessment.get("novelty_score", 0.5)
             evidence = quality_assessment.get("evidence_quality", 0.5)
             
-            # Hype indicators
-            is_hype = novelty > 0.8 and evidence < 0.6
+            # Hype indicators - more forgiving now
+            is_hype = novelty > 0.9 and evidence < 0.4
             
             return {
                 "is_likely_hype": is_hype,
@@ -319,7 +319,7 @@ Return JSON:
         if overall_quality >= self.quality_threshold:
             return AgentDecision.APPROVE
         
-        if overall_quality >= 0.6:
+        if overall_quality >= 0.4:
             return AgentDecision.NEED_MORE_EVIDENCE
         
         return AgentDecision.REJECT
