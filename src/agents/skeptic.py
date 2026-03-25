@@ -101,7 +101,7 @@ class SkepticAgent(BaseAgent):
         evidence_check = self.validate_evidence(state)
         
         # Step 4: Make decision
-        decision = self.make_decision(quality_assessment, hype_check, evidence_check)
+        decision = self.make_decision(state, quality_assessment, hype_check, evidence_check)
         
         # Step 5: Generate feedback
         feedback = self.generate_feedback(quality_assessment, hype_check, evidence_check, decision)
@@ -290,6 +290,7 @@ Return JSON:
     
     def make_decision(
         self,
+        state: NewsroomState,
         quality_assessment: Dict[str, Any],
         hype_check: Dict[str, Any],
         evidence_check: Dict[str, Any]
@@ -316,7 +317,8 @@ Return JSON:
         if not has_enough_sources:
             return AgentDecision.NEED_MORE_EVIDENCE
         
-        if overall_quality >= self.quality_threshold:
+        threshold = state.get("skeptic_threshold_override") or self.quality_threshold
+        if overall_quality >= threshold:
             return AgentDecision.APPROVE
         
         if overall_quality >= 0.4:

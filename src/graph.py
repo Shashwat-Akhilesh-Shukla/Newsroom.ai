@@ -18,6 +18,7 @@ from .agents.skeptic import SkepticAgent
 from .agents.writer import WriterAgent
 from .agents.editor import EditorAgent
 from .agents.publisher import PublisherAgent
+from .agents.manager import ManagerAgent
 
 logger = logging.getLogger(__name__)
 
@@ -29,6 +30,7 @@ skeptic_agent = SkepticAgent()
 writer_agent = WriterAgent()
 editor_agent = EditorAgent()
 publisher_agent = PublisherAgent()
+manager_agent = ManagerAgent()
 
 
 def create_newsroom_workflow() -> StateGraph:
@@ -65,7 +67,9 @@ def create_newsroom_workflow() -> StateGraph:
         route_researcher,
         {
             "skeptic": "skeptic",
-            "researcher": "researcher"  # Retry when 0 notes produced
+            "researcher": "researcher",  # Retry when 0 notes produced
+            "writer": "writer",          # Forced timeout bypass
+            "END": END
         }
     )
     
@@ -75,7 +79,8 @@ def create_newsroom_workflow() -> StateGraph:
         {
             "writer": "writer",
             "researcher": "researcher",  # Need more evidence
-            "scout": "scout"  # Rejected, find new topic
+            "scout": "scout",            # Rejected, find new topic
+            "END": END
         }
     )
     
@@ -83,7 +88,8 @@ def create_newsroom_workflow() -> StateGraph:
         "writer",
         route_writer,
         {
-            "editor": "editor"
+            "editor": "editor",
+            "END": END
         }
     )
     
@@ -92,8 +98,9 @@ def create_newsroom_workflow() -> StateGraph:
         route_editor,
         {
             "publisher": "publisher",
-            "writer": "writer",  # Rewrite loop
-            "researcher": "researcher"  # Fact-check
+            "writer": "writer",          # Rewrite loop
+            "researcher": "researcher",  # Fact-check
+            "END": END
         }
     )
     
@@ -130,10 +137,13 @@ def route_scout(state: NewsroomState) -> Literal["researcher", "scout", "END"]:
     Returns:
         Next node name
     """
+    override = manager_agent.evaluate_routing("scout", state)
+    if override:
+        return override
     return scout_agent.get_routing_decision(state)
 
 
-def route_researcher(state: NewsroomState) -> Literal["skeptic", "researcher"]:
+def route_researcher(state: NewsroomState) -> Literal["skeptic", "researcher", "writer", "END"]:
     """
     Route from Researcher agent.
 
@@ -143,10 +153,13 @@ def route_researcher(state: NewsroomState) -> Literal["skeptic", "researcher"]:
     Returns:
         'skeptic' normally, 'researcher' to retry when 0 notes produced
     """
+    override = manager_agent.evaluate_routing("researcher", state)
+    if override:
+        return override
     return researcher_agent.get_routing_decision(state)
 
 
-def route_skeptic(state: NewsroomState) -> Literal["writer", "researcher", "scout"]:
+def route_skeptic(state: NewsroomState) -> Literal["writer", "researcher", "scout", "END"]:
     """
     Route from Skeptic agent.
     
@@ -156,10 +169,13 @@ def route_skeptic(state: NewsroomState) -> Literal["writer", "researcher", "scou
     Returns:
         Next node name
     """
+    override = manager_agent.evaluate_routing("skeptic", state)
+    if override:
+        return override
     return skeptic_agent.get_routing_decision(state)
 
 
-def route_writer(state: NewsroomState) -> Literal["editor"]:
+def route_writer(state: NewsroomState) -> Literal["editor", "END"]:
     """
     Route from Writer agent.
     
@@ -169,10 +185,13 @@ def route_writer(state: NewsroomState) -> Literal["editor"]:
     Returns:
         Next node name (always editor)
     """
+    override = manager_agent.evaluate_routing("writer", state)
+    if override:
+        return override
     return writer_agent.get_routing_decision(state)
 
 
-def route_editor(state: NewsroomState) -> Literal["publisher", "writer", "researcher"]:
+def route_editor(state: NewsroomState) -> Literal["publisher", "writer", "researcher", "END"]:
     """
     Route from Editor agent.
     
@@ -182,10 +201,13 @@ def route_editor(state: NewsroomState) -> Literal["publisher", "writer", "resear
     Returns:
         Next node name
     """
+    override = manager_agent.evaluate_routing("editor", state)
+    if override:
+        return override
     return editor_agent.get_routing_decision(state)
 
 
-def route_publisher(state: NewsroomState) -> Literal["END_PUBLISHED", "END_KILLED", "editor"]:
+def route_publisher(state: NewsroomState) -> Literal["END_PUBLISHED", "END_KILLED", "editor", "END"]:
     """
     Route from Publisher agent.
 
@@ -193,6 +215,9 @@ def route_publisher(state: NewsroomState) -> Literal["END_PUBLISHED", "END_KILLE
         'END_PUBLISHED' on success, 'END_KILLED' on editorial veto,
         'editor' on soft publishing failure
     """
+    override = manager_agent.evaluate_routing("publisher", state)
+    if override:
+        return override
     return publisher_agent.get_routing_decision(state)
 
 

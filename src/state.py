@@ -80,6 +80,8 @@ class NewsroomState(TypedDict):
     current_agent: str
     workflow_stage: str
     iteration_counts: Dict[str, int]
+    budget_manager_decision: Optional[str]
+    skeptic_threshold_override: Optional[float]
     
     # Timestamps
     created_at: str
@@ -136,6 +138,8 @@ def create_initial_state(topic: Optional[str] = None) -> NewsroomState:
             "research_loops": 0,
             "revision_loops": 0,
         },
+        budget_manager_decision=None,
+        skeptic_threshold_override=None,
         
         # Timestamps
         created_at=now,
