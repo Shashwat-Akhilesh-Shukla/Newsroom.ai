@@ -23,6 +23,7 @@ from src.graph import run_newsroom, stream_newsroom
 from src.state import create_initial_state
 from src.utils.config import get_config
 from src.observability import setup_tracing
+from src.storage.memory import SystemMemory
 
 # Configure logging
 logging.basicConfig(
@@ -117,6 +118,16 @@ async def main():
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 output_file = output_dir / f"article_{timestamp}.md"
                 save_article(final_state, str(output_file))
+                
+            # Log successful memory
+            try:
+                memory = SystemMemory()
+                memory.mark_topic_published(
+                    final_state.get('topic', 'Unknown'),
+                    metadata={"word_count": len(final_state.get('draft', '').split())}
+                )
+            except Exception as e:
+                logger.error(f"Failed to record memory publication: {e}")
         
         else:
             logger.info("❌ Status: NOT PUBLISHED")
@@ -132,6 +143,20 @@ async def main():
                 logger.info("\n📋 Editor Comments:")
                 for comment in final_state["editor_comments"][-2:]:
                     logger.info(f"   {comment}")
+            
+            # Log rejection memory
+            try:
+                memory = SystemMemory()
+                topic = final_state.get('topic')
+                if topic:
+                    reason = "Workflow failed."
+                    if final_state.get("critic_feedback"):
+                        reason = str(final_state["critic_feedback"][-1])
+                    elif final_state.get("editor_comments"):
+                        reason = str(final_state["editor_comments"][-1])
+                    memory.mark_topic_rejected(topic, reason)
+            except Exception as e:
+                logger.error(f"Failed to record memory rejection: {e}")
         
         logger.info("=" * 70)
         

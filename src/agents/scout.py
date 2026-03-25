@@ -15,6 +15,7 @@ from ..state import NewsroomState, AgentDecision, increment_iteration, check_max
 from ..utils.api_clients import TrendAggregator
 from ..utils.llm_utils import generate_structured_output, create_topic_selection_batch_prompt
 from ..utils.config import get_config
+from ..storage.memory import SystemMemory
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,7 @@ class ScoutAgent(BaseAgent):
 
         # Initialize trend aggregator (all sources are free, no API keys needed)
         self.aggregator = TrendAggregator()
+        self.memory = SystemMemory()
         
         self.confidence_threshold = config.get('confidence_threshold', 0.7)
         self.max_iterations = config.get('max_iterations', 3)
@@ -101,8 +103,19 @@ class ScoutAgent(BaseAgent):
         # Step 2: Aggregate and deduplicate topics
         aggregated_topics = self.aggregate_topics(all_trends)
         
+        # Filter topics against system memory
+        filtered_topics = []
+        for topic_dict in aggregated_topics:
+            title = topic_dict.get('title', '')
+            if not self.memory.is_topic_processed(title):
+                filtered_topics.append(topic_dict)
+            else:
+                self.logger.debug(f"Skipping topic '{title}': Already in memory history.")
+        
+        aggregated_topics = filtered_topics
+        
         if not aggregated_topics:
-            self.logger.warning("No topics after aggregation")
+            self.logger.warning("No new topics after memory filtration")
             state["confidence"] = 0.0
             return state
         
@@ -243,8 +256,9 @@ class ScoutAgent(BaseAgent):
             Dictionary containing 'topic' and 'analysis' for the selected best topic, or None
         """
         try:
-            # Create batch analysis prompt
-            prompt = create_topic_selection_batch_prompt(topics)
+            # Create batch analysis prompt with memory context injected
+            memory_ctx = self.memory.get_scout_memory_context()
+            prompt = create_topic_selection_batch_prompt(topics, memory_context=memory_ctx)
             
             # Get LLM analysis
             config = get_config()

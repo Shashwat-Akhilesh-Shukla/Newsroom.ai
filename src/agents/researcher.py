@@ -21,6 +21,7 @@ from ..utils.llm_utils import (
     format_prompt
 )
 from ..utils.config import get_config
+from ..storage.memory import SystemMemory
 
 logger = logging.getLogger(__name__)
 
@@ -57,6 +58,7 @@ class ResearcherAgent(BaseAgent):
         # Initialize API clients
         self.hn_client = HackerNewsClient()
         self.arxiv_client = ArXivClient()
+        self.memory = SystemMemory()
         
         self.max_sources = config.get('max_sources', 10)
     
@@ -170,11 +172,16 @@ class ResearcherAgent(BaseAgent):
         for query in [topic]:  # Limit queries
             papers = await self.arxiv_client.search_papers(query, max_results=5)
             for paper in papers:
+                url = paper.get('url', '')
+                if self.memory.is_source_used(url):
+                    self.logger.debug(f"Skipping ArXiv source {url} (already in memory)")
+                    continue
+                    
                 sources.append({
                     'type': 'arxiv',
                     'title': paper.get('title', ''),
                     'content': paper.get('summary', ''),
-                    'url': paper.get('url', ''),
+                    'url': url,
                     'authors': paper.get('authors', []),
                     'published': paper.get('published', ''),
                     'source_name': 'ArXiv'
@@ -183,18 +190,29 @@ class ResearcherAgent(BaseAgent):
         # Gather from Hacker News discussions
         hn_topics = await self.hn_client.get_trending_topics(limit=20)
         for hn_topic in hn_topics:
+            url = hn_topic.get('url', '')
+            if self.memory.is_source_used(url):
+                self.logger.debug(f"Skipping HN source {url} (already in memory)")
+                continue
+
             # Check if topic is relevant
             if self._is_relevant(topic, hn_topic.get('title', '')):
                 sources.append({
                     'type': 'hackernews',
                     'title': hn_topic.get('title', ''),
                     'content': f"Score: {hn_topic.get('score', 0)}, Comments: {hn_topic.get('comments', 0)}",
-                    'url': hn_topic.get('url', ''),
+                    'url': url,
                     'source_name': 'Hacker News'
                 })
         
         # Limit total sources
         sources = sources[:self.max_sources]
+        
+        # Add retained sources to memory
+        for source in sources:
+            source_url = source.get('url')
+            if source_url:
+                self.memory.add_used_source(source_url)
         
         self.logger.info(f"Gathered {len(sources)} sources")
         return sources

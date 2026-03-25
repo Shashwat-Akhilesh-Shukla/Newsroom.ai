@@ -17,6 +17,7 @@ from ..utils.llm_utils import (
     format_prompt
 )
 from ..utils.config import get_config
+from ..storage.memory import SystemMemory
 
 logger = logging.getLogger(__name__)
 
@@ -50,6 +51,7 @@ class SkepticAgent(BaseAgent):
             }
         
         super().__init__(name="skeptic", config=config)
+        self.memory = SystemMemory()
         
         self.quality_threshold = config.get('quality_threshold', 0.6)
         self.min_sources = config.get('min_sources', 2)
@@ -102,6 +104,12 @@ class SkepticAgent(BaseAgent):
         
         # Step 4: Make decision
         decision = self.make_decision(state, quality_assessment, hype_check, evidence_check)
+        
+        # Store rejection reason into memory
+        if decision == AgentDecision.REJECT:
+            concerns = quality_assessment.get("concerns", [])
+            primary_reason = concerns[0] if concerns else "Did not meet quality threshold."
+            self.memory.add_skeptic_reason(primary_reason)
         
         # Step 5: Generate feedback
         feedback = self.generate_feedback(quality_assessment, hype_check, evidence_check, decision)
@@ -209,7 +217,8 @@ Return JSON:
             
             prompt = format_prompt(
                 template,
-                research_summary=json.dumps(research_summary, indent=2)
+                research_summary=json.dumps(research_summary, indent=2),
+                common_rejections="\n".join([f"- {r}" for r in self.memory.get_common_rejections(limit=5)]) or "None yet."
             )
             
             # Get LLM assessment

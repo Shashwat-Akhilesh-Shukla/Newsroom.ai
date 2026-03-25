@@ -93,6 +93,10 @@ scout:
     Topics Data:
     {topics_data}
 
+    System Memory Context:
+    Below is a breakdown of what the newsroom has already published successfully, or what has been rejected. Use this memory context to understand what type of articles perform well and what to avoid. Do not select topics that have already been listed!
+    {memory_context}
+
     Consider:
     1. **Relevance**: Is this topic relevant to a technical audience interested in AI, software engineering, or tech trends?
     2. **Novelty**: Is this genuinely new or a fresh perspective on an existing topic?
@@ -231,6 +235,10 @@ skeptic:
     
     Research Summary:
     {research_summary}
+    
+    System Memory Context:
+    Below are some of the most common reasons why you've rejected topics in the past. Keep a strong eye out to prevent history from repeating itself.
+    {common_rejections}
     
     Evaluate:
     1. **Evidence Quality**: Are claims reasonably supported by the provided sources?

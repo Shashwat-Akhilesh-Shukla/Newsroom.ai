@@ -384,12 +384,13 @@ Respond with ONLY the JSON object, no additional text."""
     return format_prompt(template, topic_data=json.dumps(topic_data, indent=2))
 
 
-def create_topic_selection_batch_prompt(topics_data: List[Dict[str, Any]]) -> str:
+def create_topic_selection_batch_prompt(topics_data: List[Dict[str, Any]], memory_context: str = "") -> str:
     """
     Create a prompt for selecting the best topic from a batch.
     
     Args:
         topics_data: List of topic data from various sources
+        memory_context: Information about past successful and rejected topics
         
     Returns:
         Formatted prompt
@@ -416,7 +417,7 @@ Provide your analysis in JSON format with the following fields:
 
 Respond with ONLY the JSON object, no additional text."""
     
-    return format_prompt(template, topics_data=json.dumps(topics_data, indent=2))
+    return format_prompt(template, topics_data=json.dumps(topics_data, indent=2), memory_context=memory_context)
 
 def create_research_synthesis_prompt(topic: str, sources: List[Dict[str, Any]]) -> str:
     """
