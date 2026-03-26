@@ -8,8 +8,12 @@ scout:
     Topic Data:
     {topic_data}
     
+    STRICT TOPIC RULES:
+    - ALLOWED TOPICS: AI, Machine Learning, Robotics, Cybersecurity, Software Engineering, Semiconductors, Tech Policy, Startups, Open Source, Big Tech.
+    - PROHIBITED TOPICS: No political topics. Any political topic must be immediately rejected.
+    
     Consider:
-    1. **Relevance**: Is this topic relevant to a technical audience interested in AI, software engineering, or tech trends?
+    1. **Relevance**: Is this topic strictly within the ALLOWED TOPICS list and completely avoids PROHIBITED TOPICS?
     2. **Novelty**: Is this genuinely new or a fresh perspective on an existing topic?
     3. **Technical Depth**: Does this topic have enough technical substance for a deep-dive article?
     4. **Audience Interest**: Based on engagement metrics, is there genuine interest in this topic?
@@ -97,8 +101,12 @@ scout:
     Below is a breakdown of what the newsroom has already published successfully, or what has been rejected. Use this memory context to understand what type of articles perform well and what to avoid. Do not select topics that have already been listed!
     {memory_context}
 
+    STRICT TOPIC RULES:
+    - ALLOWED TOPICS: AI, Machine Learning, Robotics, Cybersecurity, Software Engineering, Semiconductors, Tech Policy, Startups, Open Source, Big Tech.
+    - PROHIBITED TOPICS: No political topics. Any political topic must be immediately rejected.
+
     Consider:
-    1. **Relevance**: Is this topic relevant to a technical audience interested in AI, software engineering, or tech trends?
+    1. **Relevance**: Is this topic strictly within the ALLOWED TOPICS list and completely avoids PROHIBITED TOPICS?
     2. **Novelty**: Is this genuinely new or a fresh perspective on an existing topic?
     3. **Technical Depth**: Does this topic have enough technical substance for a deep-dive article?
     4. **Audience Interest**: Based on engagement metrics, is there genuine interest in this topic?
