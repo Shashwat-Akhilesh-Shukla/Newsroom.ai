@@ -421,6 +421,17 @@ class DuckDuckGoNewsClient:
                     })
         return results
 
+    async def search_news(self, query: str) -> List[Dict[str, Any]]:
+        """Public method to search news by query."""
+        results = await self._search_news(query)
+        # Deduplicate
+        seen: Dict[str, Dict[str, Any]] = {}
+        for item in results:
+            url = item.get('url', '')
+            if url and url not in seen:
+                seen[url] = item
+        return list(seen.values())
+
     async def get_trending_topics(self) -> List[Dict[str, Any]]:
         tasks = [self._search_news(query) for query in self.SEARCH_QUERIES]
         semaphore = asyncio.Semaphore(2)

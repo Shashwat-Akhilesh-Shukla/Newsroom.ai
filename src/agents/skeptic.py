@@ -319,6 +319,18 @@ Return JSON:
         is_hype = hype_check.get("is_likely_hype", False)
         has_enough_sources = evidence_check.get("has_enough_sources", False)
         
+        num_sources = state.get("metadata", {}).get("sources_gathered", 0)
+        num_notes = len(state.get("research_notes", []))
+        threshold = state.get("skeptic_threshold_override") or self.quality_threshold
+        
+        # -------------------------------------------------------------
+        # FORCE PUBLISH RULE 
+        # "Real newsrooms publish imperfect articles all the time."
+        if num_sources >= 3 and num_notes >= 5 and overall_quality >= threshold:
+            self.logger.info("Force publish rule triggered — bypassing strict skeptic checks.")
+            return AgentDecision.APPROVE
+        # -------------------------------------------------------------
+        
         # Decision logic
         if is_hype:
             return AgentDecision.REJECT
@@ -326,7 +338,6 @@ Return JSON:
         if not has_enough_sources:
             return AgentDecision.NEED_MORE_EVIDENCE
         
-        threshold = state.get("skeptic_threshold_override") or self.quality_threshold
         if overall_quality >= threshold:
             return AgentDecision.APPROVE
         

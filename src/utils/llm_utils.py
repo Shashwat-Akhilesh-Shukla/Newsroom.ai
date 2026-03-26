@@ -419,6 +419,48 @@ Respond with ONLY the JSON object, no additional text."""
     
     return format_prompt(template, topics_data=json.dumps(topics_data, indent=2), memory_context=memory_context)
 
+def create_research_planning_prompt(topic: str, context: str = "") -> str:
+    """
+    Create a prompt for generating a research plan.
+    
+    Args:
+        topic: Research topic
+        context: Initial context
+        
+    Returns:
+        Formatted prompt
+    """
+    template = load_prompt_template("researcher", "research_planning")
+    
+    if not template:
+        # Fallback template
+        template = """You are a research strategist planning deep research on a topic.
+        
+Topic: {topic}
+Initial Context: {context}
+
+Generate a research plan with extracted keywords and specific search queries for different sources.
+Source Types and Query Types:
+- News: What happened
+- Reddit: Discussion / Use cases
+- HackerNews: Technical discussion
+- ArXiv: Research papers
+
+Return JSON:
+```json
+{
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "news_queries": ["query1", "query2"],
+  "reddit_queries": ["query1", "query2"],
+  "hackernews_queries": ["query1", "query2"],
+  "arxiv_queries": ["query1", "query2"],
+  "focus_areas": ["area1", "area2"]
+}
+```"""
+    
+    return format_prompt(template, topic=topic, context=context)
+
+
 def create_research_synthesis_prompt(topic: str, sources: List[Dict[str, Any]]) -> str:
     """
     Create a prompt for synthesizing research.

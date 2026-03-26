@@ -140,15 +140,22 @@ researcher:
     Topic: {topic}
     Initial Context: {context}
     
-    Generate a research plan with specific search queries for different sources:
+    Generate a research plan with extracted keywords and specific search queries for different sources.
+    Source Types and Query Types:
+    - News: What happened
+    - Reddit: Discussion / Use cases
+    - HackerNews: Technical discussion
+    - ArXiv: Research papers
     
     Return JSON:
     ```json
     {
+      "keywords": ["keyword1", "keyword2", "keyword3"],
+      "news_queries": ["query1", "query2"],
+      "reddit_queries": ["query1", "query2"],
+      "hackernews_queries": ["query1", "query2"],
       "arxiv_queries": ["query1", "query2"],
-      "web_queries": ["query1", "query2"],
-      "focus_areas": ["area1", "area2"],
-      "key_questions": ["question1", "question2"]
+      "focus_areas": ["area1", "area2"]
     }
     ```
 
@@ -184,33 +191,31 @@ researcher:
     ```
 
   research_synthesis: |
-    Synthesize research findings from multiple sources into a coherent research summary.
+    Synthesize research findings from multiple sources into structured research notes.
     
     Topic: {topic}
     
     Sources:
     {sources}
     
-    Create a comprehensive research summary that:
-    1. Identifies main themes and findings
-    2. Notes areas of consensus and disagreement
-    3. Highlights the most credible claims
-    4. Identifies gaps in current knowledge
+    Create comprehensive structured research notes with these exact categories:
+    1. FACTS: What happened, who did it, when, key numbers
+    2. TECHNICAL: How it works, technology involved, challenges
+    3. CONTEXT: Why it matters, use cases, industry impact
+    4. RESEARCH: Related papers, algorithms, similar systems
     
     Return JSON:
     ```json
     {
       "summary": "2-3 paragraph synthesis",
-      "main_findings": [
+      "structured_notes": [
         {
-          "finding": "Key finding",
+          "category": "FACTS|TECHNICAL|CONTEXT|RESEARCH",
+          "claim": "Key finding/point",
           "support_level": "strong/moderate/weak",
-          "sources": ["source1", "source2"]
+          "sources": ["sourceurl1", "sourceurl2"]
         }
       ],
-      "consensus_areas": ["area1", "area2"],
-      "disagreements": ["disagreement1"],
-      "open_questions": ["question1", "question2"],
       "recommended_citations": [
         {
           "claim": "Claim to cite",

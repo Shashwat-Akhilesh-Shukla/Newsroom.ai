@@ -13,10 +13,11 @@ from datetime import datetime
 
 from .base import BaseAgent
 from ..state import NewsroomState, ResearchNote, add_research_note
-from ..utils.api_clients import HackerNewsClient, ArXivClient
+from ..utils.api_clients import HackerNewsClient, ArXivClient, DuckDuckGoNewsClient
 from ..utils.llm_utils import (
     generate_structured_output,
     create_research_synthesis_prompt,
+    create_research_planning_prompt,
     load_prompt_template,
     format_prompt
 )
@@ -58,6 +59,7 @@ class ResearcherAgent(BaseAgent):
         # Initialize API clients
         self.hn_client = HackerNewsClient()
         self.arxiv_client = ArXivClient()
+        self.ddg_client = DuckDuckGoNewsClient()
         self.memory = SystemMemory()
         
         self.max_sources = config.get('max_sources', 10)
@@ -91,28 +93,34 @@ class ResearcherAgent(BaseAgent):
         topic = state["topic"]
         self.logger.info(f"Researcher agent starting research on: '{topic}'")
         
-        # Step 1: Gather information from sources
-        sources = await self.gather_sources(topic)
+        # Step 1: Generate Research Plan (Keywords and Queries)
+        research_plan = await self.generate_research_plan(topic)
+        keywords = research_plan.get("keywords", topic.split())
+
+        # Step 2: Gather information from sources
+        sources = await self.gather_sources(topic, research_plan, keywords)
         
-        if not sources:
-            self.logger.warning("No sources gathered")
+        if not sources or len(sources) < 2:
+            self.logger.warning(f"Not enough relevant sources gathered ({len(sources)}). Need at least 2.")
+            # We enforce minimum 2 relevant sources. If <2, we clear notes to trigger a retry.
+            state["research_notes"] = []
             return state
         
-        # Step 2: Synthesize research
+        # Step 3: Synthesize research
         synthesis = await self.synthesize_research(topic, sources)
         
         if not synthesis:
             self.logger.error("Failed to synthesize research")
             return state
         
-        # Step 3: Update state with research findings
+        # Step 4: Update state with structured research notes
         state["research_summary"] = synthesis.get('summary', '')
         
-        # Add research notes
-        for finding in synthesis.get('main_findings', []):
+        # Add structured notes
+        for finding in synthesis.get('structured_notes', []):
             state = add_research_note(
                 state,
-                claim=finding.get('finding', ''),
+                claim=f"[{finding.get('category', 'FACTS')}] {finding.get('claim', '')}",
                 citation=', '.join(finding.get('sources', [])),
                 source_url='',  # Will be populated from sources
                 credibility_score=self._map_support_level(finding.get('support_level', 'weak'))
@@ -156,55 +164,98 @@ class ResearcherAgent(BaseAgent):
     
 
     
-    async def gather_sources(self, topic: str) -> List[Dict[str, Any]]:
+    async def generate_research_plan(self, topic: str) -> Dict[str, Any]:
+        """Generate keywords and search queries."""
+        try:
+            prompt = create_research_planning_prompt(topic)
+            config = get_config()
+            plan = await generate_structured_output(
+                prompt=prompt,
+                system_prompt="You are a research strategist planning deep research on a topic.",
+                temperature=0.3,
+                provider=config.llm.provider,
+                model=config.llm.model
+            )
+            self.logger.info(f"Generated research plan with {len(plan.get('keywords', []))} keywords")
+            return plan
+        except Exception as e:
+            self.logger.error(f"Failed to generate research plan: {e}")
+            return {"keywords": topic.split()}
+
+    async def gather_sources(self, topic: str, research_plan: Dict[str, Any], keywords: List[str]) -> List[Dict[str, Any]]:
         """
-        Gather sources directly from topic.
-        
-        Args:
-            topic: Research topic
-            
-        Returns:
-            List of sources
+        Gather sources directly using generated queries and filter by keywords.
         """
         sources = []
+        all_results = []
         
         # Gather from ArXiv
-        for query in [topic]:  # Limit queries
-            papers = await self.arxiv_client.search_papers(query, max_results=5)
+        arxiv_queries = research_plan.get("arxiv_queries", [topic])
+        for query in arxiv_queries[:2]:
+            papers = await self.arxiv_client.search_papers(query, max_results=3)
             for paper in papers:
-                url = paper.get('url', '')
-                if self.memory.is_source_used(url):
-                    self.logger.debug(f"Skipping ArXiv source {url} (already in memory)")
-                    continue
-                    
-                sources.append({
+                all_results.append({
                     'type': 'arxiv',
                     'title': paper.get('title', ''),
                     'content': paper.get('summary', ''),
-                    'url': url,
-                    'authors': paper.get('authors', []),
-                    'published': paper.get('published', ''),
+                    'url': paper.get('url', ''),
                     'source_name': 'ArXiv'
                 })
-        
-        # Gather from Hacker News discussions
-        hn_topics = await self.hn_client.get_trending_topics(limit=20)
-        for hn_topic in hn_topics:
-            url = hn_topic.get('url', '')
-            if self.memory.is_source_used(url):
-                self.logger.debug(f"Skipping HN source {url} (already in memory)")
-                continue
 
-            # Check if topic is relevant
-            if self._is_relevant(topic, hn_topic.get('title', '')):
-                sources.append({
+        # Gather from DuckDuckGo News
+        news_queries = research_plan.get("news_queries", [topic])
+        for query in news_queries[:2]:
+            news_items = await self.ddg_client.search_news(query)
+            for item in news_items[:3]:
+                all_results.append({
+                    'type': 'news',
+                    'title': item.get('title', ''),
+                    'content': item.get('title', ''),
+                    'url': item.get('url', ''),
+                    'source_name': 'News'
+                })
+                
+        # Gather from Reddit via DDG
+        reddit_queries = research_plan.get("reddit_queries", [topic])
+        for query in reddit_queries[:2]:
+            reddit_items = await self.ddg_client.search_news(f"{query} site:reddit.com")
+            for item in reddit_items[:3]:
+                all_results.append({
+                    'type': 'reddit',
+                    'title': item.get('title', ''),
+                    'content': item.get('title', ''),
+                    'url': item.get('url', ''),
+                    'source_name': 'Reddit'
+                })
+
+        # Gather from HackerNews via DDG
+        hn_queries = research_plan.get("hackernews_queries", [topic])
+        for query in hn_queries[:2]:
+            hn_items = await self.ddg_client.search_news(f"{query} site:news.ycombinator.com")
+            for item in hn_items[:3]:
+                all_results.append({
                     'type': 'hackernews',
-                    'title': hn_topic.get('title', ''),
-                    'content': f"Score: {hn_topic.get('score', 0)}, Comments: {hn_topic.get('comments', 0)}",
-                    'url': url,
+                    'title': item.get('title', ''),
+                    'content': item.get('title', ''),
+                    'url': item.get('url', ''),
                     'source_name': 'Hacker News'
                 })
-        
+
+        # Filter sources by keyword relevance
+        for result in all_results:
+            url = result.get('url', '')
+            if not url or self.memory.is_source_used(url):
+                continue
+                
+            title_content = (result.get('title', '') + " " + result.get('content', '')).lower()
+            
+            # Count how many keywords match
+            match_count = sum(1 for kw in keywords if kw.lower() in title_content)
+            
+            # Minimum requirement: at least 1 keyword match
+            if match_count >= 1 or not keywords:
+                sources.append(result)
+
         # Limit total sources
         sources = sources[:self.max_sources]
         
@@ -214,7 +265,7 @@ class ResearcherAgent(BaseAgent):
             if source_url:
                 self.memory.add_used_source(source_url)
         
-        self.logger.info(f"Gathered {len(sources)} sources")
+        self.logger.info(f"Gathered {len(sources)} relevant sources after keyword filtering")
         return sources
     
 
@@ -258,7 +309,7 @@ class ResearcherAgent(BaseAgent):
                 model=config.llm.model
             )
             
-            self.logger.info(f"Synthesized research with {len(synthesis.get('main_findings', []))} findings")
+            self.logger.info(f"Synthesized research with {len(synthesis.get('structured_notes', []))} findings")
             return synthesis
             
         except Exception as e:
