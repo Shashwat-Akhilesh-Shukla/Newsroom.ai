@@ -326,9 +326,16 @@ Return JSON:
         # -------------------------------------------------------------
         # FORCE PUBLISH RULE 
         # "Real newsrooms publish imperfect articles all the time."
-        if num_sources >= 3 and num_notes >= 5 and overall_quality >= threshold:
-            self.logger.info("Force publish rule triggered — bypassing strict skeptic checks.")
-            return AgentDecision.APPROVE
+        revision_loops = len(state.get("critic_feedback", []))
+        if num_sources >= 3 and num_notes >= 5:
+            if overall_quality >= threshold:
+                return AgentDecision.APPROVE
+            elif revision_loops >= 1:
+                self.logger.info(f"Force publish rule triggered (revision {revision_loops}) — bypassing strict skeptic checks.")
+                return AgentDecision.APPROVE
+            else:
+                self.logger.info("First try failed strict quality, but meets minimum source/note count. Requesting improvement.")
+                return AgentDecision.NEED_MORE_EVIDENCE
         # -------------------------------------------------------------
         
         # Decision logic
