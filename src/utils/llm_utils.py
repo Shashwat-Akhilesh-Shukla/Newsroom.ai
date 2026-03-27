@@ -12,10 +12,33 @@ import os
 import json
 import logging
 import yaml
+import contextvars
 from typing import Optional, Dict, Any, List
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
+
+# ============================================================================
+# LLM Usage Tracking
+# ============================================================================
+
+llm_call_count_var = contextvars.ContextVar("llm_call_count", default=0)
+llm_prompt_tokens_var = contextvars.ContextVar("llm_prompt_tokens", default=0)
+llm_completion_tokens_var = contextvars.ContextVar("llm_completion_tokens", default=0)
+
+def reset_llm_metrics():
+    """Reset the LLM usage metrics for the current context."""
+    llm_call_count_var.set(0)
+    llm_prompt_tokens_var.set(0)
+    llm_completion_tokens_var.set(0)
+
+def get_llm_metrics() -> Dict[str, int]:
+    """Get the accumulated LLM metrics for the current context."""
+    return {
+        "call_count": llm_call_count_var.get(),
+        "prompt_tokens": llm_prompt_tokens_var.get(),
+        "completion_tokens": llm_completion_tokens_var.get(),
+    }
 
 
 # ============================================================================
@@ -142,6 +165,30 @@ async def generate_completion(
             invoke_kwargs["run_name"] = run_name
 
         response = await llm.ainvoke(messages, **invoke_kwargs)
+        
+        # Track metrics
+        llm_call_count_var.set(llm_call_count_var.get() + 1)
+        
+        input_tokens = 0
+        output_tokens = 0
+        
+        if hasattr(response, "usage_metadata") and response.usage_metadata:
+            usage = response.usage_metadata
+            input_tokens = usage.get("input_tokens", 0)
+            output_tokens = usage.get("output_tokens", 0)
+        elif hasattr(response, "response_metadata") and "token_usage" in response.response_metadata:
+            usage = response.response_metadata["token_usage"]
+            input_tokens = usage.get("prompt_tokens", 0)
+            output_tokens = usage.get("completion_tokens", 0)
+        else:
+            # Fallback to manual counting if not provided by provider
+            total_prompt = prompt + (system_prompt or "")
+            input_tokens = count_tokens(total_prompt, model)
+            output_tokens = count_tokens(response.content, model)
+            
+        llm_prompt_tokens_var.set(llm_prompt_tokens_var.get() + input_tokens)
+        llm_completion_tokens_var.set(llm_completion_tokens_var.get() + output_tokens)
+
         return response.content
 
     except Exception as e:

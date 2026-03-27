@@ -140,6 +140,10 @@ class BaseAgent(ABC):
         start_time = datetime.utcnow()
         langsmith_run_id: Optional[str] = None
 
+        # Reset LLM metrics contextvars for the upcoming agent process logic
+        from ..utils.llm_utils import reset_llm_metrics, get_llm_metrics
+        reset_llm_metrics()
+
         if _obs_available:
             # ----------------------------------------------------------------
             # Instrumented path — wrapped in a LangSmith span
@@ -199,6 +203,8 @@ class BaseAgent(ABC):
         duration = (end_time - start_time).total_seconds()
         self.logger.info(f"{self.name} completed in {duration:.2f}s → {next_agent}")
 
+        llm_usage = get_llm_metrics()
+
         if _obs_available:
             try:
                 metrics = collect_agent_metrics(
@@ -209,6 +215,9 @@ class BaseAgent(ABC):
                     routing_decision=next_agent,
                     confidence_score=updated_state.get("confidence", 0.0),
                     langsmith_run_id=langsmith_run_id,
+                    llm_call_count=llm_usage.get("call_count", 0),
+                    token_input=llm_usage.get("prompt_tokens", 0),
+                    token_output=llm_usage.get("completion_tokens", 0),
                 )
                 # Persist metrics inside state for downstream access
                 if "metrics" not in updated_state["metadata"]:
