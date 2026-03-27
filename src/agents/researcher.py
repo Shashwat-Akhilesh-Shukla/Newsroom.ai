@@ -242,11 +242,14 @@ class ResearcherAgent(BaseAgent):
                 })
 
         # Filter sources by keyword relevance
+        valid_sources = []
         for result in all_results:
             url = result.get('url', '')
-            if not url or self.memory.is_source_used(url):
-                continue
-                
+            if url and not self.memory.is_source_used(url):
+                valid_sources.append(result)
+        
+        relevant_sources = []
+        for result in valid_sources:
             title_content = (result.get('title', '') + " " + result.get('content', '')).lower()
             
             # Count how many keywords match
@@ -254,10 +257,14 @@ class ResearcherAgent(BaseAgent):
             
             # Minimum requirement: at least 1 keyword match
             if match_count >= 1 or not keywords:
-                sources.append(result)
+                relevant_sources.append(result)
+
+        if len(relevant_sources) < 2:
+            self.logger.warning("Relevance filter too strict — using top sources instead")
+            relevant_sources = valid_sources[:3]
 
         # Limit total sources
-        sources = sources[:self.max_sources]
+        sources = relevant_sources[:self.max_sources]
         
         # Add retained sources to memory
         for source in sources:
