@@ -2,7 +2,8 @@
   "rejected_topics": {
     "bernie sanders and aoc introduce bill to pause building of new datacenters | us news": "No research notes available — topic rejected",
     "pokémon go players spent ten years building a robot navigation system without knowing it": "**Decision: AgentDecision.REJECT**\n\nOverall Quality Score: 0.00\n\n\n**Concerns:**\n- The stated topic is completely unsupported by the provided research summary.\n- The research summary explicitly refutes the stated topic, indicating the sources do not contain information on Pokémon Go players building a robot navigation system.\n- The proposed topic is misleading and appears to be fabricated.\n\nSources: 4 (minimum: 2)",
-    "librarian 'gobsmacked' after school use ai to remove 200 books from shelves including orwell's 1984 and twilight": "No research notes available — topic rejected"
+    "librarian 'gobsmacked' after school use ai to remove 200 books from shelves including orwell's 1984 and twilight": "No research notes available — topic rejected",
+    "doj confirms fbi director kash patel’s personal email was hacked": "No research notes available — topic rejected"
   },
   "published_topics": {},
   "used_sources": {

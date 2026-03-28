@@ -35,14 +35,15 @@ This tension creates quality. It's messy. It's inefficient. **It works.**
 
 | Agent | Personality | Superpower | Can Say "No"? |
 |-------|-------------|------------|---------------|
-| 🔍 **Scout** | Trend hunter, always online | Discovers what's hot on Reddit, ArXiv, DuckDuckGo News, Google Trends | ✅ Loops until confident |
-| 📚 **Researcher** | Academic librarian | Deep research with proper citations | ❌ Neutral gatherer |
+| 🔍 **Scout** | Trend hunter, always online | Discovers strictly technical topics (no politics) | ✅ Loops until confident |
+| 📚 **Researcher** | Academic librarian | Deep research via keyword extraction & query filters | ❌ Neutral gatherer |
 | 🤔 **Skeptic** | The cynic in the room | Challenges hype: "Is this *actually* new?" | ✅ Can reject outright |
 | ✍️ **Writer** | Creative wordsmith | Turns research into compelling narratives | ❌ Follows orders |
 | 📝 **Editor** | Perfectionist, brutally honest | Catches logic holes and hallucinations | ✅ Forces rewrites |
 | 🚀 **Publisher** | Quality gatekeeper | SEO, formatting, duplicate checks, Reddit publishing | ✅ Final veto power |
+| 👑 **Manager** | Editor-in-Chief & Governor | Tracks budget (costs, time) and overrides routing dynamically | ✅ Can halt system |
 
-**The magic:** Three agents can block progress. This creates feedback loops that improve quality with each iteration.
+**The magic:** Four agents can block progress. This creates feedback loops that improve quality with each iteration, while the Manager ensures the system stays within budget.
 
 ---
 
@@ -72,6 +73,8 @@ Think of it like Git vs. a linear file system. Once you need branches and merges
 
 ### The Workflow
 ![Workflow diagram](image.png)
+
+*Note: The **Manager (Editor-in-Chief)** oversees this entire process in the background, continuously tracking system metrics (time elapsed, LLM costs, and loop counts) to dynamically override routing and enforce budget constraints if limits are breached.*
 
 
 ```
@@ -214,7 +217,8 @@ You should see output like:
 - **Writer Agent** — Draft creation with narrative structure (`src/agents/writer.py`)
 - **Editor Agent** — Review, revision loops, hallucination checks (`src/agents/editor.py`)
 - **Publisher Agent** — SEO checks, duplicate detection, Reddit publishing (`src/agents/publisher.py`)
-- **LangGraph Integration** — All 6 agents connected with full conditional routing (`src/graph.py`)
+- **Manager Agent** — System-wide governor enforcing limits on cost, time, and loops (`src/agents/manager.py`)
+- **LangGraph Integration** — All 7 agents connected with full conditional routing (`src/graph.py`)
 
 ### ✅ Phase 4: Infrastructure (Complete)
 - **Async Architecture** — Fully async from top to bottom (`asyncio`)
@@ -262,7 +266,8 @@ AI_NEWSROOM/
 │   │   ├── skeptic.py       # Quality-control agent
 │   │   ├── writer.py        # Draft creation agent
 │   │   ├── editor.py        # Review & revision agent
-│   │   └── publisher.py     # Publishing & SEO agent
+│   │   ├── publisher.py     # Publishing & SEO agent
+│   │   └── manager.py       # System Budget Manager / Editor-in-Chief agent
 │   ├── storage/
 │   │   ├── database.py      # SQLAlchemy async ORM layer
 │   │   └── cache.py         # Redis-backed async cache
