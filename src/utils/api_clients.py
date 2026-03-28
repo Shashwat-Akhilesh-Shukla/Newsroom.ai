@@ -129,6 +129,28 @@ class HackerNewsClient:
         logger.info(f"Fetched {len(topics)} trending topics from Hacker News")
         return topics
 
+    async def get_story_with_comments(self, story_id: int, max_comments: int = 5) -> str:
+        """Fetch a story and its top comments as a formatted string."""
+        story = await self.get_story_details(story_id)
+        if not story: return ""
+        
+        content = f"Title: {story.get('title', '')}\n"
+        if story.get('text'):
+            content += f"Content: {story.get('text', '')}\n"
+            
+        kids = story.get('kids', [])[:max_comments]
+        if kids:
+            content += "\nTop Comments:\n"
+            tasks = [self.get_story_details(kid_id) for kid_id in kids]
+            comments = await asyncio.gather(*tasks, return_exceptions=True)
+            for c in comments:
+                if isinstance(c, dict) and c.get('text'):
+                    # Basic cleanup of HN HTML comments
+                    text = c.get('text', '').replace('<p>', '\n').replace('&#x27;', "'").replace('&quot;', '"')
+                    content += f"- {text}\n"
+                    
+        return content
+
 
 # ============================================================================
 # ArXiv Client
@@ -357,6 +379,37 @@ class RedditClient:
         logger.info(f"Fetched {len(deduped)} unique trending posts from Reddit")
         return deduped
 
+    async def get_post_with_comments(self, url: str, limit: int = 5) -> str:
+        """Fetch a reddit post and its top comments as a formatted string."""
+        if 'reddit.com' not in url:
+            return ""
+            
+        if not url.endswith('.json'):
+            if url.endswith('/'): url = url[:-1]
+            url = f"{url}.json"
+            
+        try:
+            data = await self._make_request(url, params={'limit': limit, 'raw_json': 1})
+            if not isinstance(data, list) or len(data) < 2: return ""
+            
+            post_data = data[0].get('data', {}).get('children', [])[0].get('data', {})
+            comments_data = data[1].get('data', {}).get('children', [])
+            
+            content = f"Title: {post_data.get('title', '')}\n"
+            if post_data.get('selftext'):
+                content += f"Content:\n{post_data.get('selftext')}\n"
+                
+            content += "\nTop Comments:\n"
+            for c in comments_data[:limit]:
+                comment_text = c.get('data', {}).get('body')
+                if comment_text:
+                    content += f"- {comment_text}\n"
+                    
+            return content
+        except Exception as e:
+            logger.error(f"Failed to fetch Reddit post details: {e}")
+            return ""
+
 
 # ============================================================================
 # DuckDuckGo News Client (Free — no API key required)
@@ -456,6 +509,30 @@ class DuckDuckGoNewsClient:
         deduped = list(seen.values())
         logger.info(f"Fetched {len(deduped)} unique results from DuckDuckGo News")
         return deduped
+
+
+# ============================================================================
+# Generic Web Scraper Client
+# ============================================================================
+
+def scrape_article_text_sync(url: str) -> str:
+    """Synchronously scrape article text using newspaper3k."""
+    try:
+        from newspaper import Article
+        article = Article(url)
+        article.download()
+        article.parse()
+        return article.text
+    except ImportError:
+        logger.error("newspaper3k is not installed. Run: pip install newspaper3k")
+        return ""
+    except Exception as e:
+        logger.error(f"Failed to scrape article {url}: {e}")
+        return ""
+
+async def scrape_article_text(url: str) -> str:
+    """Asynchronously scrape article text."""
+    return await asyncio.to_thread(scrape_article_text_sync, url)
 
 
 # ============================================================================

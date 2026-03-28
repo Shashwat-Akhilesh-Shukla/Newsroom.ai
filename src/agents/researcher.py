@@ -13,7 +13,9 @@ from datetime import datetime
 
 from .base import BaseAgent
 from ..state import NewsroomState, ResearchNote, add_research_note
-from ..utils.api_clients import HackerNewsClient, ArXivClient, DuckDuckGoNewsClient
+from ..utils.api_clients import (
+    HackerNewsClient, ArXivClient, DuckDuckGoNewsClient, RedditClient, scrape_article_text
+)
 from ..utils.llm_utils import (
     generate_structured_output,
     create_research_synthesis_prompt,
@@ -58,6 +60,7 @@ class ResearcherAgent(BaseAgent):
         
         # Initialize API clients
         self.hn_client = HackerNewsClient()
+        self.reddit_client = RedditClient()
         self.arxiv_client = ArXivClient()
         self.ddg_client = DuckDuckGoNewsClient()
         self.memory = SystemMemory()
@@ -209,11 +212,14 @@ class ResearcherAgent(BaseAgent):
         for query in news_queries[:2]:
             news_items = await self.ddg_client.search_news(query)
             for item in news_items[:3]:
+                url = item.get('url', '')
+                content = await scrape_article_text(url)
+                if not content: content = item.get('title', '')
                 all_results.append({
                     'type': 'news',
                     'title': item.get('title', ''),
-                    'content': item.get('title', ''),
-                    'url': item.get('url', ''),
+                    'content': content,
+                    'url': url,
                     'source_name': 'News'
                 })
                 
@@ -222,11 +228,14 @@ class ResearcherAgent(BaseAgent):
         for query in reddit_queries[:2]:
             reddit_items = await self.ddg_client.search_news(f"{query} site:reddit.com")
             for item in reddit_items[:3]:
+                url = item.get('url', '')
+                content = await self.reddit_client.get_post_with_comments(url, limit=5)
+                if not content: content = item.get('title', '')
                 all_results.append({
                     'type': 'reddit',
                     'title': item.get('title', ''),
-                    'content': item.get('title', ''),
-                    'url': item.get('url', ''),
+                    'content': content,
+                    'url': url,
                     'source_name': 'Reddit'
                 })
 
@@ -235,11 +244,24 @@ class ResearcherAgent(BaseAgent):
         for query in hn_queries[:2]:
             hn_items = await self.ddg_client.search_news(f"{query} site:news.ycombinator.com")
             for item in hn_items[:3]:
+                url = item.get('url', '')
+                content = ""
+                import urllib.parse
+                parsed_url = urllib.parse.urlparse(url)
+                qs = urllib.parse.parse_qs(parsed_url.query)
+                if 'id' in qs:
+                    try:
+                        story_id = int(qs['id'][0])
+                        content = await self.hn_client.get_story_with_comments(story_id, max_comments=5)
+                    except ValueError:
+                        pass
+                
+                if not content: content = item.get('title', '')
                 all_results.append({
                     'type': 'hackernews',
                     'title': item.get('title', ''),
-                    'content': item.get('title', ''),
-                    'url': item.get('url', ''),
+                    'content': content,
+                    'url': url,
                     'source_name': 'Hacker News'
                 })
 
@@ -247,7 +269,7 @@ class ResearcherAgent(BaseAgent):
         valid_sources = []
         for result in all_results:
             url = result.get('url', '')
-            if url and not self.memory.is_source_used(url):
+            if url:
                 valid_sources.append(result)
         
         relevant_sources = []
