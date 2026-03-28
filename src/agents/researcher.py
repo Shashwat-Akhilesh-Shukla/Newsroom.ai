@@ -100,11 +100,13 @@ class ResearcherAgent(BaseAgent):
         # Step 2: Gather information from sources
         sources = await self.gather_sources(topic, research_plan, keywords)
         
-        if not sources or len(sources) < 2:
+        if not sources:
             self.logger.warning(f"Not enough relevant sources gathered ({len(sources)}). Need at least 2.")
             # We enforce minimum 2 relevant sources. If <2, we clear notes to trigger a retry.
             state["research_notes"] = []
             return state
+        if len(sources) < 2:
+            self.logger.warning("Only 1 source found — proceeding anyway")
         
         # Step 3: Synthesize research
         synthesis = await self.synthesize_research(topic, sources)
