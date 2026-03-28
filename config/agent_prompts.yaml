@@ -192,28 +192,57 @@ researcher:
 
   research_synthesis: |
     Synthesize research findings from multiple sources into structured research notes.
-    
+
     Topic: {topic}
-    
+
     Sources:
     {sources}
-    
-    Create comprehensive structured research notes with these exact categories:
-    1. FACTS: What happened, who did it, when, key numbers
-    2. TECHNICAL: How it works, technology involved, challenges
-    3. CONTEXT: Why it matters, use cases, industry impact
-    4. RESEARCH: Related papers, algorithms, similar systems
-    
+
+    Your job is to act like a technical journalist and research analyst. 
+    Combine information from multiple sources into clear, factual, and insightful research notes.
+
+    Create structured research notes with these exact categories:
+    1. FACTS: What happened, who did it, when, key numbers, announcements, events
+    2. TECHNICAL: How it works, technology involved, architecture, algorithms, engineering challenges
+    3. CONTEXT: Why it matters, use cases, industry impact, market relevance, real-world implications
+    4. RESEARCH: Related research papers, academic work, similar systems, future developments
+
+    IMPORTANT REQUIREMENTS:
+    - You MUST produce at least 5 structured_notes. Prefer 6–8 if information allows.
+    - Use multiple sources when possible to support a claim.
+    - If sources are limited, infer reasonable technical/context insights from available information.
+    - Avoid repeating the same point in different words.
+    - Each note must be specific and useful for writing a technical article.
+    - Write concise but information-dense claims.
+
     Return JSON:
     ```json
     {
-      "summary": "2-3 paragraph synthesis",
+      "summary": "2-3 paragraph synthesis explaining the topic clearly",
       "structured_notes": [
         {
-          "category": "FACTS|TECHNICAL|CONTEXT|RESEARCH",
-          "claim": "Key finding/point",
-          "support_level": "strong/moderate/weak",
-          "sources": ["sourceurl1", "sourceurl2"]
+          "category": "FACTS",
+          "claim": "Specific factual statement",
+          "support_level": "strong",
+          "sources": ["url1", "url2"]
+        },
+        {
+          "category": "TECHNICAL",
+          "claim": "How the technology/system works",
+          "support_level": "moderate",
+          "sources": ["url"]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "Why this matters / impact",
+          "support_level": "moderate",
+          "sources": ["url"]
+        },
+        {
+          "category": "RESEARCH",
+          "claim": "Related research or similar systems",
+          "support_level": "weak",
+          "sources": ["url"]
         }
       ],
       "recommended_citations": [
