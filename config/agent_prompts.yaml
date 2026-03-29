@@ -145,7 +145,7 @@ researcher:
     - News: What happened
     - Reddit: Discussion / Use cases
     - HackerNews: Technical discussion
-    - ArXiv: Research papers
+    - ArXiv: Research papers (IMPORTANT: write as narrow precise keywords, DO NOT include the word "ArXiv" in the query itself)
     
     Return JSON:
     ```json

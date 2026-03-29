@@ -162,10 +162,10 @@ class ArXivClient:
     BASE_URL = "https://export.arxiv.org/api/query"
     
     def __init__(self):
-        self.rate_limiter = RateLimiter(calls_per_second=0.5)
+        self.rate_limiter = RateLimiter(calls_per_second=0.3)
         self.session = httpx.AsyncClient(headers={'User-Agent': 'AI-Newsroom/1.0'})
     
-    @retry_with_backoff(max_retries=3)
+    @retry_with_backoff(max_retries=3, base_delay=3.0)
     async def _make_request(self, params: Dict[str, Any]) -> str:
         await self.rate_limiter.wait()
         response = await self.session.get(self.BASE_URL, params=params, timeout=15.0)
@@ -416,8 +416,6 @@ class RedditClient:
 # ============================================================================
 
 class DuckDuckGoNewsClient:
-    DDG_API_URL = "https://api.duckduckgo.com/"
-
     SEARCH_QUERIES = [
         "technology news",
         "artificial intelligence",
@@ -427,51 +425,37 @@ class DuckDuckGoNewsClient:
     ]
 
     def __init__(self):
-        self.rate_limiter = RateLimiter(calls_per_second=0.3)
-        self.session = httpx.AsyncClient(headers={
-            'User-Agent': 'Mozilla/5.0 (compatible; AI-Newsroom/1.0)'
-        })
+        self.rate_limiter = RateLimiter(calls_per_second=0.5)
 
-    @retry_with_backoff(max_retries=3)
+    @retry_with_backoff(max_retries=3, base_delay=2.0)
     async def _search_news(self, query: str) -> List[Dict[str, Any]]:
         await self.rate_limiter.wait()
-        params = {
-            'q': query,
-            'format': 'json',
-            'no_html': '1',
-            'skip_disambig': '1',
-        }
+        
+        def _do_search():
+            from duckduckgo_search import DDGS
+            with DDGS() as ddgs:
+                results = list(ddgs.text(query, max_results=10))
+                return results
+
         try:
-            resp = await self.session.get(self.DDG_API_URL, params=params, timeout=10.0)
-            resp.raise_for_status()
-            data = resp.json()
+            data = await asyncio.to_thread(_do_search)
         except Exception as e:
-            logger.warning(f"DuckDuckGo JSON API failed for '{query}': {e}")
+            logger.warning(f"DuckDuckGo Search failed for '{query}': {e}")
             return []
 
         results = []
-        for item in data.get('RelatedTopics', []):
-            text = item.get('Text', '')
-            url = item.get('FirstURL', '')
-            if text and url:
+        for item in data:
+            title = item.get('title', '')
+            url = item.get('href', '')
+            body = item.get('body', '')
+            if title and url:
                 results.append({
-                    'title': text[:200],
+                    'title': f"{title} - {body}"[:200],
                     'url': url,
                     'query': query,
                     'source': 'duckduckgo_news',
                     'score': 0,
                 })
-            for sub in item.get('Topics', []):
-                sub_text = sub.get('Text', '')
-                sub_url = sub.get('FirstURL', '')
-                if sub_text and sub_url:
-                    results.append({
-                        'title': sub_text[:200],
-                        'url': sub_url,
-                        'query': query,
-                        'source': 'duckduckgo_news',
-                        'score': 0,
-                    })
         return results
 
     async def search_news(self, query: str) -> List[Dict[str, Any]]:
