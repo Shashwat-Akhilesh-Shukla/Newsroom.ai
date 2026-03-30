@@ -297,6 +297,8 @@ class ResearcherAgent(BaseAgent):
                 self.memory.add_used_source(source_url)
         
         self.logger.info(f"Gathered {len(sources)} relevant sources after keyword filtering")
+        self.logger.info(f"Total raw results: {len(all_results)}")
+        self.logger.info(f"Valid sources with URL: {len(valid_sources)}")
         return sources
     
 

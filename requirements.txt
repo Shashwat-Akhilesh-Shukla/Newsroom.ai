@@ -15,7 +15,7 @@ langsmith>=0.1.0  # LangSmith tracing, evaluation, and production monitoring
 praw>=7.7.0
 
 # API clients for external services
-# Reddit (public JSON API) and DuckDuckGo News are used instead of Twitter — no extra packages needed.
+ddgs>=0.4.6 # DuckDuckGo
 httpx>=0.25.0  # Async HTTP requests (also used for Reddit & DuckDuckGo)
 arxiv>=2.0.0  # ArXiv API
 pytrends>=4.9.0  # Google Trends

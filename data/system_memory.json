@@ -1,24 +1,13 @@
 {
   "rejected_topics": {
-    "bernie sanders and aoc introduce bill to pause building of new datacenters | us news": "No research notes available — topic rejected",
-    "pokémon go players spent ten years building a robot navigation system without knowing it": "**Decision: AgentDecision.REJECT**\n\nOverall Quality Score: 0.00\n\n\n**Concerns:**\n- The stated topic is completely unsupported by the provided research summary.\n- The research summary explicitly refutes the stated topic, indicating the sources do not contain information on Pokémon Go players building a robot navigation system.\n- The proposed topic is misleading and appears to be fabricated.\n\nSources: 4 (minimum: 2)",
-    "librarian 'gobsmacked' after school use ai to remove 200 books from shelves including orwell's 1984 and twilight": "No research notes available — topic rejected",
-    "doj confirms fbi director kash patel’s personal email was hacked": "No research notes available — topic rejected",
-    "cyber group behind kash patel email hack issues $50m 'bounty' threat on trump and netanyahu": "No research notes available — topic rejected",
-    "white house app found tracking users' exact location every 4.5 minutes via third-party server": "No research notes available — topic rejected"
+    "chatgpt acts as a \"cognitive crutch\" that weakens memory, new research suggests. while these tools can speed up initial learning, they might actually weaken the deep mental processing required to store knowledge over the long term.": "No research notes available — topic rejected"
   },
   "published_topics": {},
   "used_sources": {
-    "http://arxiv.org/abs/2603.24594v1": 1,
-    "http://arxiv.org/abs/2603.24591v1": 1,
-    "http://arxiv.org/abs/2603.24590v1": 1,
-    "http://arxiv.org/abs/2603.24589v1": 1,
-    "http://arxiv.org/abs/2603.24587v1": 1,
-    "https://en.andros.dev/blog/aa31d744/from-zero-to-a-rag-system-successes-and-failures/": 1,
-    "http://arxiv.org/abs/2603.24586v1": 1,
-    "http://arxiv.org/abs/2603.24584v1": 1
+    "http://arxiv.org/abs/2603.26666v1": 4,
+    "http://arxiv.org/abs/2603.26665v1": 3,
+    "http://arxiv.org/abs/2603.26664v1": 5,
+    "http://arxiv.org/abs/2603.26603v1": 1
   },
-  "skeptic_reasons": {
-    "The stated topic is completely unsupported by the provided research summary.": 2
-  }
+  "skeptic_reasons": {}
 }

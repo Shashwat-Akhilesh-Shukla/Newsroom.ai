@@ -432,7 +432,7 @@ class DuckDuckGoNewsClient:
         await self.rate_limiter.wait()
         
         def _do_search():
-            from duckduckgo_search import DDGS
+            from ddgs import DDGS
             with DDGS() as ddgs:
                 results = list(ddgs.text(query, max_results=10))
                 return results
