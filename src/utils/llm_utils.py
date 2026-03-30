@@ -224,7 +224,7 @@ async def generate_structured_output(
         max_tokens=max_tokens,
         provider=provider,
         model=model,
-        response_mime_type="application/json"
+        response_mime_type=None
     )
     
     return extract_json_from_response(response)
@@ -234,7 +234,8 @@ def extract_json_from_response(response: str) -> Dict[str, Any]:
     """
     Extract JSON from LLM response.
     
-    Handles cases where JSON is wrapped in markdown code blocks.
+    Handles cases where JSON is wrapped in markdown code blocks or contains
+    common LLM syntax errors (escaped quotes, truncated strings, etc).
     
     Args:
         response: LLM response text
@@ -242,6 +243,8 @@ def extract_json_from_response(response: str) -> Dict[str, Any]:
     Returns:
         Parsed JSON object
     """
+    import json_repair
+
     # Remove markdown code blocks if present
     text = response.strip()
     
@@ -256,11 +259,31 @@ def extract_json_from_response(response: str) -> Dict[str, Any]:
     text = text.strip()
     
     try:
-        return json.loads(text)
-    except json.JSONDecodeError as e:
+        # Robustly parse JSON using json_repair
+        parsed = json_repair.loads(text)
+        if isinstance(parsed, str):
+            # If it just returned a string, try standard json just in case
+            try:
+                parsed_json = json.loads(text)
+                if isinstance(parsed_json, dict):
+                    return parsed_json
+                return {}
+            except Exception:
+                return {}
+        if isinstance(parsed, dict) or isinstance(parsed, list):
+            return parsed
+        return {}
+    except Exception as e:
         logger.error(f"Failed to parse JSON from response: {e}")
         logger.debug(f"Response text: {text}")
-        raise
+        # Fallback to standard json loads gracefully
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, dict) or isinstance(parsed, list):
+                return parsed
+        except Exception:
+            pass
+        return {}
 
 
 # ============================================================================
