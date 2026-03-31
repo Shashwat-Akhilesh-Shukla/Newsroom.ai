@@ -222,22 +222,12 @@ async def trace_agent_execution(
                 tags=[agent_name, "newsroom", metadata["workflow_stage"]],
                 project_name=_project_name,
             )
-
-        yield run_ctx
-
-        # Patch output onto the run after yield
-        if client and run_id_str:
-            client.update_run(
-                run_id_str,
-                outputs=run_ctx.get("output", {}),
-                end_time=datetime.utcnow(),
-            )
-
     except Exception as exc:
-        logger.debug(f"LangSmith span error for {agent_name}: {exc}")
-        # Always yield to the caller even if LangSmith fails
-        if "output" not in run_ctx:
-            yield run_ctx
+        logger.debug(f"LangSmith create span error for {agent_name}: {exc}")
+
+    try:
+        yield run_ctx
+    except Exception as exc:
         # Patch error if we opened a run
         if client and run_id_str:
             try:
@@ -248,6 +238,18 @@ async def trace_agent_execution(
                 )
             except Exception:
                 pass
+        raise
+        
+    # Patch output onto the run after successful yield
+    if client and run_id_str:
+        try:
+            client.update_run(
+                run_id_str,
+                outputs=run_ctx.get("output", {}),
+                end_time=datetime.utcnow(),
+            )
+        except Exception as exc:
+            logger.debug(f"LangSmith update span error for {agent_name}: {exc}")
 
 
 # ---------------------------------------------------------------------------

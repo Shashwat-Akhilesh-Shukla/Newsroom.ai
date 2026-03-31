@@ -148,42 +148,29 @@ class BaseAgent(ABC):
             # ----------------------------------------------------------------
             # Instrumented path — wrapped in a LangSmith span
             # ----------------------------------------------------------------
-            try:
-                async with trace_agent_execution(self.name, state) as run_ctx:
-                    langsmith_run_id = run_ctx.get("run_id")
+            async with trace_agent_execution(self.name, state) as run_ctx:
+                langsmith_run_id = run_ctx.get("run_id")
 
-                    try:
-                        updated_state = await self.process(state)
-                    except Exception as exc:
-                        post_error_feedback(langsmith_run_id, str(exc))
-                        self.logger.error(
-                            f"Error in {self.name}: {exc}", exc_info=True
-                        )
-                        raise
-
-                    end_time = datetime.utcnow()
-                    next_agent = self.get_routing_decision(updated_state)
-
-                    # Attach structured output to the LangSmith span
-                    run_ctx["output"] = {
-                        "topic": updated_state.get("topic", ""),
-                        "confidence": updated_state.get("confidence", 0.0),
-                        "routing_decision": next_agent,
-                        "workflow_stage": updated_state.get("workflow_stage", ""),
-                        "draft_version": updated_state.get("draft_version", 0),
-                    }
-
-            except Exception:
-                # trace_agent_execution itself failed — fall back to bare run
                 try:
                     updated_state = await self.process(state)
                 except Exception as exc:
+                    post_error_feedback(langsmith_run_id, str(exc))
                     self.logger.error(
                         f"Error in {self.name}: {exc}", exc_info=True
                     )
                     raise
+
                 end_time = datetime.utcnow()
                 next_agent = self.get_routing_decision(updated_state)
+
+                # Attach structured output to the LangSmith span
+                run_ctx["output"] = {
+                    "topic": updated_state.get("topic", ""),
+                    "confidence": updated_state.get("confidence", 0.0),
+                    "routing_decision": next_agent,
+                    "workflow_stage": updated_state.get("workflow_stage", ""),
+                    "draft_version": updated_state.get("draft_version", 0),
+                }
 
         else:
             # ----------------------------------------------------------------

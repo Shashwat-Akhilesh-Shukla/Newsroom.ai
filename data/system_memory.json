@@ -7,7 +7,15 @@
     "http://arxiv.org/abs/2603.26666v1": 4,
     "http://arxiv.org/abs/2603.26665v1": 3,
     "http://arxiv.org/abs/2603.26664v1": 5,
-    "http://arxiv.org/abs/2603.26603v1": 1
+    "http://arxiv.org/abs/2603.26603v1": 1,
+    "http://arxiv.org/abs/2603.28762v1": 2,
+    "http://arxiv.org/abs/2603.28755v1": 2,
+    "http://arxiv.org/abs/2603.28754v1": 2,
+    "http://arxiv.org/abs/2603.28767v1": 1,
+    "http://arxiv.org/abs/2603.28764v1": 1,
+    "http://arxiv.org/abs/2603.28736v1": 1
   },
-  "skeptic_reasons": {}
+  "skeptic_reasons": {
+    "The provided research explicitly states it does not contain information relevant to the topic 'AI is denying health care claims.'": 1
+  }
 }
