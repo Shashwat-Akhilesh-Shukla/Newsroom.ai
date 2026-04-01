@@ -8,6 +8,8 @@ import logging
 import json
 from typing import Dict, Any, Optional
 import hashlib
+from pathlib import Path
+from datetime import datetime
 
 from .base import BaseAgent
 from ..state import NewsroomState, AgentDecision
@@ -84,6 +86,9 @@ class PublisherAgent(BaseAgent):
         
         self.logger.info(f"Publisher agent validating: '{topic}'")
         
+        # Step 0: Save the approved draft before any publishing logic
+        self.save_approved_draft(state)
+        
         # Step 1: Generate SEO metadata
         seo_metadata = await self.generate_seo_metadata(state)
         
@@ -125,6 +130,52 @@ class PublisherAgent(BaseAgent):
         
         return state
     
+    def save_approved_draft(self, state: NewsroomState) -> None:
+        """
+        Save the approved draft to the output directory as a .doc file.
+        """
+        try:
+            output_dir = Path("output")
+            output_dir.mkdir(exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            # Create a safe slug
+            safe_topic = state.get("topic", "untitled")
+            slug = "".join([c if c.isalnum() else "_" for c in safe_topic]).lower()
+            
+            # Save as .doc
+            filename = f"approved_{slug}_{timestamp}.doc"
+            output_file = output_dir / filename
+            
+            content = []
+            content.append(f"Topic: {state.get('topic', 'Untitled')}")
+            content.append(f"Approved At: {timestamp}")
+            content.append(f"Word Count: {len(state.get('draft', '').split())}")
+            content.append("\n" + "="*50 + "\n")
+            content.append(state.get("draft", ""))
+            
+            # Add citations if available
+            if state.get("research_notes"):
+                content.append("\n" + "="*50 + "\n")
+                content.append("References:\n")
+                for i, note in enumerate(state["research_notes"][:10], 1):
+                    citation = note.get("citation", "")
+                    if citation:
+                        content.append(f"{i}. {citation}")
+            
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(content))
+                
+            self.logger.info(f"Successfully saved approved draft to: {output_file}")
+            
+            # Also store path in state metadata
+            if "metadata" not in state:
+                state["metadata"] = {}
+            state["metadata"]["approved_doc_path"] = str(output_file)
+            
+        except Exception as e:
+            self.logger.error(f"Failed to save approved draft: {e}", exc_info=True)
+
     def get_routing_decision(self, state: NewsroomState) -> str:
         """
         Determine routing based on Publisher's decision.
