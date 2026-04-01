@@ -101,6 +101,16 @@ class PublisherAgent(BaseAgent):
         # Step 4: Make publishing decision
         decision = self.make_decision(seo_metadata, duplicate_check, format_check)
         
+        # Store metadata FIRST so generate_publishing_metadata can access it
+        if "metadata" not in state:
+            state["metadata"] = {}
+        state["metadata"]["publisher_checks"] = {
+            "seo_metadata": seo_metadata,
+            "duplicate_check": duplicate_check,
+            "format_check": format_check,
+            "decision": decision
+        }
+        
         # Step 5: Generate publishing metadata
         if decision == AgentDecision.PUBLISH:
             publishing_metadata = self.generate_publishing_metadata(state, seo_metadata)
@@ -117,14 +127,6 @@ class PublisherAgent(BaseAgent):
         
         # Update state
         state["publisher_decision"] = decision
-        
-        # Store metadata
-        state["metadata"]["publisher_checks"] = {
-            "seo_metadata": seo_metadata,
-            "duplicate_check": duplicate_check,
-            "format_check": format_check,
-            "decision": decision
-        }
         
         self.logger.info(f"Publisher decision: {decision}")
         
