@@ -14,6 +14,7 @@ import logging
 from datetime import datetime
 
 from ..state import NewsroomState, update_state_timestamp
+from ..utils.events import emit_event
 
 
 class BaseAgent(ABC):
@@ -110,6 +111,7 @@ class BaseAgent(ABC):
         """
         self.execution_count += 1
         self.logger.info(f"Executing {self.name} (run #{self.execution_count})")
+        emit_event(self.name, "started", f"{self.name} started execute")
 
         # Validate input
         if not self.validate_input(state):
@@ -158,6 +160,7 @@ class BaseAgent(ABC):
                     self.logger.error(
                         f"Error in {self.name}: {exc}", exc_info=True
                     )
+                    emit_event(self.name, "error", f"Error in {self.name}: {exc}", {"error": str(exc)})
                     raise
 
                 end_time = datetime.utcnow()
@@ -180,6 +183,7 @@ class BaseAgent(ABC):
                 updated_state = await self.process(state)
             except Exception as exc:
                 self.logger.error(f"Error in {self.name}: {exc}", exc_info=True)
+                emit_event(self.name, "error", f"Error in {self.name}: {exc}", {"error": str(exc)})
                 raise
             end_time = datetime.utcnow()
             next_agent = self.get_routing_decision(updated_state)
@@ -189,6 +193,7 @@ class BaseAgent(ABC):
         # ------------------------------------------------------------------
         duration = (end_time - start_time).total_seconds()
         self.logger.info(f"{self.name} completed in {duration:.2f}s → {next_agent}")
+        emit_event(self.name, "completed", f"{self.name} finished execute", {"duration_seconds": duration, "next_agent": next_agent})
 
         llm_usage = get_llm_metrics()
 
@@ -246,6 +251,7 @@ class BaseAgent(ABC):
             reason: Reasoning behind the decision
         """
         self.logger.info(f"Decision: {decision} | Reason: {reason}")
+        emit_event(self.name, "decision", f"{decision} -> {reason}", {"decision": decision, "reason": reason})
 
     def get_config_value(self, key: str, default: Any = None) -> Any:
         """
