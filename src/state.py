@@ -30,6 +30,16 @@ class AgentDecision(str, Enum):
     PUBLISH = "publish"
     REJECT_PUBLISH = "reject_publish"
 
+AgentStatus = Literal["idle", "running", "completed", "error"]
+
+class AgentState(TypedDict):
+    """Status for each agent in the workflow."""
+    scout: AgentStatus
+    researcher: AgentStatus
+    skeptic: AgentStatus
+    writer: AgentStatus
+    editor: AgentStatus
+    publisher: AgentStatus
 
 class ResearchNote(TypedDict):
     """Structure for research findings."""
@@ -79,6 +89,7 @@ class NewsroomState(TypedDict):
     metadata: Dict[str, any]
     current_agent: str
     workflow_stage: str
+    agent_states: AgentState
     iteration_counts: Dict[str, int]
     budget_manager_decision: Optional[str]
     skeptic_threshold_override: Optional[float]
@@ -133,6 +144,14 @@ def create_initial_state(topic: Optional[str] = None) -> NewsroomState:
         metadata={},
         current_agent="scout",
         workflow_stage="discovery",
+        agent_states={
+            "scout": "idle",
+            "researcher": "idle",
+            "skeptic": "idle",
+            "writer": "idle",
+            "editor": "idle",
+            "publisher": "idle"
+        },
         iteration_counts={
             "scout_loops": 0,
             "research_loops": 0,
@@ -166,7 +185,7 @@ def validate_state(state: NewsroomState) -> bool:
     required_fields = [
         "topic", "confidence", "research_notes", "draft",
         "editor_comments", "publish_ready", "metadata",
-        "current_agent", "workflow_stage"
+        "current_agent", "workflow_stage", "agent_states"
     ]
     
     for field in required_fields:
