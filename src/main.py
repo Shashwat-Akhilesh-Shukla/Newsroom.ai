@@ -8,6 +8,8 @@ import logging
 import sys
 import argparse
 import asyncio
+import json
+import shutil
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
@@ -25,13 +27,16 @@ from src.utils.config import get_config
 from src.observability import setup_tracing
 from src.storage.memory import SystemMemory
 
+run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file_name = f'newsroom_{run_timestamp}.log'
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler(f'newsroom_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log', encoding='utf-8')
+        logging.FileHandler(log_file_name, encoding='utf-8')
     ]
 )
 
@@ -100,24 +105,20 @@ async def main():
         logger.info("WORKFLOW COMPLETE")
         logger.info("=" * 70)
         
+        # Determine output directory
+        output_dir = Path("output") / f"run_{run_timestamp}"
+        if args.output:
+            out_p = Path(args.output)
+            output_dir = out_p if out_p.is_dir() else out_p.parent / f"run_{run_timestamp}"
+            
+        save_artifacts(final_state, output_dir, log_file_name)
+        
         if final_state.get("publish_ready"):
             logger.info("✅ Status: PUBLISHED")
             logger.info(f"📝 Topic: {final_state.get('topic')}")
             logger.info(f"📊 Word Count: {len(final_state.get('draft', '').split())}")
             logger.info(f"🔄 Draft Versions: {final_state.get('draft_version', 0)}")
             logger.info(f"📚 Research Sources: {len(final_state.get('research_notes', []))}")
-            
-            # Save article if output specified
-            if args.output:
-                save_article(final_state, args.output)
-            else:
-                # Save to default location
-                output_dir = Path("output")
-                output_dir.mkdir(exist_ok=True)
-                
-                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                output_file = output_dir / f"article_{timestamp}.md"
-                save_article(final_state, str(output_file))
                 
             # Log successful memory
             try:
@@ -172,22 +173,15 @@ async def main():
         sys.exit(1)
 
 
-def save_article(state: dict, output_path: str):
+def save_artifacts(state: dict, base_dir: Path, log_file: str):
     """
-    Save the final article to a file.
-    
-    Args:
-        state: Final newsroom state
-        output_path: Path to save the article
+    Save all requested artifacts to the specified directory.
     """
     try:
-        output_file = Path(output_path)
-        output_file.parent.mkdir(parents=True, exist_ok=True)
+        base_dir.mkdir(parents=True, exist_ok=True)
         
-        # Create article with metadata
+        # 1. article.md
         article_content = []
-        
-        # Add frontmatter
         article_content.append("---")
         article_content.append(f"title: {state.get('topic', 'Untitled')}")
         
@@ -201,10 +195,8 @@ def save_article(state: dict, output_path: str):
         article_content.append("---")
         article_content.append("")
         
-        # Add the article
         article_content.append(state.get("draft", ""))
         
-        # Add research notes as appendix
         if state.get("research_notes"):
             article_content.append("\n\n---\n")
             article_content.append("## References\n")
@@ -217,15 +209,66 @@ def save_article(state: dict, output_path: str):
                     if url:
                         article_content.append(f"   {url}")
                     article_content.append("")
+                    
+        md_text = '\n'.join(article_content)
+        (base_dir / "article.md").write_text(md_text, encoding='utf-8')
         
-        # Write to file
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(article_content))
+        # 2. article.docx
+        try:
+            import docx
+            
+            doc = docx.Document()
+            doc.add_heading(state.get('topic', 'Untitled'), 0)
+            
+            for paragraph in state.get('draft', '').split('\n'):
+                if paragraph.strip():
+                    if paragraph.startswith('#'):
+                        level = min(len(paragraph) - len(paragraph.lstrip('#')), 4)
+                        doc.add_heading(paragraph.lstrip('#').strip(), level)
+                    else:
+                        doc.add_paragraph(paragraph)
+            
+            if state.get("research_notes"):
+                doc.add_heading("References", 1)
+                for note in state["research_notes"][:10]:
+                    if note.get("citation"):
+                        p = doc.add_paragraph(note["citation"], style='List Bullet')
+                        if note.get("url"):
+                            p.add_run(f" ({note['url']})")
+                            
+            doc.save(base_dir / "article.docx")
+        except ImportError:
+            logger.warning("python-docx not installed, skipping article.docx generation.")
+            
+        # 3. research_notes.json
+        (base_dir / "research_notes.json").write_text(
+            json.dumps(state.get("research_notes", []), indent=2), encoding="utf-8"
+        )
         
-        logger.info(f"💾 Article saved to: {output_file}")
+        # 4. run_report.json
+        report = {
+            "topic": state.get("topic"),
+            "status": "PUBLISHED" if state.get("publish_ready") else "NOT PUBLISHED",
+            "workflow_stage": state.get("workflow_stage"),
+            "draft_version": state.get("draft_version"),
+            "revision_count": state.get("revision_count"),
+            "iteration_counts": state.get("iteration_counts", {}),
+            "created_at": state.get("created_at"),
+            "updated_at": state.get("updated_at"),
+            "metadata": state.get("metadata", {})
+        }
+        (base_dir / "run_report.json").write_text(
+            json.dumps(report, indent=2, default=str), encoding="utf-8"
+        )
+        
+        # 5. logs.txt
+        if Path(log_file).exists():
+            shutil.copy2(log_file, base_dir / "logs.txt")
+            
+        logger.info(f"💾 Artifacts stored in: {base_dir}")
         
     except Exception as e:
-        logger.error(f"Failed to save article: {e}")
+        logger.error(f"Failed to save artifacts: {e}", exc_info=True)
 
 
 def run():
