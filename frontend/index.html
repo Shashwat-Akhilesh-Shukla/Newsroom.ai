@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Newsroom Workflow</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="main-content">
+        <h1>AI Newsroom Orcherstrator</h1>
+        
+        <div id="graph" class="graph-container">
+          <!-- Flow Lines Background Container -->
+          <svg class="connections" preserveAspectRatio="none">
+             <!-- Lines will be dynamically updated by JS if needed, but we rely mostly on CSS glowing -->
+          </svg>
+          
+          <div id="scout" class="agent-box idle">Scout</div>
+          <div id="researcher" class="agent-box idle">Researcher</div>
+          <div id="skeptic" class="agent-box idle">Skeptic</div>
+          <div id="writer" class="agent-box idle">Writer</div>
+          <div id="editor" class="agent-box idle">Editor</div>
+          <div id="publisher" class="agent-box idle">Publisher</div>
+        </div>
+
+        <div id="document-preview" class="hidden glass-panel">
+           <div class="actions">
+              <a id="btn-download-docx" class="btn" href="#" download>Download .docx</a>
+              <button id="btn-close-preview" class="btn">Close Preview</button>
+           </div>
+           <div id="markdown-content" class="markdown-body"></div>
+        </div>
+      </div>
+      
+      <div class="sidebar glass-panel">
+        <div class="sidebar-header">
+           <h3>Terminal Logs</h3>
+        </div>
+        <pre id="log-output"></pre>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from src.graph import run_newsroom, stream_newsroom
 from src.state import create_initial_state
 from src.utils.config import get_config
+from src.utils.events import RedisLogHandler
 from src.observability import setup_tracing
 from src.storage.memory import SystemMemory
 
@@ -31,12 +32,16 @@ run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 log_file_name = f'newsroom_{run_timestamp}.log'
 
 # Configure logging
+redis_handler = RedisLogHandler()
+redis_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler(log_file_name, encoding='utf-8')
+        logging.FileHandler(log_file_name, encoding='utf-8'),
+        redis_handler
     ]
 )
 

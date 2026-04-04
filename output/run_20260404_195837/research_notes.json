@@ -1,0 +1,93 @@
+[
+  {
+    "claim": "[FACTS] The provided research papers (EventHub, Generative World Renderer, Modulate-and-Map) are academic publications from arXiv focusing on computer vision, 3D rendering, and anomaly detection, not on corporate activities like H-1B visa petitions or layoffs.",
+    "citation": "http://arxiv.org/abs/2604.02331v1, http://arxiv.org/abs/2604.02329v1, http://arxiv.org/abs/2604.02328v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[TECHNICAL] EventHub introduces a novel framework for training deep-event stereo networks using standard color images to generate proxy annotations or events, enabling generalization without costly active sensors.",
+    "citation": "http://arxiv.org/abs/2604.02331v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[TECHNICAL] The Generative World Renderer project developed a large-scale, dynamic dataset of 4M continuous frames from AAA games using a dual-screen stitched capture method, providing synchronized RGB and five G-buffer channels for advancing bidirectional rendering and G-buffer-guided video generation.",
+    "citation": "http://arxiv.org/abs/2604.02329v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[TECHNICAL] Modulate-and-Map (ModMap) is a natively multiview and multimodal framework for 3D anomaly detection and segmentation, which learns to map features across modalities and views using feature-wise modulation and a cross-view training strategy.",
+    "citation": "http://arxiv.org/abs/2604.02328v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[CONTEXT] The research in these papers addresses critical challenges in computer vision, such as improving the realism and temporal coherence of synthetic datasets, enabling robust 3D anomaly detection in industrial settings, and advancing event-based vision for challenging conditions like nighttime scenes.",
+    "citation": "http://arxiv.org/abs/2604.02331v1, http://arxiv.org/abs/2604.02329v1, http://arxiv.org/abs/2604.02328v1",
+    "source_url": "",
+    "credibility_score": 0.7,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[RESEARCH] These works contribute to the state-of-the-art in their respective domains: EventHub repurposes RGB stereo models for event data, Generative World Renderer proposes a VLM-based assessment for inverse rendering, and ModMap sets new benchmarks in multiview, multimodal 3D anomaly detection.",
+    "citation": "http://arxiv.org/abs/2604.02331v1, http://arxiv.org/abs/2604.02329v1, http://arxiv.org/abs/2604.02328v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:30:34.858768"
+  },
+  {
+    "claim": "[FACTS] Oracle filed approximately 3,126 H-1B visa petitions for fiscal years 2025 and 2026, with 436 of these petitions filed in fiscal year 2026 alone, coinciding with recent mass layoffs.",
+    "citation": "https://nypost.com/2026/04/02/us-news/outrage-over-oracles-thousands-of-h-1b-requests-amid-layoffs/, https://letsdatascience.com/news/oracle-files-thousands-h-1b-petitions-amid-layoffs-c43caa33, https://www.reddit.com/r/Layoffs/comments/1sbqx3x/oracle_files_thousands_of_h1b_visa_petitions_amid/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[FACTS] Oracle's recent layoffs impacted 'thousands' of employees globally, with reports suggesting up to 30,000 workers worldwide, including 12,000 in India, were affected by role eliminations.",
+    "citation": "https://nypost.com/2026/04/02/us-news/outrage-over-oracles-thousands-of-h-1b-requests-amid-layoffs/, https://americanbazaaronline.com/2026/04/02/oracle-layoffs-2026-h-1b-visa-holders-face-race-against-time-478128/, https://www.reddit.com/r/technology/comments/1sbnpif/oracle_files_thousands_of_h1b_visa_petitions_amid/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[FACTS] H-1B visa holders affected by Oracle's layoffs face a strict 60-day grace period to secure new employment or are required to leave the United States, intensifying job loss into a potential immigration crisis.",
+    "citation": "https://americanbazaaronline.com/2026/04/02/oracle-layoffs-2026-h-1b-visa-holders-face-race-against-time-478128/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[TECHNICAL] Oracle's layoffs are part of a strategic restructuring driven by aggressive investments in AI and cloud infrastructure, leading to a re-composition of the workforce where legacy on-premises roles are cut, and new H-1B hires flow into cloud, AI, and data engineering positions.",
+    "citation": "https://americanbazaaronline.com/2026/04/02/oracle-layoffs-2026-h-1b-visa-holders-face-race-against-time-478128/, https://trend.hulryung.com/en/posts/2026-04-04-1000-oracle-h-1b-visa-petitions-amid-mass-layoffs-tech-worker-displacement-immigration-policy-2026/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[TECHNICAL] While companies state the H-1B program is essential for hiring foreign workers in specialty occupations due to a lack of local candidates with comparable skills, critics argue it is also used for 'workforce arbitrage' to manage labor costs and increase predictability.",
+    "citation": "https://nypost.com/2026/04/02/us-news/outrage-over-oracles-thousands-of-h-1b-requests-amid-layoffs/, https://trend.hulryung.com/en/posts/2026-04-04-1000-oracle-h-1b-visa-petitions-amid-mass-layoffs-tech-worker-displacement-immigration-policy-2026/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[CONTEXT] The simultaneous layoffs and H-1B filings have generated significant outrage among Oracle employees and on social media, with many calling it a 'slap in the face' and accusing the company of disloyalty to American workers.",
+    "citation": "https://nypost.com/2026/04/02/us-news/outrage-over-oracles-thousands-of-h-1b-requests-amid-layoffs/, https://www.reddit.com/r/technology/comments/1sbnpif/oracle_files_thousands_of_h1b_visa_petitions_amid/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  },
+  {
+    "claim": "[CONTEXT] This practice is not unique to Oracle, as other major tech companies like Amazon, Google, Meta, and Microsoft have also conducted mass layoffs while simultaneously increasing H-1B application volumes, indicating a broader industry trend.",
+    "citation": "https://nypost.com/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-04T14:31:56.213292"
+  }
+]

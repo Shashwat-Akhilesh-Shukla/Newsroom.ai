@@ -21,6 +21,22 @@ except Exception as e:
     logger.warning(f"Failed to setup Redis for events: {e}. Events will only be published locally.")
     redis_available = False
 
+class RedisLogHandler(logging.Handler):
+    """Custom logging handler to broadcast raw log lines to Redis."""
+    def __init__(self, channel="newsroom:logs"):
+        super().__init__()
+        self.channel = channel
+        self.redis_client = redis_client if redis_available else None
+
+    def emit(self, record):
+        if self.redis_client:
+            try:
+                msg = self.format(record)
+                # Send raw string directly, or wrap in JSON
+                self.redis_client.publish(self.channel, json.dumps({"type": "log", "message": msg}))
+            except Exception:
+                pass
+
 class EventBus:
     """Event bus for subscribing locally and broadcasting agent events to Redis."""
     def __init__(self):

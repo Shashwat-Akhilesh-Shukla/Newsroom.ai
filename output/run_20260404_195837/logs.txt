@@ -1,0 +1,379 @@
+2026-04-04 19:58:37,899 - src.observability.tracing - INFO - LangSmith tracing enabled | project='Newsroom'
+2026-04-04 19:58:37,907 - __main__ - INFO - ======================================================================
+2026-04-04 19:58:37,909 - __main__ - INFO - AI NEWSROOM - Multi-Agent Content Creation System
+2026-04-04 19:58:37,911 - __main__ - INFO - ======================================================================
+2026-04-04 19:58:37,913 - __main__ - INFO - LLM Provider: gemini
+2026-04-04 19:58:37,916 - __main__ - INFO - Model: gemini-2.5-flash
+2026-04-04 19:58:37,918 - __main__ - INFO - Scout Confidence Threshold: 0.7
+2026-04-04 19:58:37,921 - __main__ - INFO - Max Revision Loops: 4
+2026-04-04 19:58:37,924 - __main__ - INFO - ======================================================================
+2026-04-04 19:58:37,927 - __main__ - INFO - 
+🚀 Starting workflow (streaming mode)...
+
+2026-04-04 19:58:37,929 - src.graph - INFO - Starting newsroom workflow (streaming mode)...
+2026-04-04 19:58:38,015 - src.graph - INFO - Newsroom workflow created successfully
+2026-04-04 19:58:38,035 - src.graph - INFO - 🔍 LangSmith trace: https://smith.langchain.com/projects/p/Newsroom/runs/8cb4ddc5-6b77-45ee-82f2-af201032019c
+2026-04-04 19:58:38,373 - newsroom.agents.scout - INFO - Executing scout (run #1)
+2026-04-04 19:58:39,575 - newsroom.agents.scout - INFO - Scout agent starting topic discovery...
+2026-04-04 19:58:39,576 - newsroom.agents.scout - INFO - Fetching trends from all sources...
+2026-04-04 19:58:39,578 - src.utils.api_clients - INFO - Fetching trends from all sources...
+2026-04-04 19:58:40,503 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/topstories.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:40,624 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-04 19:58:40,636 - src.utils.api_clients - INFO - Fetched 10 recent papers from cs.AI
+2026-04-04 19:58:40,776 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47637757.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:40,781 - src.utils.api_clients - ERROR - Failed to fetch trending searches: The request failed: Google returned a response with code 404
+2026-04-04 19:58:40,969 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,284 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633396.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,648 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=technology%20news 200
+2026-04-04 19:58:41,681 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47638075.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,688 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633157.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,688 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47638270.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,704 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47634690.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,704 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633855.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,711 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47628608.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,717 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47626462.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,724 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47601194.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,735 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47631118.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,741 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633116.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,746 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47597366.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,761 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47630576.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,765 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47627527.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,766 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47622616.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,767 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633131.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,772 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47586885.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,774 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47638685.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,778 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47628326.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,780 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47618223.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,781 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47637287.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,786 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47629116.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,788 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47592068.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,790 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47597159.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,793 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47601992.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,796 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47629433.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,802 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47638246.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,805 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47585469.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,810 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47629903.json "HTTP/1.1 200 OK"
+2026-04-04 19:58:41,814 - src.utils.api_clients - INFO - Fetched 29 trending topics from Hacker News
+2026-04-04 19:58:41,943 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Technology%20news&explaintext=0&exintro=0&redirects=1 200
+2026-04-04 19:58:42,127 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=artificial%20intelligence 200
+2026-04-04 19:58:42,134 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=technology+news&limit=1 200
+2026-04-04 19:58:42,212 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/worldnews/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,260 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/artificial/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,319 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Futurology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,324 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/science/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,391 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/programming/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,435 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=artificial+intelligence&limit=1 200
+2026-04-04 19:58:42,436 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Artificial%20intelligence&explaintext=0&exintro=0&redirects=1 200
+2026-04-04 19:58:42,491 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/MachineLearning/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,883 - primp - INFO - response: https://www.google.com/search?q=technology+news&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-04 19:58:42,959 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/cybersecurity/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:58:42,970 - src.utils.api_clients - INFO - Fetched 70 unique trending posts from Reddit
+2026-04-04 19:58:43,290 - primp - INFO - response: https://search.brave.com/search?q=artificial+intelligence&source=web 200
+2026-04-04 19:58:44,109 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=science%20discovery 200
+2026-04-04 19:58:44,424 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Science%20Discovery%20Center%20of%20Oneonta&explaintext=0&exintro=0&redirects=1 200
+2026-04-04 19:58:44,474 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=science+discovery&limit=1 200
+2026-04-04 19:58:44,944 - primp - INFO - response: https://search.yahoo.com/search;_ylt=_S1QpX5lHy8FkIpW89-Zc9sz;_ylu=7wzfKnjiINigGO4ehUF_OKWjyHp9LIQQ4kEYEgAsFGCY3BU?p=science+discovery 200
+2026-04-04 19:58:46,097 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=cybersecurity%20breach 200
+2026-04-04 19:58:46,392 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Cyber%20security%20breach&explaintext=0&exintro=0&redirects=1 200
+2026-04-04 19:58:46,434 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=cybersecurity+breach&limit=1 200
+2026-04-04 19:58:47,285 - primp - INFO - response: https://www.mojeek.com/search?q=science+discovery 200
+2026-04-04 19:58:48,122 - primp - INFO - response: https://www.mojeek.com/search?q=cybersecurity+breach 200
+2026-04-04 19:58:48,127 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=software%20engineering 200
+2026-04-04 19:58:48,431 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Software%20engineering&explaintext=0&exintro=0&redirects=1 200
+2026-04-04 19:58:48,487 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=software+engineering&limit=1 200
+2026-04-04 19:58:49,485 - primp - INFO - response: https://yandex.com/search/site/?text=software+engineering&web=1&searchid=5898158 200
+2026-04-04 19:58:49,512 - src.utils.api_clients - INFO - Fetched 50 unique results from DuckDuckGo News
+2026-04-04 19:58:49,512 - src.utils.api_clients - INFO - Fetched 159 total trends from 4 sources
+2026-04-04 19:58:49,512 - newsroom.agents.scout - INFO -   hackernews: 29 items
+2026-04-04 19:58:49,512 - newsroom.agents.scout - INFO -   arxiv: 10 items
+2026-04-04 19:58:49,512 - newsroom.agents.scout - INFO -   reddit: 70 items
+2026-04-04 19:58:49,512 - newsroom.agents.scout - INFO -   duckduckgo_news: 50 items
+2026-04-04 19:58:49,512 - newsroom.agents.scout - INFO - Aggregated 159 unique topics
+2026-04-04 19:58:51,623 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 19:59:09,143 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 19:59:09,303 - newsroom.agents.scout - INFO - Selected topic: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs' with confidence 0.85
+2026-04-04 19:59:09,309 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.85 >= threshold 0.7
+2026-04-04 19:59:09,894 - newsroom.agents.scout - INFO - scout completed in 30.93s → researcher
+2026-04-04 19:59:12,544 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.85 >= threshold 0.7
+2026-04-04 19:59:12,563 - __main__ - INFO - 📍 SCOUT: discovery
+2026-04-04 19:59:12,565 - newsroom.agents.researcher - INFO - Executing researcher (run #1)
+2026-04-04 19:59:12,867 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 19:59:13,495 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 19:59:24,022 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 19:59:24,027 - newsroom.agents.researcher - INFO - Generated research plan with 6 keywords
+2026-04-04 19:59:24,534 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AH-1B+visa+labor+market+effects&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-04 19:59:27,763 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3ACorporate+immigration+strategy+layoffs&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-04 19:59:28,244 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20H-1B%20petitions%20mass%20layoffs 200
+2026-04-04 19:59:28,696 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+H-1B+petitions+mass+layoffs&limit=1 200
+2026-04-04 19:59:31,690 - primp - INFO - response: https://yandex.com/search/site/?text=Oracle+H-1B+petitions+mass+layoffs&web=1&searchid=9653601 200
+2026-04-04 19:59:35,822 - src.utils.api_clients - ERROR - Failed to scrape article https://www.ibtimes.co.uk/oracle-backlash-layoffs-h1b-visa-surge-1790167: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.ibtimes.co.uk/oracle-backlash-layoffs-h1b-visa-surge-1790167 on URL https://www.ibtimes.co.uk/oracle-backlash-layoffs-h1b-visa-surge-1790167
+2026-04-04 19:59:40,584 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+visa+filings+amid+layoffs+explanation&limit=1 200
+2026-04-04 19:59:40,893 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20visa%20filings%20amid%20layoffs%20explanation 200
+2026-04-04 19:59:41,658 - primp - INFO - response: https://search.brave.com/search?q=Oracle+visa+filings+amid+layoffs+explanation&source=web 200
+2026-04-04 19:59:43,079 - src.utils.api_clients - ERROR - Failed to scrape article https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/: Article `download()` failed with 403 Client Error: Forbidden for url: https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/ on URL https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/
+2026-04-04 19:59:44,777 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=reddit%20Oracle%20H-1B%20layoffs%20discussion%20site%3Areddit.com 200
+2026-04-04 19:59:45,266 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=reddit+Oracle+H-1B+layoffs+discussion+site%3Areddit.com&limit=1 200
+2026-04-04 19:59:46,144 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-04 19:59:46,566 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/1sbnpif/oracle_files_thousands_of_h1b_visa_petitions_amid.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:48,520 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/h1b/comments/1csb0mj/laid_off_on_h1b.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:50,465 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/oracle/comments/1ck7d5b/layoff_this_week.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:50,962 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=reddit%20H-1B%20visa%20tech%20layoffs%20experiences%20site%3Areddit.com 200
+2026-04-04 19:59:51,493 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=reddit+H-1B+visa+tech+layoffs+experiences+site%3Areddit.com&limit=1 200
+2026-04-04 19:59:53,034 - primp - INFO - response: https://yandex.com/search/site/?text=reddit+H-1B+visa+tech+layoffs+experiences+site%3Areddit.com&web=1&searchid=6171574 200
+2026-04-04 19:59:53,477 - primp - INFO - response: https://www.google.com/search?q=reddit+H-1B+visa+tech+layoffs+experiences+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-04 19:59:54,154 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/1hp0gue/trump_says_h1b_visa_program_is_great_amid_maga.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:56,081 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/centrist/comments/1hnodib/h1b_visa_exploited_for_decades.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:58,121 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/centrist/comments/1hohktn/trump_says_h1b_visa_program_is_great_amid_maga.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 19:59:58,615 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=hackernews%20Oracle%20H-1B%20layoffs%20ethics%20site%3Anews.ycombinator.com 200
+2026-04-04 19:59:59,066 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=hackernews+Oracle+H-1B+layoffs+ethics+site%3Anews.ycombinator.com&limit=1 200
+2026-04-04 20:00:03,949 - primp - INFO - response: https://search.yahoo.com/search;_ylt=yVTuQPm0y0VNdETZQ-I6ZA7b;_ylu=Zr6ICyF8IfHNUOqv4r3Lr6CGvIobu3MMxchekWJQJDnI-4s?p=hackernews+Oracle+H-1B+layoffs+ethics+site%3Anews.ycombinator.com 200
+2026-04-04 20:00:04,081 - ddgs.ddgs - INFO - Error in engine google: DDGSException("DecodeError: DecodeError('Body collection error: error decoding response body')")
+2026-04-04 20:00:04,581 - primp - INFO - response: https://www.google.com/search?q=hackernews+Oracle+H-1B+layoffs+ethics+site%3Anews.ycombinator.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-04 20:00:09,643 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47631732.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:09,913 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632095.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:10,448 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632481.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:10,727 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632724.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:10,749 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632282.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:10,758 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633184.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,034 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43307755.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,543 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43308504.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,555 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43308908.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,561 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43308870.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,566 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43312006.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:11,829 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/43312152.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,104 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298183.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,596 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298528.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,596 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298412.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,608 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298845.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,610 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298485.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:12,614 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47298821.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:13,084 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=hackernews%20H-1B%20program%20tech%20industry%20impact%20site%3Anews.ycombinator.com 200
+2026-04-04 20:00:13,592 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=hackernews+H-1B+program+tech+industry+impact+site%3Anews.ycombinator.com&limit=1 200
+2026-04-04 20:00:14,065 - primp - INFO - response: https://search.yahoo.com/search;_ylt=m6Qs9U3Rs6pXbzXtCaJpzyDk;_ylu=xVqccjMJykRMhnI_W8P-e_zUlogizOFhM94U0jZvKXFq7eQ?p=hackernews+H-1B+program+tech+industry+impact+site%3Anews.ycombinator.com 200
+2026-04-04 20:00:17,122 - primp - INFO - response: https://yandex.com/search/site/?text=hackernews+H-1B+program+tech+industry+impact+site%3Anews.ycombinator.com&web=1&searchid=1811275 200
+2026-04-04 20:00:17,447 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42450413.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:17,958 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42452044.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:18,227 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42452180.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:18,232 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42453963.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:18,236 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42455663.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:18,263 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42454351.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:18,558 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45309740.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:19,029 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45310070.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:19,031 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45309962.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:19,034 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45310203.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:19,034 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45310183.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:19,045 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45310093.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:20,534 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721190.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:20,822 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721332.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:21,308 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721358.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:21,313 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721528.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:21,314 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721917.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:21,319 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42721749.json "HTTP/1.1 200 OK"
+2026-04-04 20:00:21,320 - newsroom.agents.researcher - WARNING - Relevance filter too strict — using top sources instead
+2026-04-04 20:00:21,322 - newsroom.agents.researcher - INFO - Gathered 3 relevant sources after keyword filtering
+2026-04-04 20:00:21,322 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-04 20:00:21,322 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-04 20:00:22,031 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:00:34,843 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:00:34,858 - newsroom.agents.researcher - INFO - Synthesized research with 6 findings
+2026-04-04 20:00:34,858 - newsroom.agents.researcher - INFO - Research complete: 6 notes, 3 sources
+2026-04-04 20:00:34,860 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 6 notes
+2026-04-04 20:00:35,363 - newsroom.agents.researcher - INFO - researcher completed in 82.28s → skeptic
+2026-04-04 20:00:38,708 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 6 notes
+2026-04-04 20:00:38,712 - __main__ - INFO - 📍 RESEARCHER: discovery
+2026-04-04 20:00:38,714 - newsroom.agents.skeptic - INFO - Executing skeptic (run #1)
+2026-04-04 20:00:39,013 - newsroom.agents.skeptic - INFO - Skeptic agent reviewing research on: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:00:39,706 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:00:46,743 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:00:46,749 - newsroom.agents.skeptic - INFO - Quality assessment: 0.00
+2026-04-04 20:00:46,749 - newsroom.agents.skeptic - INFO - First try failed strict quality, but meets minimum source/note count. Requesting improvement.
+2026-04-04 20:00:46,749 - newsroom.agents.skeptic - INFO - Skeptic decision: AgentDecision.NEED_MORE_EVIDENCE
+2026-04-04 20:00:46,752 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.NEED_MORE_EVIDENCE | Reason: Insufficient evidence, sending back to Researcher
+2026-04-04 20:00:47,487 - newsroom.agents.skeptic - INFO - skeptic completed in 8.04s → researcher
+2026-04-04 20:00:49,731 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.NEED_MORE_EVIDENCE | Reason: Insufficient evidence, sending back to Researcher
+2026-04-04 20:00:49,734 - __main__ - INFO - 📍 SKEPTIC: discovery
+2026-04-04 20:00:49,734 - newsroom.agents.researcher - INFO - Executing researcher (run #2)
+2026-04-04 20:00:50,038 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:00:50,758 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:01:00,359 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:01:00,368 - newsroom.agents.researcher - INFO - Generated research plan with 12 keywords
+2026-04-04 20:01:00,422 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AH-1B+visa+labor+market+effects&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-04 20:01:04,122 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3ASkilled+immigration+tech+sector+employment&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-04 20:01:04,664 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20H-1B%20visa%20filings%20mass%20layoffs%20report 200
+2026-04-04 20:01:04,977 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+H-1B+visa+filings+mass+layoffs+report&limit=1 200
+2026-04-04 20:01:05,678 - primp - INFO - response: https://www.google.com/search?q=Oracle+H-1B+visa+filings+mass+layoffs+report&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-04 20:01:06,945 - ddgs.ddgs - INFO - Error in engine yahoo: DDGSException("RequestError: RequestError('error sending request for url (https://search.yahoo.com/search;_ylt=AVIcaSbz0xxS_xuDreQdH40c;_ylu=elDlFebLHKzit6TihbA4b_zIJH66Cnfcva-RPTfIg8catq4?p=Oracle+H-1B+visa+filings+mass+layoffs+report)', 'https://search.yahoo.com/search;_ylt=AVIcaSbz0xxS_xuDreQdH40c;_ylu=elDlFebLHKzit6TihbA4b_zIJH66Cnfcva-RPTfIg8catq4?p=Oracle+H-1B+visa+filings+mass+layoffs+report')")
+2026-04-04 20:01:07,934 - primp - INFO - response: https://yandex.com/search/site/?text=Oracle+H-1B+visa+filings+mass+layoffs+report&web=1&searchid=3802236 200
+2026-04-04 20:01:09,793 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+statement+H-1B+petitions+layoffs+rationale&limit=1 200
+2026-04-04 20:01:09,943 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20statement%20H-1B%20petitions%20layoffs%20rationale 200
+2026-04-04 20:01:11,086 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-04 20:01:11,804 - src.utils.api_clients - ERROR - Failed to scrape article https://letsdatascience.com/news/oracle-files-thousands-h-1b-petitions-amid-layoffs-c43caa33: Article `download()` failed with 429 Client Error: Too Many Requests for url: https://letsdatascience.com/news/oracle-files-thousands-h-1b-petitions-amid-layoffs-c43caa33 on URL https://letsdatascience.com/news/oracle-files-thousands-h-1b-petitions-amid-layoffs-c43caa33
+2026-04-04 20:01:13,284 - src.utils.api_clients - ERROR - Failed to scrape article https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/: Article `download()` failed with 403 Client Error: Forbidden for url: https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/ on URL https://nationaltoday.com/us/tx/austin/news/2026/04/03/oracle-files-thousands-of-h-1b-visa-petitions-amid-mass-layoffs/
+2026-04-04 20:01:13,693 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+layoffs+H-1B+employee+experience+reddit+site%3Areddit.com&limit=1 200
+2026-04-04 20:01:13,754 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20layoffs%20H-1B%20employee%20experience%20reddit%20site%3Areddit.com 200
+2026-04-04 20:01:13,959 - ddgs.ddgs - INFO - Error in engine yahoo: DDGSException("RequestError: RequestError('error sending request for url (https://search.yahoo.com/search;_ylt=vimzm0hup71obu8pdHDvCpQx;_ylu=9i3pt-iIuGoBKraUdBf6C6xPz72d_dRsY8IYQUf-8STj3uc?p=Oracle+layoffs+H-1B+employee+experience+reddit+site%3Areddit.com)', 'https://search.yahoo.com/search;_ylt=vimzm0hup71obu8pdHDvCpQx;_ylu=9i3pt-iIuGoBKraUdBf6C6xPz72d_dRsY8IYQUf-8STj3uc?p=Oracle+layoffs+H-1B+employee+experience+reddit+site%3Areddit.com')")
+2026-04-04 20:01:14,813 - primp - INFO - response: https://search.brave.com/search?q=Oracle+layoffs+H-1B+employee+experience+reddit+site%3Areddit.com&source=web 200
+2026-04-04 20:01:15,244 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Layoffs/comments/1sbqx3x/oracle_files_thousands_of_h1b_visa_petitions_amid.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:17,311 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/1sbnpif/oracle_files_thousands_of_h1b_visa_petitions_amid.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:19,222 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/jobs/comments/1sahxrr/oracle_survivors_reportedly_told_to_stretch_after.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:19,719 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=H-1B%20visa%20holders%20tech%20layoffs%20discussion%20reddit%20site%3Areddit.com 200
+2026-04-04 20:01:20,214 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=H-1B+visa+holders+tech+layoffs+discussion+reddit+site%3Areddit.com&limit=1 200
+2026-04-04 20:01:20,996 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-04 20:01:21,344 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Economics/comments/z3jzc6/tech_layoffs_send_h1b_visa_holders_scrambling_for.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:23,323 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/bayarea/comments/z8pdl6/tech_layoffs_wallop_h1b_visa_holders_its_not_just.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:25,759 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/economy/comments/z3jz0w/tech_layoffs_send_h1b_visa_holders_scrambling_for.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-04 20:01:26,248 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Oracle%20H-1B%20visa%20strategy%20layoffs%20HackerNews%20site%3Anews.ycombinator.com 200
+2026-04-04 20:01:26,704 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Oracle+H-1B+visa+strategy+layoffs+HackerNews+site%3Anews.ycombinator.com&limit=1 200
+2026-04-04 20:01:27,423 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-04 20:01:27,993 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47631732.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:28,269 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632095.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:28,792 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632481.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,070 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633184.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,093 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632282.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,108 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632724.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,384 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632434.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,884 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47634171.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,893 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47632588.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,905 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633216.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:29,908 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633129.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:30,189 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47633263.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:30,672 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Tech%20industry%20H-1B%20ethics%20HackerNews%20site%3Anews.ycombinator.com 200
+2026-04-04 20:01:31,138 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Tech+industry+H-1B+ethics+HackerNews+site%3Anews.ycombinator.com&limit=1 200
+2026-04-04 20:01:31,359 - ddgs.ddgs - INFO - Error in engine yahoo: DDGSException("RequestError: RequestError('error sending request for url (https://search.yahoo.com/search;_ylt=RNhzyOBrjVEt3bywq-j7Oc3q;_ylu=vhkcqy9sETdi9yApWl0tX5Ai1mF_O_J0m2N_T7xXV3SB-Eo?p=Tech+industry+H-1B+ethics+HackerNews+site%3Anews.ycombinator.com)', 'https://search.yahoo.com/search;_ylt=RNhzyOBrjVEt3bywq-j7Oc3q;_ylu=vhkcqy9sETdi9yApWl0tX5Ai1mF_O_J0m2N_T7xXV3SB-Eo?p=Tech+industry+H-1B+ethics+HackerNews+site%3Anews.ycombinator.com')")
+2026-04-04 20:01:32,174 - primp - INFO - response: https://search.brave.com/search?q=Tech+industry+H-1B+ethics+HackerNews+site%3Anews.ycombinator.com&source=web 200
+2026-04-04 20:01:32,488 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42450413.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,004 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42452180.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,012 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42454351.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,015 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42453963.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,019 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42455663.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,022 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42452044.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:33,508 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18572924.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,004 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18575792.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,011 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18573363.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,022 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18573593.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,023 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18575345.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,263 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/18576059.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:34,537 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24535126.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,144 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24535622.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,159 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24535510.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,160 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24535249.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,161 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24535293.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,162 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/24536438.json "HTTP/1.1 200 OK"
+2026-04-04 20:01:35,173 - newsroom.agents.researcher - INFO - Gathered 10 relevant sources after keyword filtering
+2026-04-04 20:01:35,173 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-04 20:01:35,173 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-04 20:01:35,805 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:01:56,187 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:01:56,213 - newsroom.agents.researcher - INFO - Synthesized research with 7 findings
+2026-04-04 20:01:56,213 - newsroom.agents.researcher - INFO - Research complete: 13 notes, 10 sources
+2026-04-04 20:01:56,213 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 13 notes
+2026-04-04 20:01:56,693 - newsroom.agents.researcher - INFO - researcher completed in 66.48s → skeptic
+2026-04-04 20:02:00,387 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 13 notes
+2026-04-04 20:02:00,387 - __main__ - INFO - 📍 RESEARCHER: discovery
+2026-04-04 20:02:00,393 - newsroom.agents.skeptic - INFO - Executing skeptic (run #2)
+2026-04-04 20:02:00,684 - newsroom.agents.skeptic - INFO - Skeptic agent reviewing research on: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:02:01,327 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:02:10,813 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:02:10,816 - newsroom.agents.skeptic - INFO - Quality assessment: 0.10
+2026-04-04 20:02:10,816 - newsroom.agents.skeptic - INFO - Force publish rule triggered (revision 1) — bypassing strict skeptic checks.
+2026-04-04 20:02:10,816 - newsroom.agents.skeptic - INFO - Skeptic decision: AgentDecision.APPROVE
+2026-04-04 20:02:10,816 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-04 20:02:11,317 - newsroom.agents.skeptic - INFO - skeptic completed in 10.42s → writer
+2026-04-04 20:02:13,931 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-04 20:02:13,947 - __main__ - INFO - 📍 SKEPTIC: discovery
+2026-04-04 20:02:13,949 - newsroom.agents.writer - INFO - Executing writer (run #1)
+2026-04-04 20:02:14,243 - newsroom.agents.writer - INFO - Writer agent creating draft v1 for: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:02:14,244 - newsroom.agents.writer - INFO - Creating initial draft
+2026-04-04 20:02:14,884 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:02:53,008 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:02:53,022 - newsroom.agents.writer - INFO - Draft v1 complete: 1607 words, 10 claims
+2026-04-04 20:02:53,022 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-04 20:02:56,834 - newsroom.agents.writer - INFO - writer completed in 39.07s → editor
+2026-04-04 20:02:59,922 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-04 20:02:59,933 - __main__ - INFO - 📍 WRITER: discovery
+2026-04-04 20:02:59,940 - newsroom.agents.editor - INFO - Executing editor (run #1)
+2026-04-04 20:03:00,480 - newsroom.agents.editor - INFO - Editor agent reviewing draft v1
+2026-04-04 20:03:02,636 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:03:22,895 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:03:22,910 - newsroom.agents.editor - INFO - Draft quality: 0.40
+2026-04-04 20:03:22,917 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-04 20:03:22,921 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-04 20:03:23,480 - newsroom.agents.editor - INFO - editor completed in 22.98s → writer
+2026-04-04 20:03:26,893 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-04 20:03:26,903 - __main__ - INFO - 📍 EDITOR: discovery
+2026-04-04 20:03:26,910 - newsroom.agents.writer - INFO - Executing writer (run #2)
+2026-04-04 20:03:27,222 - newsroom.agents.writer - INFO - Writer agent creating draft v2 for: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:03:27,227 - newsroom.agents.writer - INFO - Handling revision request with 1 comments
+2026-04-04 20:03:28,193 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:03:45,670 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:03:45,681 - newsroom.agents.writer - INFO - Draft v2 complete: 1211 words, 10 claims
+2026-04-04 20:03:45,681 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-04 20:03:46,247 - newsroom.agents.writer - INFO - writer completed in 18.76s → editor
+2026-04-04 20:03:48,955 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-04 20:03:48,959 - __main__ - INFO - 📍 WRITER: discovery
+2026-04-04 20:03:48,962 - newsroom.agents.editor - INFO - Executing editor (run #2)
+2026-04-04 20:03:49,255 - newsroom.agents.editor - INFO - Editor agent reviewing draft v2
+2026-04-04 20:03:49,904 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:04:10,113 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:04:10,128 - newsroom.agents.editor - INFO - Draft quality: 0.40
+2026-04-04 20:04:10,128 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-04 20:04:10,131 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-04 20:04:10,722 - newsroom.agents.editor - INFO - editor completed in 21.17s → writer
+2026-04-04 20:04:14,572 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-04 20:04:14,572 - __main__ - INFO - 📍 EDITOR: discovery
+2026-04-04 20:04:14,576 - newsroom.agents.writer - INFO - Executing writer (run #3)
+2026-04-04 20:04:14,878 - newsroom.agents.writer - INFO - Writer agent creating draft v3 for: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:04:14,878 - newsroom.agents.writer - INFO - Handling revision request with 2 comments
+2026-04-04 20:04:15,491 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:04:34,444 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:04:34,461 - newsroom.agents.writer - INFO - Draft v3 complete: 1359 words, 10 claims
+2026-04-04 20:04:34,463 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-04 20:04:35,043 - newsroom.agents.writer - INFO - writer completed in 19.89s → editor
+2026-04-04 20:04:37,724 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-04 20:04:37,726 - __main__ - INFO - 📍 WRITER: discovery
+2026-04-04 20:04:37,728 - newsroom.agents.editor - INFO - Executing editor (run #3)
+2026-04-04 20:04:38,021 - newsroom.agents.editor - INFO - Editor agent reviewing draft v3
+2026-04-04 20:04:38,650 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:04:58,238 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:04:58,249 - newsroom.agents.editor - INFO - Draft quality: 0.20
+2026-04-04 20:04:58,249 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-04 20:04:58,249 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-04 20:04:58,731 - newsroom.agents.editor - INFO - editor completed in 20.52s → writer
+2026-04-04 20:05:01,866 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-04 20:05:01,907 - __main__ - INFO - 📍 EDITOR: discovery
+2026-04-04 20:05:01,917 - newsroom.agents.writer - INFO - Executing writer (run #4)
+2026-04-04 20:05:02,230 - newsroom.agents.writer - INFO - Writer agent creating draft v4 for: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:05:02,231 - newsroom.agents.writer - INFO - Handling revision request with 3 comments
+2026-04-04 20:05:03,251 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:05:20,945 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:05:20,954 - newsroom.agents.writer - INFO - Draft v4 complete: 1361 words, 10 claims
+2026-04-04 20:05:20,959 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-04 20:05:21,759 - newsroom.agents.writer - INFO - writer completed in 19.04s → editor
+2026-04-04 20:05:24,578 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-04 20:05:24,586 - __main__ - INFO - 📍 WRITER: discovery
+2026-04-04 20:05:24,594 - newsroom.agents.editor - INFO - Executing editor (run #4)
+2026-04-04 20:05:24,893 - newsroom.agents.editor - INFO - Editor agent reviewing draft v4
+2026-04-04 20:05:25,512 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:05:44,913 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:05:44,936 - newsroom.agents.editor - INFO - Draft quality: 0.00
+2026-04-04 20:05:44,936 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-04 20:05:44,937 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-04 20:05:45,508 - newsroom.agents.editor - INFO - editor completed in 20.33s → publisher
+2026-04-04 20:05:48,408 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-04 20:05:48,411 - __main__ - INFO - 📍 EDITOR: discovery
+2026-04-04 20:05:48,412 - newsroom.agents.publisher - INFO - Executing publisher (run #1)
+2026-04-04 20:05:48,715 - newsroom.agents.publisher - INFO - Publisher agent validating: 'Oracle Files Thousands of H-1B Visa Petitions Amid Mass Layoffs'
+2026-04-04 20:05:48,715 - newsroom.agents.publisher - INFO - Successfully saved approved draft to: output\approved_oracle_files_thousands_of_h_1b_visa_petitions_amid_mass_layoffs_20260404_200548.doc
+2026-04-04 20:05:49,363 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-04 20:05:55,427 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-04 20:05:55,434 - newsroom.agents.publisher - INFO - Generated SEO metadata: Oracle's Dual Strategy: H-1B Visas Amid Mass Layoffs & AI Shift
+2026-04-04 20:05:55,440 - newsroom.agents.publisher - WARNING - Missing Reddit credentials (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD) — skipping Reddit publish.
+2026-04-04 20:05:55,443 - newsroom.agents.publisher - INFO - Publisher decision: AgentDecision.PUBLISH
+2026-04-04 20:05:55,449 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-04 20:05:56,805 - newsroom.agents.publisher - INFO - publisher completed in 7.04s → END_PUBLISHED
+2026-04-04 20:05:59,908 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-04 20:05:59,915 - __main__ - INFO - 📍 PUBLISHER: discovery
+2026-04-04 20:05:59,925 - __main__ - INFO - 
+======================================================================
+2026-04-04 20:05:59,928 - __main__ - INFO - WORKFLOW COMPLETE
+2026-04-04 20:05:59,931 - __main__ - INFO - ======================================================================

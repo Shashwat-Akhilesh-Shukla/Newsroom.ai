@@ -11,6 +11,7 @@ import logging
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import redis.asyncio as aioredis
 
 # Ensure src is in python path
@@ -32,6 +33,11 @@ app.add_middleware(
 
 logger = logging.getLogger("newsroom.api")
 logging.basicConfig(level=logging.INFO)
+
+# Mount output directory if it exists
+output_dir = Path(__file__).parent.parent.parent / "output"
+output_dir.mkdir(exist_ok=True)
+app.mount("/output", StaticFiles(directory=str(output_dir)), name="output")
 
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
 
@@ -64,8 +70,8 @@ async def redis_listener():
     try:
         redis_client = aioredis.from_url(REDIS_URL)
         pubsub = redis_client.pubsub()
-        await pubsub.subscribe("newsroom:events")
-        logger.info(f"Subscribed to Redis channel 'newsroom:events' at {REDIS_URL}")
+        await pubsub.subscribe("newsroom:events", "newsroom:logs")
+        logger.info(f"Subscribed to Redis channels at {REDIS_URL}")
         
         async for message in pubsub.listen():
             if message["type"] == "message":
