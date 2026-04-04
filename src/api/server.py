@@ -105,18 +105,18 @@ async def websocket_endpoint(websocket: WebSocket):
         manager.disconnect(websocket)
 
 # ─── REST: Trigger Workflow ───────────────────────────
-_workflow_process = None
+import subprocess
+import threading
+import json as _json
+
+_workflow_thread = None
+_workflow_running = False
 
 @app.post("/api/run")
 async def trigger_run():
-    """
-    Launch the newsroom workflow as a background subprocess.
-    Only one run at a time is allowed.
-    """
-    global _workflow_process
+    global _workflow_thread, _workflow_running
 
-    # Check if a workflow is already running
-    if _workflow_process is not None and _workflow_process.returncode is None:
+    if _workflow_running:
         return JSONResponse(
             status_code=409,
             content={"status": "error", "message": "A workflow is already running."}
@@ -124,47 +124,45 @@ async def trigger_run():
 
     root = Path(__file__).parent.parent.parent
     python = sys.executable
+    main_script = str(root / "src" / "main.py")
 
-    try:
-        _workflow_process = await asyncio.create_subprocess_exec(
-            python, "-m", "src.main",
-            cwd=str(root),
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.STDOUT,
-        )
+    def run_in_thread():
+        global _workflow_running
+        _workflow_running = True
+        try:
+            proc = subprocess.Popen(
+                [python, main_script],
+                cwd=str(root),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+            )
+            for line in proc.stdout:
+                line = line.rstrip()
+                if line:
+                    payload = _json.dumps({"type": "log", "message": line})
+                    # Schedule broadcast on the event loop from this thread
+                    asyncio.run_coroutine_threadsafe(manager.broadcast(payload), loop)
+            proc.wait()
+            done = _json.dumps({"type": "log", "message": f">>> Workflow process exited (code {proc.returncode})"})
+            asyncio.run_coroutine_threadsafe(manager.broadcast(done), loop)
+        except Exception as e:
+            err = _json.dumps({"type": "log", "message": f">>> Subprocess error: {e}"})
+            asyncio.run_coroutine_threadsafe(manager.broadcast(err), loop)
+        finally:
+            _workflow_running = False
 
-        # Stream stdout to connected WebSocket clients
-        asyncio.create_task(_stream_process_output(_workflow_process))
+    # Grab the running event loop so the thread can schedule broadcasts
+    loop = asyncio.get_event_loop()
 
-        logger.info(f"Workflow subprocess started (PID {_workflow_process.pid})")
-        return JSONResponse({"status": "started", "pid": _workflow_process.pid})
+    _workflow_thread = threading.Thread(target=run_in_thread, daemon=True)
+    _workflow_thread.start()
 
-    except Exception as e:
-        logger.error(f"Failed to start workflow subprocess: {e}")
-        return JSONResponse(status_code=500, content={"status": "error", "message": str(e)})
+    logger.info("Workflow thread started")
+    return JSONResponse({"status": "started"})
 
-
-async def _stream_process_output(proc):
-    """Read subprocess stdout and broadcast each line as a log event."""
-    import json as _json
-    try:
-        async for raw_line in proc.stdout:
-            line = raw_line.decode("utf-8", errors="replace").rstrip()
-            if line:
-                payload = _json.dumps({"type": "log", "message": line})
-                await manager.broadcast(payload)
-    except Exception as e:
-        logger.error(f"Process output streaming error: {e}")
-    finally:
-        await proc.wait()
-        logger.info(f"Workflow process exited with code {proc.returncode}")
-        # Notify frontend
-        import json as _json2
-        done_msg = _json2.dumps({
-            "type": "log",
-            "message": f">>> Workflow process exited (code {proc.returncode})"
-        })
-        await manager.broadcast(done_msg)
 
 
 # ─── REST: List Output Runs ───────────────────────────
