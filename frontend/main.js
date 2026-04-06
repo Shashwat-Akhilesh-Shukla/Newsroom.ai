@@ -6,8 +6,9 @@
 // ─────────────────────────────────────────────
 // CONFIG
 // ─────────────────────────────────────────────
-const API_BASE = 'http://127.0.0.1:8000';
-const WS_URL   = 'ws://127.0.0.1:8000/ws/events';
+const API_BASE = window.location.origin;
+const WS_PROTOCOL = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+const WS_URL = `${WS_PROTOCOL}//${window.location.host}/ws/events`;
 
 // Agent definitions — order matters (matches workflow)
 const AGENTS = [

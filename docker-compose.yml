@@ -18,9 +18,11 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    # The default entrypoint will run src.main. 
-    # To run streaming mode, you can override command:
-    # command: ["--stream"]
+    ports:
+      - "8000:8000"
+    # The default command will run uvicorn (FastAPI dashboard) locally. 
+    # To run the backend pipeline in CLI streaming mode, you can override command:
+    # command: ["python", "-m", "src.main", "--stream"]
     
   db:
     image: postgres:15-alpine

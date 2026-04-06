@@ -1,0 +1,52 @@
+# render.yaml
+# Render Blueprint for "Zero Issue" One-Click Deployment
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # ----------------------------------------------------
+  # 1. The Core Application / Web Service
+  # ----------------------------------------------------
+  - type: web
+    name: ai-newsroom
+    env: docker
+    region: oregon                  # Choose your preferred region
+    plan: free                      # You can scale this to 'starter' or 'standard'
+    dockerfilePath: ./Dockerfile    # Deploys the unified multi-stage build out of box
+    healthCheckPath: /              # Front-end static route ensures alive
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false                 # DO NOT store secrets in the yaml; define them securely in Render dashboard
+      - key: DATABASE_URL
+        fromDatabase:
+          name: newsroom-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: newsroom-cache
+          property: connectionString
+
+# ----------------------------------------------------
+# 2. Managed PostgreSQL Database
+# ----------------------------------------------------
+databases:
+  - name: newsroom-db
+    databaseName: newsroom
+    user: newsroom_admin
+    plan: free
+
+# ----------------------------------------------------
+# 3. Managed Redis (for event streaming / LangGraph state)
+# ----------------------------------------------------
+# Render natively runs Redis via blueprints as well
+envGroup:
+  - name: GlobalEnv
+    envVars:
+      - key: REDIS_HOST
+        value: newsroom-cache
+
+services:
+  - type: redis
+    name: newsroom-cache
+    plan: free
+    ipAllowList: [] # allowing internal access only

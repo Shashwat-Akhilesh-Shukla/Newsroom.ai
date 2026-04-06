@@ -187,7 +187,16 @@ async def list_runs():
 
     return JSONResponse(runs)
 
+# ─── Frontend Static Mount ────────────────────────────
+# Must be mounted last so it doesn't shadow /api or /ws routes
+frontend_dir = Path(__file__).parent.parent.parent / "frontend" / "dist"
+if frontend_dir.exists():
+    app.mount("/", StaticFiles(directory=str(frontend_dir), html=True), name="frontend")
+else:
+    logger.warning("Frontend dist directory not found. Please run 'npm run build' in the frontend folder.")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("src.api.server:app", host="0.0.0.0", port=8000, reload=True)
+    # Use PORT env variable if available, defaults to 8000
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("src.api.server:app", host="0.0.0.0", port=port, reload=True)
