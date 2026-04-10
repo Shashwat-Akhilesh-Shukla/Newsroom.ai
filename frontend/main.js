@@ -56,6 +56,17 @@ const state = {
   wsRetries: 0,
 };
 
+// Metrics state
+const metrics = {
+  agentsDone: 0,
+  events: 0,
+  errors: 0,
+  articles: 0,
+  startTime: null,
+  durationTimer: null,
+  agentStartTimes: {},
+};
+
 // ─────────────────────────────────────────────
 // DOM REFS
 // ─────────────────────────────────────────────
@@ -76,6 +87,16 @@ const btnDownload  = $('btn-download-docx');
 const runsList     = $('runs-list');
 const svgEl        = $('connections-svg');
 const graphNodes   = $('graph-nodes');
+
+// Metric DOM refs
+const mvAgentsDone = $('mv-agents-done');
+const mvDuration   = $('mv-duration');
+const mvEvents     = $('mv-events');
+const mvArticles   = $('mv-articles');
+const mvErrors     = $('mv-errors');
+const mvStatus     = $('mv-status');
+const mbarAgents   = $('mbar-agents');
+const agentTimeline = $('agent-timeline');
 
 // ─────────────────────────────────────────────
 // MARKDOWN RENDERER (no external dep)
@@ -124,6 +145,110 @@ function renderMarkdown(md) {
     .join('\n');
 
   return html;
+}
+
+// ─────────────────────────────────────────────
+// METRICS UPDATERS
+// ─────────────────────────────────────────────
+function flashEl(el) {
+  el.classList.remove('flashing');
+  void el.offsetWidth; // reflow
+  el.classList.add('flashing');
+}
+
+function setMetricText(el, text) {
+  if (el.dataset.val === String(text)) return;
+  el.dataset.val = String(text);
+  // Preserve unit spans if present
+  const unit = el.querySelector('.metric-unit');
+  if (unit) {
+    el.childNodes[0].textContent = String(text);
+  } else {
+    el.textContent = String(text);
+  }
+  flashEl(el);
+}
+
+function updateMetricStatus(state) {
+  const labels = { idle: 'IDLE', running: 'RUNNING', done: 'DONE', error: 'ERROR' };
+  mvStatus.dataset.state = state;
+  setMetricText(mvStatus, labels[state] || state.toUpperCase());
+}
+
+function startDurationTimer() {
+  if (metrics.durationTimer) return;
+  metrics.startTime = Date.now();
+  metrics.durationTimer = setInterval(() => {
+    const elapsed = Math.round((Date.now() - metrics.startTime) / 1000);
+    // Update duration text — bypass flash (updates every second)
+    const unit = mvDuration.querySelector('.metric-unit');
+    if (unit) mvDuration.childNodes[0].textContent = String(elapsed);
+    else mvDuration.textContent = String(elapsed);
+  }, 1000);
+}
+
+function stopDurationTimer() {
+  if (metrics.durationTimer) {
+    clearInterval(metrics.durationTimer);
+    metrics.durationTimer = null;
+  }
+}
+
+function resetMetrics() {
+  metrics.agentsDone     = 0;
+  metrics.events         = 0;
+  metrics.errors         = 0;
+  metrics.agentStartTimes = {};
+  stopDurationTimer();
+
+  setMetricText(mvAgentsDone, 0);
+  const durUnit = mvDuration.querySelector('.metric-unit');
+  if (durUnit) mvDuration.childNodes[0].textContent = '0';
+  setMetricText(mvEvents,    0);
+  setMetricText(mvErrors,    0);
+  mbarAgents.style.width = '0%';
+  updateMetricStatus('idle');
+  agentTimeline.innerHTML = '';
+}
+
+function tickEvent() {
+  metrics.events++;
+  setMetricText(mvEvents, metrics.events);
+}
+
+function tickError() {
+  metrics.errors++;
+  setMetricText(mvErrors, metrics.errors);
+}
+
+// ── Agent Timeline ──
+let atlItems = {}; // agentId → element
+
+function atlEnsure(id) {
+  if (atlItems[id]) return atlItems[id];
+  const item = document.createElement('div');
+  item.className = 'atl-item idle';
+  item.dataset.id = id;
+  const meta = AGENTS.find(a => a.id === id);
+  item.innerHTML = `
+    <span class="atl-dot"></span>
+    <span class="atl-name">${meta?.label || id}</span>
+    <span class="atl-time">—</span>
+  `;
+  agentTimeline.appendChild(item);
+  atlItems[id] = item;
+  return item;
+}
+
+function atlSetState(id, state, elapsed) {
+  const item = atlEnsure(id);
+  item.className = `atl-item ${state}`;
+  // Remove & re-add to replay animation
+  agentTimeline.removeChild(item);
+  agentTimeline.appendChild(item);
+  if (elapsed !== undefined) {
+    item.querySelector('.atl-time').textContent = `${elapsed}s`;
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -363,16 +488,40 @@ function onAgentStarted(id) {
   const prev = getPreviousAgent(id);
   if (prev) activateEdge(prev, id);
   setTicker(`[${id.toUpperCase()}] is running…`);
+  // Metrics
+  metrics.agentStartTimes[id] = Date.now();
+  if (!metrics.startTime) startDurationTimer();
+  updateMetricStatus('running');
+  atlSetState(id, 'running');
+  tickEvent();
 }
 
 function onAgentCompleted(id) {
   setAgentStatus(id, 'completed');
   const prev = getPreviousAgent(id);
   if (prev) markEdgeDone(prev, id);
+  // Metrics
+  metrics.agentsDone++;
+  const elapsed = metrics.agentStartTimes[id]
+    ? Math.round((Date.now() - metrics.agentStartTimes[id]) / 1000)
+    : undefined;
+  setMetricText(mvAgentsDone, metrics.agentsDone);
+  mbarAgents.style.width = `${(metrics.agentsDone / AGENTS.length) * 100}%`;
+  atlSetState(id, 'done', elapsed);
+  tickEvent();
+  // If all agents done
+  if (metrics.agentsDone >= AGENTS.length) {
+    stopDurationTimer();
+    updateMetricStatus('done');
+  }
 }
 
 function onAgentError(id) {
   setAgentStatus(id, 'error');
+  // Metrics
+  tickError();
+  atlSetState(id, 'error');
+  updateMetricStatus('error');
 }
 
 // ─────────────────────────────────────────────
@@ -451,6 +600,12 @@ function connectWebSocket() {
       if (parsed.data?.run_id) {
         state.latestRunId = parsed.data.run_id;
       }
+
+      // Article published
+      if (event === 'completed' && id === 'publisher') {
+        metrics.articles++;
+        setMetricText(mvArticles, metrics.articles);
+      }
     }
   };
 
@@ -486,6 +641,9 @@ async function triggerWorkflow() {
   });
   setTicker('Workflow starting…');
   appendLog('>>> Triggering AI Newsroom workflow…', 'system');
+  // Reset metrics
+  atlItems = {};
+  resetMetrics();
 
   try {
     const res = await fetch(`${API_BASE}/api/run`, { method: 'POST' });

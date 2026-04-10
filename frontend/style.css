@@ -570,3 +570,204 @@ body {
 .run-item-id { font-family: var(--mono); font-size: 12px; color: var(--text); }
 .run-item-meta { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
 .run-item-btn { font-size: 11px; padding: 4px 10px; }
+
+/* ═══════════════════════════
+   METRICS PANEL (RIGHT)
+═══════════════════════════ */
+:root {
+  --metrics-w: 220px;
+  --m-cyan:    #22d3ee;
+  --m-green:   #4ade80;
+  --m-purple:  #a78bfa;
+  --m-orange:  #fb923c;
+  --m-red:     #f87171;
+  --m-yellow:  #fbbf24;
+}
+
+#metrics-panel {
+  width: var(--metrics-w);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(13,18,32,0.95) 0%, rgba(8,12,20,0.98) 100%);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-2) transparent;
+}
+#metrics-panel::-webkit-scrollbar { width: 3px; }
+#metrics-panel::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 2px; }
+
+.metrics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 14px 11px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+
+.metrics-pulse {
+  width: 7px;
+  height: 7px;
+  background: var(--m-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--m-cyan);
+  animation: metric-blink 2.4s ease-in-out infinite;
+}
+@keyframes metric-blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--m-cyan); }
+  50%       { opacity: 0.3; box-shadow: none; }
+}
+
+/* 2-column grid for cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 12px;
+}
+
+.metric-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 11px 10px 10px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+  backdrop-filter: blur(8px);
+}
+.metric-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.metric-card:hover {
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Full-width card for agents done (first) */
+#mc-agents-done {
+  grid-column: 1 / -1;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--mono);
+  line-height: 1;
+  color: var(--m-cyan);
+  text-shadow: 0 0 18px var(--m-cyan), 0 0 40px rgba(34,211,238,0.4);
+  letter-spacing: -1px;
+  transition: color 0.4s, text-shadow 0.4s;
+}
+
+/* Assign distinct glow colours per card */
+#mc-duration   .metric-value { color: var(--m-green);  text-shadow: 0 0 18px var(--m-green),  0 0 40px rgba(74,222,128,0.4); }
+#mc-events     .metric-value { color: var(--m-purple); text-shadow: 0 0 18px var(--m-purple), 0 0 40px rgba(167,139,250,0.4); }
+#mc-articles   .metric-value { color: var(--m-orange); text-shadow: 0 0 18px var(--m-orange), 0 0 40px rgba(251,146,60,0.4); }
+#mc-errors     .metric-value { color: var(--m-red);    text-shadow: 0 0 18px var(--m-red),    0 0 40px rgba(248,113,113,0.4); }
+#mc-status     .metric-value { color: var(--m-yellow); text-shadow: 0 0 18px var(--m-yellow), 0 0 40px rgba(251,191,36,0.4); font-size: 13px; letter-spacing: 1.5px; }
+
+/* Number flash animation on update */
+@keyframes flash-up {
+  0%   { filter: brightness(3); transform: scale(1.12); }
+  100% { filter: brightness(1); transform: scale(1); }
+}
+.metric-value.flashing {
+  animation: flash-up 0.45s ease-out;
+}
+
+.metric-unit {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.5;
+  margin-left: 1px;
+}
+
+.metric-label {
+  font-size: 9.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-family: var(--mono);
+}
+
+/* agents-done progress bar */
+.metric-bar {
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.metric-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--m-cyan), var(--m-green));
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--m-cyan);
+  transition: width 0.5s ease;
+}
+
+/* status variants */
+#mv-status[data-state="running"]   { color: var(--m-cyan);   text-shadow: 0 0 18px var(--m-cyan), 0 0 40px rgba(34,211,238,0.4); }
+#mv-status[data-state="done"]      { color: var(--m-green);  text-shadow: 0 0 18px var(--m-green), 0 0 40px rgba(74,222,128,0.4); }
+#mv-status[data-state="error"]     { color: var(--m-red);    text-shadow: 0 0 18px var(--m-red), 0 0 40px rgba(248,113,113,0.4); }
+
+/* ── AGENT TIMELINE ── */
+.metrics-agent-breakdown {
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+  flex: 1;
+}
+
+#agent-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.atl-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid transparent;
+  font-size: 11px;
+  transition: border-color 0.3s, background 0.3s;
+  animation: atl-slide 0.3s ease;
+}
+@keyframes atl-slide {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.atl-item.running  { border-color: rgba(34,211,238,0.25); background: rgba(34,211,238,0.04); }
+.atl-item.done     { border-color: rgba(74,222,128,0.2);  background: rgba(74,222,128,0.03); }
+.atl-item.error    { border-color: rgba(248,113,113,0.25); background: rgba(248,113,113,0.04); }
+
+.atl-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.atl-item.idle    .atl-dot { background: var(--text-muted); }
+.atl-item.running .atl-dot { background: var(--m-cyan);  box-shadow: 0 0 6px var(--m-cyan);  animation: atl-pulse 1.2s ease-in-out infinite; }
+.atl-item.done    .atl-dot { background: var(--m-green); box-shadow: 0 0 6px var(--m-green); }
+.atl-item.error   .atl-dot { background: var(--m-red);   box-shadow: 0 0 6px var(--m-red); }
+
+@keyframes atl-pulse {
+  0%,100% { opacity: 1; } 50% { opacity: 0.35; }
+}
+
+.atl-name { flex: 1; color: var(--text-dim); font-family: var(--mono); font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+.atl-time { color: var(--text-muted); font-family: var(--mono); font-size: 9.5px; }

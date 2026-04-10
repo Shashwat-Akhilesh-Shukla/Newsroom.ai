@@ -68,6 +68,53 @@
           </div>
         </main>
 
+        <!-- RIGHT: METRICS PANEL -->
+        <aside id="metrics-panel">
+          <div class="metrics-header">
+            <span class="mono label">LIVE METRICS</span>
+            <span class="metrics-pulse"></span>
+          </div>
+          <div class="metrics-grid">
+
+            <div class="metric-card" id="mc-agents-done">
+              <div class="metric-value" id="mv-agents-done">0<span class="metric-unit">/6</span></div>
+              <div class="metric-label">Agents Done</div>
+              <div class="metric-bar"><div class="metric-bar-fill" id="mbar-agents" style="width:0%"></div></div>
+            </div>
+
+            <div class="metric-card" id="mc-duration">
+              <div class="metric-value" id="mv-duration">0<span class="metric-unit">s</span></div>
+              <div class="metric-label">Duration</div>
+            </div>
+
+            <div class="metric-card" id="mc-events">
+              <div class="metric-value" id="mv-events">0</div>
+              <div class="metric-label">Events</div>
+            </div>
+
+            <div class="metric-card" id="mc-articles">
+              <div class="metric-value" id="mv-articles">0</div>
+              <div class="metric-label">Articles</div>
+            </div>
+
+            <div class="metric-card" id="mc-errors">
+              <div class="metric-value" id="mv-errors" data-color="error">0</div>
+              <div class="metric-label">Errors</div>
+            </div>
+
+            <div class="metric-card" id="mc-status">
+              <div class="metric-value metric-status" id="mv-status">IDLE</div>
+              <div class="metric-label">Status</div>
+            </div>
+
+          </div>
+
+          <div class="metrics-agent-breakdown">
+            <div class="mono label" style="margin-bottom:10px">AGENT LOG</div>
+            <div id="agent-timeline"></div>
+          </div>
+        </aside>
+
       </div><!-- /#body -->
 
     </div><!-- /#app -->
