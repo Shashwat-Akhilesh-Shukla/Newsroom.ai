@@ -55,12 +55,16 @@ class EventBus:
             except Exception:
                 pass
         
+        # Print to stdout so the orchestrator server can intercept the JSON
+        print(f"__EVENT__:{json.dumps(event_data)}", flush=True)
+
         # Broadcast via Redis
         if redis_available:
             try:
                 redis_client.publish("newsroom:events", json.dumps(event_data))
             except Exception as e:
                 logger.debug(f"Failed to publish event to Redis: {e}")
+
 
 
 # Global singleton instance

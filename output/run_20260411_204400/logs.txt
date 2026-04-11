@@ -1,0 +1,391 @@
+2026-04-11 20:44:00,829 - src.observability.tracing - INFO - LangSmith tracing enabled | project='Newsroom'
+2026-04-11 20:44:00,991 - __main__ - INFO - ======================================================================
+2026-04-11 20:44:01,009 - __main__ - INFO - AI NEWSROOM - Multi-Agent Content Creation System
+2026-04-11 20:44:01,025 - __main__ - INFO - ======================================================================
+2026-04-11 20:44:01,040 - __main__ - INFO - LLM Provider: gemini
+2026-04-11 20:44:01,053 - __main__ - INFO - Model: gemini-2.5-flash
+2026-04-11 20:44:01,069 - __main__ - INFO - Scout Confidence Threshold: 0.7
+2026-04-11 20:44:01,087 - __main__ - INFO - Max Revision Loops: 4
+2026-04-11 20:44:01,102 - __main__ - INFO - ======================================================================
+2026-04-11 20:44:01,118 - __main__ - INFO - 
+🚀 Starting workflow...
+
+2026-04-11 20:44:01,134 - src.graph - INFO - Starting newsroom workflow...
+2026-04-11 20:44:01,246 - src.graph - INFO - Newsroom workflow created successfully
+2026-04-11 20:44:01,260 - src.graph - INFO - 🔍 LangSmith trace: https://smith.langchain.com/projects/p/Newsroom/runs/df08d136-9154-498d-a380-b509078e2e45
+2026-04-11 20:44:01,483 - newsroom.agents.scout - INFO - Executing scout (run #1)
+2026-04-11 20:44:02,545 - newsroom.agents.scout - INFO - Scout agent starting topic discovery...
+2026-04-11 20:44:02,559 - newsroom.agents.scout - INFO - Fetching trends from all sources...
+2026-04-11 20:44:02,572 - src.utils.api_clients - INFO - Fetching trends from all sources...
+2026-04-11 20:44:02,676 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-11 20:44:02,703 - src.utils.api_clients - INFO - Fetched 10 recent papers from cs.AI
+2026-04-11 20:44:03,073 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=technology%20news 200
+2026-04-11 20:44:03,235 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/topstories.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:03,289 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=technology+news&limit=1 200
+2026-04-11 20:44:03,346 - src.utils.api_clients - ERROR - Failed to fetch trending searches: The request failed: Google returned a response with code 404
+2026-04-11 20:44:03,392 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Technology%20news&explaintext=0&exintro=0&redirects=1 200
+2026-04-11 20:44:03,536 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730194.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:03,570 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,049 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47724352.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,532 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730370.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,552 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47724118.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,565 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47697722.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,578 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47720419.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,600 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47687443.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,619 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47676890.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,632 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47695213.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,645 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47719942.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,661 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47719274.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,673 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47725403.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,686 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47727659.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,700 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730229.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,716 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47721953.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,732 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47702890.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,747 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47727960.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,763 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47698455.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,785 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730407.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,799 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47729994.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,811 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47728653.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,824 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47725583.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,835 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47717847.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,856 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47698111.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,868 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47722333.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,887 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47689793.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,899 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47721946.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,912 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730712.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,927 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47717690.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,935 - primp - INFO - response: https://www.mojeek.com/search?q=technology+news 200
+2026-04-11 20:44:04,940 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47719740.json "HTTP/1.1 200 OK"
+2026-04-11 20:44:04,995 - src.utils.api_clients - INFO - Fetched 30 trending topics from Hacker News
+2026-04-11 20:44:05,191 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=artificial%20intelligence 200
+2026-04-11 20:44:05,367 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=artificial+intelligence&limit=1 200
+2026-04-11 20:44:05,527 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Artificial%20intelligence&explaintext=0&exintro=0&redirects=1 200
+2026-04-11 20:44:05,708 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/artificial/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,735 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/programming/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,772 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/science/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,789 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Futurology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,811 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/MachineLearning/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,853 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/cybersecurity/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:05,986 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/worldnews/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:44:06,021 - src.utils.api_clients - INFO - Fetched 70 unique trending posts from Reddit
+2026-04-11 20:44:06,433 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-11 20:44:07,164 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=science%20discovery 200
+2026-04-11 20:44:07,183 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=cybersecurity%20breach 200
+2026-04-11 20:44:07,300 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=cybersecurity+breach&limit=1 200
+2026-04-11 20:44:07,312 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=science+discovery&limit=1 200
+2026-04-11 20:44:07,478 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Science%20Discovery%20Center%20of%20Oneonta&explaintext=0&exintro=0&redirects=1 200
+2026-04-11 20:44:07,518 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Cyber%20security%20breach&explaintext=0&exintro=0&redirects=1 200
+2026-04-11 20:44:07,700 - ddgs.ddgs - INFO - Error in engine yahoo: DDGSException("RequestError: RequestError('error sending request for url (https://search.yahoo.com/search;_ylt=ZQiJC0g8ScMGHZdzyZFOvfvM;_ylu=YwGieiDcqoRoD8gbc_UCEfF-dM7HtBpt0IVCsYPyc1J5WLI?p=science+discovery)', 'https://search.yahoo.com/search;_ylt=ZQiJC0g8ScMGHZdzyZFOvfvM;_ylu=YwGieiDcqoRoD8gbc_UCEfF-dM7HtBpt0IVCsYPyc1J5WLI?p=science+discovery')")
+2026-04-11 20:44:08,504 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-11 20:44:09,087 - primp - INFO - response: https://www.google.com/search?q=cybersecurity+breach&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-11 20:44:09,214 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=software%20engineering 200
+2026-04-11 20:44:09,435 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=software+engineering&limit=1 200
+2026-04-11 20:44:09,542 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Software%20engineering&explaintext=0&exintro=0&redirects=1 200
+2026-04-11 20:44:10,112 - primp - INFO - response: https://search.brave.com/search?q=software+engineering&source=web 200
+2026-04-11 20:44:10,569 - primp - INFO - response: https://search.brave.com/search?q=cybersecurity+breach&source=web 200
+2026-04-11 20:44:10,634 - src.utils.api_clients - INFO - Fetched 50 unique results from DuckDuckGo News
+2026-04-11 20:44:10,650 - src.utils.api_clients - INFO - Fetched 160 total trends from 4 sources
+2026-04-11 20:44:10,662 - newsroom.agents.scout - INFO -   hackernews: 30 items
+2026-04-11 20:44:10,675 - newsroom.agents.scout - INFO -   arxiv: 10 items
+2026-04-11 20:44:10,688 - newsroom.agents.scout - INFO -   reddit: 70 items
+2026-04-11 20:44:10,699 - newsroom.agents.scout - INFO -   duckduckgo_news: 50 items
+2026-04-11 20:44:10,711 - newsroom.agents.scout - INFO - Aggregated 160 unique topics
+2026-04-11 20:44:13,028 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:44:25,981 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:44:26,039 - newsroom.agents.scout - INFO - Selected topic: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout' with confidence 0.90
+2026-04-11 20:44:26,052 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.90 >= threshold 0.7
+2026-04-11 20:44:26,688 - newsroom.agents.scout - INFO - scout completed in 24.53s → researcher
+2026-04-11 20:44:30,079 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.90 >= threshold 0.7
+2026-04-11 20:44:30,106 - newsroom.agents.researcher - INFO - Executing researcher (run #1)
+2026-04-11 20:44:30,476 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:44:31,316 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:44:41,080 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:44:41,097 - newsroom.agents.researcher - INFO - Generated research plan with 7 keywords
+2026-04-11 20:44:41,702 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3Agenerational+differences+artificial+intelligence+employment+perception&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-11 20:44:45,017 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3Aemployee+resistance+technological+change+workplace&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-11 20:44:45,395 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Gen+Z+AI+job+fear+reports&limit=1 200
+2026-04-11 20:44:45,510 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Gen%20Z%20AI%20job%20fear%20reports 200
+2026-04-11 20:44:46,564 - primp - INFO - response: https://yandex.com/search/site/?text=Gen+Z+AI+job+fear+reports&web=1&searchid=8392156 200
+2026-04-11 20:44:54,081 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Workers+sabotaging+AI+rollout+news&limit=1 200
+2026-04-11 20:44:54,328 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Workers%20sabotaging%20AI%20rollout%20news 200
+2026-04-11 20:44:55,272 - primp - INFO - response: https://yandex.com/search/site/?text=Workers+sabotaging+AI+rollout+news&web=1&searchid=4213227 200
+2026-04-11 20:44:59,924 - ddgs.ddgs - INFO - Error in engine grokipedia: DDGSException("ConnectError: ConnectError('error sending request for url (https://grokipedia.com/api/typeahead?query=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com&limit=1)', 'https://grokipedia.com/api/typeahead?query=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com&limit=1')")
+2026-04-11 20:45:00,410 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Gen%20Z%20AI%20job%20fear%20reddit%20discussion%20site%3Areddit.com 200
+2026-04-11 20:45:00,464 - primp - INFO - response: https://www.google.com/search?q=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-11 20:45:01,677 - primp - INFO - response: https://search.yahoo.com/search;_ylt=FjZP2lsRPyBLeXozB7BKTO6E;_ylu=4ja4pEOBXhGy1wIWkvIu_WXVpLf7wbWrXJ3u1ZGDhVSoMTI?p=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com 200
+2026-04-11 20:45:03,513 - primp - INFO - response: https://yandex.com/search/site/?text=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com&web=1&searchid=8976760 200
+2026-04-11 20:45:04,465 - primp - INFO - response: https://search.brave.com/search?q=Gen+Z+AI+job+fear+reddit+discussion+site%3Areddit.com&source=web 200
+2026-04-11 20:45:04,800 - src.utils.api_clients - WARNING - _make_request attempt 1 failed: [Errno 11001] getaddrinfo failed. Retrying in 1.0s...
+2026-04-11 20:45:06,542 - src.utils.api_clients - WARNING - _make_request attempt 2 failed: [Errno 11001] getaddrinfo failed. Retrying in 2.0s...
+2026-04-11 20:45:08,561 - src.utils.api_clients - ERROR - _make_request failed after 3 attempts: [Errno 11001] getaddrinfo failed
+2026-04-11 20:45:08,576 - src.utils.api_clients - ERROR - Failed to fetch Reddit post details: [Errno 11001] getaddrinfo failed
+2026-04-11 20:45:11,042 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-11 20:45:11,225 - src.utils.api_clients - WARNING - _make_request attempt 1 failed: Client error '403 Blocked' for url 'https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403. Retrying in 1.0s...
+2026-04-11 20:45:12,828 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-11 20:45:13,002 - src.utils.api_clients - WARNING - _make_request attempt 2 failed: Client error '403 Blocked' for url 'https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403. Retrying in 2.0s...
+2026-04-11 20:45:15,277 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-11 20:45:15,443 - src.utils.api_clients - ERROR - _make_request failed after 3 attempts: Client error '403 Blocked' for url 'https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-04-11 20:45:15,457 - src.utils.api_clients - ERROR - Failed to fetch Reddit post details: Client error '403 Blocked' for url 'https://www.reddit.com/r/Marz/comments/jl7cvl/_/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-04-11 20:45:17,706 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/politics.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:45:18,228 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Employee%20sabotage%20AI%20rollout%20reddit%20site%3Areddit.com 200
+2026-04-11 20:45:18,692 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Employee+sabotage+AI+rollout+reddit+site%3Areddit.com&limit=1 200
+2026-04-11 20:45:19,255 - primp - INFO - response: https://search.yahoo.com/search;_ylt=ZxgPtIEbamsDWzyb06ffuT4X;_ylu=OVF58wfw7wnwK0RuSGRbChU7qjj6UxquKW4XGInoCqSKRa0?p=Employee+sabotage+AI+rollout+reddit+site%3Areddit.com 200
+2026-04-11 20:45:20,341 - primp - INFO - response: https://www.google.com/search?q=Employee+sabotage+AI+rollout+reddit+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-11 20:45:22,394 - primp - INFO - response: https://www.mojeek.com/search?q=Employee+sabotage+AI+rollout+reddit+site%3Areddit.com 200
+2026-04-11 20:45:24,013 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-11 20:45:24,398 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/sysadmin/comments/169tvd7/if_you_discovered_that_an_employee_who_reports_to.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:45:26,347 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/dataanalysis/comments/16ik074/being_pushed_to_use_ai_at_work_and_im.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:45:28,740 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/ArtificialInteligence/comments/18oghg5/who_uses_ai_secretly_at_work.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:45:29,110 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=AI+implementation+challenges+employee+resistance+HN+site%3Anews.ycombinator.com&limit=1 200
+2026-04-11 20:45:29,246 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=AI%20implementation%20challenges%20employee%20resistance%20HN%20site%3Anews.ycombinator.com 200
+2026-04-11 20:45:30,072 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-11 20:45:30,673 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44050152.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:30,980 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44050261.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:31,481 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44050756.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:31,797 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44050340.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:31,811 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44051629.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:31,825 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44050403.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:32,122 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42917959.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:32,629 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42918173.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:32,641 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/42918308.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:33,049 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Securing+AI+systems+internal+threats+HN+site%3Anews.ycombinator.com&limit=1 200
+2026-04-11 20:45:33,147 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Securing%20AI%20systems%20internal%20threats%20HN%20site%3Anews.ycombinator.com 200
+2026-04-11 20:45:34,676 - primp - INFO - response: https://www.mojeek.com/search?q=Securing+AI+systems+internal+threats+HN+site%3Anews.ycombinator.com 200
+2026-04-11 20:45:35,243 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47031334.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,186 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47047444.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,199 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47039184.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,210 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47040414.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,223 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47046626.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,242 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47039861.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:36,536 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44330755.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,049 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44331138.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,061 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44331064.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,074 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44330894.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,088 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44330961.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,107 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44331517.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:37,559 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44431251.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,063 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44431461.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,075 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44433768.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,089 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44432720.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,106 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44431517.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,117 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44431336.json "HTTP/1.1 200 OK"
+2026-04-11 20:45:38,163 - newsroom.agents.researcher - WARNING - Relevance filter too strict — using top sources instead
+2026-04-11 20:45:38,199 - newsroom.agents.researcher - INFO - Gathered 3 relevant sources after keyword filtering
+2026-04-11 20:45:38,212 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-11 20:45:38,227 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-11 20:45:39,138 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:45:57,379 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:45:57,394 - newsroom.agents.researcher - INFO - Synthesized research with 8 findings
+2026-04-11 20:45:57,412 - newsroom.agents.researcher - INFO - Research complete: 8 notes, 3 sources
+2026-04-11 20:45:57,424 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 8 notes
+2026-04-11 20:45:58,370 - newsroom.agents.researcher - INFO - researcher completed in 87.28s → skeptic
+2026-04-11 20:46:03,259 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 8 notes
+2026-04-11 20:46:03,291 - newsroom.agents.skeptic - INFO - Executing skeptic (run #1)
+2026-04-11 20:46:03,649 - newsroom.agents.skeptic - INFO - Skeptic agent reviewing research on: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:46:04,494 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:46:13,551 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:46:13,570 - newsroom.agents.skeptic - INFO - Quality assessment: 0.10
+2026-04-11 20:46:13,584 - newsroom.agents.skeptic - INFO - First try failed strict quality, but meets minimum source/note count. Requesting improvement.
+2026-04-11 20:46:13,596 - newsroom.agents.skeptic - INFO - Skeptic decision: AgentDecision.NEED_MORE_EVIDENCE
+2026-04-11 20:46:13,610 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.NEED_MORE_EVIDENCE | Reason: Insufficient evidence, sending back to Researcher
+2026-04-11 20:46:14,164 - newsroom.agents.skeptic - INFO - skeptic completed in 10.27s → researcher
+2026-04-11 20:46:16,972 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.NEED_MORE_EVIDENCE | Reason: Insufficient evidence, sending back to Researcher
+2026-04-11 20:46:17,007 - newsroom.agents.researcher - INFO - Executing researcher (run #2)
+2026-04-11 20:46:17,533 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:46:18,355 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:46:26,394 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:46:26,413 - newsroom.agents.researcher - INFO - Generated research plan with 9 keywords
+2026-04-11 20:46:37,014 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AGenerational+differences+AI+adoption+workplace&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-11 20:46:42,304 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AEmployee+resistance+technological+change&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-11 20:46:42,710 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Gen+Z+AI+job+fear+sabotage+reports&limit=1 200
+2026-04-11 20:46:42,846 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Gen%20Z%20AI%20job%20fear%20sabotage%20reports 200
+2026-04-11 20:46:43,832 - primp - INFO - response: https://yandex.com/search/site/?text=Gen+Z+AI+job+fear+sabotage+reports&web=1&searchid=7208766 200
+2026-04-11 20:46:48,603 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Employee+resistance+AI+implementation+workplace&limit=1 200
+2026-04-11 20:46:48,707 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Employee%20resistance%20AI%20implementation%20workplace 200
+2026-04-11 20:46:50,020 - primp - INFO - response: https://yandex.com/search/site/?text=Employee+resistance+AI+implementation+workplace&web=1&searchid=5173375 200
+2026-04-11 20:46:51,631 - src.utils.api_clients - ERROR - Failed to scrape article https://medium.com/@theIkiGuyMarketing/why-im-wary-of-ai-an-employee-s-honest-take-on-the-ai-workplace-3dc5ba0c2a08: Article `download()` failed with 403 Client Error: Forbidden for url: https://medium.com/@theIkiGuyMarketing/why-im-wary-of-ai-an-employee-s-honest-take-on-the-ai-workplace-3dc5ba0c2a08 on URL https://medium.com/@theIkiGuyMarketing/why-im-wary-of-ai-an-employee-s-honest-take-on-the-ai-workplace-3dc5ba0c2a08
+2026-04-11 20:46:52,431 - src.utils.api_clients - ERROR - Failed to scrape article https://smallbizleader.com/qa/x-ways-to-overcome-employee-resistance-when-implementing-ai-solutions-in-your-small-business/: Article `download()` failed with 429 Client Error: Too Many Requests for url: https://smallbizleader.com/qa/x-ways-to-overcome-employee-resistance-when-implementing-ai-solutions-in-your-small-business/ on URL https://smallbizleader.com/qa/x-ways-to-overcome-employee-resistance-when-implementing-ai-solutions-in-your-small-business/
+2026-04-11 20:46:52,837 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Gen+Z+AI+job+fear+reddit+site%3Areddit.com&limit=1 200
+2026-04-11 20:46:52,934 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Gen%20Z%20AI%20job%20fear%20reddit%20site%3Areddit.com 200
+2026-04-11 20:46:53,989 - primp - INFO - response: https://yandex.com/search/site/?text=Gen+Z+AI+job+fear+reddit+site%3Areddit.com&web=1&searchid=2781938 200
+2026-04-11 20:46:55,527 - primp - INFO - response: https://www.mojeek.com/search?q=Gen+Z+AI+job+fear+reddit+site%3Areddit.com 200
+2026-04-11 20:46:56,207 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Futurology/comments/1k8adoz/an_alarming_number_of_gen_z_ai_users_think_its.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:46:57,834 - src.utils.api_clients - WARNING - _make_request attempt 1 failed: [Errno 11001] getaddrinfo failed. Retrying in 1.0s...
+2026-04-11 20:46:59,842 - src.utils.api_clients - WARNING - _make_request attempt 2 failed: [Errno 11001] getaddrinfo failed. Retrying in 2.0s...
+2026-04-11 20:47:01,871 - src.utils.api_clients - ERROR - _make_request failed after 3 attempts: [Errno 11001] getaddrinfo failed
+2026-04-11 20:47:01,886 - src.utils.api_clients - ERROR - Failed to fetch Reddit post details: [Errno 11001] getaddrinfo failed
+2026-04-11 20:47:04,486 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/politics.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:47:04,878 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Sabotaging+AI+at+work+reddit+site%3Areddit.com&limit=1 200
+2026-04-11 20:47:05,010 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Sabotaging%20AI%20at%20work%20reddit%20site%3Areddit.com 200
+2026-04-11 20:47:05,517 - primp - INFO - response: https://www.google.com/search?q=Sabotaging+AI+at+work+reddit+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-11 20:47:07,542 - primp - INFO - response: https://www.mojeek.com/search?q=Sabotaging+AI+at+work+reddit+site%3Areddit.com 200
+2026-04-11 20:47:08,360 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/slatestarcodex/comments/zke245/perhaps_it_is_a_bad_thing_that_the_worlds_leading.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:47:10,397 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/122agy1/ai_chatbot_company_replika_restores_erotic.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:47:12,391 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/11z3ipr/apple_further_cracks_down_on_remote_work_by.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-11 20:47:12,782 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=AI+implementation+challenges+employee+resistance+site%3Anews.ycombinator.com&limit=1 200
+2026-04-11 20:47:12,994 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=AI%20implementation%20challenges%20employee%20resistance%20site%3Anews.ycombinator.com 200
+2026-04-11 20:47:13,870 - primp - INFO - response: https://search.yahoo.com/search;_ylt=MFTivUGzd0rTWhegPuVUIg-3;_ylu=oYKGCW5OZvsTGGMKOtecyvpkds6ETfWpN2Tj9cBpIX41AS8?p=AI+implementation+challenges+employee+resistance+site%3Anews.ycombinator.com 200
+2026-04-11 20:47:14,867 - primp - INFO - response: https://search.brave.com/search?q=AI+implementation+challenges+employee+resistance+site%3Anews.ycombinator.com&source=web 200
+2026-04-11 20:47:15,500 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46945755.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:15,794 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46946522.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:16,322 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46946207.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:16,631 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46946551.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:16,644 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46946345.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:16,660 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46946686.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:16,961 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44709844.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:17,481 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44710271.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:17,495 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44709937.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:17,986 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276287.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:18,492 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276397.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:18,509 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276807.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:18,526 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276708.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:18,543 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276991.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:19,054 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/25276722.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:19,552 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Workplace+AI+adoption+issues+technical+site%3Anews.ycombinator.com&limit=1 200
+2026-04-11 20:47:19,570 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Workplace%20AI%20adoption%20issues%20technical%20site%3Anews.ycombinator.com 200
+2026-04-11 20:47:19,982 - primp - INFO - response: https://search.yahoo.com/search;_ylt=SC1L4EuQXV1WdzyPusgMKGHz;_ylu=ASXma_eQj6EzHiLwY5qHMLchupvC_93iT-UUghOSyTHsimk?p=Workplace+AI+adoption+issues+technical+site%3Anews.ycombinator.com 200
+2026-04-11 20:47:22,126 - primp - INFO - response: https://www.mojeek.com/search?q=Workplace+AI+adoption+issues+technical+site%3Anews.ycombinator.com 200
+2026-04-11 20:47:22,714 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46440833.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,226 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46441531.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,236 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46443059.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,251 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46441461.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,265 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46441409.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,276 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46440994.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:23,723 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46424200.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,227 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46431202.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,241 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46429725.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,253 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46430808.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,274 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46427349.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,292 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46426478.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:24,724 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44601562.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,226 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44602053.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,242 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44602222.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,256 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44601581.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,268 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44601882.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,285 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44601739.json "HTTP/1.1 200 OK"
+2026-04-11 20:47:25,314 - newsroom.agents.researcher - INFO - Gathered 5 relevant sources after keyword filtering
+2026-04-11 20:47:25,326 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-11 20:47:25,344 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-11 20:47:26,207 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:47:46,063 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:47:46,077 - newsroom.agents.researcher - INFO - Synthesized research with 7 findings
+2026-04-11 20:47:46,091 - newsroom.agents.researcher - INFO - Research complete: 15 notes, 5 sources
+2026-04-11 20:47:46,102 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 15 notes
+2026-04-11 20:47:46,746 - newsroom.agents.researcher - INFO - researcher completed in 89.07s → skeptic
+2026-04-11 20:47:50,280 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 15 notes
+2026-04-11 20:47:50,309 - newsroom.agents.skeptic - INFO - Executing skeptic (run #2)
+2026-04-11 20:47:50,642 - newsroom.agents.skeptic - INFO - Skeptic agent reviewing research on: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:47:51,466 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:47:59,823 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:47:59,842 - newsroom.agents.skeptic - INFO - Quality assessment: 0.10
+2026-04-11 20:47:59,856 - newsroom.agents.skeptic - INFO - Force publish rule triggered (revision 1) — bypassing strict skeptic checks.
+2026-04-11 20:47:59,866 - newsroom.agents.skeptic - INFO - Skeptic decision: AgentDecision.APPROVE
+2026-04-11 20:47:59,881 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-11 20:48:00,434 - newsroom.agents.skeptic - INFO - skeptic completed in 9.55s → writer
+2026-04-11 20:48:03,639 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-11 20:48:03,671 - newsroom.agents.writer - INFO - Executing writer (run #1)
+2026-04-11 20:48:04,027 - newsroom.agents.writer - INFO - Writer agent creating draft v1 for: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:48:04,040 - newsroom.agents.writer - INFO - Creating initial draft
+2026-04-11 20:48:04,907 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:48:36,468 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:48:36,487 - newsroom.agents.writer - INFO - Draft v1 complete: 1746 words, 10 claims
+2026-04-11 20:48:36,500 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-11 20:48:37,564 - newsroom.agents.writer - INFO - writer completed in 32.79s → editor
+2026-04-11 20:48:40,430 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-11 20:48:40,469 - newsroom.agents.editor - INFO - Executing editor (run #1)
+2026-04-11 20:48:40,808 - newsroom.agents.editor - INFO - Editor agent reviewing draft v1
+2026-04-11 20:48:41,652 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:49:02,946 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:49:02,967 - newsroom.agents.editor - INFO - Draft quality: 0.40
+2026-04-11 20:49:02,982 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-11 20:49:02,995 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-11 20:49:04,039 - newsroom.agents.editor - INFO - editor completed in 22.50s → writer
+2026-04-11 20:49:07,448 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-11 20:49:07,484 - newsroom.agents.writer - INFO - Executing writer (run #2)
+2026-04-11 20:49:07,854 - newsroom.agents.writer - INFO - Writer agent creating draft v2 for: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:49:07,866 - newsroom.agents.writer - INFO - Handling revision request with 1 comments
+2026-04-11 20:49:09,246 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:49:29,633 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:49:29,651 - newsroom.agents.writer - INFO - Draft v2 complete: 1439 words, 10 claims
+2026-04-11 20:49:29,662 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-11 20:49:30,226 - newsroom.agents.writer - INFO - writer completed in 22.14s → editor
+2026-04-11 20:49:33,665 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-11 20:49:33,701 - newsroom.agents.editor - INFO - Executing editor (run #2)
+2026-04-11 20:49:34,277 - newsroom.agents.editor - INFO - Editor agent reviewing draft v2
+2026-04-11 20:49:36,235 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:49:56,104 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:49:56,139 - newsroom.agents.editor - INFO - Draft quality: 0.20
+2026-04-11 20:49:56,160 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-11 20:49:56,174 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-11 20:49:57,012 - newsroom.agents.editor - INFO - editor completed in 22.43s → writer
+2026-04-11 20:50:01,044 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-11 20:50:01,079 - newsroom.agents.writer - INFO - Executing writer (run #3)
+2026-04-11 20:50:01,426 - newsroom.agents.writer - INFO - Writer agent creating draft v3 for: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:50:01,438 - newsroom.agents.writer - INFO - Handling revision request with 2 comments
+2026-04-11 20:50:03,382 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:50:23,387 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:50:23,407 - newsroom.agents.writer - INFO - Draft v3 complete: 1083 words, 10 claims
+2026-04-11 20:50:23,423 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-11 20:50:23,986 - newsroom.agents.writer - INFO - writer completed in 22.31s → editor
+2026-04-11 20:50:27,689 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-11 20:50:27,724 - newsroom.agents.editor - INFO - Executing editor (run #3)
+2026-04-11 20:50:28,149 - newsroom.agents.editor - INFO - Editor agent reviewing draft v3
+2026-04-11 20:50:29,252 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:50:50,822 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:50:50,835 - newsroom.agents.editor - INFO - Draft quality: 0.30
+2026-04-11 20:50:50,850 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-11 20:50:50,864 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-11 20:50:51,465 - newsroom.agents.editor - INFO - editor completed in 23.10s → writer
+2026-04-11 20:50:54,862 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-11 20:50:54,891 - newsroom.agents.writer - INFO - Executing writer (run #4)
+2026-04-11 20:50:55,233 - newsroom.agents.writer - INFO - Writer agent creating draft v4 for: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:50:55,245 - newsroom.agents.writer - INFO - Handling revision request with 3 comments
+2026-04-11 20:50:56,511 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:51:16,904 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:51:16,920 - newsroom.agents.writer - INFO - Draft v4 complete: 1321 words, 10 claims
+2026-04-11 20:51:16,945 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-11 20:51:17,512 - newsroom.agents.writer - INFO - writer completed in 22.03s → editor
+2026-04-11 20:51:22,881 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-11 20:51:22,915 - newsroom.agents.editor - INFO - Executing editor (run #4)
+2026-04-11 20:51:23,260 - newsroom.agents.editor - INFO - Editor agent reviewing draft v4
+2026-04-11 20:51:24,122 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:51:45,065 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:51:45,081 - newsroom.agents.editor - INFO - Draft quality: 0.30
+2026-04-11 20:51:45,095 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-11 20:51:45,113 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-11 20:51:45,895 - newsroom.agents.editor - INFO - editor completed in 22.17s → publisher
+2026-04-11 20:51:49,412 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-11 20:51:49,444 - newsroom.agents.publisher - INFO - Executing publisher (run #1)
+2026-04-11 20:51:49,783 - newsroom.agents.publisher - INFO - Publisher agent validating: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:51:49,795 - newsroom.agents.publisher - INFO - Successfully saved approved draft to: output\approved_gen_z_workers_are_so_fearful_ai_will_take_their_job_they_re_intentionally_sabotaging_their_company_s_ai_rollout_20260411_205149.doc
+2026-04-11 20:51:50,696 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-11 20:51:58,498 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-11 20:51:58,512 - newsroom.agents.publisher - INFO - Generated SEO metadata: Gen Z's AI Sabotage: Job Fear Undermines Corporate Innovation
+2026-04-11 20:51:58,525 - newsroom.agents.publisher - WARNING - Missing Reddit credentials (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD) — skipping Reddit publish.
+2026-04-11 20:51:58,556 - newsroom.agents.publisher - INFO - Publisher decision: AgentDecision.PUBLISH
+2026-04-11 20:51:58,584 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-11 20:51:59,145 - newsroom.agents.publisher - INFO - publisher completed in 9.11s → END_PUBLISHED
+2026-04-11 20:52:02,892 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-11 20:52:02,959 - src.graph - INFO - Newsroom workflow completed successfully
+2026-04-11 20:52:02,975 - src.graph - INFO - ✅ Article published: 'Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout'
+2026-04-11 20:52:02,991 - src.graph - INFO -    Word count: 1321
+2026-04-11 20:52:03,017 - src.graph - INFO -    Revisions: 4
+2026-04-11 20:52:03,034 - src.observability.metrics - INFO - ============================================================
+2026-04-11 20:52:03,053 - src.observability.metrics - INFO - WORKFLOW METRICS SUMMARY
+2026-04-11 20:52:03,072 - src.observability.metrics - INFO -   Topic:           Gen Z workers are so fearful AI will take their job they’re intentionally sabotaging their company’s AI rollout
+2026-04-11 20:52:03,090 - src.observability.metrics - INFO -   Published:       True
+2026-04-11 20:52:03,106 - src.observability.metrics - INFO -   Total latency:   419.3s
+2026-04-11 20:52:03,123 - src.observability.metrics - INFO -   Total LLM calls: 16
+2026-04-11 20:52:03,146 - src.observability.metrics - INFO -   Total tokens:    75,431 (in=25,796 / out=49,635)
+2026-04-11 20:52:03,159 - src.observability.metrics - INFO -   Est. cost:       $0.0168 USD
+2026-04-11 20:52:03,177 - src.observability.metrics - INFO -   Agent steps:     14
+2026-04-11 20:52:03,189 - src.observability.metrics - INFO -   Revision loops:  0
+2026-04-11 20:52:03,204 - src.observability.metrics - INFO - ============================================================
+2026-04-11 20:52:03,216 - __main__ - INFO - 
+======================================================================
+2026-04-11 20:52:03,237 - __main__ - INFO - WORKFLOW COMPLETE
+2026-04-11 20:52:03,249 - __main__ - INFO - ======================================================================

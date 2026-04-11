@@ -1,0 +1,2175 @@
+{
+  "topic": "Gen Z workers are so fearful AI will take their job they\u2019re intentionally sabotaging their company\u2019s AI rollout",
+  "status": "PUBLISHED",
+  "workflow_stage": "discovery",
+  "draft_version": 4,
+  "revision_count": 0,
+  "iteration_counts": {
+    "scout_loops": 1,
+    "research_loops": 0,
+    "revision_loops": 4
+  },
+  "created_at": "2026-04-11T15:14:01.118201",
+  "updated_at": "2026-04-11T15:21:49.475824",
+  "metadata": {
+    "langsmith_run_id": "df08d136-9154-498d-a380-b509078e2e45",
+    "workflow_run_id": "df08d136-9154-498d-a380-b509078e2e45",
+    "scout_analysis": {
+      "relevance": 1.0,
+      "novelty": 0.9,
+      "technical_depth": 0.8,
+      "audience_interest": 0.9,
+      "cross_platform_score": 0.7,
+      "overall_confidence": 0.9,
+      "reasoning": "The selected topic, 'Gen Z workers are so fearful AI will take their job they\u2019re intentionally sabotaging their company\u2019s AI rollout,' is the single best choice because it directly falls under the 'AI' and 'Tech Policy' ALLOWED TOPICS. The angle of active sabotage due to fear is highly novel and provides a fresh perspective on the human-AI interaction in the workplace, moving beyond generic discussions of job displacement. This offers significant potential for technical depth, allowing an article to explore the specific AI technologies being implemented, the technical challenges of AI integration, the vulnerabilities exploited by 'sabotage,' and the ethical/policy frameworks for responsible AI deployment. The high score and numerous comments on the 'technology' subreddit indicate strong audience interest, aligning with previously successful articles about AI's impact on the workforce. It is also distinct from any previously published topics. Other topics were either too general news, purely financial, or explicitly political and thus prohibited.",
+      "suggested_angle": "A deep dive into the technical and ethical challenges of AI implementation in the workplace, focusing on how companies can design and deploy AI systems to mitigate employee fear, prevent sabotage, and foster responsible adoption, including technical solutions for explainable AI and human-in-the-loop systems.",
+      "keywords": [
+        "AI adoption",
+        "workforce AI",
+        "AI ethics",
+        "tech policy",
+        "employee resistance",
+        "AI implementation",
+        "Gen Z",
+        "future of work",
+        "responsible AI"
+      ]
+    },
+    "all_trends": {
+      "hackernews": [
+        {
+          "title": "Filing the corners off my MacBooks",
+          "url": "https://kentwalters.com/posts/corners/",
+          "score": 1085,
+          "comments": 495,
+          "author": "normanvalentine",
+          "time": 1775859400,
+          "source": "hackernews",
+          "id": 47724352
+        },
+        {
+          "title": "Artemis II safely splashes down",
+          "url": "https://www.cbsnews.com/live-updates/artemis-ii-splashdown-return/",
+          "score": 1067,
+          "comments": 341,
+          "author": "areoform",
+          "time": 1775866251,
+          "source": "hackernews",
+          "id": 47725583
+        },
+        {
+          "title": "1D Chess",
+          "url": "https://rowan441.github.io/1dchess/chess.html",
+          "score": 896,
+          "comments": 154,
+          "author": "burnt-resistor",
+          "time": 1775835448,
+          "source": "hackernews",
+          "id": 47719740
+        },
+        {
+          "title": "WireGuard makes new Windows release following Microsoft signing resolution",
+          "url": "https://lists.zx2c4.com/pipermail/wireguard/2026-April/009561.html",
+          "score": 512,
+          "comments": 148,
+          "author": "zx2c4",
+          "time": 1775836192,
+          "source": "hackernews",
+          "id": 47719942
+        },
+        {
+          "title": "Installing every* Firefox extension",
+          "url": "https://jack.cab/blog/every-firefox-extension",
+          "score": 503,
+          "comments": 67,
+          "author": "RohanAdwankar",
+          "time": 1775858193,
+          "source": "hackernews",
+          "id": 47724118
+        },
+        {
+          "title": "Industrial design files for Keychron keyboards and mice",
+          "url": "https://github.com/Keychron/Keychron-Keyboards-Hardware-Design",
+          "score": 411,
+          "comments": 128,
+          "author": "stingraycharles",
+          "time": 1775838146,
+          "source": "hackernews",
+          "id": 47720419
+        },
+        {
+          "title": "AI assistance when contributing to the Linux kernel",
+          "url": "https://github.com/torvalds/linux/blob/master/Documentation/process/coding-assistants.rst",
+          "score": 407,
+          "comments": 294,
+          "author": "hmokiguess",
+          "time": 1775846121,
+          "source": "hackernews",
+          "id": 47721953
+        },
+        {
+          "title": "Chimpanzees in Uganda locked in eight-year 'civil war', say researchers",
+          "url": "https://www.bbc.com/news/articles/cr71lkzv49po",
+          "score": 377,
+          "comments": 225,
+          "author": "neversaydie",
+          "time": 1775848222,
+          "source": "hackernews",
+          "id": 47722333
+        },
+        {
+          "title": "CPU-Z and HWMonitor compromised",
+          "url": "https://www.theregister.com/2026/04/10/cpuid_site_hijacked/",
+          "score": 369,
+          "comments": 94,
+          "author": "pashadee",
+          "time": 1775827760,
+          "source": "hackernews",
+          "id": 47717847
+        },
+        {
+          "title": "Starfling: A one-tap endless orbital slingshot game in a single HTML file",
+          "url": "https://playstarfling.com",
+          "score": 354,
+          "comments": 95,
+          "author": "iceberger2001",
+          "time": 1775699567,
+          "source": "hackernews",
+          "id": 47698455
+        },
+        {
+          "title": "Helium is hard to replace",
+          "url": "https://www.construction-physics.com/p/helium-is-hard-to-replace",
+          "score": 337,
+          "comments": 237,
+          "author": "JumpCrisscross",
+          "time": 1775833611,
+          "source": "hackernews",
+          "id": 47719274
+        },
+        {
+          "title": "JSON formatter Chrome plugin now closed and injecting adware",
+          "url": "https://github.com/callumlocke/json-formatter",
+          "score": 249,
+          "comments": 124,
+          "author": "jkl5xx",
+          "time": 1775846095,
+          "source": "hackernews",
+          "id": 47721946
+        },
+        {
+          "title": "France's government is ditching Windows for Linux, says US tech a strategic risk",
+          "url": "https://www.xda-developers.com/frances-government-ditching-windows-for-linux/",
+          "score": 210,
+          "comments": 123,
+          "author": "pabs3",
+          "time": 1775895914,
+          "source": "hackernews",
+          "id": 47728653
+        },
+        {
+          "title": "Volunteers turn a fan's recordings of 10K concerts into an online treasure trove",
+          "url": "https://apnews.com/article/aadam-jacobs-collection-concerts-internet-archive-chicago-b1c9c4466a2db409a83523ad84b79d62",
+          "score": 205,
+          "comments": 34,
+          "author": "geox",
+          "time": 1775639470,
+          "source": "hackernews",
+          "id": 47687443
+        },
+        {
+          "title": "Optimal Strategy for Connect 4",
+          "url": "https://2swap.github.io/WeakC4/explanation/",
+          "score": 162,
+          "comments": 22,
+          "author": "marvinborner",
+          "time": 1775677070,
+          "source": "hackernews",
+          "id": 47695213
+        },
+        {
+          "title": "Show HN: Pardonned.com \u2013 A searchable database of US Pardons",
+          "url": "",
+          "score": 143,
+          "comments": 49,
+          "author": "vidluther",
+          "time": 1775888365,
+          "source": "hackernews",
+          "id": 47727960
+        },
+        {
+          "title": "Bevy game development tutorials and in-depth resources",
+          "url": "https://taintedcoders.com/",
+          "score": 116,
+          "comments": 26,
+          "author": "GenericCanadian",
+          "time": 1775696327,
+          "source": "hackernews",
+          "id": 47698111
+        },
+        {
+          "title": "Italo Calvino: A traveller in a world of uncertainty",
+          "url": "https://www.historytoday.com/archive/portrait-author-historian/italo-calvino-traveller-world-uncertainty",
+          "score": 107,
+          "comments": 20,
+          "author": "lermontov",
+          "time": 1775864887,
+          "source": "hackernews",
+          "id": 47725403
+        },
+        {
+          "title": "Polymarket gamblers betting millions on war",
+          "url": "https://www.theguardian.com/business/2026/apr/11/polymarket-gamblers-betting-iran-war-ukraine-news-truth",
+          "score": 98,
+          "comments": 59,
+          "author": "sandebert",
+          "time": 1775910484,
+          "source": "hackernews",
+          "id": 47729994
+        },
+        {
+          "title": "Bitcoin miners are losing on every coin produced as difficulty drops",
+          "url": "https://www.coindesk.com/markets/2026/03/22/bitcoin-miners-are-losing-usd19-000-on-every-btc-produced-as-difficulty-drops-7-8",
+          "score": 86,
+          "comments": 79,
+          "author": "PaulHoule",
+          "time": 1775913745,
+          "source": "hackernews",
+          "id": 47730370
+        },
+        {
+          "title": "Cirrus Labs to join OpenAI",
+          "url": "https://cirruslabs.org/",
+          "score": 81,
+          "comments": 34,
+          "author": "seekdeep",
+          "time": 1775912494,
+          "source": "hackernews",
+          "id": 47730194
+        },
+        {
+          "title": "Productive Procrastination",
+          "url": "https://www.maxvanijsselmuiden.nl/blog/productive-procrastination/",
+          "score": 76,
+          "comments": 29,
+          "author": "maxvij",
+          "time": 1775884881,
+          "source": "hackernews",
+          "id": 47727659
+        },
+        {
+          "title": "How Passive Radar Works",
+          "url": "https://www.passiveradar.com/how-passive-radar-works/",
+          "score": 73,
+          "comments": 24,
+          "author": "surprisetalk",
+          "time": 1775738124,
+          "source": "hackernews",
+          "id": 47702890
+        },
+        {
+          "title": "South Korea introduces universal basic mobile data access",
+          "url": "https://www.theregister.com/2026/04/10/south_korea_data_access_universal/",
+          "score": 64,
+          "comments": 15,
+          "author": "saikatsg",
+          "time": 1775914036,
+          "source": "hackernews",
+          "id": 47730407
+        },
+        {
+          "title": "How Much Linear Memory Access Is Enough?",
+          "url": "https://solidean.com/blog/2026/how-much-linear-memory-access-is-enough/",
+          "score": 23,
+          "comments": 2,
+          "author": "PhilipTrettner",
+          "time": 1775654179,
+          "source": "hackernews",
+          "id": 47689793
+        },
+        {
+          "title": "Sybilproof reputation mechanisms (2005) [pdf]",
+          "url": "https://dl.acm.org/doi/pdf/10.1145/1080192.1080202",
+          "score": 19,
+          "comments": 0,
+          "author": "perfmode",
+          "time": 1775575775,
+          "source": "hackernews",
+          "id": 47676890
+        },
+        {
+          "title": "Cooperative Vectors Introduction",
+          "url": "https://www.evolvebenchmark.com/blog-posts/cooperative-vectors-introduction",
+          "score": 15,
+          "comments": 0,
+          "author": "JasperBekkers",
+          "time": 1775826972,
+          "source": "hackernews",
+          "id": 47717690
+        },
+        {
+          "title": "Previously unknown verses by Empedocles found on papyrus",
+          "url": "https://www.thehistoryblog.com/archives/75792",
+          "score": 11,
+          "comments": 1,
+          "author": "danielam",
+          "time": 1775692833,
+          "source": "hackernews",
+          "id": 47697722
+        },
+        {
+          "title": "The Problem That Built an Industry",
+          "url": "https://ajitem.com/blog/iron-core-part-1-the-problem-that-built-an-industry/",
+          "score": 6,
+          "comments": 1,
+          "author": "ShaggyHotDog",
+          "time": 1775916183,
+          "source": "hackernews",
+          "id": 47730712
+        },
+        {
+          "title": "Borges' cartographers and the tacit skill of reading LM output",
+          "url": "https://galsapir.github.io/sparse-thoughts/2026/04/11/map-and-territory/",
+          "score": 4,
+          "comments": 0,
+          "author": "galsapir",
+          "time": 1775912794,
+          "source": "hackernews",
+          "id": 47730229
+        }
+      ],
+      "arxiv": [
+        {
+          "title": "Act Wisely: Cultivating Meta-Cognitive Tool Use in Agentic Multimodal Models",
+          "summary": "The advent of agentic multimodal models has empowered systems to actively interact with external environments. However, current agents suffer from a profound meta-cognitive deficit: they struggle to arbitrate between leveraging internal knowledge and querying external utilities. Consequently, they frequently fall prey to blind tool invocation, resorting to reflexive tool execution even when queries are resolvable from the raw visual context. This pathological behavior precipitates severe latency bottlenecks and injects extraneous noise that derails sound reasoning. Existing reinforcement learning protocols attempt to mitigate this via a scalarized reward that penalizes tool usage. Yet, this coupled formulation creates an irreconcilable optimization dilemma: an aggressive penalty suppresses essential tool use, whereas a mild penalty is entirely subsumed by the variance of the accuracy reward during advantage normalization, rendering it impotent against tool overuse. To transcend this bottleneck, we propose HDPO, a framework that reframes tool efficiency from a competing scalar objective to a strictly conditional one. By eschewing reward scalarization, HDPO maintains two orthogonal optimization channels: an accuracy channel that maximizes task correctness, and an efficiency channel that enforces execution economy exclusively within accurate trajectories via conditional advantage estimation. This decoupled architecture naturally induces a cognitive curriculum-compelling the agent to first master task resolution before refining its self-reliance. Extensive evaluations demonstrate that our resulting model, Metis, reduces tool invocations by orders of magnitude while simultaneously elevating reasoning accuracy.",
+          "authors": [
+            "Shilin Yan",
+            "Jintao Tong",
+            "Hongwei Xue",
+            "Xiaojun Tang",
+            "Yangyang Wang",
+            "Kunyu Shi",
+            "Guannan Zhang",
+            "Ruixuan Li",
+            "Yixiong Zou"
+          ],
+          "published": "2026-04-09T17:59:57Z",
+          "url": "http://arxiv.org/abs/2604.08545v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "SIM1: Physics-Aligned Simulator as Zero-Shot Data Scaler in Deformable Worlds",
+          "summary": "Robotic manipulation with deformable objects represents a data-intensive regime in embodied learning, where shape, contact, and topology co-evolve in ways that far exceed the variability of rigids. Although simulation promises relief from the cost of real-world data acquisition, prevailing sim-to-real pipelines remain rooted in rigid-body abstractions, producing mismatched geometry, fragile soft dynamics, and motion primitives poorly suited for cloth interaction. We posit that simulation fails not for being synthetic, but for being ungrounded. To address this, we introduce SIM1, a physics-aligned real-to-sim-to-real data engine that grounds simulation in the physical world. Given limited demonstrations, the system digitizes scenes into metric-consistent twins, calibrates deformable dynamics through elastic modeling, and expands behaviors via diffusion-based trajectory generation with quality filtering. This pipeline transforms sparse observations into scaled synthetic supervision with near-demonstration fidelity. Experiments show that policies trained on purely synthetic data achieve parity with real-data baselines at a 1:15 equivalence ratio, while delivering 90% zero-shot success and 50% generalization gains in real-world deployment. These results validate physics-aligned simulation as scalable supervision for deformable manipulation and a practical pathway for data-efficient policy learning.",
+          "authors": [
+            "Yunsong Zhou",
+            "Hangxu Liu",
+            "Xuekun Jiang",
+            "Xing Shen",
+            "Yuanzhen Zhou",
+            "Hui Wang",
+            "Baole Fang",
+            "Yang Tian",
+            "Mulin Yu",
+            "Qiaojun Yu",
+            "Li Ma",
+            "Hengjie Li",
+            "Hanqing Wang",
+            "Jia Zeng",
+            "Jiangmiao Pang"
+          ],
+          "published": "2026-04-09T17:59:52Z",
+          "url": "http://arxiv.org/abs/2604.08544v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.CV"
+          ]
+        },
+        {
+          "title": "Seeing but Not Thinking: Routing Distraction in Multimodal Mixture-of-Experts",
+          "summary": "Multimodal Mixture-of-Experts (MoE) models have achieved remarkable performance on vision-language tasks. However, we identify a puzzling phenomenon termed Seeing but Not Thinking: models accurately perceive image content yet fail in subsequent reasoning, while correctly solving identical problems presented as pure text. Through systematic analysis, we first verify that cross-modal semantic sharing exists in MoE architectures, ruling out semantic alignment failure as the sole explanation. We then reveal that visual experts and domain experts exhibit layer-wise separation, with image inputs inducing significant routing divergence from text inputs in middle layers where domain experts concentrate. Based on these findings, we propose the Routing Distraction hypothesis: when processing visual inputs, the routing mechanism fails to adequately activate task-relevant reasoning experts. To validate this hypothesis, we design a routing-guided intervention method that enhances domain expert activation. Experiments on three multimodal MoE models across six benchmarks demonstrate consistent improvements, with gains of up to 3.17% on complex visual reasoning tasks. Our analysis further reveals that domain expert identification locates cognitive functions rather than sample-specific solutions, enabling effective transfer across tasks with different information structures.",
+          "authors": [
+            "Haolei Xu",
+            "Haiwen Hong",
+            "Hongxing Li",
+            "Rui Zhou",
+            "Yang Zhang",
+            "Longtao Huang",
+            "Hui Xue",
+            "Yongliang Shen",
+            "Weiming Lu",
+            "Yueting Zhuang"
+          ],
+          "published": "2026-04-09T17:59:44Z",
+          "url": "http://arxiv.org/abs/2604.08541v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.CL"
+          ]
+        },
+        {
+          "title": "AVGen-Bench: A Task-Driven Benchmark for Multi-Granular Evaluation of Text-to-Audio-Video Generation",
+          "summary": "Text-to-Audio-Video (T2AV) generation is rapidly becoming a core interface for media creation, yet its evaluation remains fragmented. Existing benchmarks largely assess audio and video in isolation or rely on coarse embedding similarity, failing to capture the fine-grained joint correctness required by realistic prompts. We introduce AVGen-Bench, a task-driven benchmark for T2AV generation featuring high-quality prompts across 11 real-world categories. To support comprehensive assessment, we propose a multi-granular evaluation framework that combines lightweight specialist models with Multimodal Large Language Models (MLLMs), enabling evaluation from perceptual quality to fine-grained semantic controllability. Our evaluation reveals a pronounced gap between strong audio-visual aesthetics and weak semantic reliability, including persistent failures in text rendering, speech coherence, physical reasoning, and a universal breakdown in musical pitch control. Code and benchmark resources are available at http://aka.ms/avgenbench.",
+          "authors": [
+            "Ziwei Zhou",
+            "Zeyuan Lai",
+            "Rui Wang",
+            "Yifan Yang",
+            "Zhen Xing",
+            "Yuqing Yang",
+            "Qi Dai",
+            "Lili Qiu",
+            "Chong Luo"
+          ],
+          "published": "2026-04-09T17:59:39Z",
+          "url": "http://arxiv.org/abs/2604.08540v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.CL"
+          ]
+        },
+        {
+          "title": "OpenVLThinkerV2: A Generalist Multimodal Reasoning Model for Multi-domain Visual Tasks",
+          "summary": "Group Relative Policy Optimization (GRPO) has emerged as the de facto Reinforcement Learning (RL) objective driving recent advancements in Multimodal Large Language Models. However, extending this success to open-source multimodal generalist models remains heavily constrained by two primary challenges: the extreme variance in reward topologies across diverse visual tasks, and the inherent difficulty of balancing fine-grained perception with multi-step reasoning capabilities. To address these issues, we introduce Gaussian GRPO (G$^2$RPO), a novel RL training objective that replaces standard linear scaling with non-linear distributional matching. By mathematically forcing the advantage distribution of any given task to strictly converge to a standard normal distribution, $\\mathcal{N}(0,1)$, G$^2$RPO theoretically ensures inter-task gradient equity, mitigates vulnerabilities to heavy-tail outliers, and offers symmetric update for positive and negative rewards. Leveraging the enhanced training stability provided by G$^2$RPO, we introduce two task-level shaping mechanisms to seamlessly balance perception and reasoning. First, response length shaping dynamically elicits extended reasoning chains for complex queries while enforce direct outputs to bolster visual grounding. Second, entropy shaping tightly bounds the model's exploration zone, effectively preventing both entropy collapse and entropy explosion. Integrating these methodologies, we present OpenVLThinkerV2, a highly robust, general-purpose multimodal model. Extensive evaluations across 18 diverse benchmarks demonstrate its superior performance over strong open-source and leading proprietary frontier models.",
+          "authors": [
+            "Wenbo Hu",
+            "Xin Chen",
+            "Yan Gao-Tian",
+            "Yihe Deng",
+            "Nanyun Peng",
+            "Kai-Wei Chang"
+          ],
+          "published": "2026-04-09T17:59:39Z",
+          "url": "http://arxiv.org/abs/2604.08539v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.CL"
+          ]
+        },
+        {
+          "title": "RewardFlow: Generate Images by Optimizing What You Reward",
+          "summary": "We introduce RewardFlow, an inversion-free framework that steers pretrained diffusion and flow-matching models at inference time through multi-reward Langevin dynamics. RewardFlow unifies complementary differentiable rewards for semantic alignment, perceptual fidelity, localized grounding, object consistency, and human preference, and further introduces a differentiable VQA-based reward that provides fine-grained semantic supervision through language-vision reasoning. To coordinate these heterogeneous objectives, we design a prompt-aware adaptive policy that extracts semantic primitives from the instruction, infers edit intent, and dynamically modulates reward weights and step sizes throughout sampling. Across several image editing and compositional generation benchmarks, RewardFlow delivers state-of-the-art edit fidelity and compositional alignment.",
+          "authors": [
+            "Onkar Susladkar",
+            "Dong-Hwan Jang",
+            "Tushar Prakash",
+            "Adheesh Juvekar",
+            "Vedant Shah",
+            "Ayush Barik",
+            "Nabeel Bashir",
+            "Muntasir Wahed",
+            "Ritish Shrirao",
+            "Ismini Lourentzou"
+          ],
+          "published": "2026-04-09T17:59:19Z",
+          "url": "http://arxiv.org/abs/2604.08536v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "PSI: Shared State as the Missing Layer for Coherent AI-Generated Instruments in Personal AI Agents",
+          "summary": "Personal AI tools can now be generated from natural-language requests, but they often remain isolated after creation. We present PSI, a shared-state architecture that turns independently generated modules into coherent instruments: persistent, connected, and chat-complementary artifacts accessible through both GUIs and a generic chat agent. By publishing current state and write-back affordances to a shared personal-context bus, modules enable cross-module reasoning and synchronized actions across interfaces. We study PSI through a three-week autobiographical deployment in a self-developed personal AI environment and show that later-generated instruments can be integrated automatically through the same contract. PSI identifies shared state as the missing systems layer that transforms AI-generated personal software from isolated apps into coherent personal computing environments.",
+          "authors": [
+            "Zhiyuan Wang",
+            "Erzhen Hu",
+            "Mark Rucker",
+            "Laura E. Barnes"
+          ],
+          "published": "2026-04-09T17:58:36Z",
+          "url": "http://arxiv.org/abs/2604.08529v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.HC",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "Ads in AI Chatbots? An Analysis of How Large Language Models Navigate Conflicts of Interest",
+          "summary": "Today's large language models (LLMs) are trained to align with user preferences through methods such as reinforcement learning. Yet models are beginning to be deployed not merely to satisfy users, but also to generate revenue for the companies that created them through advertisements. This creates the potential for LLMs to face conflicts of interest, where the most beneficial response to a user may not be aligned with the company's incentives. For instance, a sponsored product may be more expensive but otherwise equal to another; in this case, what does (and should) the LLM recommend to the user? In this paper, we provide a framework for categorizing the ways in which conflicting incentives might lead LLMs to change the way they interact with users, inspired by literature from linguistics and advertising regulation. We then present a suite of evaluations to examine how current models handle these tradeoffs. We find that a majority of LLMs forsake user welfare for company incentives in a multitude of conflict of interest situations, including recommending a sponsored product almost twice as expensive (Grok 4.1 Fast, 83%), surfacing sponsored options to disrupt the purchasing process (GPT 5.1, 94%), and concealing prices in unfavorable comparisons (Qwen 3 Next, 24%). Behaviors also vary strongly with levels of reasoning and users' inferred socio-economic status. Our results highlight some of the hidden risks to users that can emerge when companies begin to subtly incentivize advertisements in chatbots.",
+          "authors": [
+            "Addison J. Wu",
+            "Ryan Liu",
+            "Shuyue Stella Li",
+            "Yulia Tsvetkov",
+            "Thomas L. Griffiths"
+          ],
+          "published": "2026-04-09T17:57:50Z",
+          "url": "http://arxiv.org/abs/2604.08525v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.CY"
+          ]
+        },
+        {
+          "title": "What Drives Representation Steering? A Mechanistic Case Study on Steering Refusal",
+          "summary": "Applying steering vectors to large language models (LLMs) is an efficient and effective model alignment technique, but we lack an interpretable explanation for how it works-- specifically, what internal mechanisms steering vectors affect and how this results in different model outputs. To investigate the causal mechanisms underlying the effectiveness of steering vectors, we conduct a comprehensive case study on refusal. We propose a multi-token activation patching framework and discover that different steering methodologies leverage functionally interchangeable circuits when applied at the same layer. These circuits reveal that steering vectors primarily interact with the attention mechanism through the OV circuit while largely ignoring the QK circuit-- freezing all attention scores during steering drops performance by only 8.75% across two model families. A mathematical decomposition of the steered OV circuit further reveals semantically interpretable concepts, even in cases where the steering vector itself does not. Leveraging the activation patching results, we show that steering vectors can be sparsified by up to 90-99% while retaining most performance, and that different steering methodologies agree on a subset of important dimensions.",
+          "authors": [
+            "Stephen Cheng",
+            "Sarah Wiegreffe",
+            "Dinesh Manocha"
+          ],
+          "published": "2026-04-09T17:57:14Z",
+          "url": "http://arxiv.org/abs/2604.08524v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+          ]
+        },
+        {
+          "title": "ClawBench: Can AI Agents Complete Everyday Online Tasks?",
+          "summary": "AI agents may be able to automate your inbox, but can they automate other routine aspects of your life? Everyday online tasks offer a realistic yet unsolved testbed for evaluating the next generation of AI agents. To this end, we introduce ClawBench, an evaluation framework of 153 simple tasks that people need to accomplish regularly in their lives and work, spanning 144 live platforms across 15 categories, from completing purchases and booking appointments to submitting job applications. These tasks require demanding capabilities beyond existing benchmarks, such as obtaining relevant information from user-provided documents, navigating multi-step workflows across diverse platforms, and write-heavy operations like filling in many detailed forms correctly. Unlike existing benchmarks that evaluate agents in offline sandboxes with static pages, ClawBench operates on production websites, preserving the full complexity, dynamic nature, and challenges of real-world web interaction. A lightweight interception layer captures and blocks only the final submission request, ensuring safe evaluation without real-world side effects. Our evaluations of 7 frontier models show that both proprietary and open-source models can complete only a small portion of these tasks. For example, Claude Sonnet 4.6 achieves only 33.3%. Progress on ClawBench brings us closer to AI agents that can function as reliable general-purpose assistants.",
+          "authors": [
+            "Yuxuan Zhang",
+            "Yubo Wang",
+            "Yipeng Zhu",
+            "Penghui Du",
+            "Junwen Miao",
+            "Xuan Lu",
+            "Wendong Xu",
+            "Yunzhuo Hao",
+            "Songcheng Cai",
+            "Xiaochen Wang",
+            "Huaisong Zhang",
+            "Xian Wu",
+            "Yi Lu",
+            "Minyi Lei",
+            "Kai Zou",
+            "Huifeng Yin",
+            "Ping Nie",
+            "Liang Chen",
+            "Dongfu Jiang",
+            "Wenhu Chen",
+            "Kelsey R. Allen"
+          ],
+          "published": "2026-04-09T17:57:13Z",
+          "url": "http://arxiv.org/abs/2604.08523v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ]
+        }
+      ],
+      "google_trends": [],
+      "reddit": [
+        {
+          "title": "Artemis II crew splashes down safely in Pacific Ocean, ending historic moon mission",
+          "url": "https://www.rnz.co.nz/news/world/592079/artemis-ii-crew-splashes-down-safely-in-pacific-ocean-ending-historic-moon-mission",
+          "score": 35226,
+          "comments": 844,
+          "author": "Elsa-Fidelis",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1si3oyc/artemis_ii_crew_splashes_down_safely_in_pacific/",
+          "source": "reddit"
+        },
+        {
+          "title": "Gen Z workers are so fearful AI will take their job they\u2019re intentionally sabotaging their company\u2019s AI rollout",
+          "url": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+          "score": 22629,
+          "comments": 1411,
+          "author": "Just-Grocery-2229",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1si20pk/gen_z_workers_are_so_fearful_ai_will_take_their/",
+          "source": "reddit"
+        },
+        {
+          "title": "Tesla Plummets into 8th Consecutive Week of Losses as JPMorgan Warns of 60% Downside",
+          "url": "https://markets.financialcontent.com/stocks/article/marketminute-2026-4-10-tesla-plummets-into-8th-consecutive-week-of-losses-as-jpmorgan-warns-of-60-downside",
+          "score": 19411,
+          "comments": 725,
+          "author": "MarvelsGrantMan136",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1shveii/tesla_plummets_into_8th_consecutive_week_of/",
+          "source": "reddit"
+        },
+        {
+          "title": "Cognitive dissonance helps explain why Trump supporters remain loyal, new research suggests. This sheds light on how supporters of Donald Trump justify their continued allegiance despite learning about allegations of his sexual misconduct and illegal activities.",
+          "url": "https://www.psypost.org/cognitive-dissonance-helps-explain-why-trump-supporters-remain-loyal-new-research-suggests/",
+          "score": 10333,
+          "comments": 1152,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sih8m7/cognitive_dissonance_helps_explain_why_trump/",
+          "source": "reddit"
+        },
+        {
+          "title": "Iran Unable to Find Mines in Strait of Hormuz, U.S. Says",
+          "url": "https://www.nytimes.com/2026/04/10/us/politics/iran-mines-strait.html",
+          "score": 8248,
+          "comments": 739,
+          "author": "Comfortable-Rule-491",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1si2qsv/iran_unable_to_find_mines_in_strait_of_hormuz_us/",
+          "source": "reddit"
+        },
+        {
+          "title": "During 2024 US presidential election, conservatives successfully repackaged \u201cgreat replacement\u201d demographic fears to broaden their mainstream appeal. By framing immigration as a purposeful strategy to manipulate elections, political campaigns normalized extremist narratives.",
+          "url": "https://www.psypost.org/how-extremist-theories-were-disguised-as-election-integrity-in-2024-2026-03-26/",
+          "score": 7230,
+          "comments": 456,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1si108k/during_2024_us_presidential_election/",
+          "source": "reddit"
+        },
+        {
+          "title": "Iran's new supreme leader has severe and disfiguring wounds, sources say",
+          "url": "https://www.reuters.com/world/middle-east/irans-new-supreme-leader-has-severe-disfiguring-wounds-sources-say-2026-04-11/",
+          "score": 6861,
+          "comments": 627,
+          "author": "InsatiablePrism",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sibfyo/irans_new_supreme_leader_has_severe_and/",
+          "source": "reddit"
+        },
+        {
+          "title": "Gallup: Gen Z growing more negative toward AI",
+          "url": "https://www.highereddive.com/news/gen-z-ai-gallup-poll-negative-sentiment/817133/",
+          "score": 6644,
+          "comments": 314,
+          "author": "Haunterblademoi",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1si5cr2/gallup_gen_z_growing_more_negative_toward_ai/",
+          "source": "reddit"
+        },
+        {
+          "title": "Insects, including bees, may possess forms of subjective experience showing emotional states, attention, and cognitive bias which challenge the view that consciousness requires a large brain, according to a 2025 review in Philosophical Transactions of the Royal Society B.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41229297/",
+          "score": 6081,
+          "comments": 289,
+          "author": "ThinkThenPost",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1shitwe/insects_including_bees_may_possess_forms_of/",
+          "source": "reddit"
+        },
+        {
+          "title": "PC Industry in Dire Straits, \u2018Asking You to Own Nothing and Be Happy,\u2019 Says Framework CEO",
+          "url": "https://gizmodo.com/pc-industry-in-dire-straits-asking-you-to-own-nothing-and-be-happy-says-framework-ceo-2000744967",
+          "score": 5329,
+          "comments": 460,
+          "author": "Logical_Welder3467",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1si5u69/pc_industry_in_dire_straits_asking_you_to_own/",
+          "source": "reddit"
+        },
+        {
+          "title": "A large-scale survey of over 3,500 US political elites shows near-unanimous agreement among Democrats on the scientific consensus that global warming is occurring and primarily caused by humans. In contrast, fewer than half of Republicans affirm anthropogenic climate change.",
+          "url": "https://iopscience.iop.org/article/10.1088/2515-7620/ae56d7",
+          "score": 3870,
+          "comments": 153,
+          "author": "smurfyjenkins",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1shzxfl/a_largescale_survey_of_over_3500_us_political/",
+          "source": "reddit"
+        },
+        {
+          "title": "US intelligence indicates China preparing weapons shipment to Iran, CNN reports",
+          "url": "https://www.reuters.com/world/china/us-intelligence-indicates-china-preparing-weapons-shipment-iran-cnn-reports-2026-04-11/",
+          "score": 3661,
+          "comments": 467,
+          "author": "Perfect_Swing_6158",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1si9wru/us_intelligence_indicates_china_preparing_weapons/",
+          "source": "reddit"
+        },
+        {
+          "title": "\u2018God does not bless any conflict\u2019: pope issues new rebuke over Iran war",
+          "url": "https://www.theguardian.com/world/2026/apr/10/pope-leo-criticism-iran-war",
+          "score": 3479,
+          "comments": 256,
+          "author": "Resplendent_Lumine",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sidyx1/god_does_not_bless_any_conflict_pope_issues_new/",
+          "source": "reddit"
+        },
+        {
+          "title": "US demands Reddit unmask ICE critic, summons firm to grand jury",
+          "url": "https://arstechnica.com/tech-policy/2026/04/trump-admin-hounds-reddit-to-reveal-identity-of-user-who-criticized-ice/",
+          "score": 3414,
+          "comments": 532,
+          "author": "xpda",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sij8d9/us_demands_reddit_unmask_ice_critic_summons_firm/",
+          "source": "reddit"
+        },
+        {
+          "title": "Negative effects of artificial sweeteners may pass on to next generation, mouse research suggests. The changes to gene expression, glucose tolerance, and fecal microbiome could potentially increase vulnerability to conditions like diabetes \u2014 the very problem the sweeteners were trying to solve.",
+          "url": "https://www.frontiersin.org/news/2026/04/10/negative-effects-artificial-sweeteners-may-pass-next-generation-frontiers-nutrition",
+          "score": 2421,
+          "comments": 223,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1shnjiy/negative_effects_of_artificial_sweeteners_may/",
+          "source": "reddit"
+        },
+        {
+          "title": "Silicon Valley is quietly running on Chinese open source models and almost nobody is talking about it",
+          "url": "https://www.reddit.com/r/Futurology/comments/1siea6z/silicon_valley_is_quietly_running_on_chinese_open/",
+          "score": 1714,
+          "comments": 174,
+          "author": "jimmytoan",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1siea6z/silicon_valley_is_quietly_running_on_chinese_open/",
+          "source": "reddit"
+        },
+        {
+          "title": "US Vice President JD Vance arrives in Islamabad for \u2018make-or-break\u2019 talks with Iran",
+          "url": "https://www.dawn.com/news/amp/1990743",
+          "score": 1671,
+          "comments": 276,
+          "author": "darashiku6",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sic7lb/us_vice_president_jd_vance_arrives_in_islamabad/",
+          "source": "reddit"
+        },
+        {
+          "title": "In interpersonal conflicts, staying calm protects your reputation, while crying damages the reputation of your opponent alongside your own. This points to a social tradeoff where keeping your cool helps you look good, but shedding tears is more effective if you want to make other person look bad.",
+          "url": "https://www.psypost.org/crying-during-a-conflict-damages-your-opponents-reputation-at-a-cost-to-your-own/",
+          "score": 1584,
+          "comments": 138,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sif0k5/in_interpersonal_conflicts_staying_calm_protects/",
+          "source": "reddit"
+        },
+        {
+          "title": "Prostitution of minors in France rises by 43 percent in four years",
+          "url": "https://www.rfi.fr/en/france/20260410-prostitution-of-minors-in-france-rises-by-43-percent-in-four-years",
+          "score": 1570,
+          "comments": 170,
+          "author": "Glad-Following-2072",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1siiri1/prostitution_of_minors_in_france_rises_by_43/",
+          "source": "reddit"
+        },
+        {
+          "title": "Clean power fortifies Britain against gas price shocks. British wind and solar blunted the worst of the price shocks in the first four weeks of the latest fossil fuel crisis by displacing gas generation, delivering savings",
+          "url": "https://ember-energy.org/latest-insights/clean-power-fortifies-britain-against-gas-price-shocks/",
+          "score": 1136,
+          "comments": 32,
+          "author": "sundler",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1shpfrb/clean_power_fortifies_britain_against_gas_price/",
+          "source": "reddit"
+        },
+        {
+          "title": "Depression during pregnancy. Two decades of data has found that a mother's depression at almost every time point in development, from pregnancy onward, was linked with symptoms of depression in her kids as adults",
+          "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2847640?guestAccessKey=1b34668e-afe8-4888-aa3d-dd05b3b83eff&utm_source=for_the_media&utm_medium=referral&utm_campaign=ftm_links&utm_content=tfl&utm_term=041026",
+          "score": 1121,
+          "comments": 72,
+          "author": "Wagamaga",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sicbvv/depression_during_pregnancy_two_decades_of_data/",
+          "source": "reddit"
+        },
+        {
+          "title": "Iranian source says US has agreed to release frozen Iranian assets in Qatar, other banks",
+          "url": "https://www.reuters.com/business/finance/iranian-source-says-us-has-agreed-release-frozen-iranian-assets-qatar-other-2026-04-11/",
+          "score": 1056,
+          "comments": 234,
+          "author": "consulent-finanziar",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1siekga/iranian_source_says_us_has_agreed_to_release/",
+          "source": "reddit"
+        },
+        {
+          "title": "A $300 device can silently override GPS across an entire city. Autonomous vehicles, delivery drones, and air traffic control all depend on it. Why don't we have a backup?",
+          "url": "https://www.reddit.com/r/Futurology/comments/1shsmqy/a_300_device_can_silently_override_gps_across_an/",
+          "score": 1021,
+          "comments": 263,
+          "author": "projectschema",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1shsmqy/a_300_device_can_silently_override_gps_across_an/",
+          "source": "reddit"
+        },
+        {
+          "title": "Red Hat appears to have fired its entire engineering team in China, which it no longer thinks is a country it needs to prioritize. Most of the team will move to India.",
+          "url": "https://www.theregister.com/2026/04/10/red_hat_ends_china_engineering/",
+          "score": 982,
+          "comments": 32,
+          "author": "Logical_Welder3467",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sieita/red_hat_appears_to_have_fired_its_entire/",
+          "source": "reddit"
+        },
+        {
+          "title": "Naturally Occurring Bacteria Completely Eradicate Tumors in Mice With a Single Dose",
+          "url": "https://scitechdaily.com/naturally-occurring-bacteria-completely-eradicate-tumors-in-mice-with-a-single-dose/",
+          "score": 674,
+          "comments": 41,
+          "author": "_Dark_Wing",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1siei1g/naturally_occurring_bacteria_completely_eradicate/",
+          "source": "reddit"
+        },
+        {
+          "title": "FBI recovers \"deleted\" Signal messages through iPhone notifications",
+          "url": "https://www.techspot.com/news/112021-fbi-recovers-suspect-deleted-signal-messages-through-saved.html",
+          "score": 403,
+          "comments": 54,
+          "author": "AdSpecialist6598",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1siicxk/fbi_recovers_deleted_signal_messages_through/",
+          "source": "reddit"
+        },
+        {
+          "title": "A new study found a vegan Mediterranean diet significantly reduced environmental impacts related to human health (\u221254.5%), ecosystems (\u221250.9%), and resource use (\u221243.4%) compared to a traditional Mediterranean diet. Retail food cost was also reduced by 16.3%.",
+          "url": "https://link.springer.com/article/10.1007/s00394-026-03939-3",
+          "score": 395,
+          "comments": 70,
+          "author": "James_Fortis",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sii06o/a_new_study_found_a_vegan_mediterranean_diet/",
+          "source": "reddit"
+        },
+        {
+          "title": "Anthropic Model Scare Sparks Urgent Bessent, Powell Warning to Bank CEOs",
+          "url": "https://www.bloomberg.com/news/articles/2026-04-10/anthropic-model-scare-sparks-urgent-bessent-powell-warning-to-bank-ceos",
+          "score": 368,
+          "comments": 165,
+          "author": "Blueberryburntpie",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1shj2yo/anthropic_model_scare_sparks_urgent_bessent/",
+          "source": "reddit"
+        },
+        {
+          "title": "CPUID site hijacked to serve malware instead of HWMonitor downloads",
+          "url": "https://www.theregister.com/2026/04/10/cpuid_site_hijacked/",
+          "score": 350,
+          "comments": 24,
+          "author": "rkhunter_",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1shlzih/cpuid_site_hijacked_to_serve_malware_instead_of/",
+          "source": "reddit"
+        },
+        {
+          "title": "The AWS Lambda 'Kiss of Death'",
+          "url": "https://shatteredsilicon.net/the-aws-lambda-kiss-of-death/",
+          "score": 314,
+          "comments": 66,
+          "author": "tkyjonathan",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sgzwez/the_aws_lambda_kiss_of_death/",
+          "source": "reddit"
+        },
+        {
+          "title": "Quitting cyber after 7 years",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1shm0p9/quitting_cyber_after_7_years/",
+          "score": 308,
+          "comments": 116,
+          "author": "OSPFisHard",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1shm0p9/quitting_cyber_after_7_years/",
+          "source": "reddit"
+        },
+        {
+          "title": "Ember\u2019s analysis shows how solar and battery storage can meet as much as 90% of India\u2019s electricity demand at lower LCOE than the average power purchase costs in most states",
+          "url": "https://ember-energy.org/latest-insights/battery-storage-is-now-cheap-enough-to-unleash-indias-full-solar-potential/",
+          "score": 224,
+          "comments": 3,
+          "author": "sundler",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1shq2k4/embers_analysis_shows_how_solar_and_battery/",
+          "source": "reddit"
+        },
+        {
+          "title": "Claude Mythos Thread",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1shqu76/claude_mythos_thread/",
+          "score": 199,
+          "comments": 86,
+          "author": "SeaRegular3219",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1shqu76/claude_mythos_thread/",
+          "source": "reddit"
+        },
+        {
+          "title": "Google engineer rejected by 16 colleges uses AI to sue universities for racial discrimination",
+          "url": "https://abc7.com/story/google-engineer-rejected-16-colleges-uses-ai-sue-universities-racial-discrimination/18861654/",
+          "score": 196,
+          "comments": 89,
+          "author": "Fcking_Chuck",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1shncya/google_engineer_rejected_by_16_colleges_uses_ai/",
+          "source": "reddit"
+        },
+        {
+          "title": "Neuralink enables nonverbal ALS patient to speak again with thoughts and AI-cloned voice",
+          "url": "https://streamable.com/d0eyxd",
+          "score": 194,
+          "comments": 124,
+          "author": "WhoAreYouTalkinTwo",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1siisyt/neuralink_enables_nonverbal_als_patient_to_speak/",
+          "source": "reddit"
+        },
+        {
+          "title": "'We Have No Chance Against This,' Honda CEO Says After Seeing Chinese Supplier Factory: TDS",
+          "url": "https://www.thedrive.com/news/we-have-no-chance-against-this-honda-ceo-says-after-seeing-chinese-supplier-factory-tds",
+          "score": 190,
+          "comments": 123,
+          "author": "boppinmule",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sijxu7/we_have_no_chance_against_this_honda_ceo_says/",
+          "source": "reddit"
+        },
+        {
+          "title": "Gaining obesity between ages 17 and 29 is linked to 70% higher risk of premature death compared to those who never develop obesity before age 60, based on data from over 600,000 people",
+          "url": "https://www.lunduniversity.lu.se/article/early-weight-gain-can-have-lifelong-consequences",
+          "score": 151,
+          "comments": 18,
+          "author": "sr_local",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1siii4d/gaining_obesity_between_ages_17_and_29_is_linked/",
+          "source": "reddit"
+        },
+        {
+          "title": "Floating point from scratch: Hard Mode",
+          "url": "https://essenceia.github.io/projects/floating_dragon/",
+          "score": 104,
+          "comments": 16,
+          "author": "NXGZ",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1shxle1/floating_point_from_scratch_hard_mode/",
+          "source": "reddit"
+        },
+        {
+          "title": "6 Months Using AI for Actual Work: What's Incredible, What's Overhyped, and What's Quietly Dangerous",
+          "url": "https://www.reddit.com/r/artificial/comments/1si5uiw/6_months_using_ai_for_actual_work_whats/",
+          "score": 101,
+          "comments": 56,
+          "author": "Typical-Education345",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1si5uiw/6_months_using_ai_for_actual_work_whats/",
+          "source": "reddit"
+        },
+        {
+          "title": "[D] 60% MatMul Performance Bug in cuBLAS on RTX 5090 [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1shtv0r/d_60_matmul_performance_bug_in_cublas_on_rtx_5090/",
+          "score": 96,
+          "comments": 7,
+          "author": "NoVibeCoding",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1shtv0r/d_60_matmul_performance_bug_in_cublas_on_rtx_5090/",
+          "source": "reddit"
+        },
+        {
+          "title": "ShinyHunters Claims Rockstar Games Breach via Snowflake Integration",
+          "url": "https://thecybersecguru.com/news/rockstar-games-snowflake-breach/",
+          "score": 87,
+          "comments": 7,
+          "author": "raptorhunter22",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1si8z49/shinyhunters_claims_rockstar_games_breach_via/",
+          "source": "reddit"
+        },
+        {
+          "title": "How has Claude far surpassed the competitors? They were not first to market or ever had the most cash yet their feature are far and away the best on the market.",
+          "url": "https://www.reddit.com/r/artificial/comments/1shypcx/how_has_claude_far_surpassed_the_competitors_they/",
+          "score": 60,
+          "comments": 59,
+          "author": "InternationalAsk9845",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1shypcx/how_has_claude_far_surpassed_the_competitors_they/",
+          "source": "reddit"
+        },
+        {
+          "title": "[P] PCA before truncation makes non-Matryoshka embeddings compressible: results on BGE-M3 [P]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sgt7ol/p_pca_before_truncation_makes_nonmatryoshka/",
+          "score": 49,
+          "comments": 27,
+          "author": "ahbond",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sgt7ol/p_pca_before_truncation_makes_nonmatryoshka/",
+          "source": "reddit"
+        },
+        {
+          "title": "Is LinkedIn actually worth it, or does it just make you feel behind?",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sihr2y/is_linkedin_actually_worth_it_or_does_it_just/",
+          "score": 39,
+          "comments": 73,
+          "author": "Ok-Employee-9886",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sihr2y/is_linkedin_actually_worth_it_or_does_it_just/",
+          "source": "reddit"
+        },
+        {
+          "title": "Parsing 11 languages in pure Go without CGO: replacing regex with a tree-sitter runtime",
+          "url": "https://glinr.hashnode.dev/parsing-11-languages-in-pure-go-without-cgo-how-i-replaced-regex-with-a-tree-sitter-runtime",
+          "score": 38,
+          "comments": 10,
+          "author": "Familiar-Classroom47",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1shroof/parsing_11_languages_in_pure_go_without_cgo/",
+          "source": "reddit"
+        },
+        {
+          "title": "Reproducing the AWS Outage Race Condition with a Model Checker",
+          "url": "https://wyounas.github.io/aws/concurrency/2025/10/30/reproducing-the-aws-outage-race-condition-with-model-checker/",
+          "score": 24,
+          "comments": 0,
+          "author": "fagnerbrack",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1shmtl3/reproducing_the_aws_outage_race_condition_with_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "Everyone wants to be a content creator. nobody wants to actually create anything worth watching. and the internet is slowly suffocating under the weight of it.",
+          "url": "https://www.reddit.com/r/artificial/comments/1shw8zl/everyone_wants_to_be_a_content_creator_nobody/",
+          "score": 23,
+          "comments": 27,
+          "author": "AssignmentHopeful651",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1shw8zl/everyone_wants_to_be_a_content_creator_nobody/",
+          "source": "reddit"
+        },
+        {
+          "title": "Humanity needs to be CONTAINED",
+          "url": "https://www.reddit.com/r/Futurology/comments/1sigv08/humanity_needs_to_be_contained/",
+          "score": 20,
+          "comments": 44,
+          "author": "SystemArchitect99",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sigv08/humanity_needs_to_be_contained/",
+          "source": "reddit"
+        },
+        {
+          "title": "Getting sabotaged by a reviewer at IJCAI  [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1si2od5/getting_sabotaged_by_a_reviewer_at_ijcai_d/",
+          "score": 19,
+          "comments": 7,
+          "author": "AppropriatePush6262",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1si2od5/getting_sabotaged_by_a_reviewer_at_ijcai_d/",
+          "source": "reddit"
+        },
+        {
+          "title": "Economics of having AI and Robots doing jobs.",
+          "url": "https://www.reddit.com/r/Futurology/comments/1si92l2/economics_of_having_ai_and_robots_doing_jobs/",
+          "score": 17,
+          "comments": 36,
+          "author": "Ok-Sock2250",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1si92l2/economics_of_having_ai_and_robots_doing_jobs/",
+          "source": "reddit"
+        },
+        {
+          "title": "[D] Large scale OCR [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1shg2ob/d_large_scale_ocr_d/",
+          "score": 16,
+          "comments": 13,
+          "author": "vroemboem",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1shg2ob/d_large_scale_ocr_d/",
+          "source": "reddit"
+        },
+        {
+          "title": "What percent of people currently in college will actually be able to have successful careers in their field?",
+          "url": "https://www.reddit.com/r/Futurology/comments/1sic70w/what_percent_of_people_currently_in_college_will/",
+          "score": 16,
+          "comments": 28,
+          "author": "Great-Grapefruit5220",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sic70w/what_percent_of_people_currently_in_college_will/",
+          "source": "reddit"
+        },
+        {
+          "title": "I probably shouldn't be impressed, but I am.",
+          "url": "https://i.redd.it/jodki7syieug1.jpeg",
+          "score": 15,
+          "comments": 8,
+          "author": "Forsaken-Hotel7535",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1shu0k3/i_probably_shouldnt_be_impressed_but_i_am/",
+          "source": "reddit"
+        },
+        {
+          "title": "A Chinese startup is sending robots into real homes to clean alongside human cleaners, booked through an app",
+          "url": "https://www.reddit.com/r/Futurology/comments/1sijvnb/a_chinese_startup_is_sending_robots_into_real/",
+          "score": 15,
+          "comments": 3,
+          "author": "Exact-Literature-395",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sijvnb/a_chinese_startup_is_sending_robots_into_real/",
+          "source": "reddit"
+        },
+        {
+          "title": "Blue team question: How would you detect a low-and-slow attacker blending into normal traffic?",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1siixkw/blue_team_question_how_would_you_detect_a/",
+          "score": 10,
+          "comments": 42,
+          "author": "thenoopcoder",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1siixkw/blue_team_question_how_would_you_detect_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "Using XSLT to analyse large XML datasets",
+          "url": "https://xn--mbius-jua.band/blog/nmapview/",
+          "score": 9,
+          "comments": 6,
+          "author": "13utters",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1shu7ta/using_xslt_to_analyse_large_xml_datasets/",
+          "source": "reddit"
+        },
+        {
+          "title": "[P] ibu-boost: a GBDT library where splits are *absolutely* rejected, not just relatively ranked[P]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1shpdm2/p_ibuboost_a_gbdt_library_where_splits_are/",
+          "score": 9,
+          "comments": 5,
+          "author": "Pleasant_Yard_8879",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1shpdm2/p_ibuboost_a_gbdt_library_where_splits_are/",
+          "source": "reddit"
+        },
+        {
+          "title": "Could a fully automated future lead humans to live mostly in virtual realities?",
+          "url": "https://www.reddit.com/r/Futurology/comments/1siba6t/could_a_fully_automated_future_lead_humans_to/",
+          "score": 9,
+          "comments": 27,
+          "author": "Shot_Start_1129",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1siba6t/could_a_fully_automated_future_lead_humans_to/",
+          "source": "reddit"
+        },
+        {
+          "title": "Splunk experience",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1si9v97/splunk_experience/",
+          "score": 7,
+          "comments": 13,
+          "author": "silkandz3faron",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1si9v97/splunk_experience/",
+          "source": "reddit"
+        },
+        {
+          "title": "Cloudflare just turned Browser Rendering into a lot more powerful MCP infrastructure",
+          "url": "https://www.reddit.com/r/artificial/comments/1sieggh/cloudflare_just_turned_browser_rendering_into_a/",
+          "score": 6,
+          "comments": 6,
+          "author": "Infinite-pheonix",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sieggh/cloudflare_just_turned_browser_rendering_into_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "AI as an extension of cognition rather than a replacement?",
+          "url": "https://medium.com/pen-with-paper/the-future-of-ai-might-not-be-what-you-think-it-is-cc8b34fbbe76",
+          "score": 6,
+          "comments": 15,
+          "author": "Agreeable-Warning-65",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1si4qpq/ai_as_an_extension_of_cognition_rather_than_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "What image/video training data is hardest to find right now? [R]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1shibc9/what_imagevideo_training_data_is_hardest_to_find/",
+          "score": 5,
+          "comments": 17,
+          "author": "DrinkConscious9173",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1shibc9/what_imagevideo_training_data_is_hardest_to_find/",
+          "source": "reddit"
+        },
+        {
+          "title": "TMLR reviews stalled [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1si3t9p/tmlr_reviews_stalled_d/",
+          "score": 2,
+          "comments": 7,
+          "author": "Pure-Ad9079",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1si3t9p/tmlr_reviews_stalled_d/",
+          "source": "reddit"
+        },
+        {
+          "title": "What if the real value is in mapping the terrain (when we talk about information contained in the web) ?",
+          "url": "https://www.reddit.com/r/artificial/comments/1sik6oy/what_if_the_real_value_is_in_mapping_the_terrain/",
+          "score": 1,
+          "comments": 2,
+          "author": "shbong",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sik6oy/what_if_the_real_value_is_in_mapping_the_terrain/",
+          "source": "reddit"
+        },
+        {
+          "title": "Claude code x n8n",
+          "url": "https://www.reddit.com/r/artificial/comments/1sik4by/claude_code_x_n8n/",
+          "score": 1,
+          "comments": 1,
+          "author": "emprendedorjoven",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sik4by/claude_code_x_n8n/",
+          "source": "reddit"
+        },
+        {
+          "title": "A Bird That Never Flew | Official First Look Trailer (2026) | An AI Feature Film",
+          "url": "https://www.youtube.com/watch?v=VWhaFln4tFA",
+          "score": 1,
+          "comments": 0,
+          "author": "Critical_Return_4187",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sigaso/a_bird_that_never_flew_official_first_look/",
+          "source": "reddit"
+        },
+        {
+          "title": "What is missing when building privacy-first apps?",
+          "url": "https://stoffelmpc.com/stoffel-blog/mpc-data-in-use?utm_source=reddit&utm_medium=social&utm_campaign=na-michael-mpc-blog-series&utm_content=rprog&utm_term=mpc",
+          "score": 0,
+          "comments": 0,
+          "author": "badcryptobitch",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sijeo8/what_is_missing_when_building_privacyfirst_apps/",
+          "source": "reddit"
+        },
+        {
+          "title": "Building a Visual EXPLAIN to understand database query plans faster",
+          "url": "https://tabularis.dev/blog/visual-explain-query-plan-analysis",
+          "score": 0,
+          "comments": 0,
+          "author": "debba_",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sib0bn/building_a_visual_explain_to_understand_database/",
+          "source": "reddit"
+        },
+        {
+          "title": "Injecting runtime behavior into existing code without modifying source",
+          "url": "https://youtu.be/n1hGDWLoEPw",
+          "score": 0,
+          "comments": 2,
+          "author": "KennethSweet",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sijqm5/injecting_runtime_behavior_into_existing_code/",
+          "source": "reddit"
+        },
+        {
+          "title": "PhD or Masters for Computational Cognitive Science [R]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sil6fo/phd_or_masters_for_computational_cognitive/",
+          "score": 0,
+          "comments": 3,
+          "author": "Friendly_Schedule_36",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sil6fo/phd_or_masters_for_computational_cognitive/",
+          "source": "reddit"
+        }
+      ],
+      "duckduckgo_news": [
+        {
+          "title": "Technology news - Technology journalism is the genre of reporting that concerns the development, marketing, and application of technology. The field covers a wide variety of topics, including communic",
+          "url": "https://en.wikipedia.org/wiki/Technology_news",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Latest technology news - The most recent news, updates, and developments in the field of technology. Covers breaking stories, innovations, product launches, industry trends, and other current events r",
+          "url": "https://grokipedia.com/page/Latest_technology_news",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Tech News | Today's Latest Technology News | Reuters - Reuters, thenewsand media division of Thomson Reuters, is the world\u2019s largest multimedianewsprovider, reaching billions of people worldwide ...",
+          "url": "https://www.reuters.com/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology Intelligence: Latest news & opinion - The - News...Technology... Technewsand expert opinion from The Telegraph stechnologyteam.",
+          "url": "https://www.telegraph.co.uk/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology | Latest News & Updates | BBC News - FollowTechnologyFollow Following Following ... Updates from yourNewstopics will appear in MyNewsand in a collection on theNewshomepage .",
+          "url": "https://www.bbc.co.uk/news/technology",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology News | MakeUseOf - Thetechnologynewsstories that matter to you, explained in a way that everyone can understand. ... newsletter for jargon-free explanations of the ...",
+          "url": "https://www.makeuseof.com/category/news/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology News \u2013 World Wide Technology News, Web - TechnologyNews... World WideTechnologyNews, Web Development Tips and Computer Tips. ... Astechnologycontinues to advance, smart refrigerators ...",
+          "url": "https://www.wizardworlddigital.com/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Geeks are Sexy - Tech, science, cosplay and news by geeks, for - Tech, science, cosplay andnewsby geeks, for geeks! We maketechnologysexy! ... 10, 2026 Geeks are Sexy Geeks , General , Security ,Techn",
+          "url": "https://www.geeksaresexy.net/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Education Technology News -- Campus Technology - The latest educationtechnologynewsand trends for college and university ed tech professionals. ... CAMPUSTECHNOLOGYNEWS",
+          "url": "https://campustechnology.com/articles/list/news.aspx",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Tech News, Latest Technology News Today, New Gadgets, Phones, - technologyNews... The Indian Express website has been rated GREEN for its credibility and trustworthiness by Newsguard, a global service",
+          "url": "https://indianexpress.com/section/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence - Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-so",
+          "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence - AI hierarchy Artificial intelligence (AI) is a subfield of computer science focused on the development of systems that can perform tasks requiring human intelligence, such...",
+          "url": "https://grokipedia.com/page/Artificial_intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence (AI) | Definition, Examples, Types ... - Artificialintelligence(AI) is the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with ",
+          "url": "https://www.britannica.com/technology/artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is Artificial Intelligence? Definition, Uses, and Types - Artificialintelligence(AI) is the theory and development of computer systems capable of performing tasks that historically required human",
+          "url": "https://www.coursera.org/articles/what-is-artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial Intelligence Tutorial | AI Tutorial - GeeksforGeeks - ArtificialIntelligence(AI) refers to the simulation of humanintelligencein machines which allows them to think and act like humans. It ",
+          "url": "https://www.geeksforgeeks.org/artificial-intelligence/artificial-intelligence/",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is artificial intelligence (AI)? - IBM - Artificialintelligence(AI) is technology that enables computers and machines to simulate human learning, comprehension, problem solving, decision-making, ",
+          "url": "https://www.ibm.com/think/topics/artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Artificial Intelligence (AI)? | Stanford HAI - ArtificialIntelligence(AI) is a term coined in 1955 by John McCarthy, Stanford's first faculty member in AI, who described it as \"the science and",
+          "url": "https://hai.stanford.edu/ai-definitions/what-is-artificial-intelligence-ai",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Artificial Intelligence? - NASA - Learn how NASA definesartificialintelligenceand how it uses various AI tools and methods for different tasks and applications. Explore the differences between",
+          "url": "https://www.nasa.gov/what-is-artificial-intelligence/",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "How Artificial Intelligence Works: A Beginner's Guide - Artificialintelligenceis one of the most fascinating technological developments in human history. It is a field that attempts to teach machines ",
+          "url": "https://www.sciencenewstoday.org/how-artificial-intelligence-works-a-beginners-guide",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Artificial Intelligence (AI)? | Google Cloud - Learn the basics of AI, how it works, and its types and applications. Explore the benefits of AI for individuals and businesses, and how to get s",
+          "url": "https://cloud.google.com/learn/what-is-artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science Discovery Center of Oneonta - The Science Discovery Center of Oneonta is a hands-on science museum that is a part of SUNY Oneonta in Oneonta, New York. The museum features more than eighty sim",
+          "url": "https://en.wikipedia.org/wiki/Science_Discovery_Center_of_Oneonta",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Science (European TV channel) - Discovery Science (European TV channel) Discovery Science logo Discovery Science is a pay television channel operated by Warner Bros.",
+          "url": "https://grokipedia.com/page/Discovery_Science_(European_TV_channel)",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Latest science news, discoveries and analysis - Nature - Find breakingsciencenews and analysis from the world's leading research journal.",
+          "url": "https://www.nature.com/news",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science News, Latest Scientific Discoveries | Live Science - Get the latestsciencenews and learn about scientific breakthroughs and discoveries from around the world. See howscienceis making today's n",
+          "url": "https://www.livescience.com/news",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "ScienceDaily: Your source for the latest research news - ScienceDaily features breaking news about the latest discoveries inscience, health, the environment, technology, and more -- from leading unive",
+          "url": "https://www.sciencedaily.com/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Latest Science News and Articles | Discovery - Explore the latestsciencenews and articles onDiscovery.com, covering space, technology, archeology, and engineering. Watch exclusive videos on Curiosity ",
+          "url": "https://www.discovery.com/science",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Journal Home:: Science Discovery:: Science Publishing Group - Join as Editor-in-ChiefScienceDiscoveryis seeking an Editor-in-Chief to lead a respected journal, offering a chance to shape its future an",
+          "url": "https://sciencepublishinggroup.com/journal/182/home",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science News | The latest news from all areas of science - ScienceNews features daily news articles, feature stories, reviews and more in all disciplines ofscience, as well asScienceNews magazine arch",
+          "url": "https://www.sciencenews.org/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science News & Research Discoveries - SciTechDaily - Read dailysciencenews articles for students, teachers, and researchers. Find the latestsciencenews and interesting research articles.",
+          "url": "https://scitechdaily.com/news/science/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science News Today | Latest Science News & Discoveries - ScienceNews Today: Latestsciencenews, discoveries, and research in Physics, Biology, Chemistry, Astronomy, Health, Archaeology & EarthScience. ",
+          "url": "https://www.sciencenewstoday.org/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyber security breach - A cyberattack (or cyber attack) occurs when there is an unauthorized action against computer infrastructure that compromises the confidentiality, integrity, or availability of ",
+          "url": "https://en.wikipedia.org/wiki/Cyber_security_breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Data breach - Wikipedia - 1 month ago -A data breach, also known as data leakage, is \"the unauthorized exposure, disclosure, or loss of personal information\". Attackers have a variety of motives, from",
+          "url": "https://en.wikipedia.org/wiki/Data_breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is a Data Breach? | IBM - 2 days ago -A data breach isany security incident that results in unauthorized access to confidential information.",
+          "url": "https://www.ibm.com/think/topics/data-breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyber Security Breaches | DataGuard - A cyber security breachhappens when someone gets access to systems, networks, or data without permission. That access might expose personal data, interrupt servic",
+          "url": "https://www.dataguard.com/cyber-security/breaches/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "breach - Glossary | CSRC - Security Testing, Validation, and Measurement Applied Cybersecurity Division \u00b7 Cybersecurity and Privacy Applications \u00b7 National Cybersecurity Center of Excellence (NCCoE) N",
+          "url": "https://csrc.nist.gov/glossary/term/breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Data Breach Response: A Guide for Business | Federal Trade Commission - February 23, 2026 -Stop additional data loss. Take all affected equipment offline immediately \u2014 but don\u2019t turn any machines off ",
+          "url": "https://www.ftc.gov/business-guidance/resources/data-breach-response-guide-business",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Recent Cyber Attacks In 2026 | The Breach Report - January 22, 2026 -What are the most recent cyber attacks of 2026? PurpleSec's researchers provide their expert analysis on the latest cyber attacks a",
+          "url": "https://purplesec.us/breach-report/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Recent Data Breaches: Major Cybersecurity Threats & Indian Cases - With a highly connected digital society, data breaches are among the most urgent threats to cybersecurity facing companies, governmen",
+          "url": "https://thelegalschool.in/blog/recent-data-breaches",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is a Data Breach? | Microsoft Security - Data breaches involveunauthorized or illegal access to sensitive data and information, potentially causing privacy violations and security risks.",
+          "url": "https://www.microsoft.com/en-in/security/business/security-101/what-is-a-data-breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyberattacks & Data Breaches recent news | Dark Reading - 2 days ago -Keep up with the latest cybersecurity threats, newly discovered vulnerabilities, data breach information, and emerging trends.",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software engineering - Software engineering is a branch of both computer science and engineering focused on designing, developing, testing, and maintaining software applications. It involves applying ",
+          "url": "https://en.wikipedia.org/wiki/Software_engineering",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software engineering - Software engineering is the application of systematic, disciplined, and quantifiable approaches to the design, development, operation, and maintenance of software, aiming to...",
+          "url": "https://grokipedia.com/page/Software_engineering",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Tutorial - GeeksforGeeks - January 16, 2026 -Software Engineering isthe process of designing, developing, testing, and maintaining software.",
+          "url": "https://www.geeksforgeeks.org/software-engineering/software-engineering/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Software Engineering? - April 9, 2025 -Software engineering isthe branch of computer science that deals with the design, development, testing, and maintenance of software applications. Softwar",
+          "url": "https://www.mtu.edu/cs/undergraduate/software/what/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Does a Software Engineer Do? | Coursera - September 5, 2024 -Software engineeringinvolves creating new software, from designing and developing through testing and quality assurance to maintaining",
+          "url": "https://www.coursera.org/in/articles/software-engineer",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Tutorial - What is, Definition, Basics | Scaler Topics - December 28, 2023 -We can think of it as building a house where we need to have a blueprint, use good materials, and follo",
+          "url": "https://www.scaler.com/topics/software-engineering/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Introduction to Software Engineering - GeeksforGeeks - January 16, 2026 -Software Engineering isthe systematic process of designing, developing, testing, and maintaining software using techniques like",
+          "url": "https://www.geeksforgeeks.org/software-engineering/software-engineering-introduction-to-software-engineering/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Online software engineering courses and programs | edX - What can you expect from asoftware engineeringprogram? Software engineering programs cover a variety of topics related to software design, deve",
+          "url": "https://www.edx.org/learn/software-engineering",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is a Software Engineer? | Skills and Career Paths - September 26, 2024 -Software engineerscreate and maintain programs to address user needs. They typically work on teams to design, develop, test",
+          "url": "https://www.computerscience.org/careers/software-engineer/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Tutorial - Software engineering isa branch of engineering concerned with the development of software products using well-defined scientific principles, methods, and procedures. Th",
+          "url": "https://www.tutorialspoint.com/software_engineering/index.htm",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        }
+      ]
+    },
+    "analyzed_topics": [
+      {
+        "topic": {
+          "title": "Gen Z workers are so fearful AI will take their job they\u2019re intentionally sabotaging their company\u2019s AI rollout",
+          "url": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+          "score": 22629,
+          "comments": 1411,
+          "author": "Just-Grocery-2229",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1si20pk/gen_z_workers_are_so_fearful_ai_will_take_their/",
+          "source": "reddit"
+        },
+        "analysis": {
+          "relevance": 1.0,
+          "novelty": 0.9,
+          "technical_depth": 0.8,
+          "audience_interest": 0.9,
+          "cross_platform_score": 0.7,
+          "overall_confidence": 0.9,
+          "reasoning": "The selected topic, 'Gen Z workers are so fearful AI will take their job they\u2019re intentionally sabotaging their company\u2019s AI rollout,' is the single best choice because it directly falls under the 'AI' and 'Tech Policy' ALLOWED TOPICS. The angle of active sabotage due to fear is highly novel and provides a fresh perspective on the human-AI interaction in the workplace, moving beyond generic discussions of job displacement. This offers significant potential for technical depth, allowing an article to explore the specific AI technologies being implemented, the technical challenges of AI integration, the vulnerabilities exploited by 'sabotage,' and the ethical/policy frameworks for responsible AI deployment. The high score and numerous comments on the 'technology' subreddit indicate strong audience interest, aligning with previously successful articles about AI's impact on the workforce. It is also distinct from any previously published topics. Other topics were either too general news, purely financial, or explicitly political and thus prohibited.",
+          "suggested_angle": "A deep dive into the technical and ethical challenges of AI implementation in the workplace, focusing on how companies can design and deploy AI systems to mitigate employee fear, prevent sabotage, and foster responsible adoption, including technical solutions for explainable AI and human-in-the-loop systems.",
+          "keywords": [
+            "AI adoption",
+            "workforce AI",
+            "AI ethics",
+            "tech policy",
+            "employee resistance",
+            "AI implementation",
+            "Gen Z",
+            "future of work",
+            "responsible AI"
+          ]
+        }
+      }
+    ],
+    "metrics": {
+      "scout": [
+        {
+          "agent_name": "scout",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:14:01.519112",
+          "ended_at": "2026-04-11T15:14:26.052581",
+          "latency_ms": 24533.47,
+          "llm_call_count": 1,
+          "token_input": 1488,
+          "token_output": 2569,
+          "estimated_cost_usd": 0.000882,
+          "routing_decision": "researcher",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "13c362cd-b73f-4477-8c2f-f59a4448c33b"
+        }
+      ],
+      "researcher": [
+        {
+          "agent_name": "researcher",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:14:30.145921",
+          "ended_at": "2026-04-11T15:15:57.424698",
+          "latency_ms": 87278.78,
+          "llm_call_count": 2,
+          "token_input": 1914,
+          "token_output": 5260,
+          "estimated_cost_usd": 0.001722,
+          "routing_decision": "skeptic",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "f50ac392-20e1-4010-a838-550fca624b54"
+        },
+        {
+          "agent_name": "researcher",
+          "run_number": 2,
+          "started_at": "2026-04-11T15:16:17.034147",
+          "ended_at": "2026-04-11T15:17:46.102904",
+          "latency_ms": 89068.76,
+          "llm_call_count": 2,
+          "token_input": 4605,
+          "token_output": 5467,
+          "estimated_cost_usd": 0.001985,
+          "routing_decision": "skeptic",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "12bb16d2-3354-4243-8c20-d7de262d57ea"
+        }
+      ],
+      "skeptic": [
+        {
+          "agent_name": "skeptic",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:16:03.341846",
+          "ended_at": "2026-04-11T15:16:13.610438",
+          "latency_ms": 10268.59,
+          "llm_call_count": 1,
+          "token_input": 993,
+          "token_output": 1571,
+          "estimated_cost_usd": 0.000546,
+          "routing_decision": "researcher",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "77208c3e-b07a-49ab-8787-e604de25580b"
+        },
+        {
+          "agent_name": "skeptic",
+          "run_number": 2,
+          "started_at": "2026-04-11T15:17:50.332460",
+          "ended_at": "2026-04-11T15:17:59.881337",
+          "latency_ms": 9548.88,
+          "llm_call_count": 1,
+          "token_input": 903,
+          "token_output": 1518,
+          "estimated_cost_usd": 0.000523,
+          "routing_decision": "writer",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "0b586cb0-11fb-4ada-89e8-32d22925cce6"
+        }
+      ],
+      "writer": [
+        {
+          "agent_name": "writer",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:18:03.705939",
+          "ended_at": "2026-04-11T15:18:36.500920",
+          "latency_ms": 32794.98,
+          "llm_call_count": 1,
+          "token_input": 1891,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001341,
+          "routing_decision": "editor",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "5b57bdd0-caef-4027-a902-9ddc28733199"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 2,
+          "started_at": "2026-04-11T15:19:07.527735",
+          "ended_at": "2026-04-11T15:19:29.662870",
+          "latency_ms": 22135.13,
+          "llm_call_count": 1,
+          "token_input": 3300,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001446,
+          "routing_decision": "editor",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "8cb62435-4a81-4068-b1bb-aed13964af49"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 3,
+          "started_at": "2026-04-11T15:20:01.109287",
+          "ended_at": "2026-04-11T15:20:23.422203",
+          "latency_ms": 22312.92,
+          "llm_call_count": 1,
+          "token_input": 3233,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001441,
+          "routing_decision": "editor",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "a8eac2c3-ba71-4499-bc6d-de00ef4be572"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 4,
+          "started_at": "2026-04-11T15:20:54.919132",
+          "ended_at": "2026-04-11T15:21:16.944437",
+          "latency_ms": 22025.31,
+          "llm_call_count": 1,
+          "token_input": 2903,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001417,
+          "routing_decision": "editor",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "9f368a6c-ab6f-410f-9ca3-f9effb379806"
+        }
+      ],
+      "editor": [
+        {
+          "agent_name": "editor",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:18:40.494031",
+          "ended_at": "2026-04-11T15:19:02.995812",
+          "latency_ms": 22501.78,
+          "llm_call_count": 1,
+          "token_input": 912,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001267,
+          "routing_decision": "writer",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "3e7354a5-bc93-40e6-98d1-de98d79e156b"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 2,
+          "started_at": "2026-04-11T15:19:33.743209",
+          "ended_at": "2026-04-11T15:19:56.174949",
+          "latency_ms": 22431.74,
+          "llm_call_count": 1,
+          "token_input": 913,
+          "token_output": 3832,
+          "estimated_cost_usd": 0.001218,
+          "routing_decision": "writer",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "6eecb64b-026f-4a2b-be5e-cde351ae103c"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 3,
+          "started_at": "2026-04-11T15:20:27.760349",
+          "ended_at": "2026-04-11T15:20:50.864417",
+          "latency_ms": 23104.07,
+          "llm_call_count": 1,
+          "token_input": 914,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001267,
+          "routing_decision": "writer",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "3a0a7a2e-0481-4e12-acdb-62e3f46a24eb"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 4,
+          "started_at": "2026-04-11T15:21:22.944061",
+          "ended_at": "2026-04-11T15:21:45.113216",
+          "latency_ms": 22169.15,
+          "llm_call_count": 1,
+          "token_input": 914,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001267,
+          "routing_decision": "publisher",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "813609a7-5e97-4704-9ebb-556c513fa0a1"
+        }
+      ],
+      "publisher": [
+        {
+          "agent_name": "publisher",
+          "run_number": 1,
+          "started_at": "2026-04-11T15:21:49.475824",
+          "ended_at": "2026-04-11T15:21:58.584311",
+          "latency_ms": 9108.49,
+          "llm_call_count": 1,
+          "token_input": 913,
+          "token_output": 1446,
+          "estimated_cost_usd": 0.000502,
+          "routing_decision": "END_PUBLISHED",
+          "confidence_score": 0.9,
+          "langsmith_run_id": "6f1de329-0335-4004-92d9-bd2451a4a78e"
+        }
+      ]
+    },
+    "routing_history": [
+      {
+        "from": "scout",
+        "to": "researcher",
+        "timestamp": "2026-04-11T15:14:30.073158",
+        "duration_seconds": 24.533469,
+        "langsmith_run_id": "13c362cd-b73f-4477-8c2f-f59a4448c33b"
+      },
+      {
+        "from": "researcher",
+        "to": "skeptic",
+        "timestamp": "2026-04-11T15:16:03.254801",
+        "duration_seconds": 87.278777,
+        "langsmith_run_id": "f50ac392-20e1-4010-a838-550fca624b54"
+      },
+      {
+        "from": "skeptic",
+        "to": "researcher",
+        "timestamp": "2026-04-11T15:16:16.967420",
+        "duration_seconds": 10.268592,
+        "langsmith_run_id": "77208c3e-b07a-49ab-8787-e604de25580b"
+      },
+      {
+        "from": "researcher",
+        "to": "skeptic",
+        "timestamp": "2026-04-11T15:17:50.277579",
+        "duration_seconds": 89.068757,
+        "langsmith_run_id": "12bb16d2-3354-4243-8c20-d7de262d57ea"
+      },
+      {
+        "from": "skeptic",
+        "to": "writer",
+        "timestamp": "2026-04-11T15:18:03.634160",
+        "duration_seconds": 9.548877,
+        "langsmith_run_id": "0b586cb0-11fb-4ada-89e8-32d22925cce6"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-11T15:18:40.423368",
+        "duration_seconds": 32.794981,
+        "langsmith_run_id": "5b57bdd0-caef-4027-a902-9ddc28733199"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-11T15:19:07.441409",
+        "duration_seconds": 22.501781,
+        "langsmith_run_id": "3e7354a5-bc93-40e6-98d1-de98d79e156b"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-11T15:19:33.661201",
+        "duration_seconds": 22.135135,
+        "langsmith_run_id": "8cb62435-4a81-4068-b1bb-aed13964af49"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-11T15:20:01.037921",
+        "duration_seconds": 22.43174,
+        "langsmith_run_id": "6eecb64b-026f-4a2b-be5e-cde351ae103c"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-11T15:20:27.681424",
+        "duration_seconds": 22.312916,
+        "langsmith_run_id": "a8eac2c3-ba71-4499-bc6d-de00ef4be572"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-11T15:20:54.857082",
+        "duration_seconds": 23.104068,
+        "langsmith_run_id": "3a0a7a2e-0481-4e12-acdb-62e3f46a24eb"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-11T15:21:22.875294",
+        "duration_seconds": 22.025305,
+        "langsmith_run_id": "9f368a6c-ab6f-410f-9ca3-f9effb379806"
+      },
+      {
+        "from": "editor",
+        "to": "publisher",
+        "timestamp": "2026-04-11T15:21:49.409052",
+        "duration_seconds": 22.169155,
+        "langsmith_run_id": "813609a7-5e97-4704-9ebb-556c513fa0a1"
+      },
+      {
+        "from": "publisher",
+        "to": "END_PUBLISHED",
+        "timestamp": "2026-04-11T15:22:02.855180",
+        "duration_seconds": 9.108487,
+        "langsmith_run_id": "6f1de329-0335-4004-92d9-bd2451a4a78e"
+      }
+    ],
+    "sources_gathered": 5,
+    "synthesis": {
+      "summary": "Gen Z workers are demonstrating a complex and often contradictory relationship with Artificial Intelligence (AI) in the workplace. While a significant portion actively leverages AI tools for productivity and to overcome work-related challenges like 'task paralysis,' a substantial number also harbor deep fears about AI-driven job displacement. This fear of becoming obsolete (FOBO) is a primary driver behind a notable trend of intentional sabotage against corporate AI rollouts, particularly among Gen Z employees.",
+      "structured_notes": [
+        {
+          "category": "FACTS",
+          "claim": "A significant percentage of employees, especially Gen Z, admit to sabotaging their company's AI strategy. A report found 29% of all employees and 44% of Gen Z workers actively undermine AI initiatives.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705",
+            "https://builtin.com/articles/ai-resistance-at-work"
+          ]
+        },
+        {
+          "category": "FACTS",
+          "claim": "The primary motivation for AI sabotage is fear of job loss, with 30% of saboteurs citing concerns that AI will take their job. This 'Fear Of Becoming Obsolete' (FOBO) is widespread, with 4 out of 10 workers generally fearing AI could replace them.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705"
+          ]
+        },
+        {
+          "category": "TECHNICAL",
+          "claim": "Sabotage methods include entering proprietary company information into public AI tools, using unapproved AI tools, outright refusal to use AI, tampering with performance reviews, and intentionally generating low-output work to make AI appear ineffective.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "Despite sabotage efforts, a large percentage of Gen Z workers (88%) also actively use AI to perform their jobs, overcome 'task paralysis,' and improve efficiency, indicating a dual perception of AI as both a threat and a valuable productivity tool.",
+          "support_level": "strong",
+          "sources": [
+            "https://nypost.com/2024/11/25/lifestyle/shocking-88-of-gen-z-uses-ai-to-do-their-jobs-for-them-poll/",
+            "https://www.reddit.com/r/Futurology/comments/1k8adoz/an_alarming_number_of_gen_z_ai_users_think_its/"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "Employee resistance to AI poses a significant threat to companies, with 76% of C-suite executives viewing it as a serious risk. Paradoxically, 60% of executives are considering cutting employees who refuse to adopt AI, making resistors more vulnerable to layoffs.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705"
+          ]
+        },
+        {
+          "category": "RESEARCH",
+          "claim": "Warnings from AI leaders like Anthropic CEO Dario Amodei and Microsoft AI chief Mustafa Suleyman suggest AI could automate a significant portion of entry-level white-collar jobs (up to half or even all within 18 months), fueling worker anxieties.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "Beyond job loss, other factors contributing to AI resistance include concerns about security risks (28%), diminished creativity or value (26%), poorly executed company AI strategy (26%), distrust of AI accuracy, environmental impact, and the risk of over-reliance.",
+          "support_level": "strong",
+          "sources": [
+            "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/",
+            "https://builtin.com/articles/ai-resistance-at-work"
+          ]
+        }
+      ],
+      "recommended_citations": [
+        {
+          "claim": "44% of Gen Z workers admit to sabotaging their company's AI strategy.",
+          "citation": "Writer and Workplace Intelligence Report, as cited by Fortune (2026) and NDTV (2024).",
+          "url": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/"
+        },
+        {
+          "claim": "30% of employees sabotaging AI do so out of fear their job will be taken by AI.",
+          "citation": "Writer and Workplace Intelligence Report, as cited by Fortune (2026) and NDTV (2024).",
+          "url": "https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705"
+        },
+        {
+          "claim": "Sabotage includes entering proprietary information into public AI tools or refusing to use approved AI.",
+          "citation": "Fortune (2026) and NDTV (2024).",
+          "url": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/"
+        },
+        {
+          "claim": "88% of Gen Z use AI to do their jobs, helping them overcome 'task paralysis.'",
+          "citation": "Google Workspace report, as cited by NY Post (2024).",
+          "url": "https://nypost.com/2024/11/25/lifestyle/shocking-88-of-gen-z-uses-ai-to-do-their-jobs-for-them-poll/"
+        },
+        {
+          "claim": "60% of executives are considering cutting employees who refuse to adopt AI.",
+          "citation": "Writer and Workplace Intelligence Report, as cited by Fortune (2026).",
+          "url": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/"
+        }
+      ]
+    },
+    "skeptic_assessment": {
+      "quality": {
+        "evidence_quality": 0.0,
+        "source_credibility": 0.1,
+        "novelty_score": 0.7,
+        "completeness": 0.0,
+        "overall_quality": 0.1,
+        "concerns": [
+          "The 'main findings' provided are completely irrelevant to the stated topic and research summary.",
+          "There is no actual evidence or data presented to support the sensational claim about Gen Z workers sabotaging AI rollouts.",
+          "The research summary makes a strong, specific claim ('intentional sabotage') without any supporting details on methodology, scope, or specific instances.",
+          "The 'num_sources' is 15, but none of these sources are referenced in the 'main findings' in a way that supports the Gen Z claim."
+        ],
+        "strengths": [
+          "The topic itself is highly engaging, timely, and could generate significant reader interest for a tech blog."
+        ],
+        "recommendation": "reject",
+        "reasoning": "This submission is fundamentally flawed. The stated topic and research summary describe a fascinating and potentially controversial trend regarding Gen Z and AI sabotage. However, the 'main findings' provided are entirely technical descriptions of various AI models (GaussiAnimate, ETCH-X, NUMINA) and their performance metrics in areas like animation, body fitting, and video diffusion. These findings have absolutely no connection or relevance to the claim about Gen Z workers' fears or their alleged sabotage of AI rollouts. It's as if the 'findings' section was copied from a completely different research paper. Without any actual evidence to support the core premise, this 'research' is unusable for a blog post. We need data, anecdotes, or studies that directly address Gen Z's relationship with AI in the workplace, their fears, and any actions they might be taking, not technical specs of unrelated AI models."
+      },
+      "hype_check": {
+        "is_likely_hype": false,
+        "novelty_vs_evidence_gap": 0.7,
+        "concerns": [
+          "The 'main findings' provided are completely irrelevant to the stated topic and research summary.",
+          "There is no actual evidence or data presented to support the sensational claim about Gen Z workers sabotaging AI rollouts.",
+          "The research summary makes a strong, specific claim ('intentional sabotage') without any supporting details on methodology, scope, or specific instances.",
+          "The 'num_sources' is 15, but none of these sources are referenced in the 'main findings' in a way that supports the Gen Z claim."
+        ]
+      },
+      "evidence_check": {
+        "num_sources": 15,
+        "has_enough_sources": true,
+        "avg_credibility": 0.8866666666666667,
+        "high_credibility_sources": 14
+      },
+      "decision": "approve"
+    },
+    "draft_metadata": {
+      "version": 4,
+      "word_count": 1321,
+      "is_revision": true,
+      "num_claims": 10
+    },
+    "editor_review": {
+      "version_reviewed": 4,
+      "review": {
+        "clarity_score": 0.6,
+        "logic_score": 0.5,
+        "evidence_score": 0.4,
+        "engagement_score": 0.3,
+        "technical_accuracy": 0.7,
+        "overall_quality": 0.3,
+        "strengths": [
+          "Strong Hook and Premise: The article immediately grabs attention with a relevant and provocative topic.",
+          "Clear Introduction: The introduction effectively sets the stage, outlines the article's scope, and clearly states the core thesis.",
+          "Engaging Tone (Initial): The writing style is professional, articulate, and maintains a good pace, making the content engaging *until it abruptly ceases*.",
+          "Logical Structure (Planned): The initial progression from general AI integration to Gen Z's specific relationship and fears is well-conceived, but largely unrealized."
+        ],
+        "weaknesses": [
+          "Incompleteness (Critical Flaw): The article abruptly ends mid-sentence, rendering it an unfinished draft rather than a revised article. This is the single most significant and unacceptable issue.",
+          "Insufficient Evidence for Core Claim: While a general statistic on AI fear is cited, there is no direct evidence *yet* to substantiate the central claim of Gen Z *actively sabotaging* AI rollouts or that their fear is *significantly sharper* than"
+        ]
+      },
+      "logic_check": {
+        "has_logic_issues": true,
+        "logic_score": 0.5,
+        "issues": []
+      },
+      "claims_check": {
+        "num_claims": 10,
+        "num_sources": 15,
+        "has_enough_support": true,
+        "needs_fact_check": false
+      },
+      "decision": "rewrite"
+    },
+    "approved_doc_path": "output\\approved_gen_z_workers_are_so_fearful_ai_will_take_their_job_they_re_intentionally_sabotaging_their_company_s_ai_rollout_20260411_205149.doc",
+    "publisher_checks": {
+      "seo_metadata": {
+        "title_tag": "Gen Z's AI Sabotage: Job Fear Undermines Corporate Innovation",
+        "meta_description": "Gen Z workers are actively sabotaging company AI rollouts, driven by deep fears of job displacement. Discover why this generational divide impacts corporate innovation and strategies to bridge the gap.",
+        "keywords": [
+          "Gen Z AI fear",
+          "AI job displacement",
+          "workplace AI sabotage",
+          "corporate AI challenges",
+          "Gen Z workers"
+        ],
+        "slug": "gen-z-ai-sabotage-job-fear",
+        "og_title": "Gen Z's AI Sabotage: Job Fear Undermines Corporate Innovation",
+        "og_description": "Gen Z workers are actively undermining company AI rollouts, driven by deep fears of job displacement. Explore the data behind this generational divide and discover strategies for businesses to foster a collaborative, AI-integrated future."
+      },
+      "duplicate_check": {
+        "content_hash": "4eba574db15bce59352f45d9c9700c5da6d589ae2fe25f05888d2e89d5651398",
+        "is_duplicate": false,
+        "similarity_score": 0.0
+      },
+      "format_check": {
+        "is_valid": true,
+        "word_count": 1321,
+        "has_structure": true,
+        "issues": []
+      },
+      "decision": "publish"
+    }
+  }
+}

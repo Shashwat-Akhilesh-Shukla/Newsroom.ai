@@ -142,7 +142,10 @@ async def trigger_run():
             for line in proc.stdout:
                 line = line.rstrip()
                 if line:
-                    payload = _json.dumps({"type": "log", "message": line})
+                    if line.startswith("__EVENT__:"):
+                        payload = line[10:]
+                    else:
+                        payload = _json.dumps({"type": "log", "message": line})
                     # Schedule broadcast on the event loop from this thread
                     asyncio.run_coroutine_threadsafe(manager.broadcast(payload), loop)
             proc.wait()

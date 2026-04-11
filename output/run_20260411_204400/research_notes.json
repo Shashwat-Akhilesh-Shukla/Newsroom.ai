@@ -1,0 +1,107 @@
+[
+  {
+    "claim": "[FACTS] GaussiAnimate achieves significant reanimation performance improvements, with 17.3% PSNR gains over Linear Blend Skinning (LBS) and 21.7% over Bag-of-Bones (BoB), while its Partwise Motion Matching (PartMM) algorithm shows 48.4% RMSE improvement over robust LBS.",
+    "citation": "http://arxiv.org/abs/2604.08547v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[FACTS] ETCH-X delivers substantial performance improvements in expressive body fitting, including an 80.8% MPJPE-All improvement and 80.5% V2V-All improvement on unseen BEDLAM2.0 data, and 33.0% MPJPE-All on 4D-Dress.",
+    "citation": "http://arxiv.org/abs/2604.08548v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[FACTS] NUMINA improves counting accuracy in text-to-video diffusion models by up to 7.4% on Wan2.1-1.3B models, and by 4.9% and 5.5% on 5B and 14B models respectively, while also enhancing CLIP alignment and maintaining temporal consistency.",
+    "citation": "http://arxiv.org/abs/2604.08546v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[TECHNICAL] GaussiAnimate introduces a \"Skelebones\" rigging system that compresses temporally-consistent deformable Gaussians into free-form bones, extracts a Mean Curvature Skeleton, and binds them via non-parametric Partwise Motion Matching to capture non-rigid deformations and enable intuitive control of 4D shapes.",
+    "citation": "http://arxiv.org/abs/2604.08547v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[TECHNICAL] ETCH-X upgrades its predecessor by leveraging a tightness-aware fitting paradigm to 'undress' clothing dynamics, extending expressiveness with SMPL-X, and replacing sparse markers with implicit dense correspondences ('dense fit'), enabling scalable training on composable datasets like CLOTH3D, AMASS, and InterHand2.6M.",
+    "citation": "http://arxiv.org/abs/2604.08548v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[TECHNICAL] NUMINA is a training-free 'identify-then-guide' framework for text-to-video diffusion models that identifies prompt-layout inconsistencies by selecting discriminative self- and cross-attention heads to derive a countable latent layout, then refines and modulates cross-attention for guided regeneration.",
+    "citation": "http://arxiv.org/abs/2604.08546v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[CONTEXT] These advancements in 4D shape animation, expressive human body fitting, and numerically accurate text-to-video generation are crucial for enhancing realism and control in various applications such as animation, virtual reality, gaming, and the creation of digital humans.",
+    "citation": "http://arxiv.org/abs/2604.08547v1, http://arxiv.org/abs/2604.08548v1, http://arxiv.org/abs/2604.08546v1",
+    "source_url": "",
+    "credibility_score": 0.7,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[RESEARCH] GaussiAnimate's Partwise Motion Matching algorithm demonstrates strong generalization capabilities, outperforming GRU- and MLP-based learning methods by over 20%, particularly in low-data regimes (~1000 frames).",
+    "citation": "http://arxiv.org/abs/2604.08547v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:15:57.410997"
+  },
+  {
+    "claim": "[FACTS] A significant percentage of employees, especially Gen Z, admit to sabotaging their company's AI strategy. A report found 29% of all employees and 44% of Gen Z workers actively undermine AI initiatives.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705, https://builtin.com/articles/ai-resistance-at-work",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[FACTS] The primary motivation for AI sabotage is fear of job loss, with 30% of saboteurs citing concerns that AI will take their job. This 'Fear Of Becoming Obsolete' (FOBO) is widespread, with 4 out of 10 workers generally fearing AI could replace them.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[TECHNICAL] Sabotage methods include entering proprietary company information into public AI tools, using unapproved AI tools, outright refusal to use AI, tampering with performance reviews, and intentionally generating low-output work to make AI appear ineffective.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[CONTEXT] Despite sabotage efforts, a large percentage of Gen Z workers (88%) also actively use AI to perform their jobs, overcome 'task paralysis,' and improve efficiency, indicating a dual perception of AI as both a threat and a valuable productivity tool.",
+    "citation": "https://nypost.com/2024/11/25/lifestyle/shocking-88-of-gen-z-uses-ai-to-do-their-jobs-for-them-poll/, https://www.reddit.com/r/Futurology/comments/1k8adoz/an_alarming_number_of_gen_z_ai_users_think_its/",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[CONTEXT] Employee resistance to AI poses a significant threat to companies, with 76% of C-suite executives viewing it as a serious risk. Paradoxically, 60% of executives are considering cutting employees who refuse to adopt AI, making resistors more vulnerable to layoffs.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[RESEARCH] Warnings from AI leaders like Anthropic CEO Dario Amodei and Microsoft AI chief Mustafa Suleyman suggest AI could automate a significant portion of entry-level white-collar jobs (up to half or even all within 18 months), fueling worker anxieties.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://www.ndtv.com/feature/fearful-gen-z-employees-intentionally-sabotage-ai-adoption-over-job-security-concerns-11330705",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  },
+  {
+    "claim": "[CONTEXT] Beyond job loss, other factors contributing to AI resistance include concerns about security risks (28%), diminished creativity or value (26%), poorly executed company AI strategy (26%), distrust of AI accuracy, environmental impact, and the risk of over-reliance.",
+    "citation": "https://fortune.com/2026/04/08/gen-z-workers-sabotage-ai-rollout-backlash/, https://builtin.com/articles/ai-resistance-at-work",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-11T15:17:46.091512"
+  }
+]
