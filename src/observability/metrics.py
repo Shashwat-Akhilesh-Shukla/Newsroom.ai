@@ -221,18 +221,20 @@ def metrics_to_langsmith_feedback(
         return
 
     feedback_pairs = [
-        ("latency_ms", metrics.latency_ms),
+        ("latency_s", metrics.latency_ms / 1000.0),
         ("estimated_cost_usd", metrics.estimated_cost_usd),
         ("confidence_score", metrics.confidence_score),
         ("token_total", float(metrics.token_input + metrics.token_output)),
     ]
 
     for key, score in feedback_pairs:
+        # LangSmith limit: [-99999.9999, 99999.9999]
+        safe_score = max(-99999.9999, min(99999.9999, score))
         try:
             client.create_feedback(
                 run_id=run_id,
                 key=key,
-                score=score,
+                score=safe_score,
                 source_info={"agent": metrics.agent_name},
             )
         except Exception as exc:

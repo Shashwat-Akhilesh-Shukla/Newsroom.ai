@@ -1,0 +1,435 @@
+2026-04-15 20:47:15,717 - src.observability.tracing - INFO - LangSmith tracing enabled | project='Newsroom'
+2026-04-15 20:47:15,899 - __main__ - INFO - ======================================================================
+2026-04-15 20:47:15,911 - __main__ - INFO - AI NEWSROOM - Multi-Agent Content Creation System
+2026-04-15 20:47:15,922 - __main__ - INFO - ======================================================================
+2026-04-15 20:47:15,931 - __main__ - INFO - LLM Provider: gemini
+2026-04-15 20:47:15,942 - __main__ - INFO - Model: gemini-2.5-flash
+2026-04-15 20:47:15,952 - __main__ - INFO - Scout Confidence Threshold: 0.7
+2026-04-15 20:47:15,964 - __main__ - INFO - Max Revision Loops: 4
+2026-04-15 20:47:15,973 - __main__ - INFO - ======================================================================
+2026-04-15 20:47:15,985 - __main__ - INFO - 
+🚀 Starting workflow...
+
+2026-04-15 20:47:15,995 - src.graph - INFO - Starting newsroom workflow...
+2026-04-15 20:47:16,055 - src.graph - INFO - Newsroom workflow created successfully
+2026-04-15 20:47:16,072 - src.graph - INFO - 🔍 LangSmith trace: https://smith.langchain.com/projects/p/Newsroom/runs/9f6a53b3-6835-4952-b209-4f19fc8bfdc6
+2026-04-15 20:47:16,285 - newsroom.agents.scout - INFO - Executing scout (run #1)
+2026-04-15 20:47:17,602 - newsroom.agents.scout - INFO - Scout agent starting topic discovery...
+2026-04-15 20:47:17,613 - newsroom.agents.scout - INFO - Fetching trends from all sources...
+2026-04-15 20:47:17,625 - src.utils.api_clients - INFO - Fetching trends from all sources...
+2026-04-15 20:47:17,782 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-15 20:47:17,818 - src.utils.api_clients - INFO - Fetched 10 recent papers from cs.AI
+2026-04-15 20:47:18,335 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/topstories.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:18,585 - src.utils.api_clients - ERROR - Failed to fetch trending searches: The request failed: Google returned a response with code 404
+2026-04-15 20:47:18,633 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778475.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:18,653 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=technology%20news 200
+2026-04-15 20:47:18,874 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:18,965 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Technology%20news&explaintext=0&exintro=0&redirects=1 200
+2026-04-15 20:47:19,154 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778758.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,467 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47776667.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,481 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778366.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,492 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47724571.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,505 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47777449.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,522 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47775628.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,534 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47779856.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,548 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778933.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,555 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47708710.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,570 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47777902.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,584 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47774789.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,598 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47774971.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,621 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47776796.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,635 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778306.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,649 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47732623.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,665 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778617.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,676 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778920.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,693 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47708627.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,703 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778308.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,716 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47779730.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,732 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47740840.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,747 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47740879.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,760 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47778050.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,775 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47779094.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,784 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47725897.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,800 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47772012.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,817 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47734629.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,833 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47776557.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,850 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47728662.json "HTTP/1.1 200 OK"
+2026-04-15 20:47:19,896 - src.utils.api_clients - INFO - Fetched 29 trending topics from Hacker News
+2026-04-15 20:47:20,418 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=artificial%20intelligence 200
+2026-04-15 20:47:20,599 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/science/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:20,687 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Futurology/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:20,722 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=artificial+intelligence&limit=1 200
+2026-04-15 20:47:20,732 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Artificial%20intelligence&explaintext=0&exintro=0&redirects=1 200
+2026-04-15 20:47:20,784 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/cybersecurity/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:20,802 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=technology+news&limit=1 200
+2026-04-15 20:47:20,865 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/worldnews/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:20,892 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/programming/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:21,168 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/MachineLearning/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:21,271 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/artificial/hot.json?limit=10&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:47:21,457 - src.utils.api_clients - INFO - Fetched 72 unique trending posts from Reddit
+2026-04-15 20:47:21,636 - primp - INFO - response: https://search.brave.com/search?q=technology+news&source=web 200
+2026-04-15 20:47:22,504 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=science%20discovery 200
+2026-04-15 20:47:22,546 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-15 20:47:22,724 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=science+discovery&limit=1 200
+2026-04-15 20:47:22,820 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Science%20Discovery%20Center%20of%20Oneonta&explaintext=0&exintro=0&redirects=1 200
+2026-04-15 20:47:23,834 - primp - INFO - response: https://www.google.com/search?q=science+discovery&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:47:23,955 - ddgs.ddgs - INFO - Error in engine grokipedia: DDGSException("ConnectError: ConnectError('error sending request for url (https://grokipedia.com/api/typeahead?query=cybersecurity+breach&limit=1)', 'https://grokipedia.com/api/typeahead?query=cybersecurity+breach&limit=1')")
+2026-04-15 20:47:24,413 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=cybersecurity%20breach 200
+2026-04-15 20:47:24,747 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Cyber%20security%20breach&explaintext=0&exintro=0&redirects=1 200
+2026-04-15 20:47:24,980 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-15 20:47:25,583 - primp - INFO - response: https://www.mojeek.com/search?q=science+discovery 200
+2026-04-15 20:47:26,415 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=software%20engineering 200
+2026-04-15 20:47:26,724 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=Software%20engineering&explaintext=0&exintro=0&redirects=1 200
+2026-04-15 20:47:28,467 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=software+engineering&limit=1 200
+2026-04-15 20:47:30,184 - primp - INFO - response: https://www.mojeek.com/search?q=software+engineering 200
+2026-04-15 20:47:30,336 - src.utils.api_clients - INFO - Fetched 50 unique results from DuckDuckGo News
+2026-04-15 20:47:30,347 - src.utils.api_clients - INFO - Fetched 161 total trends from 4 sources
+2026-04-15 20:47:30,352 - newsroom.agents.scout - INFO -   hackernews: 29 items
+2026-04-15 20:47:30,369 - newsroom.agents.scout - INFO -   arxiv: 10 items
+2026-04-15 20:47:30,379 - newsroom.agents.scout - INFO -   reddit: 72 items
+2026-04-15 20:47:30,391 - newsroom.agents.scout - INFO -   duckduckgo_news: 50 items
+2026-04-15 20:47:30,409 - newsroom.agents.scout - INFO - Aggregated 160 unique topics
+2026-04-15 20:47:36,533 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:47:51,856 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:47:51,934 - newsroom.agents.scout - INFO - Selected topic: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary' with confidence 0.95
+2026-04-15 20:47:51,946 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.95 >= threshold 0.7
+2026-04-15 20:47:52,297 - newsroom.agents.scout - INFO - scout completed in 35.64s → researcher
+2026-04-15 20:47:53,888 - newsroom.agents.scout - INFO - Decision: AgentDecision.PROCEED | Reason: Confidence 0.95 >= threshold 0.7
+2026-04-15 20:47:53,916 - newsroom.agents.researcher - INFO - Executing researcher (run #1)
+2026-04-15 20:47:54,256 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:47:56,305 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:48:00,077 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 503 Service Unavailable"
+2026-04-15 20:48:00,095 - google_genai._api_client - INFO - Retrying google.genai._api_client.BaseApiClient._async_request_once in 1.16 seconds as it raised ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}.
+2026-04-15 20:48:10,461 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:48:10,481 - newsroom.agents.researcher - INFO - Generated research plan with 15 keywords
+2026-04-15 20:48:11,075 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AAI+backlash+social+movements&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-15 20:48:14,457 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3ATechnological+resistance+critical+infrastructure&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-15 20:48:14,973 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=AI%20data%20center%20shutdown%20protest%20incidents 200
+2026-04-15 20:48:15,418 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=AI+data+center+shutdown+protest+incidents&limit=1 200
+2026-04-15 20:48:15,943 - primp - INFO - response: https://www.google.com/search?q=AI+data+center+shutdown+protest+incidents&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:48:17,744 - primp - INFO - response: https://yandex.com/search/site/?text=AI+data+center+shutdown+protest+incidents&web=1&searchid=9162685 200
+2026-04-15 20:48:25,315 - src.utils.api_clients - ERROR - Failed to scrape article https://www.ibtimes.com/anti-data-center-referendum-passes-wisconsin-town-huge-margin-3801021: Article `download()` failed with 403 Client Error: Forbidden for url: https://www.ibtimes.com/anti-data-center-referendum-passes-wisconsin-town-huge-margin-3801021 on URL https://www.ibtimes.com/anti-data-center-referendum-passes-wisconsin-town-huge-margin-3801021
+2026-04-15 20:48:25,750 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Reports+on+anti-AI+activism+worldwide&limit=1 200
+2026-04-15 20:48:25,829 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Reports%20on%20anti-AI%20activism%20worldwide 200
+2026-04-15 20:48:26,397 - primp - INFO - response: https://www.google.com/search?q=Reports+on+anti-AI+activism+worldwide&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:48:27,904 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-15 20:48:38,129 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Reddit%20discussion%20AI%20backlash%20sentiment%20site%3Areddit.com 200
+2026-04-15 20:48:38,593 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Reddit+discussion+AI+backlash+sentiment+site%3Areddit.com&limit=1 200
+2026-04-15 20:48:39,650 - primp - INFO - response: https://yandex.com/search/site/?text=Reddit+discussion+AI+backlash+sentiment+site%3Areddit.com&web=1&searchid=3374706 200
+2026-04-15 20:48:40,156 - primp - INFO - response: https://search.yahoo.com/search;_ylt=ldgbvLm6RzLf-ADmJfC0t4pF;_ylu=NUFTsa194817zREJCdLY4nMPul-mF3EyJ4ZEJZodNFGBD5o?p=Reddit+discussion+AI+backlash+sentiment+site%3Areddit.com 200
+2026-04-15 20:48:41,379 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-15 20:48:41,555 - src.utils.api_clients - WARNING - _make_request attempt 1 failed: [Errno 11001] getaddrinfo failed. Retrying in 1.0s...
+2026-04-15 20:48:43,422 - src.utils.api_clients - WARNING - _make_request attempt 2 failed: [Errno 11001] getaddrinfo failed. Retrying in 2.0s...
+2026-04-15 20:48:45,461 - src.utils.api_clients - ERROR - _make_request failed after 3 attempts: [Errno 11001] getaddrinfo failed
+2026-04-15 20:48:45,473 - src.utils.api_clients - ERROR - Failed to fetch Reddit post details: [Errno 11001] getaddrinfo failed
+2026-04-15 20:48:47,864 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/IdleGuildMaster/top.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:48:49,679 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-15 20:48:49,721 - src.utils.api_clients - WARNING - _make_request attempt 1 failed: Client error '403 Blocked' for url 'https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403. Retrying in 1.0s...
+2026-04-15 20:48:51,704 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-15 20:48:51,772 - src.utils.api_clients - WARNING - _make_request attempt 2 failed: Client error '403 Blocked' for url 'https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403. Retrying in 2.0s...
+2026-04-15 20:48:54,072 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1 "HTTP/1.1 403 Blocked"
+2026-04-15 20:48:54,140 - src.utils.api_clients - ERROR - _make_request failed after 3 attempts: Client error '403 Blocked' for url 'https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-04-15 20:48:54,152 - src.utils.api_clients - ERROR - Failed to fetch Reddit post details: Client error '403 Blocked' for url 'https://www.reddit.com/r/Chub_AI/hot/?limit=5&raw_json=1'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+2026-04-15 20:48:54,525 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Anti-AI+movement+Reddit+community+site%3Areddit.com&limit=1 200
+2026-04-15 20:48:54,655 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Anti-AI%20movement%20Reddit%20community%20site%3Areddit.com 200
+2026-04-15 20:48:55,554 - primp - INFO - response: https://www.google.com/search?q=Anti-AI+movement+Reddit+community+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:48:56,560 - primp - INFO - response: https://html.duckduckgo.com/html/ 200
+2026-04-15 20:48:57,757 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/antiai.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:48:58,927 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/DefendingAIArt/comments/17zbqvm/has_this_whole_antiai_movement_damaged_your.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:49:00,952 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/singularity/comments/190v1dw/anyone_else_feeling_the_heat_of_the_antiai.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:49:01,520 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Hacker%20News%20AI%20infrastructure%20security%20vulnerabilities%20site%3Anews.ycombinator.com 200
+2026-04-15 20:49:01,876 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Hacker+News+AI+infrastructure+security+vulnerabilities+site%3Anews.ycombinator.com&limit=1 200
+2026-04-15 20:49:03,736 - primp - INFO - response: https://www.mojeek.com/search?q=Hacker+News+AI+infrastructure+security+vulnerabilities+site%3Anews.ycombinator.com 200
+2026-04-15 20:49:04,642 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45074467.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:05,012 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45076773.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:05,507 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075710.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:05,893 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45076862.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:05,908 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075076.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:05,920 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075306.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:06,221 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45387155.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:06,739 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45387965.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:06,756 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45388551.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:06,774 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45388327.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:06,791 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45388178.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,093 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45388369.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,385 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46536866.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,892 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46536867.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,904 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46545900.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,921 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46540486.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,935 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46540077.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:07,954 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46538182.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:08,445 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=HN%20discussion%20on%20AI%20sabotage%20methods%20site%3Anews.ycombinator.com 200
+2026-04-15 20:49:08,924 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=HN+discussion+on+AI+sabotage+methods+site%3Anews.ycombinator.com&limit=1 200
+2026-04-15 20:49:09,018 - primp - INFO - response: https://html.duckduckgo.com/html/ 202
+2026-04-15 20:49:10,870 - primp - INFO - response: https://www.google.com/search?q=HN+discussion+on+AI+sabotage+methods+site%3Anews.ycombinator.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:49:12,738 - primp - INFO - response: https://yandex.com/search/site/?text=HN+discussion+on+AI+sabotage+methods+site%3Anews.ycombinator.com&web=1&searchid=8677340 200
+2026-04-15 20:49:13,235 - primp - INFO - response: https://search.yahoo.com/search;_ylt=1zyJdXwvYPy_u4gAWiXNlsif;_ylu=uhOMfBOfuBED05PaqAf9IRfatT8daYanhILORuperFEcoOQ?p=HN+discussion+on+AI+sabotage+methods+site%3Anews.ycombinator.com 200
+2026-04-15 20:49:15,675 - primp - INFO - response: https://www.mojeek.com/search?q=HN+discussion+on+AI+sabotage+methods+site%3Anews.ycombinator.com 200
+2026-04-15 20:49:16,436 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730957.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:16,735 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47730958.json "HTTP/1.1 200 OK"
+2026-04-15 20:49:16,762 - newsroom.agents.researcher - INFO - Gathered 5 relevant sources after keyword filtering
+2026-04-15 20:49:16,773 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-15 20:49:16,785 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-15 20:49:19,488 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:49:40,760 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:49:40,783 - newsroom.agents.researcher - INFO - Synthesized research with 0 findings
+2026-04-15 20:49:40,800 - newsroom.agents.researcher - INFO - Research complete: 0 notes, 5 sources
+2026-04-15 20:49:40,811 - newsroom.agents.researcher - INFO - Decision: RETRY_RESEARCH | Reason: 0 notes produced (attempt 1/2) — retrying researcher
+2026-04-15 20:49:41,162 - newsroom.agents.researcher - INFO - researcher completed in 106.87s → researcher
+2026-04-15 20:49:41,486 - langsmith.client - ERROR - Error creating feedback
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\utils.py", line 181, in raise_for_status_with_text
+    response.raise_for_status()
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 422 Client Error: unknown for url: https://api.smith.langchain.com/feedback
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 1524, in request_with_retries
+    ls_utils.raise_for_status_with_text(response)
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\utils.py", line 183, in raise_for_status_with_text
+    raise requests.HTTPError(str(e), response.text) from e  # type: ignore[call-arg]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+requests.exceptions.HTTPError: [Errno 422 Client Error: unknown for url: https://api.smith.langchain.com/feedback] {"detail":["body: Value error, score must be between -99999.9999 and 99999.9999 inclusive, was 106871.532"]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 7605, in create_feedback
+    self.request_with_retries(
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 1589, in request_with_retries
+    raise ls_utils.LangSmithError(
+langsmith.utils.LangSmithError: Failed to POST /feedback in LangSmith API. HTTPError('422 Client Error: unknown for url: https://api.smith.langchain.com/feedback', '{"detail":["body: Value error, score must be between -99999.9999 and 99999.9999 inclusive, was 106871.532"]}')
+2026-04-15 20:49:42,975 - newsroom.agents.researcher - INFO - Decision: RETRY_RESEARCH | Reason: 0 notes produced (attempt 2/2) — retrying researcher
+2026-04-15 20:49:43,008 - newsroom.agents.researcher - INFO - Executing researcher (run #2)
+2026-04-15 20:49:43,340 - newsroom.agents.researcher - INFO - Researcher agent starting research on: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:49:45,570 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:49:55,016 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:49:55,038 - newsroom.agents.researcher - INFO - Generated research plan with 10 keywords
+2026-04-15 20:49:55,567 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3AAI+societal+resistance+movements&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-15 20:49:58,826 - httpx - INFO - HTTP Request: GET https://export.arxiv.org/api/query?search_query=all%3ACritical+infrastructure+protection+AI&start=0&max_results=3&sortBy=submittedDate&sortOrder=descending "HTTP/1.1 200 OK"
+2026-04-15 20:49:59,347 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=AI%20protest%20incidents%20global 200
+2026-04-15 20:49:59,827 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=AI+protest+incidents+global&limit=1 200
+2026-04-15 20:50:01,232 - primp - INFO - response: https://search.brave.com/search?q=AI+protest+incidents+global&source=web 200
+2026-04-15 20:50:06,942 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Data%20center%20sabotage%20news 200
+2026-04-15 20:50:07,418 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Data+center+sabotage+news&limit=1 200
+2026-04-15 20:50:08,385 - primp - INFO - response: https://search.brave.com/search?q=Data+center+sabotage+news&source=web 200
+2026-04-15 20:50:18,085 - src.utils.api_clients - ERROR - Failed to scrape article https://startupfortune.com/anti-ai-saboteurs-are-attacking-data-centers-with-incendiary-devices-as-europes-energy-crisis-hands-them-an-unexpected-opening/: Article `download()` failed with HTTPSConnectionPool(host='startupfortune.com', port=443): Read timed out. (read timeout=7) on URL https://startupfortune.com/anti-ai-saboteurs-are-attacking-data-centers-with-incendiary-devices-as-europes-energy-crisis-hands-them-an-unexpected-opening/
+2026-04-15 20:50:22,813 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Reddit%20AI%20backlash%20discussion%20site%3Areddit.com 200
+2026-04-15 20:50:23,294 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Reddit+AI+backlash+discussion+site%3Areddit.com&limit=1 200
+2026-04-15 20:50:25,703 - primp - INFO - response: https://www.google.com/search?q=Reddit+AI+backlash+discussion+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:50:28,314 - ddgs.ddgs - INFO - Error in engine yahoo: DDGSException("DecodeError: DecodeError('Body collection error: error decoding response body')")
+2026-04-15 20:50:30,034 - primp - INFO - response: https://html.duckduckgo.com/html/ 202
+2026-04-15 20:50:32,147 - primp - INFO - response: https://search.yahoo.com/search;_ylt=6MMzQFgONwCf74KMKbZnC287;_ylu=3reJR_tueEO29bDekpjuu9RZ5dy6IQnaTJVDBleZkrkmifc?p=Reddit+AI+backlash+discussion+site%3Areddit.com 200
+2026-04-15 20:50:33,325 - ddgs.ddgs - INFO - Error in engine duckduckgo: DDGSException("DecodeError: DecodeError('Body collection error: error decoding response body')")
+2026-04-15 20:50:35,434 - primp - INFO - response: https://www.mojeek.com/search?q=Reddit+AI+backlash+discussion+site%3Areddit.com 200
+2026-04-15 20:50:36,241 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/14dyhwm/reddit_descends_into_chaos_subreddits_filled_with.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:38,073 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/TheoryOfReddit/comments/15oidoh/during_the_protests_several_users_abandoned.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:40,200 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/technology/comments/15mc4po/ai_hysteria_is_a_distraction_algorithms_already.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:40,706 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=Reddit%20anti-AI%20sentiment%20community%20site%3Areddit.com 200
+2026-04-15 20:50:41,174 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=Reddit+anti-AI+sentiment+community+site%3Areddit.com&limit=1 200
+2026-04-15 20:50:42,282 - primp - INFO - response: https://yandex.com/search/site/?text=Reddit+anti-AI+sentiment+community+site%3Areddit.com&web=1&searchid=5189907 200
+2026-04-15 20:50:42,385 - primp - INFO - response: https://html.duckduckgo.com/html/ 202
+2026-04-15 20:50:44,871 - primp - INFO - response: https://www.google.com/search?q=Reddit+anti-AI+sentiment+community+site%3Areddit.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:50:47,407 - ddgs.ddgs - INFO - Error in engine google: DDGSException("DecodeError: DecodeError('Body collection error: error decoding response body')")
+2026-04-15 20:50:48,986 - primp - INFO - response: https://search.yahoo.com/search;_ylt=9uEV2M9r-V0NeJRHeGh4SfzW;_ylu=LaaGN7JVcq6y8MZAN0eNd40zO8211KG37aTBXdPqA8cSyXQ?p=Reddit+anti-AI+sentiment+community+site%3Areddit.com 200
+2026-04-15 20:50:51,337 - primp - INFO - response: https://www.mojeek.com/search?q=Reddit+anti-AI+sentiment+community+site%3Areddit.com 200
+2026-04-15 20:50:51,848 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/DefendingAIArt/comments/1f6wkj7/why_is_antiai_sentiment_so_common.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:53,842 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/DefendingAIArt/comments/1c5cvrp/opinion_antiai_art_sentiment_in_the_art_community.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:55,921 - httpx - INFO - HTTP Request: GET https://www.reddit.com/r/DefendingAIArt/comments/1byk3wv/the_extreme_antiai_sentiment_thats_been.json?limit=5&raw_json=1 "HTTP/1.1 200 OK"
+2026-04-15 20:50:56,419 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=HackerNews%20AI%20infrastructure%20security%20vulnerabilities%20site%3Anews.ycombinator.com 200
+2026-04-15 20:50:56,987 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=HackerNews+AI+infrastructure+security+vulnerabilities+site%3Anews.ycombinator.com&limit=1 200
+2026-04-15 20:50:57,109 - primp - INFO - response: https://html.duckduckgo.com/html/ 202
+2026-04-15 20:50:59,525 - primp - INFO - response: https://www.google.com/search?q=HackerNews+AI+infrastructure+security+vulnerabilities+site%3Anews.ycombinator.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:51:01,996 - primp - INFO - response: https://www.mojeek.com/search?q=HackerNews+AI+infrastructure+security+vulnerabilities+site%3Anews.ycombinator.com 200
+2026-04-15 20:51:02,743 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46466074.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:03,060 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46467610.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:03,573 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46468406.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:04,164 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46466619.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:04,177 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46467076.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:04,192 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46467798.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:04,492 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45074467.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:04,996 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45076773.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:05,014 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075076.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:05,026 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075306.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:05,039 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45076862.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:05,345 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45075710.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:05,653 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45438503.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:06,201 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45438828.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:06,236 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45443400.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:06,269 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45440328.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:06,292 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45447328.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:06,318 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/45438697.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:07,775 - primp - INFO - response: https://grokipedia.com/api/typeahead?query=HackerNews+data+center+attack+vectors+site%3Anews.ycombinator.com&limit=1 200
+2026-04-15 20:51:08,243 - primp - INFO - response: https://en.wikipedia.org/w/api.php?action=opensearch&profile=fuzzy&limit=1&search=HackerNews%20data%20center%20attack%20vectors%20site%3Anews.ycombinator.com 200
+2026-04-15 20:51:10,903 - primp - INFO - response: https://www.google.com/search?q=HackerNews+data+center+attack+vectors+site%3Anews.ycombinator.com&filter=1&start=0&hl=en-US&lr=lang_en&cr=countryUS 200
+2026-04-15 20:51:13,278 - ddgs.ddgs - INFO - Error in engine google: DDGSException("DecodeError: DecodeError('Body collection error: error decoding response body')")
+2026-04-15 20:51:16,211 - primp - INFO - response: https://search.brave.com/search?q=HackerNews+data+center+attack+vectors+site%3Anews.ycombinator.com&source=web 200
+2026-04-15 20:51:17,189 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44464105.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:17,488 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/44464106.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:18,008 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47587597.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:18,516 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47589816.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:19,590 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47588204.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:19,604 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47589517.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:19,617 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47589253.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:19,647 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/47588512.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:19,951 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081053.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,500 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081590.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,538 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081800.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,569 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081386.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,606 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081274.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,634 - httpx - INFO - HTTP Request: GET https://hacker-news.firebaseio.com/v0/item/46081401.json "HTTP/1.1 200 OK"
+2026-04-15 20:51:20,662 - newsroom.agents.researcher - WARNING - Relevance filter too strict — using top sources instead
+2026-04-15 20:51:20,690 - newsroom.agents.researcher - INFO - Gathered 3 relevant sources after keyword filtering
+2026-04-15 20:51:20,718 - newsroom.agents.researcher - INFO - Total raw results: 24
+2026-04-15 20:51:20,742 - newsroom.agents.researcher - INFO - Valid sources with URL: 24
+2026-04-15 20:51:22,988 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:51:38,647 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:51:38,822 - newsroom.agents.researcher - INFO - Synthesized research with 9 findings
+2026-04-15 20:51:38,848 - newsroom.agents.researcher - INFO - Research complete: 9 notes, 3 sources
+2026-04-15 20:51:38,874 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 9 notes
+2026-04-15 20:51:39,268 - newsroom.agents.researcher - INFO - researcher completed in 115.85s → skeptic
+2026-04-15 20:51:39,638 - langsmith.client - ERROR - Error creating feedback
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\utils.py", line 181, in raise_for_status_with_text
+    response.raise_for_status()
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\requests\models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 422 Client Error: unknown for url: https://api.smith.langchain.com/feedback
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 1524, in request_with_retries
+    ls_utils.raise_for_status_with_text(response)
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\utils.py", line 183, in raise_for_status_with_text
+    raise requests.HTTPError(str(e), response.text) from e  # type: ignore[call-arg]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+requests.exceptions.HTTPError: [Errno 422 Client Error: unknown for url: https://api.smith.langchain.com/feedback] {"detail":["body: Value error, score must be between -99999.9999 and 99999.9999 inclusive, was 115846.167"]}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 7605, in create_feedback
+    self.request_with_retries(
+  File "C:\Users\passi\OneDrive\Desktop\Projects\FlagShip projects\AI_NEWSROOM\venv\Lib\site-packages\langsmith\client.py", line 1589, in request_with_retries
+    raise ls_utils.LangSmithError(
+langsmith.utils.LangSmithError: Failed to POST /feedback in LangSmith API. HTTPError('422 Client Error: unknown for url: https://api.smith.langchain.com/feedback', '{"detail":["body: Value error, score must be between -99999.9999 and 99999.9999 inclusive, was 115846.167"]}')
+2026-04-15 20:51:41,109 - newsroom.agents.researcher - INFO - Decision: PROCEED_TO_SKEPTIC | Reason: Research complete with 9 notes
+2026-04-15 20:51:41,174 - newsroom.agents.skeptic - INFO - Executing skeptic (run #1)
+2026-04-15 20:51:41,588 - newsroom.agents.skeptic - INFO - Skeptic agent reviewing research on: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:51:47,459 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:52:01,356 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:52:01,424 - newsroom.agents.skeptic - INFO - Quality assessment: 0.60
+2026-04-15 20:52:01,465 - newsroom.agents.skeptic - INFO - Skeptic decision: AgentDecision.APPROVE
+2026-04-15 20:52:01,481 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-15 20:52:02,004 - newsroom.agents.skeptic - INFO - skeptic completed in 20.26s → writer
+2026-04-15 20:52:04,231 - newsroom.agents.skeptic - INFO - Decision: AgentDecision.APPROVE | Reason: Research quality meets standards, proceeding to Writer
+2026-04-15 20:52:04,269 - newsroom.agents.writer - INFO - Executing writer (run #1)
+2026-04-15 20:52:04,620 - newsroom.agents.writer - INFO - Writer agent creating draft v1 for: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:52:04,631 - newsroom.agents.writer - INFO - Creating initial draft
+2026-04-15 20:52:07,341 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:52:30,434 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:52:30,456 - newsroom.agents.writer - INFO - Draft v1 complete: 1572 words, 10 claims
+2026-04-15 20:52:30,469 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-15 20:52:30,828 - newsroom.agents.writer - INFO - writer completed in 26.17s → editor
+2026-04-15 20:52:32,580 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v1 ready for review
+2026-04-15 20:52:32,602 - newsroom.agents.editor - INFO - Executing editor (run #1)
+2026-04-15 20:52:32,930 - newsroom.agents.editor - INFO - Editor agent reviewing draft v1
+2026-04-15 20:52:35,085 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:52:59,937 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:52:59,963 - newsroom.agents.editor - INFO - Draft quality: 0.40
+2026-04-15 20:52:59,974 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-15 20:52:59,987 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-15 20:53:00,343 - newsroom.agents.editor - INFO - editor completed in 27.36s → writer
+2026-04-15 20:53:01,895 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 1/4)
+2026-04-15 20:53:01,921 - newsroom.agents.writer - INFO - Executing writer (run #2)
+2026-04-15 20:53:02,460 - newsroom.agents.writer - INFO - Writer agent creating draft v2 for: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:53:02,470 - newsroom.agents.writer - INFO - Handling revision request with 1 comments
+2026-04-15 20:53:04,414 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:53:24,877 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:53:24,907 - newsroom.agents.writer - INFO - Draft v2 complete: 1073 words, 10 claims
+2026-04-15 20:53:24,922 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-15 20:53:25,271 - newsroom.agents.writer - INFO - writer completed in 22.98s → editor
+2026-04-15 20:53:27,030 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v2 ready for review
+2026-04-15 20:53:27,055 - newsroom.agents.editor - INFO - Executing editor (run #2)
+2026-04-15 20:53:27,396 - newsroom.agents.editor - INFO - Editor agent reviewing draft v2
+2026-04-15 20:53:30,361 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:53:52,048 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:53:52,103 - newsroom.agents.editor - INFO - Draft quality: 0.20
+2026-04-15 20:53:52,125 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-15 20:53:52,145 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-15 20:53:52,542 - newsroom.agents.editor - INFO - editor completed in 25.07s → writer
+2026-04-15 20:53:54,416 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 2/4)
+2026-04-15 20:53:54,470 - newsroom.agents.writer - INFO - Executing writer (run #3)
+2026-04-15 20:53:54,831 - newsroom.agents.writer - INFO - Writer agent creating draft v3 for: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:53:54,846 - newsroom.agents.writer - INFO - Handling revision request with 2 comments
+2026-04-15 20:53:57,603 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:54:17,980 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:54:18,030 - newsroom.agents.writer - INFO - Draft v3 complete: 1618 words, 10 claims
+2026-04-15 20:54:18,094 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-15 20:54:18,544 - newsroom.agents.writer - INFO - writer completed in 23.59s → editor
+2026-04-15 20:54:20,396 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v3 ready for review
+2026-04-15 20:54:20,431 - newsroom.agents.editor - INFO - Executing editor (run #3)
+2026-04-15 20:54:20,829 - newsroom.agents.editor - INFO - Editor agent reviewing draft v3
+2026-04-15 20:54:23,522 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:54:43,668 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:54:43,684 - newsroom.agents.editor - INFO - Draft quality: 0.05
+2026-04-15 20:54:43,709 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-15 20:54:43,720 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-15 20:54:44,086 - newsroom.agents.editor - INFO - editor completed in 23.23s → writer
+2026-04-15 20:54:46,051 - newsroom.agents.editor - INFO - Decision: AgentDecision.REWRITE | Reason: Draft needs revision (attempt 3/4)
+2026-04-15 20:54:46,102 - newsroom.agents.writer - INFO - Executing writer (run #4)
+2026-04-15 20:54:46,447 - newsroom.agents.writer - INFO - Writer agent creating draft v4 for: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:54:46,458 - newsroom.agents.writer - INFO - Handling revision request with 3 comments
+2026-04-15 20:54:49,118 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:55:13,962 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:55:14,012 - newsroom.agents.writer - INFO - Draft v4 complete: 1578 words, 10 claims
+2026-04-15 20:55:14,023 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-15 20:55:14,425 - newsroom.agents.writer - INFO - writer completed in 27.90s → editor
+2026-04-15 20:55:16,308 - newsroom.agents.writer - INFO - Decision: PROCEED_TO_EDITOR | Reason: Draft v4 ready for review
+2026-04-15 20:55:16,332 - newsroom.agents.editor - INFO - Executing editor (run #4)
+2026-04-15 20:55:16,672 - newsroom.agents.editor - INFO - Editor agent reviewing draft v4
+2026-04-15 20:55:19,264 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:55:42,603 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:55:42,753 - newsroom.agents.editor - INFO - Draft quality: 0.50
+2026-04-15 20:55:42,786 - newsroom.agents.editor - INFO - Editor decision: AgentDecision.REWRITE
+2026-04-15 20:55:42,877 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-15 20:55:43,255 - newsroom.agents.editor - INFO - editor completed in 26.52s → publisher
+2026-04-15 20:55:45,306 - newsroom.agents.editor - INFO - Decision: MAX_REVISIONS | Reason: Max revisions (4) reached, accepting draft as-is
+2026-04-15 20:55:45,339 - newsroom.agents.publisher - INFO - Executing publisher (run #1)
+2026-04-15 20:55:45,674 - newsroom.agents.publisher - INFO - Publisher agent validating: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:55:45,724 - newsroom.agents.publisher - INFO - Successfully saved approved draft to: output\approved_from_molotov_cocktails_to_data_center_shutdowns__the_ai_backlash_is_turning_revolutionary_20260415_205545.doc
+2026-04-15 20:55:53,110 - google_genai.models - INFO - AFC is enabled with max remote calls: 10.
+2026-04-15 20:55:59,549 - httpx - INFO - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-15 20:55:59,575 - newsroom.agents.publisher - INFO - Generated SEO metadata: AI Backlash: From Molotovs to Data Center Shutdowns & Revolution
+2026-04-15 20:55:59,586 - newsroom.agents.publisher - WARNING - Missing Reddit credentials (REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD) — skipping Reddit publish.
+2026-04-15 20:55:59,599 - newsroom.agents.publisher - INFO - Publisher decision: AgentDecision.PUBLISH
+2026-04-15 20:55:59,615 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-15 20:56:00,084 - newsroom.agents.publisher - INFO - publisher completed in 14.25s → END_PUBLISHED
+2026-04-15 20:56:02,499 - newsroom.agents.publisher - INFO - Decision: AgentDecision.PUBLISH | Reason: All checks passed, article published
+2026-04-15 20:56:02,526 - src.graph - INFO - Newsroom workflow completed successfully
+2026-04-15 20:56:02,545 - src.graph - INFO - ✅ Article published: 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary'
+2026-04-15 20:56:02,560 - src.graph - INFO -    Word count: 1578
+2026-04-15 20:56:02,570 - src.graph - INFO -    Revisions: 4
+2026-04-15 20:56:02,581 - src.observability.metrics - INFO - ============================================================
+2026-04-15 20:56:02,593 - src.observability.metrics - INFO - WORKFLOW METRICS SUMMARY
+2026-04-15 20:56:02,604 - src.observability.metrics - INFO -   Topic:           From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary
+2026-04-15 20:56:02,616 - src.observability.metrics - INFO -   Published:       True
+2026-04-15 20:56:02,634 - src.observability.metrics - INFO -   Total latency:   495.7s
+2026-04-15 20:56:02,644 - src.observability.metrics - INFO -   Total LLM calls: 15
+2026-04-15 20:56:02,669 - src.observability.metrics - INFO -   Total tokens:    71,007 (in=22,713 / out=48,294)
+2026-04-15 20:56:02,680 - src.observability.metrics - INFO -   Est. cost:       $0.0162 USD
+2026-04-15 20:56:02,702 - src.observability.metrics - INFO -   Agent steps:     13
+2026-04-15 20:56:02,714 - src.observability.metrics - INFO -   Revision loops:  0
+2026-04-15 20:56:02,725 - src.observability.metrics - INFO - ============================================================
+2026-04-15 20:56:02,735 - __main__ - INFO - 
+======================================================================
+2026-04-15 20:56:02,745 - __main__ - INFO - WORKFLOW COMPLETE
+2026-04-15 20:56:02,759 - __main__ - INFO - ======================================================================

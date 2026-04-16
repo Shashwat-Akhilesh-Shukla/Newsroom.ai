@@ -1,0 +1,65 @@
+[
+  {
+    "claim": "[FACTS] Snowflake has advanced its AI Data Cloud vision with Snowpark, a managed solution supporting data engineering and AI/ML workloads using Python and other languages, which is the target for DySkew's performance improvements.",
+    "citation": "http://arxiv.org/abs/2604.13034v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848337"
+  },
+  {
+    "claim": "[FACTS] The AiScientist system achieved significant performance gains in autonomous ML research engineering, improving PaperBench score by 10.54 points on average and reaching 81.82 Any Medal% on MLE-Bench Lite.",
+    "citation": "http://arxiv.org/abs/2604.13018v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[FACTS] PAL (Personal Adaptive Learner) is an AI-powered platform designed to transform lecture videos into interactive learning experiences that adapt dynamically to individual learners.",
+    "citation": "http://arxiv.org/abs/2604.13017v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[TECHNICAL] DySkew is a data-skew-aware execution strategy for Snowpark UDFs, built on Snowflake's new generalized skew handling solution, which uses adaptive data distribution with per-link state machines, eager redistribution, and a Row Size Model to manage overhead for large rows, replacing static round-robin methods.",
+    "citation": "http://arxiv.org/abs/2604.13034v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[TECHNICAL] AiScientist achieves long-horizon ML research engineering through hierarchical orchestration combined with a permission-scoped 'File-as-Bus' workspace, where specialized agents re-ground on durable artifacts (analyses, plans, code) rather than relying on conversational handoffs, ensuring durable state continuity.",
+    "citation": "http://arxiv.org/abs/2604.13018v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[TECHNICAL] PAL continuously analyzes multimodal lecture content to dynamically engage learners with questions of varying difficulty, adjusting to their real-time responses and generating personalized summaries with tailored examples at the end of a session.",
+    "citation": "http://arxiv.org/abs/2604.13017v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[CONTEXT] DySkew addresses a critical challenge in scalable data analytics by mitigating performance degradation from data skew and non-uniform computational costs in Snowpark UDFs, leading to significant improvements in execution time and resource utilization for large-scale workloads.",
+    "citation": "http://arxiv.org/abs/2604.13034v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[CONTEXT] AiScientist's approach to autonomous long-horizon ML research engineering is crucial for sustaining coherent progress over extended periods, reframing it as a systems problem of coordinating specialized work over durable project state, rather than solely a local reasoning problem.",
+    "citation": "http://arxiv.org/abs/2604.13018v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  },
+  {
+    "claim": "[CONTEXT] PAL moves AI-driven education beyond static personalization by providing real-time, individualized support through context-aware and adaptive decision-making, addressing the shortfall of systems constrained to predefined quizzes or generic feedback.",
+    "citation": "http://arxiv.org/abs/2604.13017v1",
+    "source_url": "",
+    "credibility_score": 0.9,
+    "timestamp": "2026-04-15T15:21:38.848854"
+  }
+]

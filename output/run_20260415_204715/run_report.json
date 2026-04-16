@@ -1,0 +1,2143 @@
+{
+  "topic": "From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary",
+  "status": "PUBLISHED",
+  "workflow_stage": "discovery",
+  "draft_version": 4,
+  "revision_count": 0,
+  "iteration_counts": {
+    "scout_loops": 1,
+    "research_loops": 0,
+    "revision_loops": 4
+  },
+  "created_at": "2026-04-15T15:17:15.985762",
+  "updated_at": "2026-04-15T15:25:45.361365",
+  "metadata": {
+    "langsmith_run_id": "9f6a53b3-6835-4952-b209-4f19fc8bfdc6",
+    "workflow_run_id": "9f6a53b3-6835-4952-b209-4f19fc8bfdc6",
+    "scout_analysis": {
+      "relevance": 1.0,
+      "novelty": 0.9,
+      "technical_depth": 0.9,
+      "audience_interest": 1.0,
+      "cross_platform_score": 0.9,
+      "overall_confidence": 0.95,
+      "reasoning": "The topic 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary' is the single best choice. It directly falls under the 'AI' and 'Tech Policy' ALLOWED TOPICS. The 'AI backlash' theme has already proven successful for the publication, as indicated by the 'Previously PUBLISHED (Successful) topics' (e.g., 'gen z workers are so fearful ai will take their job they\u2019re intentionally sabotaging their company\u2019s ai rollout'). This new topic represents a significant and alarming escalation of this existing trend, offering a fresh and highly novel perspective. The engagement metrics (score: 22592, comments: 1001) are exceptionally high, indicating strong audience interest. Technically, an article could delve into the vulnerabilities of AI data centers, the infrastructure supporting large-scale AI, the ethical frameworks surrounding AI development, and the technical challenges of mitigating societal unrest caused by AI. The other viable technical topic (Wayback Machine) is strong but doesn't have the same level of direct alignment with a core, high-performing topic like AI, nor the same extreme novelty or engagement metrics. Political and non-tech science topics were immediately rejected as per the strict rules.",
+      "suggested_angle": "A deep dive into the technical vulnerabilities of AI infrastructure and data centers, the ethical responsibilities of AI developers, and the potential policy responses required to address the escalating, and increasingly physical, societal backlash against artificial intelligence.",
+      "keywords": [
+        "AI backlash",
+        "data center security",
+        "AI ethics",
+        "tech policy",
+        "AI infrastructure",
+        "societal impact of AI",
+        "AI regulation"
+      ]
+    },
+    "all_trends": {
+      "hackernews": [
+        {
+          "title": "Stop Flock",
+          "url": "https://stopflock.com",
+          "score": 863,
+          "comments": 231,
+          "author": "cdrnsf",
+          "time": 1776203765,
+          "source": "hackernews",
+          "id": 47772012
+        },
+        {
+          "title": "Want to Write a Compiler? Just Read These Two Papers (2008)",
+          "url": "https://prog21.dadgum.com/30.html",
+          "score": 279,
+          "comments": 83,
+          "author": "downbad_",
+          "time": 1776246079,
+          "source": "hackernews",
+          "id": 47776796
+        },
+        {
+          "title": "A communist Apple II and fourteen years of not knowing what you're testing",
+          "url": "https://llama.gs/blog/index.php/2026/04/10/friday-archaeology-a-communist-apple-ii-and-fourteen-years-of-not-knowing-what-youre-testing/",
+          "score": 215,
+          "comments": 94,
+          "author": "major4x",
+          "time": 1775860584,
+          "source": "hackernews",
+          "id": 47724571
+        },
+        {
+          "title": "Fixing a 20-year-old bug in Enlightenment E16",
+          "url": "https://iczelia.net/posts/e16-20-year-old-bug/",
+          "score": 207,
+          "comments": 106,
+          "author": "snoofydude",
+          "time": 1776228420,
+          "source": "hackernews",
+          "id": 47774789
+        },
+        {
+          "title": "Good Sleep, Good Learning (2012)",
+          "url": "https://super-memory.com/articles/sleep.htm",
+          "score": 197,
+          "comments": 99,
+          "author": "downbad_",
+          "time": 1776244278,
+          "source": "hackernews",
+          "id": 47776557
+        },
+        {
+          "title": "Picasso\u2019s Guernica (Gigapixel)",
+          "url": "https://guernica.museoreinasofia.es/gigapixel/#3/63.11/-120.59",
+          "score": 181,
+          "comments": 71,
+          "author": "guigar",
+          "time": 1775896026,
+          "source": "hackernews",
+          "id": 47728662
+        },
+        {
+          "title": "Google Gemma 4 Runs Natively on iPhone with Full Offline AI Inference",
+          "url": "https://www.gizmoweek.com/gemma-4-runs-iphone/",
+          "score": 168,
+          "comments": 103,
+          "author": "takumi123",
+          "time": 1776230346,
+          "source": "hackernews",
+          "id": 47774971
+        },
+        {
+          "title": "Wacli \u2013 WhatsApp CLI: sync, search, send",
+          "url": "https://github.com/steipete/wacli",
+          "score": 165,
+          "comments": 120,
+          "author": "dinakars777",
+          "time": 1776236685,
+          "source": "hackernews",
+          "id": 47775628
+        },
+        {
+          "title": "Direct Win32 API, Weird-Shaped Windows, and Why They Mostly Disappeared",
+          "url": "https://warped3.substack.com/p/direct-win32-api-weird-shaped-windows",
+          "score": 139,
+          "comments": 75,
+          "author": "birdculture",
+          "time": 1776245071,
+          "source": "hackernews",
+          "id": 47776667
+        },
+        {
+          "title": "God Sleeps in the Minerals",
+          "url": "https://wchambliss.wordpress.com/2026/03/03/god-sleeps-in-the-minerals/",
+          "score": 135,
+          "comments": 39,
+          "author": "speckx",
+          "time": 1776258490,
+          "source": "hackernews",
+          "id": 47778475
+        },
+        {
+          "title": "Daily Claude outage is upon us. Waiting for Claude Status to update",
+          "url": "https://claudestatus.com/",
+          "score": 125,
+          "comments": 108,
+          "author": "redm",
+          "time": 1776264240,
+          "source": "hackernews",
+          "id": 47779730
+        },
+        {
+          "title": "The Future of Everything Is Lies, I Guess: New Jobs",
+          "url": "https://aphyr.com/posts/419-the-future-of-everything-is-lies-i-guess-new-jobs",
+          "score": 92,
+          "comments": 44,
+          "author": "aphyr",
+          "time": 1776260051,
+          "source": "hackernews",
+          "id": 47778758
+        },
+        {
+          "title": "Costasiella kuroshimae \u2013 Solar Powered animals, that do indirect photosynthesis",
+          "url": "https://en.wikipedia.org/wiki/Costasiella_kuroshimae",
+          "score": 91,
+          "comments": 35,
+          "author": "vinnyglennon",
+          "time": 1776007584,
+          "source": "hackernews",
+          "id": 47740840
+        },
+        {
+          "title": "US national level OS-level age verification bill",
+          "url": "https://social.coop/@cwebber/116408556882122186",
+          "score": 90,
+          "comments": 67,
+          "author": "marvinborner",
+          "time": 1776257891,
+          "source": "hackernews",
+          "id": 47778366
+        },
+        {
+          "title": "Show HN: Every CEO and CFO change at US public companies, live from SEC",
+          "url": "https://tracksuccession.com/explore",
+          "score": 84,
+          "comments": 35,
+          "author": "porsche959",
+          "time": 1776257464,
+          "source": "hackernews",
+          "id": 47778306
+        },
+        {
+          "title": "Metro stop is Ancient Rome's new attraction",
+          "url": "https://www.bbc.com/travel/article/20260408-a-150-metro-ticket-to-ancient-rome",
+          "score": 62,
+          "comments": 9,
+          "author": "Stevvo",
+          "time": 1775763546,
+          "source": "hackernews",
+          "id": 47708710
+        },
+        {
+          "title": "Installing OpenBSD on the Pomera DM250 Writerdeck",
+          "url": "https://jcs.org/2026/04/09/openbsd-dm250",
+          "score": 61,
+          "comments": 14,
+          "author": "djfergus",
+          "time": 1775868426,
+          "source": "hackernews",
+          "id": 47725897
+        },
+        {
+          "title": "Gemini Robotics-ER 1.6",
+          "url": "https://deepmind.google/blog/gemini-robotics-er-1-6/",
+          "score": 52,
+          "comments": 6,
+          "author": "markerbrod",
+          "time": 1776261751,
+          "source": "hackernews",
+          "id": 47779094
+        },
+        {
+          "title": "AI ruling prompts warnings from US lawyers: Your chats could be used against you",
+          "url": "https://www.reuters.com/legal/government/ai-ruling-prompts-warnings-us-lawyers-your-chats-could-be-used-against-you-2026-04-15/",
+          "score": 50,
+          "comments": 27,
+          "author": "alephnerd",
+          "time": 1776257473,
+          "source": "hackernews",
+          "id": 47778308
+        },
+        {
+          "title": "Pretty Fish: A better mermaid diagram editor",
+          "url": "https://pretty.fish/",
+          "score": 42,
+          "comments": 5,
+          "author": "pastelsky",
+          "time": 1775763140,
+          "source": "hackernews",
+          "id": 47708627
+        },
+        {
+          "title": "US v. Heppner (S.D.N.Y. 2026) no attorney-client privilege for AI chats [pdf]",
+          "url": "https://fingfx.thomsonreuters.com/gfx/legaldocs/xmvjyjekkpr/Rakoff%20-%20order%20-%20AI.pdf",
+          "score": 42,
+          "comments": 21,
+          "author": "1vuio0pswjnm7",
+          "time": 1776260860,
+          "source": "hackernews",
+          "id": 47778920
+        },
+        {
+          "title": "Sam Vimes 'Boots' Theory of Socio-Economic Unfairness",
+          "url": "https://terrypratchett.com/explore-discworld/sam-vimes-boots-theory-of-socio-economic-unfairness/",
+          "score": 40,
+          "comments": 24,
+          "author": "latexr",
+          "time": 1776260924,
+          "source": "hackernews",
+          "id": 47778933
+        },
+        {
+          "title": "What Is in Road Flares?",
+          "url": "https://www.spiegl.org/rocket/flare/flare.html",
+          "score": 34,
+          "comments": 19,
+          "author": "hyperific",
+          "time": 1775947242,
+          "source": "hackernews",
+          "id": 47734629
+        },
+        {
+          "title": "MCP as Observability Interface: Connecting AI Agents to Kernel Tracepoints",
+          "url": "https://ingero.io/mcp-observability-interface-ai-agents-kernel-tracepoints/",
+          "score": 27,
+          "comments": 9,
+          "author": "ingero_io",
+          "time": 1776259330,
+          "source": "hackernews",
+          "id": 47778617
+        },
+        {
+          "title": "Academic fraud may be the symptom of a more systemic problem",
+          "url": "https://www.voxweb.nl/en/academic-fraud-may-be-the-symptom-of-a-much-more-systemic-problem",
+          "score": 24,
+          "comments": 11,
+          "author": "the-mitr",
+          "time": 1776251305,
+          "source": "hackernews",
+          "id": 47777449
+        },
+        {
+          "title": "MIT Radiation Laboratory",
+          "url": "https://www.ll.mit.edu/about/history/mit-radiation-laboratory",
+          "score": 24,
+          "comments": 6,
+          "author": "stmw",
+          "time": 1776007802,
+          "source": "hackernews",
+          "id": 47740879
+        },
+        {
+          "title": "We ran Doom on a 40 year old printer controller (Agfa Compugraphic 9000PS) [video]",
+          "url": "https://www.youtube.com/watch?v=cltnlks2-uU",
+          "score": 18,
+          "comments": 3,
+          "author": "zdw",
+          "time": 1775930354,
+          "source": "hackernews",
+          "id": 47732623
+        },
+        {
+          "title": "The Deepfake Nudes Crisis in Schools Is Worse Than You Thought",
+          "url": "https://www.wired.com/story/deepfake-nudify-schools-global-crisis/",
+          "score": 9,
+          "comments": 0,
+          "author": "smurda",
+          "time": 1776264629,
+          "source": "hackernews",
+          "id": 47779856
+        },
+        {
+          "title": "Study: Back-to-basics approach can match or outperform AI in language analysis",
+          "url": "https://www.manchester.ac.uk/about/news/back-to-basics-approach-can-match-or-outperform-ai/",
+          "score": 5,
+          "comments": 0,
+          "author": "giuliomagnifico",
+          "time": 1776255707,
+          "source": "hackernews",
+          "id": 47778050
+        }
+      ],
+      "arxiv": [
+        {
+          "title": "Visual Preference Optimization with Rubric Rewards",
+          "summary": "The effectiveness of Direct Preference Optimization (DPO) depends on preference data that reflect the quality differences that matter in multimodal tasks. Existing pipelines often rely on off-policy perturbations or coarse outcome-based signals, which are not well suited to fine-grained visual reasoning. We propose rDPO, a preference optimization framework based on instance-specific rubrics. For each image-instruction pair, we create a checklist-style rubric of essential and additional criteria to score responses from any possible policies. The instruction-rubric pool is built offline and reused during the construction of on-policy data. On public reward modeling benchmarks, rubric-based prompting massively improves a 30B-A3B judge and brings it close to GPT-5.4. On public downstream benchmarks, rubric-based filtering raises the macro average to 82.69, whereas outcome-based filtering drops it to 75.82 from 81.14. When evaluating scalability on a comprehensive benchmark, rDPO achieves 61.01, markedly outperforming the style-constrained baseline (52.36) and surpassing the 59.48 base model. Together, these results show that visual preference optimization benefits from combining on-policy data construction with instance-specific criterion-level feedback.",
+          "authors": [
+            "Ya-Qi Yu",
+            "Fangyu Hong",
+            "Xiangyang Qu",
+            "Hao Wang",
+            "Gaojie Wu",
+            "Qiaoyu Luo",
+            "Nuo Xu",
+            "Huixin Wang",
+            "Wuheng Xu",
+            "Yongxin Liao",
+            "Zihao Chen",
+            "Haonan Li",
+            "Ziming Li",
+            "Dezhi Peng",
+            "Minghui Liao",
+            "Jihao Wu",
+            "Haoyu Ren",
+            "Dandan Tu"
+          ],
+          "published": "2026-04-14T17:58:22Z",
+          "url": "http://arxiv.org/abs/2604.13029v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "Representation geometry shapes task performance in vision-language modeling for CT enterography",
+          "summary": "Computed tomography (CT) enterography is a primary imaging modality for assessing inflammatory bowel disease (IBD), yet the representational choices that best support automated analysis of this modality are unknown. We present the first study of vision-language transfer learning on abdominal CT enterography and identify two main findings. First, mean pooling of slice embeddings gives better categorical disease assessment (59.2\\% three-class accuracy), whereas attention pooling gives better cross-modal retrieval (0.235 text-to-image MRR). This pattern holds across all LoRA configurations tested and suggests that the two aggregators emphasize different properties of the learned representation. Second, per-slice tissue contrast matters more than broader spatial coverage: multi-window RGB encoding, which maps complementary Hounsfield Unit windows to RGB channels, outperforms all strategies that increase spatial coverage through multiplanar sampling, and in this setting adding coronal and sagittal views reduces classification performance. For report generation, fine-tuning without retrieval context yields within-1 severity accuracy at the prevalence-matched chance level (70.4\\% vs.\\ 71\\% random), suggesting little learned ordering beyond the class distribution. Retrieval-augmented generation (RAG) improves this across all configurations, scoring 7--14 percentage points above the chance baseline and improving ordinal MAE from 0.98 to 0.80--0.89. A three-teacher pseudolabel framework enables all comparisons without expert annotations. Together, these findings provide the first baselines for this underexplored modality and offer practical guidance for building vision-language systems for volumetric medical imaging.",
+          "authors": [
+            "Cristian Minoccheri",
+            "Emily Wittrup",
+            "Kayvan Najarian",
+            "Ryan Stidham"
+          ],
+          "published": "2026-04-14T17:56:23Z",
+          "url": "http://arxiv.org/abs/2604.13021v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "PAL: Personal Adaptive Learner",
+          "summary": "AI-driven education platforms have made some progress in personalisation, yet most remain constrained to static adaptation--predefined quizzes, uniform pacing, or generic feedback--limiting their ability to respond to learners' evolving understanding. This shortfall highlights the need for systems that are both context-aware and adaptive in real time. We introduce PAL (Personal Adaptive Learner), an AI-powered platform that transforms lecture videos into interactive learning experiences. PAL continuously analyzes multimodal lecture content and dynamically engages learners through questions of varying difficulty, adjusting to their responses as the lesson unfolds. At the end of a session, PAL generates a personalized summary that reinforces key concepts while tailoring examples to the learner's interests. By uniting multimodal content analysis with adaptive decision-making, PAL contributes a novel framework for responsive digital learning. Our work demonstrates how AI can move beyond static personalization toward real-time, individualized support, addressing a core challenge in AI-enabled education.",
+          "authors": [
+            "Megha Chakraborty",
+            "Darssan L. Eswaramoorthi",
+            "Madhur Thareja",
+            "Het Riteshkumar Shah",
+            "Finlay Palmer",
+            "Aryaman Bahl",
+            "Michelle A Ihetu",
+            "Amit Sheth"
+          ],
+          "published": "2026-04-14T17:54:37Z",
+          "url": "http://arxiv.org/abs/2604.13017v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.AI",
+            "cs.HC"
+          ]
+        },
+        {
+          "title": "Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe",
+          "summary": "On-policy distillation (OPD) has become a core technique in the post-training of large language models, yet its training dynamics remain poorly understood. This paper provides a systematic investigation of OPD dynamics and mechanisms. We first identify that two conditions govern whether OPD succeeds or fails: (i) the student and teacher should share compatible thinking patterns; and (ii) even with consistent thinking patterns and higher scores, the teacher must offer genuinely new capabilities beyond what the student has seen during training. We validate these findings through weak-to-strong reverse distillation, showing that same-family 1.5B and 7B teachers are distributionally indistinguishable from the student's perspective. Probing into the token-level mechanism, we show that successful OPD is characterized by progressive alignment on high-probability tokens at student-visited states, a small shared token set that concentrates most of the probability mass (97%-99%). We further propose two practical strategies to recover failing OPD: off-policy cold start and teacher-aligned prompt selection. Finally, we show that OPD's apparent free lunch of dense token-level reward comes at a cost, raising the question of whether OPD can scale to long-horizon distillation.",
+          "authors": [
+            "Yaxuan Li",
+            "Yuxin Zuo",
+            "Bingxiang He",
+            "Jinqian Zhang",
+            "Chaojun Xiao",
+            "Cheng Qian",
+            "Tianyu Yu",
+            "Huan-ang Gao",
+            "Wenkai Yang",
+            "Zhiyuan Liu",
+            "Ning Ding"
+          ],
+          "published": "2026-04-14T17:54:28Z",
+          "url": "http://arxiv.org/abs/2604.13016v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+          ]
+        },
+        {
+          "title": "Bilevel Late Acceptance Hill Climbing for the Electric Capacitated Vehicle Routing Problem",
+          "summary": "This paper tackles the Electric Capacitated Vehicle Routing Problem (E-CVRP) through a bilevel optimization framework that handles routing and charging decisions separately or jointly depending on the search stage. By analyzing their interaction, we introduce a surrogate objective at the upper level to guide the search and accelerate convergence. A bilevel Late Acceptance Hill Climbing algorithm (b-LAHC) is introduced that operates through three phases: greedy descent, neighborhood exploration, and final solution refinement. b-LAHC operates with fixed parameters, eliminating the need for complex adaptation while remaining lightweight and effective. Extensive experiments on the IEEE WCCI-2020 benchmark show that b-LAHC achieves superior or competitive performance against eight state-of-the-art algorithms. Under a fixed evaluation budget, it attains near-optimal solutions on small-scale instances and sets 9/10 new best-known results on large-scale benchmarks, improving existing records by an average of 1.07%. Moreover, the strong correlation (though not universal) observed between the surrogate objective and the complete cost justifies the use of the surrogate objective while still necessitating a joint solution of both levels, thereby validating the effectiveness of the proposed bilevel framework and highlighting its potential for efficiently solving large-scale routing problems with a hierarchical structure.",
+          "authors": [
+            "Yinghao Qin",
+            "Mosab Bazargani",
+            "Edmund K. Burke",
+            "Carlos A. Coello Coello",
+            "Zhongmin Song",
+            "Jun Chen"
+          ],
+          "published": "2026-04-14T17:47:12Z",
+          "url": "http://arxiv.org/abs/2604.13013v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.AI",
+            "math.OC"
+          ]
+        },
+        {
+          "title": "Lightning OPD: Efficient Post-Training for Large Reasoning Models with Offline On-Policy Distillation",
+          "summary": "On-policy distillation (OPD) has emerged as an efficient post-training paradigm for large language models. However, standard OPD requires a live teacher inference server throughout training, resulting in substantial infrastructure overhead. In this work, we investigate whether on-policy distillation can be performed offline. A natural approach is to precompute teacher log-probabilities once over SFT rollouts and reuse them during training. In practice, however, this offline variant fails to reliably match the performance of standard OPD. To understand this discrepancy, we identify a previously overlooked condition that is critical for any OPD pipeline, which we term teacher consistency. This condition requires that the same teacher model be used for both supervised fine-tuning and OPD. We show that violating teacher consistency introduces an irreducible gradient bias, causing both offline and online OPD to converge to a suboptimal fixed point regardless of training duration. Building on this insight, we propose Lightning OPD, an offline on-policy distillation framework that enforces teacher consistency by precomputing teacher log-probabilities over SFT rollouts. This design eliminates the need for a live teacher server entirely. We further show that, under teacher consistency, Lightning OPD shares the same optimum as standard OPD, with bounded gradient discrepancy and an implicit regularization effect that helps prevent policy drift. Extensive experiments on mathematical reasoning and code generation demonstrate that Lightning OPD achieves state-of-the-art performance with significantly improved efficiency. Starting from an SFT-initialized Qwen3-8B-Base model, Lightning OPD reaches 69.9% on AIME 2024 in just 30 GPU hours, achieving a 4.0x speedup over standard OPD and substantially lowering the barrier to entry for academic research on LLM post-training.",
+          "authors": [
+            "Yecheng Wu",
+            "Song Han",
+            "Hai Cai"
+          ],
+          "published": "2026-04-14T17:44:50Z",
+          "url": "http://arxiv.org/abs/2604.13010v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "One Token Away from Collapse: The Fragility of Instruction-Tuned Helpfulness",
+          "summary": "Instruction-tuned large language models produce helpful, structured responses, but how robust is this helpfulness when trivially constrained? We show that simple lexical constraints (banning a single punctuation character or common word) cause instruction-tuned LLMs to collapse their responses, losing 14--48% of comprehensiveness in pairwise evaluation across three open-weight model families and one closed-weight model (GPT-4o-mini). The baseline response is preferred in 77--100% of 1,920 pairwise comparisons judged by GPT-4o-mini and GPT-4o. Notably, GPT-4o-mini suffers 31% comprehensiveness loss (99% baseline win rate), demonstrating that the fragility extends to commercially deployed closed-weight models, contrary to prior findings on format-level constraints. Through mechanistic analysis, we identify this as a planning failure: two-pass generation (free generation followed by constrained rewriting) recovers 59--96% of response length, and linear probes on prompt representations predict response length with $R^2 = 0.51$--$0.93$ before generation begins, with $R^2$ tracking collapse severity across models. The same probes yield negative $R^2$ on base models, confirming that instruction tuning creates the representational structure encoding the collapse decision. Crucially, base models show no systematic collapse under identical constraints, with effects that are small, noisy, and bidirectional, demonstrating that instruction tuning creates this fragility by coupling task competence to narrow surface-form templates. The effect replicates on MT-Bench across all eight task categories. We further show that standard independent LLM-as-judge evaluation detects only a 3.5% average quality drop where pairwise evaluation reveals 23%, exposing a methodological blind spot in how constrained generation is assessed.",
+          "authors": [
+            "Erfan Baghaei Potraghloo",
+            "Seyedarmin Azizi",
+            "Souvik Kundu",
+            "Massoud Pedram"
+          ],
+          "published": "2026-04-14T17:40:01Z",
+          "url": "http://arxiv.org/abs/2604.13006v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "LogicEval: A Systematic Framework for Evaluating Automated Repair Techniques for Logical Vulnerabilities in Real-World Software",
+          "summary": "Logical vulnerabilities in software stem from flaws in program logic rather than memory safety, which can lead to critical security failures. Although existing automated program repair techniques primarily focus on repairing memory corruption vulnerabilities, they struggle with logical vulnerabilities because of their limited semantic understanding of the vulnerable code and its expected behavior. On the other hand, recent successes of large language models (LLMs) in understanding and repairing code are promising. However, no framework currently exists to analyze the capabilities and limitations of such techniques for logical vulnerabilities. This paper aims to systematically evaluate both traditional and LLM-based repair approaches for addressing real-world logical vulnerabilities. To facilitate our assessment, we created the first ever dataset, LogicDS, of 86 logical vulnerabilities with assigned CVEs reflecting tangible security impact. We also developed a systematic framework, LogicEval, to evaluate patches for logical vulnerabilities. Evaluations suggest that compilation and testing failures are primarily driven by prompt sensitivity, loss of code context, and difficulty in patch localization.",
+          "authors": [
+            "Syed Md Mukit Rashid",
+            "Abdullah Al Ishtiaq",
+            "Kai Tu",
+            "Yilu Dong",
+            "Tianwei Wu",
+            "Ali Ranjbar",
+            "Tianchang Yang",
+            "Najrin Sultana",
+            "Shagufta Mehnaz",
+            "Syed Rafiul Hussain"
+          ],
+          "published": "2026-04-14T17:26:07Z",
+          "url": "http://arxiv.org/abs/2604.12994v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CR",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "ROSE: An Intent-Centered Evaluation Metric for NL2SQL",
+          "summary": "Execution Accuracy (EX), the widely used metric for evaluating the effectiveness of Natural Language to SQL (NL2SQL) solutions, is becoming increasingly unreliable. It is sensitive to syntactic variation, ignores that questions may admit multiple interpretations, and is easily misled by erroneous ground-truth SQL. To address this, we introduce ROSE, an intent-centered metric that focuses on whether the predicted SQL answers the question, rather than consistency with the ground-truth SQL under the reference-dependent paradigm. ROSE employs an adversarial Prover-Refuter cascade: SQL Prover assesses the semantic correctness of a predicted SQL against the user's intent independently, while Adversarial Refuter uses the ground-truth SQL as evidence to challenge and refine this judgment. On our expert-aligned validation set ROSE-VEC, ROSE achieves the best agreement with human experts, outperforming the next-best metric by nearly 24% in Cohen's Kappa. We also conduct a largescale re-evaluation of 19 NL2SQL methods, revealing four valuable insights. We release ROSE and ROSE-VEC to facilitate more reliable NL2SQL research.",
+          "authors": [
+            "Wenqi Pei",
+            "Shizheng Hou",
+            "Boyan Li",
+            "Han Chen",
+            "Zhichao Shi",
+            "Yuyu Luo"
+          ],
+          "published": "2026-04-14T17:22:40Z",
+          "url": "http://arxiv.org/abs/2604.12988v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.DB",
+            "cs.AI"
+          ]
+        },
+        {
+          "title": "Parallax: Why AI Agents That Think Must Never Act",
+          "summary": "Autonomous AI agents are rapidly transitioning from experimental tools to operational infrastructure, with projections that 80% of enterprise applications will embed AI copilots by the end of 2026. As agents gain the ability to execute real-world actions (reading files, running commands, making network requests, modifying databases), a fundamental security gap has emerged. The dominant approach to agent safety relies on prompt-level guardrails: natural language instructions that operate at the same abstraction level as the threats they attempt to mitigate. This paper argues that prompt-based safety is architecturally insufficient for agents with execution capability and introduces Parallax, a paradigm for safe autonomous AI execution grounded in four principles: Cognitive-Executive Separation, which structurally prevents the reasoning system from executing actions; Adversarial Validation with Graduated Determinism, which interposes an independent, multi-tiered validator between reasoning and execution; Information Flow Control, which propagates data sensitivity labels through agent workflows to detect context-dependent threats; and Reversible Execution, which captures pre-destructive state to enable rollback when validation fails. We present OpenParallax, an open-source reference implementation in Go, and evaluate it using Assume-Compromise Evaluation, a methodology that bypasses the reasoning system entirely to test the architectural boundary under full agent compromise. Across 280 adversarial test cases in nine attack categories, Parallax blocks 98.9% of attacks with zero false positives under its default configuration, and 100% of attacks under its maximum-security configuration. When the reasoning system is compromised, prompt-level guardrails provide zero protection because they exist only within the compromised system; Parallax's architectural boundary holds regardless.",
+          "authors": [
+            "Joel Fokou"
+          ],
+          "published": "2026-04-14T17:20:48Z",
+          "url": "http://arxiv.org/abs/2604.12986v1",
+          "source": "arxiv",
+          "categories": [
+            "cs.CR",
+            "cs.AI"
+          ]
+        }
+      ],
+      "google_trends": [],
+      "reddit": [
+        {
+          "title": "23 Major News Sites Have Blocked the Wayback Machine \u2013 Digital History In Danger",
+          "url": "https://www.gadgetreview.com/23-major-news-sites-have-blocked-the-wayback-machine-digital-history-in-danger",
+          "score": 26737,
+          "comments": 683,
+          "author": "SaveDnet-FRed0",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1slg08d/23_major_news_sites_have_blocked_the_wayback/",
+          "source": "reddit"
+        },
+        {
+          "title": "From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary",
+          "url": "https://fortune.com/2026/04/14/ai-backlash-revolutionary-sam-altman-molotov-cocktails-data-centers/",
+          "score": 22592,
+          "comments": 1001,
+          "author": "Plastic_Ninja_9014",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sll1vt/from_molotov_cocktails_to_data_center_shutdowns/",
+          "source": "reddit"
+        },
+        {
+          "title": "CNN: China to Supply Iran With Man-Portable Air Defense Systems",
+          "url": "https://militarnyi.com/en/news/cnn-china-to-supply-iran-with-manpads/",
+          "score": 18057,
+          "comments": 1423,
+          "author": "Critical_Cat_8162",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1slpt4c/cnn_china_to_supply_iran_with_manportable_air/",
+          "source": "reddit"
+        },
+        {
+          "title": "Global warming is accelerating 5,000 times faster than rice can evolve, threatening the food security of billions. New research warns that by 2070, traditional growing regions like India and Southeast Asia will exceed the 104\u00b0F (40\u00b0C) heat threshold where rice physically ceases to function.",
+          "url": "https://www.nature.com/articles/s43247-025-03108-0",
+          "score": 11502,
+          "comments": 534,
+          "author": "Cosmyka",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1slpnli/global_warming_is_accelerating_5000_times_faster/",
+          "source": "reddit"
+        },
+        {
+          "title": "Zelenskyy: return of draft-age Ukrainian men from abroad is a matter of fairness",
+          "url": "https://www.pravda.com.ua/eng/news/2026/04/14/8030112/",
+          "score": 10737,
+          "comments": 3572,
+          "author": "EsperaDeus",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm1l4n/zelenskyy_return_of_draftage_ukrainian_men_from/",
+          "source": "reddit"
+        },
+        {
+          "title": "Missouri Town Council Approves Data Center. A Week Later, Voters Fire Half of Council",
+          "url": "https://gizmodo.com/missouri-town-council-approves-data-center-a-week-later-voters-fire-half-of-council-2000746005",
+          "score": 10232,
+          "comments": 301,
+          "author": "MarvelsGrantMan136",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1slhoj2/missouri_town_council_approves_data_center_a_week/",
+          "source": "reddit"
+        },
+        {
+          "title": "AI could soon allow powerful companies to charge each customer a different price for the same product, based on what they think each individual is willing to pay. AI lets firms tailor prices to each user, raising fairness concerns as consumers may unknowingly pay more than others.",
+          "url": "https://www.eurekalert.org/news-releases/1123848",
+          "score": 9239,
+          "comments": 1014,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sl8gw7/ai_could_soon_allow_powerful_companies_to_charge/",
+          "source": "reddit"
+        },
+        {
+          "title": "Johnny Somali: South Korea jails US YouTuber for public nuisance",
+          "url": "https://www.bbc.co.uk/news/articles/cj400lje9vxo?xtor=AL-71-%5Bpartner%5D-%5Bbbc.news.twitter%5D-%5Bheadline%5D-%5Bnews%5D-%5Bbizdev%5D-%5Bisapi%5D&at_link_id=25658758-3883-11F1-8180-C4AC020512E1&at_format=link&at_ptr_name=twitter&at_bbc_team=editorial&at_campaign_type=owned&at_link_origin=BBCWorld&at_campaign=Social_Flow&at_link_type=web_link&at_medium=social",
+          "score": 6331,
+          "comments": 347,
+          "author": "tylerthe-theatre",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm0f6r/johnny_somali_south_korea_jails_us_youtuber_for/",
+          "source": "reddit"
+        },
+        {
+          "title": "New study links watching TikTok \u201cthirst traps\u201d to lower relationship trust and satisfaction. This provides evidence that watching or liking \u201cthirst traps\u201d tends to harm a relationship, especially if the people in the videos look physically different from a person\u2019s actual partner.",
+          "url": "https://www.psypost.org/new-study-links-watching-tiktok-thirst-traps-to-lower-relationship-trust-and-satisfaction/",
+          "score": 4488,
+          "comments": 338,
+          "author": "Tracheid",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1slm6vl/new_study_links_watching_tiktok_thirst_traps_to/",
+          "source": "reddit"
+        },
+        {
+          "title": "Australia's richest person must share part of her mining fortunes, court rules",
+          "url": "https://www.bbc.com/news/articles/cq5990nqjg2o",
+          "score": 4270,
+          "comments": 100,
+          "author": "UnusualPin279",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1slyo9i/australias_richest_person_must_share_part_of_her/",
+          "source": "reddit"
+        },
+        {
+          "title": "\u2018I feel helpless\u2019: college graduates can\u2019t find entry-level roles in shrinking market amid rise of AI | US news",
+          "url": "https://www.theguardian.com/us-news/2026/apr/12/college-graduates-job-market-ai",
+          "score": 3811,
+          "comments": 289,
+          "author": "Gari_305",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sjy05p/i_feel_helpless_college_graduates_cant_find/",
+          "source": "reddit"
+        },
+        {
+          "title": "Viewing sexual intimacy as a sacred experience is linked to higher levels of sexual satisfaction and passion. Spiritual meaning in the bedroom operates by enhancing specific relationship habits, such as open communication and staying present in the moment, rather than just frequency of intimacy.",
+          "url": "https://www.psypost.org/how-finding-deep-spiritual-meaning-in-the-bedroom-changes-relationship-dynamics/",
+          "score": 3612,
+          "comments": 137,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1slmjex/viewing_sexual_intimacy_as_a_sacred_experience_is/",
+          "source": "reddit"
+        },
+        {
+          "title": "'Xi will give me big, fat hug': Trump says he opened Hormuz for China and the world",
+          "url": "https://timesofindia.indiatimes.com/world/us/xi-will-give-me-big-fat-hug-trump-says-he-opened-hormuz-for-china-and-the-world/articleshow/130284475.cms",
+          "score": 3433,
+          "comments": 694,
+          "author": "CommunicationLife753",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm5bc3/xi_will_give_me_big_fat_hug_trump_says_he_opened/",
+          "source": "reddit"
+        },
+        {
+          "title": "Italy will not renew defence agreement with Israel, Meloni says",
+          "url": "https://www.bbc.com/news/articles/cr71184ex91o",
+          "score": 3125,
+          "comments": 196,
+          "author": "codname007",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm5o97/italy_will_not_renew_defence_agreement_with/",
+          "source": "reddit"
+        },
+        {
+          "title": "Allbirds announces stunning pivot from shoes to AI, stock explodes more than 300%",
+          "url": "https://www.cnbc.com/2026/04/15/allbirds-bird-stock-shoes-ai.html",
+          "score": 2211,
+          "comments": 554,
+          "author": "SemiAutoAvocado",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm6uvt/allbirds_announces_stunning_pivot_from_shoes_to/",
+          "source": "reddit"
+        },
+        {
+          "title": "Marines on way to Middle East seen using rifles with anti-drone smart scope",
+          "url": "https://taskandpurpose.com/news/marines-drone-optic-2026/",
+          "score": 2124,
+          "comments": 377,
+          "author": "S00THING_S0UNDS",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm3r43/marines_on_way_to_middle_east_seen_using_rifles/",
+          "source": "reddit"
+        },
+        {
+          "title": "World\u2019s first 100% battery-electric cruise ship unveiled with 1,856 passenger capacity",
+          "url": "https://interestingengineering.com/innovation/vision-battery-electric-cruise-concept",
+          "score": 1967,
+          "comments": 156,
+          "author": "sksarkpoes3",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1skbn2y/worlds_first_100_batteryelectric_cruise_ship/",
+          "source": "reddit"
+        },
+        {
+          "title": "US Treasury's Bessent says China has been unreliable partner by hoarding oil during war",
+          "url": "https://www.reuters.com/world/china/us-treasurys-bessent-says-china-has-been-unreliable-partner-by-hoarding-oil-2026-04-14/",
+          "score": 1927,
+          "comments": 476,
+          "author": "Fickle-Maintenance-1",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm0bxo/us_treasurys_bessent_says_china_has_been/",
+          "source": "reddit"
+        },
+        {
+          "title": "The FCC just saved Netgear from its router ban for no obvious reason",
+          "url": "https://www.theverge.com/tech/911888/netgear-router-ban-conditional-approval",
+          "score": 1834,
+          "comments": 192,
+          "author": "defenestrate_urself",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm2idv/the_fcc_just_saved_netgear_from_its_router_ban/",
+          "source": "reddit"
+        },
+        {
+          "title": "Ukraine\u2019s Robots Capture Russian Position Without Soldiers or Losses; As with drones, the future of 21st century warfare is being invented by frontline conflict.",
+          "url": "https://www.reddit.com/r/Futurology/comments/1sla1v4/ukraines_robots_capture_russian_position_without/",
+          "score": 1705,
+          "comments": 173,
+          "author": "lughnasadh",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sla1v4/ukraines_robots_capture_russian_position_without/",
+          "source": "reddit"
+        },
+        {
+          "title": "Iran reportedly bought an in-orbit Chinese satellite to target US military sites in the Middle East \u2014 purchase agreement included ongoing ground control services based in China",
+          "url": "https://www.tomshardware.com/tech-industry/iran-reportedly-bought-an-in-orbit-chinese-satellite-to-target-us-military-sites-in-the-middle-east-purchase-agreement-included-ongoing-ground-control-services-based-in-china",
+          "score": 1621,
+          "comments": 122,
+          "author": "Logical_Welder3467",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm4fqj/iran_reportedly_bought_an_inorbit_chinese/",
+          "source": "reddit"
+        },
+        {
+          "title": "Vampire bats in Mexico may feed on CWD-positive deer, spreading disease and posing species-jump threat",
+          "url": "https://www.cidrap.umn.edu/chronic-wasting-disease/vampire-bats-mexico-may-feed-cwd-positive-deer-spreading-disease-and-posing",
+          "score": 1194,
+          "comments": 15,
+          "author": "PreeOn",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1slqla1/vampire_bats_in_mexico_may_feed_on_cwdpositive/",
+          "source": "reddit"
+        },
+        {
+          "title": "Just as world gasoline prices start to soar, Vietnam, Thailand, Malaysia, and Indonesia now manufacture enough solar panels to cheaply power 20 million EVs, six times their annual new car sales.",
+          "url": "https://www.reddit.com/r/Futurology/comments/1sm0eab/just_as_world_gasoline_prices_start_to_soar/",
+          "score": 1008,
+          "comments": 48,
+          "author": "lughnasadh",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sm0eab/just_as_world_gasoline_prices_start_to_soar/",
+          "source": "reddit"
+        },
+        {
+          "title": "Blowin\u2019 in the Wind: How Nordic Countries Made Electricity Free | Atmos",
+          "url": "https://atmos.earth/climate-solutions/blowin-in-the-wind-how-nordic-countries-made-electricity-free/",
+          "score": 988,
+          "comments": 120,
+          "author": "iwantboringtimes",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1sldkbk/blowin_in_the_wind_how_nordic_countries_made/",
+          "source": "reddit"
+        },
+        {
+          "title": "Substantial amount of medical information provided by 5 popular chatbots inaccurate and incomplete, with half of their answers to health questions \u201cproblematic\u201d. Grok generated significantly more highly problematic responses. Gemini generated the fewest highly problematic responses.",
+          "url": "https://www.eurekalert.org/news-releases/1123655",
+          "score": 908,
+          "comments": 82,
+          "author": "mvea",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sm5o8n/substantial_amount_of_medical_information/",
+          "source": "reddit"
+        },
+        {
+          "title": "New World Screwworm detected about 90 miles from the United States",
+          "url": "https://www.kalb.com/2026/04/14/new-world-screwworm-detected-about-90-miles-united-states/",
+          "score": 896,
+          "comments": 140,
+          "author": "Not_so_ghetto",
+          "subreddit": "worldnews",
+          "permalink": "https://www.reddit.com/r/worldnews/comments/1sm7bdx/new_world_screwworm_detected_about_90_miles_from/",
+          "source": "reddit"
+        },
+        {
+          "title": "US Faces $7.8 Billion Measles Risk as Shots Decline, Study Finds. Health Secretary Robert F. Kennedy Jr. has moved to reshape a key federal vaccine advisory panel, raising concerns among public health experts, while the US is already seeing more than 1,700 measles cases this year.",
+          "url": "https://www.pnas.org/doi/10.1073/pnas.2605971123",
+          "score": 753,
+          "comments": 39,
+          "author": "Wagamaga",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sm12qt/us_faces_78_billion_measles_risk_as_shots_decline/",
+          "source": "reddit"
+        },
+        {
+          "title": "OpenAI\u2019s $852 billion valuation is facing skepticism from some of its own investors as the company scrambles to reorient itself around enterprise customers and fend off Anthropic",
+          "url": "https://techcrunch.com/2026/04/14/anthropics-rise-is-giving-some-openai-investors-second-thoughts/",
+          "score": 676,
+          "comments": 50,
+          "author": "Logical_Welder3467",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1slxjbb/openais_852_billion_valuation_is_facing/",
+          "source": "reddit"
+        },
+        {
+          "title": "Musician loses life's savings after downloading fake app from Apple App Store",
+          "url": "https://gizmodo.com/popular-musician-loses-life-savings-through-malicious-crypto-wallet-in-apples-app-store-2000745902",
+          "score": 585,
+          "comments": 103,
+          "author": "rogeragrimes",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sl672x/musician_loses_lifes_savings_after_downloading/",
+          "source": "reddit"
+        },
+        {
+          "title": "Sperm whales\u2019 communication closely parallels human language, study finds",
+          "url": "https://www.theguardian.com/environment/2026/apr/15/sperm-whales-alphabet-vocalizations-similar-humans",
+          "score": 536,
+          "comments": 31,
+          "author": "Doug24",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sm2fck/sperm_whales_communication_closely_parallels/",
+          "source": "reddit"
+        },
+        {
+          "title": "Drivers sue San Jose over nearly 500 Flock police cameras that track drivers in California",
+          "url": "https://www.nbcnews.com/tech/tech-news/san-jose-drivers-sue-city-police-flock-cameras-rcna331750",
+          "score": 523,
+          "comments": 18,
+          "author": "idkbruh653",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm60i5/drivers_sue_san_jose_over_nearly_500_flock_police/",
+          "source": "reddit"
+        },
+        {
+          "title": "GitHub Stacked PRs",
+          "url": "https://github.github.com/gh-stack/",
+          "score": 499,
+          "comments": 241,
+          "author": "adam-dabrowski",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sl4erj/github_stacked_prs/",
+          "source": "reddit"
+        },
+        {
+          "title": "\ud83d\udea8 RED ALERT: Tennessee is about to make building chatbots a Class A felony (15-25 years in prison). This is not a drill.",
+          "url": "https://www.reddit.com/r/artificial/comments/1slu23a/red_alert_tennessee_is_about_to_make_building/",
+          "score": 480,
+          "comments": 373,
+          "author": "HumanSkyBird",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1slu23a/red_alert_tennessee_is_about_to_make_building/",
+          "source": "reddit"
+        },
+        {
+          "title": "What I wished someone told me before my first real cybersecurity job",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sm0g6r/what_i_wished_someone_told_me_before_my_first/",
+          "score": 359,
+          "comments": 57,
+          "author": "hardeningbrief",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sm0g6r/what_i_wished_someone_told_me_before_my_first/",
+          "source": "reddit"
+        },
+        {
+          "title": "Finding a duplicated item in an array of N integers in the range 1 to N \u2212 1",
+          "url": "https://devblogs.microsoft.com/oldnewthing/20260413-00/?p=112227",
+          "score": 240,
+          "comments": 90,
+          "author": "sweetno",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sl5h3v/finding_a_duplicated_item_in_an_array_of_n/",
+          "source": "reddit"
+        },
+        {
+          "title": "Direct Win32 API, Weird-Shaped Windows, and Why They Mostly Disappeared",
+          "url": "https://warped3.substack.com/p/direct-win32-api-weird-shaped-windows",
+          "score": 208,
+          "comments": 74,
+          "author": "nccwarp9",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sm01ev/direct_win32_api_weirdshaped_windows_and_why_they/",
+          "source": "reddit"
+        },
+        {
+          "title": "Leafy vegetables identified as potential metal mining tools: Certain plants are 'hyperaccumulators' that can extract toxic yet valuable metals from contaminated soils through their roots and shoots, in a way that could be ideal for metallurgical extraction and re-use in technologies.",
+          "url": "https://news.uq.edu.au/2026-04-leafy-vegetables-identified-potential-metal-mining-tools",
+          "score": 168,
+          "comments": 7,
+          "author": "mvea",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1skaf5k/leafy_vegetables_identified_as_potential_metal/",
+          "source": "reddit"
+        },
+        {
+          "title": "Windows 11 Speeds Up Storage, Lifts 32GB FAT32 Limit After 3 Decades",
+          "url": "https://www.extremetech.com/computing/windows-11-speeds-up-storage-lifts-32gb-fat32-limit-after-3-decades",
+          "score": 167,
+          "comments": 45,
+          "author": "Ephoenix6",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sm76gw/windows_11_speeds_up_storage_lifts_32gb_fat32/",
+          "source": "reddit"
+        },
+        {
+          "title": "No one can force me to have a secure website!!!",
+          "url": "https://www.youtube.com/watch?v=M1si1y5lvkk",
+          "score": 155,
+          "comments": 61,
+          "author": "MintPaw",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sl0kfp/no_one_can_force_me_to_have_a_secure_website/",
+          "source": "reddit"
+        },
+        {
+          "title": "'Addicted to hacking': Young hacker behind historic breach speaks out for 1st time, before reporting to prison",
+          "url": "https://abcnews.com/US/addicted-hacking-young-hacker-historic-breach-speaks-1st/story?id=131855776",
+          "score": 153,
+          "comments": 25,
+          "author": "swe129",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1slt49s/addicted_to_hacking_young_hacker_behind_historic/",
+          "source": "reddit"
+        },
+        {
+          "title": "Are the Enhanced Games the Future of Sport or a Steroid \u201cClown Show\u201d? We\u2019re About to Find Out | The pro-doping athletic spectacle is descending on Vegas this May",
+          "url": "https://www.insidehook.com/sports/enhanced-games-future-sport-steroid",
+          "score": 148,
+          "comments": 46,
+          "author": "castironglider",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1slbaxk/are_the_enhanced_games_the_future_of_sport_or_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "Microbes have a far broader potential for biodegrading plastics than previously known. Researchers identified more than 600,000 microbial proteins capable of breaking down natural and synthetic plastics and created an extensive open database on microbial plastic biodegradation.",
+          "url": "https://www.utu.fi/en/news/press-release/microbes-show-almost-universal-potential-for-biodegrading-plastics",
+          "score": 139,
+          "comments": 7,
+          "author": "universityofturku",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sm2f3l/microbes_have_a_far_broader_potential_for/",
+          "source": "reddit"
+        },
+        {
+          "title": "In people with multiple sclerosis, aerobic training produced the largest reductions in both fatigue severity and fatigue impact among four exercise programs tested in an 8-week randomized trial",
+          "url": "https://journals.lww.com/acsm-msse/fulltext/2026/05000/measuring_the_effects_of_the_commonest_exercise.2.aspx",
+          "score": 130,
+          "comments": 7,
+          "author": "PhysiolMM",
+          "subreddit": "science",
+          "permalink": "https://www.reddit.com/r/science/comments/1sm0guz/in_people_with_multiple_sclerosis_aerobic/",
+          "source": "reddit"
+        },
+        {
+          "title": "What would happen if all forms of cancer were cured tomorrow?",
+          "url": "https://www.reddit.com/r/Futurology/comments/1skjyhs/what_would_happen_if_all_forms_of_cancer_were/",
+          "score": 112,
+          "comments": 287,
+          "author": "Flaky-Walrus7244",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1skjyhs/what_would_happen_if_all_forms_of_cancer_were/",
+          "source": "reddit"
+        },
+        {
+          "title": "In the future (and if it's feasible) would you genetically alter yourself? If yes, what would you want to change directly? (Be that extending your life, curing a disease, changing gender, et cetera)",
+          "url": "https://www.reddit.com/r/Futurology/comments/1skqbqm/in_the_future_and_if_its_feasible_would_you/",
+          "score": 86,
+          "comments": 229,
+          "author": "User_741776",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1skqbqm/in_the_future_and_if_its_feasible_would_you/",
+          "source": "reddit"
+        },
+        {
+          "title": "Was looking at a ICLR 2025 Oral paper and I am shocked it got oral [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1slxqac/was_looking_at_a_iclr_2025_oral_paper_and_i_am/",
+          "score": 50,
+          "comments": 16,
+          "author": "Striking-Warning9533",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1slxqac/was_looking_at_a_iclr_2025_oral_paper_and_i_am/",
+          "source": "reddit"
+        },
+        {
+          "title": "You can decompose models into a graph database [N]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1slmfmw/you_can_decompose_models_into_a_graph_database_n/",
+          "score": 45,
+          "comments": 20,
+          "author": "Educational_Win_2982",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1slmfmw/you_can_decompose_models_into_a_graph_database_n/",
+          "source": "reddit"
+        },
+        {
+          "title": "The IRS Wants Smarter Audits. Palantir Could Help Decide Who Gets Flagged",
+          "url": "https://www.wired.com/story/documents-reveal-palantir-irs-contract-fraud-clean-energy-credits/",
+          "score": 36,
+          "comments": 5,
+          "author": "esporx",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1slhx3l/the_irs_wants_smarter_audits_palantir_could_help/",
+          "source": "reddit"
+        },
+        {
+          "title": "Fall in the thermaltake captcha",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1slqg5b/fall_in_the_thermaltake_captcha/",
+          "score": 34,
+          "comments": 23,
+          "author": "Dudewithlight",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1slqg5b/fall_in_the_thermaltake_captcha/",
+          "source": "reddit"
+        },
+        {
+          "title": "Things you didn't know about (Postgres) indexes",
+          "url": "https://jon.chrt.dev/2026/04/15/things-you-didnt-know-about-indexes.html",
+          "score": 28,
+          "comments": 4,
+          "author": "NotTreeFiddy",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sm5d83/things_you_didnt_know_about_postgres_indexes/",
+          "source": "reddit"
+        },
+        {
+          "title": "SDL3 port to DOS",
+          "url": "https://bsky.app/profile/dosnostalgic.bsky.social/post/3mjfdos7iok2o",
+          "score": 28,
+          "comments": 4,
+          "author": "r_retrohacking_mod2",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1slas1j/sdl3_port_to_dos/",
+          "source": "reddit"
+        },
+        {
+          "title": "I tracked what AI agents actually do when nobody's watching. Built a tool that replays every decision.",
+          "url": "https://v.redd.it/8762ae8h0cvg1",
+          "score": 18,
+          "comments": 14,
+          "author": "DetectiveMindless652",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sm261q/i_tracked_what_ai_agents_actually_do_when_nobodys/",
+          "source": "reddit"
+        },
+        {
+          "title": "ClawBench: Can AI Agents Complete Everyday Online Tasks? 153 tasks, 144 live websites, best model at 33.3% [R]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1slf7pg/clawbench_can_ai_agents_complete_everyday_online/",
+          "score": 15,
+          "comments": 8,
+          "author": "Extreme_Play_8554",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1slf7pg/clawbench_can_ai_agents_complete_everyday_online/",
+          "source": "reddit"
+        },
+        {
+          "title": "Shifting control of advanced technology: early signs of tighter access and infrastructure dominance",
+          "url": "https://www.reddit.com/r/Futurology/comments/1slymud/shifting_control_of_advanced_technology_early/",
+          "score": 12,
+          "comments": 6,
+          "author": "MoonstoneOne",
+          "subreddit": "Futurology",
+          "permalink": "https://www.reddit.com/r/Futurology/comments/1slymud/shifting_control_of_advanced_technology_early/",
+          "source": "reddit"
+        },
+        {
+          "title": "Best AI SOC platforms 2026? I am not convinced about AI",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sm41rz/best_ai_soc_platforms_2026_i_am_not_convinced/",
+          "score": 12,
+          "comments": 16,
+          "author": "Top-Substance-6096",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sm41rz/best_ai_soc_platforms_2026_i_am_not_convinced/",
+          "source": "reddit"
+        },
+        {
+          "title": "Thoughts and experience on ML journals [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sm04fm/thoughts_and_experience_on_ml_journals_d/",
+          "score": 11,
+          "comments": 5,
+          "author": "kostaspap90",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sm04fm/thoughts_and_experience_on_ml_journals_d/",
+          "source": "reddit"
+        },
+        {
+          "title": "Engaging vs. time-saving training. What's better?",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sm6yg5/engaging_vs_timesaving_training_whats_better/",
+          "score": 9,
+          "comments": 5,
+          "author": "anthonyDavidson31",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sm6yg5/engaging_vs_timesaving_training_whats_better/",
+          "source": "reddit"
+        },
+        {
+          "title": "UK gov's Mythos AI tests help separate cybersecurity threat from hype",
+          "url": "https://arstechnica.com/ai/2026/04/uk-govs-mythos-ai-tests-help-separate-cybersecurity-threat-from-hype/",
+          "score": 6,
+          "comments": 0,
+          "author": "F0urLeafCl0ver",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sm4277/uk_govs_mythos_ai_tests_help_separate/",
+          "source": "reddit"
+        },
+        {
+          "title": "Trained a Qwen2.5-0.5B-Instruct bf16 model on Reddit post summarization task with GRPO written from scratch in PyTorch - updates! [P]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sm0lcu/trained_a_qwen2505binstruct_bf16_model_on_reddit/",
+          "score": 6,
+          "comments": 2,
+          "author": "East-Muffin-6472",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sm0lcu/trained_a_qwen2505binstruct_bf16_model_on_reddit/",
+          "source": "reddit"
+        },
+        {
+          "title": "Do companies usually do white-box testing in pentests, or do they stick to more limited access approaches?",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sm104g/do_companies_usually_do_whitebox_testing_in/",
+          "score": 6,
+          "comments": 16,
+          "author": "Moham-Aasif",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sm104g/do_companies_usually_do_whitebox_testing_in/",
+          "source": "reddit"
+        },
+        {
+          "title": "What's a purely \"you\" thing you do with AI that brings you positive benefits?",
+          "url": "https://www.reddit.com/r/artificial/comments/1sm70be/whats_a_purely_you_thing_you_do_with_ai_that/",
+          "score": 5,
+          "comments": 15,
+          "author": "BorgAdjacent",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sm70be/whats_a_purely_you_thing_you_do_with_ai_that/",
+          "source": "reddit"
+        },
+        {
+          "title": "For the first time in history, Ukraine captured a Russian position and prisoners, using only robots and drones",
+          "url": "https://www.wearethemighty.com/tactical/drones-capture-position-first-time-ukraine/",
+          "score": 5,
+          "comments": 1,
+          "author": "Sgt_Gram",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sm6y5q/for_the_first_time_in_history_ukraine_captured_a/",
+          "source": "reddit"
+        },
+        {
+          "title": "Made a tool to gather logistical intelligence from satellite data",
+          "url": "https://i.redd.it/azlaodj0cbvg1.jpeg",
+          "score": 5,
+          "comments": 3,
+          "author": "Open_Budget6556",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1slzt9g/made_a_tool_to_gather_logistical_intelligence/",
+          "source": "reddit"
+        },
+        {
+          "title": "Gemini Robotics-ER 1.6: Powering real-world robotics tasks through enhanced embodied reasoning",
+          "url": "https://deepmind.google/blog/gemini-robotics-er-1-6/",
+          "score": 4,
+          "comments": 2,
+          "author": "tekz",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1slzjhh/gemini_roboticser_16_powering_realworld_robotics/",
+          "source": "reddit"
+        },
+        {
+          "title": "[N] AMA Reminder: Max Welling",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sm7tjz/n_ama_reminder_max_welling/",
+          "score": 3,
+          "comments": 0,
+          "author": "Benlus",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sm7tjz/n_ama_reminder_max_welling/",
+          "source": "reddit"
+        },
+        {
+          "title": "CHI PLAY reviews [R]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sm3a0b/chi_play_reviews_r/",
+          "score": 3,
+          "comments": 4,
+          "author": "Ok_Ant_4311",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sm3a0b/chi_play_reviews_r/",
+          "source": "reddit"
+        },
+        {
+          "title": "Is it legal to publish Rev Shell on GitHub?",
+          "url": "https://www.reddit.com/r/cybersecurity/comments/1sm708g/is_it_legal_to_publish_rev_shell_on_github/",
+          "score": 3,
+          "comments": 13,
+          "author": "Dragon56_YT",
+          "subreddit": "cybersecurity",
+          "permalink": "https://www.reddit.com/r/cybersecurity/comments/1sm708g/is_it_legal_to_publish_rev_shell_on_github/",
+          "source": "reddit"
+        },
+        {
+          "title": "OpenAI expands its cyber defense program with GPT-5.4-Cyber for vetted researchers",
+          "url": "https://www.helpnetsecurity.com/2026/04/15/openai-gpt-5-4-cyber/",
+          "score": 2,
+          "comments": 0,
+          "author": "tekz",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1slzihs/openai_expands_its_cyber_defense_program_with/",
+          "source": "reddit"
+        },
+        {
+          "title": "Jailbreaks as social engineering: 5 case studies suggest LLMs inherit human psychological vulnerabilities from training data [D]",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1sm70ix/jailbreaks_as_social_engineering_5_case_studies/",
+          "score": 2,
+          "comments": 3,
+          "author": "One-Honey6765",
+          "subreddit": "MachineLearning",
+          "permalink": "https://www.reddit.com/r/MachineLearning/comments/1sm70ix/jailbreaks_as_social_engineering_5_case_studies/",
+          "source": "reddit"
+        },
+        {
+          "title": "Why we ended up building a Unified Payment Integration Library?",
+          "url": "https://github.com/juspay/hyperswitch-prism/wiki/How-we-ended-up-building-a-Unified-Payment-Integration-Library%3F",
+          "score": 0,
+          "comments": 1,
+          "author": "cargo_run_rust",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sm3p27/why_we_ended_up_building_a_unified_payment/",
+          "source": "reddit"
+        },
+        {
+          "title": "How to send Slack messages using Azure Logic Apps: built-in connector vs Slack APIs",
+          "url": "https://www.code4it.dev/blog/send-slack-messages-using-azure-logic-apps/",
+          "score": 0,
+          "comments": 0,
+          "author": "davidebellone",
+          "subreddit": "programming",
+          "permalink": "https://www.reddit.com/r/programming/comments/1sm1lj5/how_to_send_slack_messages_using_azure_logic_apps/",
+          "source": "reddit"
+        },
+        {
+          "title": "How I made \u20ac2,700 building a legal AI research assistant for a compliance company in Germany",
+          "url": "https://www.reddit.com/r/artificial/comments/1sm8f7c/how_i_made_2700_building_a_legal_ai_research/",
+          "score": 0,
+          "comments": 4,
+          "author": "Fabulous-Pea-5366",
+          "subreddit": "artificial",
+          "permalink": "https://www.reddit.com/r/artificial/comments/1sm8f7c/how_i_made_2700_building_a_legal_ai_research/",
+          "source": "reddit"
+        }
+      ],
+      "duckduckgo_news": [
+        {
+          "title": "Technology news - Technology journalism is the genre of reporting that concerns the development, marketing, and application of technology. The field covers a wide variety of topics, including communic",
+          "url": "https://en.wikipedia.org/wiki/Technology_news",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Latest technology news - The most recent news, updates, and developments in the field of technology. Covers breaking stories, innovations, product launches, industry trends, and other current events r",
+          "url": "https://grokipedia.com/page/Latest_technology_news",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Reuters Tech News | Today's Latest Technology News | Reuters - 10 hours ago -Find latesttechnology newsfrom every corner of the globe at Reuters.com, your online source for breaking international news",
+          "url": "https://www.reuters.com/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Tech News, Latest Technology News Today, New Gadgets, Phones, Laptops | The Indian Express - 11 hours ago -Tech News: Get the latest technology today news, reviews, and updates on smartphones, laptops",
+          "url": "https://indianexpress.com/section/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology - Bloomberg - 3 days ago -Bloomberg delivers business and markets news, data, analysis, and video to the world, featuring stories from Businessweek and Bloomberg News on everything pertaini",
+          "url": "https://www.bloomberg.com/technology",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Google News - Technology - Latest - Read full articles, watch videos, browse thousands of titles and more on the \"Technology\" topic with Google News.",
+          "url": "https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology News Today, Latest Tech News - The Hindu - 2 days ago -Tech News Today: Get today\u2019stechnology newsupdates on latest smartphones, laptop, specifications, reviews, video games and much more f",
+          "url": "https://www.thehindu.com/sci-tech/technology/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "TechCrunch | Startup and Technology News - 2 weeks ago -TechCrunch | Reporting on the business of technology, startups, venture capital funding, and Silicon Valley",
+          "url": "https://techcrunch.com/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Technology News: Latest Tech News on New Mobile Phones, Laptops, Gadgets & More - Latest Technology News and Daily Tech News Updates on Times Of India. Get trending tech news, mobile phones, laptops, ",
+          "url": "https://timesofindia.indiatimes.com/technology",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "MIT Technology Review - Emergingtechnology news& insights | AI, Climate Change, BioTech, and more",
+          "url": "https://www.technologyreview.com/",
+          "query": "technology news",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence - Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-so",
+          "url": "https://en.wikipedia.org/wiki/Artificial_intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence - AI hierarchy Artificial intelligence (AI) is a subfield of computer science focused on the development of systems that can perform tasks requiring human intelligence, such...",
+          "url": "https://grokipedia.com/page/Artificial_intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is Artificial Intelligence? Definition, Uses, and Types - What isartificialintelligence?Artificialintelligence(AI) is the theory and development of computer systems capable of performing tasks th",
+          "url": "https://www.coursera.org/articles/what-is-artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Artificial intelligence (AI) | Definition, Examples, Types ... - Artificialintelligence(AI) is the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with ",
+          "url": "https://www.britannica.com/technology/artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is artificial intelligence (AI)? - IBM - Artificialintelligence(AI) is technology that enables computers and machines to simulate human learning, comprehension, problem solving, decision-making, ",
+          "url": "https://www.ibm.com/think/topics/artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "How Artificial Intelligence Works: A Beginner's Guide - Artificialintelligenceis one of the most fascinating technological developments in human history. It is a field that attempts to teach machines ",
+          "url": "https://www.sciencenewstoday.org/how-artificial-intelligence-works-a-beginners-guide",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Artificial Intelligence? - NASA - Learn how NASA definesartificialintelligenceand how it uses various AI tools and methods for different tasks and applications. Explore the differences between",
+          "url": "https://www.nasa.gov/what-is-artificial-intelligence/",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Is Artificial Intelligence (AI)? - Built In - Artificialintelligence(AI) is the capability of computer systems to perform tasks typically associated with humanintelligence, reasoning and decision",
+          "url": "https://builtin.com/artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is AI (Artificial Intelligence)? Definition, Types ... - TechTarget - Artificialintelligence(AI) is the ability of machines to perform tasks that typically require humanintelligence. Learn about ",
+          "url": "https://www.techtarget.com/searchenterpriseai/definition/AI-Artificial-Intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What is Artificial Intelligence (AI)? | Google Cloud - Learn the basics of AI, how it works, and its types and applications. Explore the benefits of AI for individuals and businesses, and how to get s",
+          "url": "https://cloud.google.com/learn/what-is-artificial-intelligence",
+          "query": "artificial intelligence",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science Discovery Center of Oneonta - The Science Discovery Center of Oneonta is a hands-on science museum that is a part of SUNY Oneonta in Oneonta, New York. The museum features more than eighty sim",
+          "url": "https://en.wikipedia.org/wiki/Science_Discovery_Center_of_Oneonta",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Science Channel - Wikipedia - Its name was first modified to theDiscoveryScienceChannel in 1998, and then was renamed TheScienceChannel in 2002, as the first network in the ...",
+          "url": "https://en.wikipedia.org/wiki/Science_Channel",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Science (European TV channel) - Discovery Science (European TV channel) Discovery Science logo Discovery Science is a pay television channel operated by Warner Bros.",
+          "url": "https://grokipedia.com/page/Discovery_Science_(European_TV_channel)",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Center for Science and Culture | Discovery Institute - ... The Comprehensive Guide toScienceand Faith, co-edited by Casey Luskin, associate director ofDiscoveryInstitute\u2019s Center forScienceand Culture",
+          "url": "https://www.discovery.org/id/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Institute\u2019s Science Education Policy | Discovery - DiscoveryInstitute\u2019s Center forScienceand Culture advances the understanding that human beings and nature are the result of intelligent des",
+          "url": "https://www.discovery.org/a/3164/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Place Science Museum \u2013 Charlotte's #1 for - Ignite a passion for learning atDiscoveryPlaceScience\u2013Charlotte \u2019 s premierscienceMuseum\u2013where live shows captivate young minds with ...",
+          "url": "https://discoveryplace.org/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery and Translational Sciences at the Foundation - Kedest Tesfagiorgis leads the Global Partnerships and Grand Challenges team within the foundation\u2019sDiscovery& TranslationalSciencesprogram.",
+          "url": "https://www.gatesfoundation.org/our-work/programs/global-health/discovery-and-translational-sciences",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Scientific Discovery | PNNL - The EnergySciencesCenter is also accelerating scientificdiscoveryin chemistry, materialsscience, and computing.",
+          "url": "https://www.pnnl.gov/scientific-discovery",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Cube Home - Discovery Cube - Our mission is to spark a lifelong love of learning anddiscoveryin the hearts of young people throughscience-based programs and exhibits that ...",
+          "url": "https://www.discoverycube.org/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Discovery Science Place - Discovery Science Place - TheDiscoverySciencePlace is a dynamic children\u2019s museum where young minds have the freedom to examine, play, and find wonder in the world around ...",
+          "url": "https://www.discoveryscienceplace.org/",
+          "query": "science discovery",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyber security breach - A cyberattack (or cyber attack) occurs when there is an unauthorized action against computer infrastructure that compromises the confidentiality, integrity, or availability of ",
+          "url": "https://en.wikipedia.org/wiki/Cyber_security_breach",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "The Hacker News | #1 Trusted Source for Cybersecurity News - The Hacker News is the topcybersecuritynews platform, delivering real-time updates, threat intelligence, databreachreports, expert analysis",
+          "url": "https://thehackernews.com/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cybersecurity Alerts & Advisories - CISA - CybersecurityAdvisory: Provides detailed information on cyber threats, including threat actor tactics, techniques, and procedures and indicators of compromis",
+          "url": "https://www.cisa.gov/news-events/cybersecurity-advisories",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyberattacks & Data Breaches recent news | Dark Reading - Explore the latest news and expert commentary on Cyberattacks & Data Breaches, brought to you by the editors of Dark Reading",
+          "url": "https://www.darkreading.com/cyberattacks-data-breaches",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Data Breaches 2025: Biggest Cybersecurity Incidents So Far - Stay updated with the recent data breaches of 2025. Explore detailed reports on cyberattacks, compromised organizations, and security incid",
+          "url": "https://www.pkware.com/blog/recent-data-breaches",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Data Breaches News - SecurityWeek - Breaking news on major data breaches and leaks. Analysis of impact, exposure data, attribution, and post-breachforensic investigations.",
+          "url": "https://www.securityweek.com/category/data-breaches/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "List of Recent Data Breaches in 2026 - brightdefense.com - Explore the latest data breaches, who was targeted, what was exposed, and how these incidents affect users, businesses, and data security.",
+          "url": "https://www.brightdefense.com/resources/recent-data-breaches/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Breaches News | Cybersecurity Dive - The latest breaches news and analysis for leaders incybersecurity.",
+          "url": "https://www.cybersecuritydive.com/topic/breaches/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "10 Major Cyberattacks And Data Breaches In 2025 (So Far) - CRN - Major cyberattacks in 2025 so far have included the Microsoft SharePoint Server \"ToolShell\" attacks, the ransomware attack against IT d",
+          "url": "https://www.crn.com/news/security/2025/10-major-cyberattacks-and-data-breaches-in-2025-so-far",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Cyber Security News Today - Latest Updates & Research - Cybernews - Breakingcybersecurityand information news, independent research, latest tech analysis and product reviews all produced by Cybernews ",
+          "url": "https://cybernews.com/",
+          "query": "cybersecurity breach",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software engineering - Software engineering is a branch of both computer science and engineering focused on designing, developing, testing, and maintaining software applications. It involves applying ",
+          "url": "https://en.wikipedia.org/wiki/Software_engineering",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software engineering - Software engineering is the application of systematic, disciplined, and quantifiable approaches to the design, development, operation, and maintenance of software, aiming to...",
+          "url": "https://grokipedia.com/page/Software_engineering",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Institute - Part of our mission from the DoW is to publicly share components of our research to advance best practices insoftwareengineering, cyber, and AI as ...",
+          "url": "https://www.sei.cmu.edu/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Stack Exchange - SoftwareEngineering... Why XML is meant to beSoftwareand Hardware independent? ...software",
+          "url": "https://softwareengineering.stackexchange.com/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Radio \u2013 The Podcast for Professional - Since 2006, we've been talking to experts from throughout thesoftwareengineeringuniverse about the range of topics that matter to working ..",
+          "url": "https://se-radio.net/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineer: Average Salary & Pay Trends 2026 | - Softwareengineersare paid well ... If you hold an associate's degree, the next step would be to complete your bachelor's insoftwareengineering.",
+          "url": "https://www.glassdoor.com/Salaries/software-engineer-salary-SRCH_KO0,17.htm",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "Software Engineering Online Courses \u2013 Beginner to Advanced | - ... Data Science Mobile Development Programming Languages Game Development Database Design & DevelopmentSoftwareTestingSoftwareEngineerin",
+          "url": "https://www.udemy.com/courses/Development/Software-Engineering/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "2026 Software Engineering Careers: Guide to Career Paths, - The field ofsoftwareengineeringis evolving at an incredible pace, and staying ahead of emerging technologies is crucial for long-term career",
+          "url": "https://research.com/careers/software-engineering-careers",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "What Does a Software Engineer Do? | Coursera - If you re ready to start preparing for asoftwareengineerrole right away, consider enrolling in IBM s AppliedSoftwareEngineeringFundamentals ...",
+          "url": "https://www.coursera.org/articles/software-engineer",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        },
+        {
+          "title": "How to Become a Software Engineer | Career Karma - Softwareengineeringhas its pros and cons, so read below to learn more about the benefits of becoming asoftwareengineerand whether it\u2019s the ...",
+          "url": "https://careerkarma.com/careers/software-engineer/",
+          "query": "software engineering",
+          "source": "duckduckgo_news",
+          "score": 0
+        }
+      ]
+    },
+    "analyzed_topics": [
+      {
+        "topic": {
+          "title": "From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary",
+          "url": "https://fortune.com/2026/04/14/ai-backlash-revolutionary-sam-altman-molotov-cocktails-data-centers/",
+          "score": 22592,
+          "comments": 1001,
+          "author": "Plastic_Ninja_9014",
+          "subreddit": "technology",
+          "permalink": "https://www.reddit.com/r/technology/comments/1sll1vt/from_molotov_cocktails_to_data_center_shutdowns/",
+          "source": "reddit"
+        },
+        "analysis": {
+          "relevance": 1.0,
+          "novelty": 0.9,
+          "technical_depth": 0.9,
+          "audience_interest": 1.0,
+          "cross_platform_score": 0.9,
+          "overall_confidence": 0.95,
+          "reasoning": "The topic 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary' is the single best choice. It directly falls under the 'AI' and 'Tech Policy' ALLOWED TOPICS. The 'AI backlash' theme has already proven successful for the publication, as indicated by the 'Previously PUBLISHED (Successful) topics' (e.g., 'gen z workers are so fearful ai will take their job they\u2019re intentionally sabotaging their company\u2019s ai rollout'). This new topic represents a significant and alarming escalation of this existing trend, offering a fresh and highly novel perspective. The engagement metrics (score: 22592, comments: 1001) are exceptionally high, indicating strong audience interest. Technically, an article could delve into the vulnerabilities of AI data centers, the infrastructure supporting large-scale AI, the ethical frameworks surrounding AI development, and the technical challenges of mitigating societal unrest caused by AI. The other viable technical topic (Wayback Machine) is strong but doesn't have the same level of direct alignment with a core, high-performing topic like AI, nor the same extreme novelty or engagement metrics. Political and non-tech science topics were immediately rejected as per the strict rules.",
+          "suggested_angle": "A deep dive into the technical vulnerabilities of AI infrastructure and data centers, the ethical responsibilities of AI developers, and the potential policy responses required to address the escalating, and increasingly physical, societal backlash against artificial intelligence.",
+          "keywords": [
+            "AI backlash",
+            "data center security",
+            "AI ethics",
+            "tech policy",
+            "AI infrastructure",
+            "societal impact of AI",
+            "AI regulation"
+          ]
+        }
+      }
+    ],
+    "metrics": {
+      "scout": [
+        {
+          "agent_name": "scout",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:17:16.306001",
+          "ended_at": "2026-04-15T15:17:51.946779",
+          "latency_ms": 35640.78,
+          "llm_call_count": 1,
+          "token_input": 1475,
+          "token_output": 2933,
+          "estimated_cost_usd": 0.000991,
+          "routing_decision": "researcher",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "a810e725-1139-4afd-9f6b-377a81458345"
+        }
+      ],
+      "researcher": [
+        {
+          "agent_name": "researcher",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:17:53.939524",
+          "ended_at": "2026-04-15T15:19:40.811056",
+          "latency_ms": 106871.53,
+          "llm_call_count": 2,
+          "token_input": 4226,
+          "token_output": 5459,
+          "estimated_cost_usd": 0.001955,
+          "routing_decision": "researcher",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "68ef49ce-07fd-43d7-97b0-5f817b05ec82"
+        },
+        {
+          "agent_name": "researcher",
+          "run_number": 2,
+          "started_at": "2026-04-15T15:19:43.027884",
+          "ended_at": "2026-04-15T15:21:38.874051",
+          "latency_ms": 115846.17,
+          "llm_call_count": 2,
+          "token_input": 1699,
+          "token_output": 4704,
+          "estimated_cost_usd": 0.001539,
+          "routing_decision": "skeptic",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "e80fc243-24d8-4bbc-ba79-a6c52fbb98c4"
+        }
+      ],
+      "skeptic": [
+        {
+          "agent_name": "skeptic",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:21:41.226007",
+          "ended_at": "2026-04-15T15:22:01.481767",
+          "latency_ms": 20255.76,
+          "llm_call_count": 1,
+          "token_input": 894,
+          "token_output": 2457,
+          "estimated_cost_usd": 0.000804,
+          "routing_decision": "writer",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "59f7fcd8-3953-4c56-9f28-729dbaf84f11"
+        }
+      ],
+      "writer": [
+        {
+          "agent_name": "writer",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:22:04.297103",
+          "ended_at": "2026-04-15T15:22:30.469896",
+          "latency_ms": 26172.79,
+          "llm_call_count": 1,
+          "token_input": 1564,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001316,
+          "routing_decision": "editor",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "2b117f0e-a2a5-4441-b19b-f30717324787"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 2,
+          "started_at": "2026-04-15T15:23:01.944930",
+          "ended_at": "2026-04-15T15:23:24.922021",
+          "latency_ms": 22977.09,
+          "llm_call_count": 1,
+          "token_input": 2717,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001403,
+          "routing_decision": "editor",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "4fc96cc2-5098-4614-813d-ff471b0a2200"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 3,
+          "started_at": "2026-04-15T15:23:54.508101",
+          "ended_at": "2026-04-15T15:24:18.094539",
+          "latency_ms": 23586.44,
+          "llm_call_count": 1,
+          "token_input": 2285,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.00137,
+          "routing_decision": "editor",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "6c8f2f30-7c97-4ebf-bc68-0a0780cb6dbc"
+        },
+        {
+          "agent_name": "writer",
+          "run_number": 4,
+          "started_at": "2026-04-15T15:24:46.126905",
+          "ended_at": "2026-04-15T15:25:14.023840",
+          "latency_ms": 27896.93,
+          "llm_call_count": 1,
+          "token_input": 3383,
+          "token_output": 3995,
+          "estimated_cost_usd": 0.001452,
+          "routing_decision": "editor",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "8d75e2f5-11ed-4e00-8b0d-4c5666e7485a"
+        }
+      ],
+      "editor": [
+        {
+          "agent_name": "editor",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:22:32.625012",
+          "ended_at": "2026-04-15T15:22:59.987975",
+          "latency_ms": 27362.96,
+          "llm_call_count": 1,
+          "token_input": 930,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001269,
+          "routing_decision": "writer",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "c6aec333-adef-4cfe-b8c8-b3f19c8eca29"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 2,
+          "started_at": "2026-04-15T15:23:27.076870",
+          "ended_at": "2026-04-15T15:23:52.145247",
+          "latency_ms": 25068.38,
+          "llm_call_count": 1,
+          "token_input": 922,
+          "token_output": 3996,
+          "estimated_cost_usd": 0.001268,
+          "routing_decision": "writer",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "7836f071-4de2-4782-9824-cc8cc9f9ea12"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 3,
+          "started_at": "2026-04-15T15:24:20.486071",
+          "ended_at": "2026-04-15T15:24:43.720931",
+          "latency_ms": 23234.86,
+          "llm_call_count": 1,
+          "token_input": 915,
+          "token_output": 3680,
+          "estimated_cost_usd": 0.001173,
+          "routing_decision": "writer",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "f4ef0966-f28d-42b3-bd74-3ffad8cd0a7b"
+        },
+        {
+          "agent_name": "editor",
+          "run_number": 4,
+          "started_at": "2026-04-15T15:25:16.358172",
+          "ended_at": "2026-04-15T15:25:42.877546",
+          "latency_ms": 26519.37,
+          "llm_call_count": 1,
+          "token_input": 867,
+          "token_output": 3854,
+          "estimated_cost_usd": 0.001221,
+          "routing_decision": "publisher",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "247e8991-33d8-4a9e-9124-2c2d630fe048"
+        }
+      ],
+      "publisher": [
+        {
+          "agent_name": "publisher",
+          "run_number": 1,
+          "started_at": "2026-04-15T15:25:45.361365",
+          "ended_at": "2026-04-15T15:25:59.615093",
+          "latency_ms": 14253.73,
+          "llm_call_count": 1,
+          "token_input": 836,
+          "token_output": 1232,
+          "estimated_cost_usd": 0.000432,
+          "routing_decision": "END_PUBLISHED",
+          "confidence_score": 0.95,
+          "langsmith_run_id": "5365dfda-d3a5-4985-9fbb-45bf1c865c41"
+        }
+      ]
+    },
+    "routing_history": [
+      {
+        "from": "scout",
+        "to": "researcher",
+        "timestamp": "2026-04-15T15:17:53.884169",
+        "duration_seconds": 35.640778,
+        "langsmith_run_id": "a810e725-1139-4afd-9f6b-377a81458345"
+      },
+      {
+        "from": "researcher",
+        "to": "researcher",
+        "timestamp": "2026-04-15T15:19:42.970373",
+        "duration_seconds": 106.871532,
+        "langsmith_run_id": "68ef49ce-07fd-43d7-97b0-5f817b05ec82"
+      },
+      {
+        "from": "researcher",
+        "to": "skeptic",
+        "timestamp": "2026-04-15T15:21:41.100090",
+        "duration_seconds": 115.846167,
+        "langsmith_run_id": "e80fc243-24d8-4bbc-ba79-a6c52fbb98c4"
+      },
+      {
+        "from": "skeptic",
+        "to": "writer",
+        "timestamp": "2026-04-15T15:22:04.206493",
+        "duration_seconds": 20.25576,
+        "langsmith_run_id": "59f7fcd8-3953-4c56-9f28-729dbaf84f11"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-15T15:22:32.577167",
+        "duration_seconds": 26.172793,
+        "langsmith_run_id": "2b117f0e-a2a5-4441-b19b-f30717324787"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-15T15:23:01.889822",
+        "duration_seconds": 27.362963,
+        "langsmith_run_id": "c6aec333-adef-4cfe-b8c8-b3f19c8eca29"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-15T15:23:27.026832",
+        "duration_seconds": 22.977091,
+        "langsmith_run_id": "4fc96cc2-5098-4614-813d-ff471b0a2200"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-15T15:23:54.407023",
+        "duration_seconds": 25.068377,
+        "langsmith_run_id": "7836f071-4de2-4782-9824-cc8cc9f9ea12"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-15T15:24:20.388380",
+        "duration_seconds": 23.586438,
+        "langsmith_run_id": "6c8f2f30-7c97-4ebf-bc68-0a0780cb6dbc"
+      },
+      {
+        "from": "editor",
+        "to": "writer",
+        "timestamp": "2026-04-15T15:24:46.046484",
+        "duration_seconds": 23.23486,
+        "langsmith_run_id": "f4ef0966-f28d-42b3-bd74-3ffad8cd0a7b"
+      },
+      {
+        "from": "writer",
+        "to": "editor",
+        "timestamp": "2026-04-15T15:25:16.304108",
+        "duration_seconds": 27.896935,
+        "langsmith_run_id": "8d75e2f5-11ed-4e00-8b0d-4c5666e7485a"
+      },
+      {
+        "from": "editor",
+        "to": "publisher",
+        "timestamp": "2026-04-15T15:25:45.295508",
+        "duration_seconds": 26.519374,
+        "langsmith_run_id": "247e8991-33d8-4a9e-9124-2c2d630fe048"
+      },
+      {
+        "from": "publisher",
+        "to": "END_PUBLISHED",
+        "timestamp": "2026-04-15T15:26:02.492108",
+        "duration_seconds": 14.253728,
+        "langsmith_run_id": "5365dfda-d3a5-4985-9fbb-45bf1c865c41"
+      }
+    ],
+    "sources_gathered": 3,
+    "synthesis": {
+      "summary": "Recent advancements in AI and machine learning are enhancing capabilities across diverse domains, from optimizing data infrastructure to revolutionizing research and education. DySkew introduces a novel, dynamic approach to overcome data skew challenges in Snowflake's Snowpark User-Defined Functions (UDFs), significantly improving performance for large-scale data analytics and furthering Snowflake's AI Data Cloud vision. Concurrently, AiScientist presents a system designed for autonomous long-horizon ML research engineering, leveraging structured orchestration and durable state continuity to enable agents to sustain coherent progress over extended periods.\n\nIn the realm of education, PAL (Personal Adaptive Learner) offers an innovative AI-powered platform that transforms traditional lecture videos into interactive, personalized learning experiences. This system dynamically adapts to individual learner responses and interests in real-time, moving beyond static personalization to provide truly individualized support. These developments collectively underscore a trend towards more efficient, autonomous, and context-aware AI systems that address complex challenges in data processing, scientific discovery, and human learning.",
+      "structured_notes": [
+        {
+          "category": "FACTS",
+          "claim": "Snowflake has advanced its AI Data Cloud vision with Snowpark, a managed solution supporting data engineering and AI/ML workloads using Python and other languages, which is the target for DySkew's performance improvements.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13034v1"
+          ]
+        },
+        {
+          "category": "FACTS",
+          "claim": "The AiScientist system achieved significant performance gains in autonomous ML research engineering, improving PaperBench score by 10.54 points on average and reaching 81.82 Any Medal% on MLE-Bench Lite.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13018v1"
+          ]
+        },
+        {
+          "category": "FACTS",
+          "claim": "PAL (Personal Adaptive Learner) is an AI-powered platform designed to transform lecture videos into interactive learning experiences that adapt dynamically to individual learners.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13017v1"
+          ]
+        },
+        {
+          "category": "TECHNICAL",
+          "claim": "DySkew is a data-skew-aware execution strategy for Snowpark UDFs, built on Snowflake's new generalized skew handling solution, which uses adaptive data distribution with per-link state machines, eager redistribution, and a Row Size Model to manage overhead for large rows, replacing static round-robin methods.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13034v1"
+          ]
+        },
+        {
+          "category": "TECHNICAL",
+          "claim": "AiScientist achieves long-horizon ML research engineering through hierarchical orchestration combined with a permission-scoped 'File-as-Bus' workspace, where specialized agents re-ground on durable artifacts (analyses, plans, code) rather than relying on conversational handoffs, ensuring durable state continuity.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13018v1"
+          ]
+        },
+        {
+          "category": "TECHNICAL",
+          "claim": "PAL continuously analyzes multimodal lecture content to dynamically engage learners with questions of varying difficulty, adjusting to their real-time responses and generating personalized summaries with tailored examples at the end of a session.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13017v1"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "DySkew addresses a critical challenge in scalable data analytics by mitigating performance degradation from data skew and non-uniform computational costs in Snowpark UDFs, leading to significant improvements in execution time and resource utilization for large-scale workloads.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13034v1"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "AiScientist's approach to autonomous long-horizon ML research engineering is crucial for sustaining coherent progress over extended periods, reframing it as a systems problem of coordinating specialized work over durable project state, rather than solely a local reasoning problem.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13018v1"
+          ]
+        },
+        {
+          "category": "CONTEXT",
+          "claim": "PAL moves AI-driven education beyond static personalization by providing real-time, individualized support through context-aware and adaptive decision-making, addressing the shortfall of systems constrained to predefined quizzes or generic feedback.",
+          "support_level": "strong",
+          "sources": [
+            "http://arxiv.org/abs/2604.13017v1"
+          ]
+        }
+      ],
+      "recommended_citations": [
+        {
+          "claim": "Snowflake's Snowpark platform, part of its AI Data Cloud, supports data engineering and AI/ML workloads but is vulnerable to performance degradation from data skew.",
+          "citation": "DySkew: Dynamic Data Redistribution for Skew-Resilient Snowpark UDF Execution. (2026). arXiv. Retrieved from http://arxiv.org/abs/2604.13034v1",
+          "url": "http://arxiv.org/abs/2604.13034v1"
+        },
+        {
+          "claim": "Autonomous long-horizon ML research engineering benefits from systems like AiScientist that combine hierarchical orchestration with durable state continuity via a 'File-as-Bus' workspace.",
+          "citation": "Toward Autonomous Long-Horizon Engineering for ML Research. (2026). arXiv. Retrieved from http://arxiv.org/abs/2604.13018v1",
+          "url": "http://arxiv.org/abs/2604.13018v1"
+        },
+        {
+          "claim": "AI-driven education platforms can achieve real-time, individualized support by continuously analyzing multimodal content and dynamically adapting to learner responses, as demonstrated by PAL (Personal Adaptive Learner).",
+          "citation": "PAL: Personal Adaptive Learner. (2026). arXiv. Retrieved from http://arxiv.org/abs/2604.13017v1",
+          "url": "http://arxiv.org/abs/2604.13017v1"
+        }
+      ]
+    },
+    "researcher_retry_count": 2,
+    "skeptic_assessment": {
+      "quality": {
+        "evidence_quality": 0.8,
+        "source_credibility": 0.7,
+        "novelty_score": 0.8,
+        "completeness": 0.8,
+        "overall_quality": 0.6,
+        "concerns": [
+          "The proposed topic title ('From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary') is completely disconnected from and contradictory to the research summary. The summary details positive AI advancements, not an 'AI backlash.'",
+          "The title introduces a severe and misleading bias, making the article appear sensationalist and dishonest given the actual content."
+        ],
+        "strengths": [
+          "The research summary presents genuinely interesting and novel advancements in AI across diverse domains (data processing, autonomous ML research, personalized education).",
+          "The findings include specific facts and technical details (e.g., performance gains, architectural approaches), providing a solid foundation for a tech blog post.",
+          "The content appears to be well-supported by a decent number of sources (9), suggesting reasonable backing for the claims."
+        ],
+        "recommendation": "reject",
+        "reasoning": "The research summary itself outlines several compelling and novel advancements in AI, from optimizing data infrastructure with DySkew and Snowflake's vision, to enabling autonomous ML research with AiScientist, and revolutionizing education with PAL. The content is rich with specific details and performance metrics, making it highly suitable for an engaging tech blog post. The evidence quality, source credibility (based on the number of sources and project names), novelty, and completeness of the *research content* are all strong. \n\nHowever, the proposed topic title is a critical and fatal flaw. 'From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary' is not only sensationalist but also completely misrepresents the positive and forward-looking nature of the research presented. This title introduces a severe bias and would be highly misleading to readers. As a pragmatic editor, I cannot approve a piece where the title fundamentally contradicts and misleads about the content. While the underlying research is excellent and worth covering, the article as currently pitched (with this title) must be rejected. I would require a new, accurate, and non-sensationalist title that genuinely reflects the advancements discussed in the summary before considering publication."
+      },
+      "hype_check": {
+        "is_likely_hype": false,
+        "novelty_vs_evidence_gap": 0.0,
+        "concerns": [
+          "The proposed topic title ('From Molotov cocktails to data center shutdowns, the AI backlash is turning revolutionary') is completely disconnected from and contradictory to the research summary. The summary details positive AI advancements, not an 'AI backlash.'",
+          "The title introduces a severe and misleading bias, making the article appear sensationalist and dishonest given the actual content."
+        ]
+      },
+      "evidence_check": {
+        "num_sources": 9,
+        "has_enough_sources": true,
+        "avg_credibility": 0.8999999999999999,
+        "high_credibility_sources": 9
+      },
+      "decision": "approve"
+    },
+    "draft_metadata": {
+      "version": 4,
+      "word_count": 1578,
+      "is_revision": true,
+      "num_claims": 10
+    },
+    "editor_review": {
+      "version_reviewed": 4,
+      "review": {
+        "clarity_score": 0.6,
+        "logic_score": 0.6,
+        "evidence_score": 0.4,
+        "engagement_score": 0.6,
+        "technical_accuracy": 0.8,
+        "overall_quality": 0.5,
+        "strengths": [
+          "Strong, engaging title that accurately reflects the intended topic.",
+          "Clear introductory paragraph that effectively sets the scope and tone.",
+          "Identifies relevant and widely accepted categories for the 'roots of discontent' (job displacement, ethics, surveillance, environment).",
+          "Professional and generally clear writing style in the completed sections."
+        ],
+        "weaknesses": [
+          "**Incomplete Draft:** The most glaring flaw is the abrupt ending mid-sentence, rendering the article unfinished and unprofessional.",
+          "**Failure to Deliver on Core Promise:** The title promises a discussion of 'Molotov cocktails to data center shutdowns' and a 'revolutionary' backlash, yet the current draft only explores the *reasons* for discontent, not the *actions* or *manifestations* of this revolutionary aspect.",
+          "**Insufficient Evidence Presentation:** While citations are numbered, the absence of a bibliography or adherence to a specific citation style makes them placeholders rather than proper evidence.",
+          "**Lack of Specific Examples:** The 'roots of discontent' are discussed generically. The article desperately needs concrete, real-world examples to illustrate these points and, more importantly, to demonstrate the 'revolutionary' actions promised.",
+          "**Pacing and Structure:** The article builds towards a climax that is never reached due to its incompleteness. The current structure is logical for setting the stage but doesn't progress to the core subject matter."
+        ],
+        "specific_issues": [
+          "The article ends abruptly at 'The immense computat', leaving the fourth point ('Environmental Impact') unfinished and the entire draft incomplete.",
+          "The introduction mentions 'direct action that sometimes verges on the revolutionary' and 'evolving from mere critique into a powerful, organized movement,' but the subsequent content does not provide any examples or detailed discussion of such actions (e.g., digital activism, policy challenges, or the promised 'Molotov cocktails to data center shutdowns').",
+          "Citations [1], [2], [3] are present as bracketed numbers, but there is no accompanying bibliography or specified citation style (e.g., APA, MLA, Chicago). This makes the evidence unsupported and unverified.",
+          "The language, while improved, still leans towards generic statements in the 'Deep Roots' section. For instance, 'multitude of socio-economic, ethical, and environmental concerns' is broad; specific examples would strengthen each point.",
+          "The article needs a dedicated section (or multiple sections) that explores the *diverse expressions* of the backlash, moving beyond the 'roots' to actual events, movements, and actions."
+        ],
+        "recommendation": "rewrite",
+        "revision_instructions": "This draft requires a comprehensive overhaul and completion to meet the article's stated goals. Address the following points meticulously:\n\n1.  **Complete the Article:** Finish the draft entirely. This includes completing point 4 ('Environmental Impact') and adding at least one, preferably two, substantial sections that detail the *manifestations* and *expressions* of the AI backlash.\n2.  **Fulfill the Title's Promise:** Dedicate a significant portion of the article to concrete, real-world examples of the 'revolutionary' AI backlash. This *must* include specific instances of digital activism, policy challenges, direct action, protests, or discussions around data center shutdowns. Connect these actions directly to the 'roots of discontent' you've already outlined.\n3.  **Implement Proper Citations and Bibliography:**\n    *   Provide a full bibliography at the end of the article, listing all sources cited.\n    *   Choose and consistently apply a recognized citation style (e.g., APA, MLA, Chicago) for both in-text citations and the bibliography. Ensure all citations are properly formatted.\n    *   Verify the accuracy and relevance of all cited sources. If the current citations are placeholders, replace them with legitimate academic or journalistic sources.\n4.  **Enhance Specificity and Examples:** Throughout the article, replace generic statements with specific examples, case studies, or anecdotes to make the arguments more compelling and less abstract. This is especially crucial when discussing the manifestations of the backlash.\n5.  **Strengthen the 'Revolutionary' Argument:** Ensure the article clearly articulates *how* the backlash is evolving from mere critique into a 'powerful, organized movement demanding accountability and systemic change,' as stated in the introduction. Provide evidence for this evolution.\n6.  **Review for Flow and Pacing:** Ensure a smooth and logical transition between sections, building effectively from the roots of discontent to the expressions of the backlash and its profound implications.\n7.  **Proofread Meticulously:** Eliminate all grammatical errors, typos, awkward phrasing, and inconsistencies. Every sentence must be polished and impactful. Pay particular attention to sentence structure and word choice to maintain an engaging and authoritative tone."
+      },
+      "logic_check": {
+        "has_logic_issues": true,
+        "logic_score": 0.6,
+        "issues": []
+      },
+      "claims_check": {
+        "num_claims": 10,
+        "num_sources": 9,
+        "has_enough_support": true,
+        "needs_fact_check": false
+      },
+      "decision": "rewrite"
+    },
+    "approved_doc_path": "output\\approved_from_molotov_cocktails_to_data_center_shutdowns__the_ai_backlash_is_turning_revolutionary_20260415_205545.doc",
+    "publisher_checks": {
+      "seo_metadata": {
+        "title_tag": "AI Backlash: From Molotovs to Data Center Shutdowns & Revolution",
+        "meta_description": "Explore the revolutionary AI backlash, from digital activism to data center shutdowns. Understand its roots in job displacement, AI ethics, privacy, and environmental impact.",
+        "keywords": [
+          "AI backlash",
+          "AI resistance",
+          "data center shutdowns",
+          "AI ethics",
+          "job displacement AI"
+        ],
+        "slug": "ai-backlash-revolutionary-data-center-shutdowns",
+        "og_title": "The Revolutionary AI Backlash: From Molotov Cocktails to Data Center Shutdowns",
+        "og_description": "The AI backlash is intensifying, moving beyond critique to revolutionary action. Discover the diverse forms of resistance, from digital activism to data center shutdowns, and the deep roots of discontent driving this powerful movement."
+      },
+      "duplicate_check": {
+        "content_hash": "bcb4db3693ab924fb7ed425fe1d3e0071e6d1a0781b48bf2a3223b9c204f40d9",
+        "is_duplicate": false,
+        "similarity_score": 0.0
+      },
+      "format_check": {
+        "is_valid": true,
+        "word_count": 1578,
+        "has_structure": true,
+        "issues": []
+      },
+      "decision": "publish"
+    }
+  }
+}
