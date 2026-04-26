@@ -25,6 +25,7 @@ services:
           type: redis
           name: newsroom-cache
           property: connectionString
+      - fromGroup: GlobalEnv
 
   # ----------------------------------------------------
   # 3. Managed Redis (for event streaming / LangGraph state)
@@ -43,7 +44,7 @@ databases:
     user: newsroom_admin
     plan: free
 
-envGroup:
+envVarGroups:
   - name: GlobalEnv
     envVars:
       - key: REDIS_HOST
