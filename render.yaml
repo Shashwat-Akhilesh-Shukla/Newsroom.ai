@@ -26,6 +26,14 @@ services:
           name: newsroom-cache
           property: connectionString
 
+  # ----------------------------------------------------
+  # 3. Managed Redis (for event streaming / LangGraph state)
+  # ----------------------------------------------------
+  - type: redis
+    name: newsroom-cache
+    plan: free
+    ipAllowList: [] # allowing internal access only
+
 # ----------------------------------------------------
 # 2. Managed PostgreSQL Database
 # ----------------------------------------------------
@@ -35,18 +43,8 @@ databases:
     user: newsroom_admin
     plan: free
 
-# ----------------------------------------------------
-# 3. Managed Redis (for event streaming / LangGraph state)
-# ----------------------------------------------------
-# Render natively runs Redis via blueprints as well
 envGroup:
   - name: GlobalEnv
     envVars:
       - key: REDIS_HOST
         value: newsroom-cache
-
-services:
-  - type: redis
-    name: newsroom-cache
-    plan: free
-    ipAllowList: [] # allowing internal access only
