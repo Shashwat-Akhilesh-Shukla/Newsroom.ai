@@ -124,14 +124,13 @@ async def trigger_run():
 
     root = Path(__file__).parent.parent.parent
     python = sys.executable
-    main_script = str(root / "src" / "main.py")
 
     def run_in_thread():
         global _workflow_running
         _workflow_running = True
         try:
             proc = subprocess.Popen(
-                [python, main_script],
+                [python, "-m", "src.main"],
                 cwd=str(root),
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
