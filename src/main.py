@@ -18,8 +18,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 # Load environment variables explicitly
 load_dotenv()
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add project root to path so 'src.' imports work
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.graph import run_newsroom, stream_newsroom
 from src.state import create_initial_state
