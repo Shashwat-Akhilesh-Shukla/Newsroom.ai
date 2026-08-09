@@ -48,6 +48,9 @@ The system guarantees high-quality factual output through rigorous quality gates
 
 The core intelligence resolves around separation of concerns. Four independent agents have veto power, creating an adversarial system that mimics human editorial rigor.
 
+<img width="1429" height="710" alt="image" src="https://github.com/user-attachments/assets/6f869624-718c-41ac-b71a-dd7f5dc7ef3c" />
+
+
 | Agent Role | System Function | Execution Privilege |
 |-------|-------------|---------------|
 | 🔍 **Scout** | Trend anomaly detection via real-time data ingestion (Reddit, ArXiv, etc.) | ✅ Loops until confidence threshold met |
